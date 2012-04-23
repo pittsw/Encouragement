@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>List of Clients</title>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td><a href="/kenya/">Home</a></td>
+				<td><a href="/kenya/demo/">List Clients</a></td>
+				<td><a href="/kenya/add/">Add Client</a></td>
+				<td><a href="/kenya/message/">Add Message</a></td>
+			</tr>
+		</table>
+		<h1>All Clients</h1>
+		<table border="1">
+			<tr>
+				<th>ID Number</th>
+				<th>First Name</h>
+				<th>Last Name</th>
+				<th>Phone Number</th>
+				<th>Location</th>
+				<th>Birthday</th>
+			</tr>
+			{% for x in clients %}
+			<tr>
+				<td><a href="/kenya/patient/{{x.id}}/">{{x.id}}</a></td>
+				<td>{{x.first_name}}</d>
+				<td>{{x.last_name}}</td>
+				<td>{{x.phone_number}}</td>
+				<td>{{x.location}}</td>
+				<td>{{x.birth_date}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
