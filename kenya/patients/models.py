@@ -15,9 +15,8 @@ class Client(models.Model):
 	location = models.ForeignKey(Location)
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name
-	
 
-class UserProfile(models.Model):
+class Nurse(models.Model):
 	id = models.IntegerField(primary_key = True)
 	user = models.OneToOneField(User)
 	location = models.ForeignKey(Location)
@@ -27,10 +26,10 @@ class UserProfile(models.Model):
 class Message(models.Model):
 	SENDER_CHOICES = (
 	        ('C', 'Client'),
-	        ('U', 'User'),
+	        ('N', 'Nurse'),
 	)
 	client_id = models.ForeignKey(Client)
-	user_id = models.ForeignKey(UserProfile)
+	user_id = models.ForeignKey(Nurse)
 	sent_by = models.CharField(max_length = 1, choices=SENDER_CHOICES)
 	content = models.CharField(max_length=500)
 	priority = models.IntegerField()

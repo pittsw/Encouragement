@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from patients.models import Client, Message, Location, UserProfile
+from patients.models import Client, Message, Location, Nurse
 from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
@@ -43,14 +43,14 @@ def add_message(request):
 		content = request.POST["content"]
 		priority = request.POST["priority"]
 		date = request.POST["date"]
-		m = Message(client_id=Client.objects.get(id=client_id), user_id=UserProfile.objects.get(id=user_id), sent_by = sent_by, content = content, priority = priority, date = date)
+		m = Message(client_id=Client.objects.get(id=client_id), user_id=Nurse.objects.get(id=user_id), sent_by = sent_by, content = content, priority = priority, date = date)
 		m.save()
 		people = Client.objects.all()
-		nurses = UserProfile.objects.all()
+		nurses = Nurse.objects.all()
 		return render_to_response("message.html", {"people":people, "nurses":nurses, "choice":Message.SENDER_CHOICES})
 	else:
 		people = Client.objects.all()
-		nurses = UserProfile.objects.all()
+		nurses = Nurse.objects.all()
 		return render_to_response("message.html", {"people":people, "nurses":nurses, "choice":Message.SENDER_CHOICES})
 
 	
