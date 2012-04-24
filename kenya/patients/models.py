@@ -11,8 +11,14 @@ class Client(models.Model):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	phone_number = models.IntegerField()
-	birth_date = models.CharField(max_length=100)
+	birth_date = models.DateField()
 	location = models.ForeignKey(Location)
+	BABY_CHOICES = (
+		('B', 'Born'),
+		('U', 'Unborn'),
+	)
+	baby_status = models.CharField(max_length = 1, choices=BABY_CHOICES)
+	due_date = models.DateField()
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name
 
@@ -21,12 +27,12 @@ class Nurse(models.Model):
 	user = models.OneToOneField(User)
 	location = models.ForeignKey(Location)
 	def __unicode__(self):
-		return self.user.first_name
+		return self.user.first_name + ' ' + self.user.last_name
 
 class Message(models.Model):
 	SENDER_CHOICES = (
-	        ('C', 'Client'),
-	        ('N', 'Nurse'),
+		('C', 'Client'),
+		('N', 'Nurse'),
 	)
 	client_id = models.ForeignKey(Client)
 	user_id = models.ForeignKey(Nurse)

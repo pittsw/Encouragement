@@ -13,42 +13,14 @@
 				<td><a href="/kenya/message/">Add Message</a></td>
 			</tr>
 		</table>
-		<form action="/kenya/add/" method="post">
-		<fieldset>
-			<legend>Add Client</legend>
 		
-			<div>
-				<strong>Client Number:</strong>		
-					<input type="text" name="id" size="20" maxlength="15"/>
-			</div>
-			<div>
-				<strong>First Name:</strong>					
-					<input type="text" name="fname" size="16" />
-			</div>
-			<div>
-				<strong>Last Name:</strong>					
-					<input type="text" name="lname" size="16" />
-			</div>
-			<div>
-				<strong>Phone Number:</strong>					
-					<input type="text" name="phone" size="16" />
-			</div>
-			<div>
-				<strong>Birthday:</strong>					
-					<input type="text" name="bday" size="16" />
-			</div>
-			<div>
-				<strong>Location:</strong>
-				<select name="location">
-				{% for x in locations %}
-				<option value={{x.name}}>{{x.name}}</option>
-				{% endfor %}
-				</select>
-			</div>
+		<form method="post" action="">
+			<table>
+				{{ form }}
+			</table>
 			<div>
 				<input type="submit" value="Add" />
 			</div>
-		</fieldset>
 		</form>
 	</body>
 </html>

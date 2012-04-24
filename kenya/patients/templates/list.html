@@ -20,6 +20,8 @@
 				<th>Phone Number</th>
 				<th>Location</th>
 				<th>Birthday</th>
+				<th>Baby Status</th>
+				<th>Due Date</th>
 			</tr>
 			{% for x in clients %}
 			<tr>
@@ -29,6 +31,8 @@
 				<td>{{x.phone_number}}</td>
 				<td>{{x.location}}</td>
 				<td>{{x.birth_date}}</td>
+				<td>{{x.baby_status}}</td>
+				<td>{{x.due_date}}</td>
 			</tr>
 			{% endfor %}
 		</table>

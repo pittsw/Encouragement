@@ -14,21 +14,23 @@
 		<h1>{{client.first_name}} {{client.last_name}}</h1>
 		<p>ID number: {{client.id}}</p>
 		<p>Name: {{client.first_name}} {{client.last_name}}</p>
+		<p>Birthday: {{client.birth_date}}</p>
 		<p>Phone Number: {{client.phone_number}}</p>
 		<p>Location: {{client.location}}</p>
 		<table border="1">
 			<tr>
+
 				<th>Date</th>
-				<th>Priority</h>
-				<th>To</th>
-				<th>From</th>
+				<th>Priority</th>
+				<th>Communicating with</th>
+				<th>Sent by</th>
 				<th>Content</th>
 			</tr>
 			{% for x in messages %}
 			<tr>
 				<td>{{x.date}}</td>
-				<td>{{x.priority}}</d>
-				<td>{{x.sent_to}}</td>
+				<td>{{x.priority}}</td>
+				<td>{{x.user_id}}</td>
 				<td>{{x.sent_by}}</td>
 				<td>{{x.content}}</td>
 			</tr>

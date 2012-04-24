@@ -13,47 +13,14 @@
 				<td><a href="/kenya/message/">Add Message</a></td>
 			</tr>
 		</table>
-		<form action="/kenya/message/" method="post">
-		<fieldset>
-			<legend>Add New Message</legend>
 		
-			<div>
-				<strong>Client:</strong>		
-				<select name="cid">
-				{% for x in people %}
-					<option value={{x.id}}>{{x.first_name}} {{x.last_name}}</option>
-				{% endfor %}
-				</select>
-			</div>
-			<div>
-				<strong>User:</strong>					
-					<select name="uid">
-				{% for x in nurses %}
-					<option value={{x.id}}>{{x.user.first_name}} {{x.user.last_name}}</option>
-				{% endfor %}
-				</select>
-			</div>
-			<div>
-				<strong>Sent By:</strong>					
-					<input type="radio" name="sentby" value="0">Client
-					<input type="radio" name="sentby" value="1">Nurse 
-			</div>
-			<div>
-				<strong>Date:</strong>					
-					<input type="text" name="date" size="16" />
-			</div>
-			<div>
-				<strong>Priority:</strong>					
-					<input type="text" name="priority" size="16" />
-			</div>
-			<div>
-				<strong>Message Content:</strong>
-					<textarea rows="5" cols="100" name="content"></textarea>
-			</div>
+		<form method="post" action="">
+			<table>
+				{{ form }}
+			</table>
 			<div>
 				<input type="submit" value="Add" />
 			</div>
-		</fieldset>
 		</form>
 	</body>
 </html>

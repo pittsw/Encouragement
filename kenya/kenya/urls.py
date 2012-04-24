@@ -5,12 +5,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^kenya/patient/(?P<id_number>\d+)/$', 'kenya.views.client'),
-	url(r'^kenya/patient/$', 'kenya.views.list_clients'),
-	url(r'^kenya/message/$', 'kenya.views.add_message'),
-	url(r'^kenya/demo/$', 'kenya.views.list_clients'),
-	url(r'^kenya/add/$', 'kenya.views.add'),
-	url(r'^kenya/$', 'kenya.views.index'),
+	url(r'^kenya/patient/(?P<id_number>\d+)/$', 'patients.views.client'),
+	url(r'^kenya/patient/$', 'patients.views.list_clients'),
+	url(r'^kenya/message/$', 'patients.views.add_message'),
+	url(r'^kenya/demo/$', 'patients.views.list_clients'),
+	url(r'^kenya/add/$', 'patients.views.add_client'),
+	url(r'^kenya/$', 'patients.views.index'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'kenya.views.index'),
+    url(r'^$', 'patients.views.index'),
 )
