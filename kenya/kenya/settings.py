@@ -26,10 +26,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+import os
+ROOT_PATH = os.path.dirname(__file__)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/mooch/Documents/Encouragement/kenya/kenya.sqlite3',
+        'NAME': '{path}/kenya.sqlite3'.format(path=ROOT_PATH),
     }
 }
 
