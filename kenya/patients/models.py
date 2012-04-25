@@ -14,10 +14,10 @@ class Client(models.Model):
 	birth_date = models.DateField()
 	location = models.ForeignKey(Location)
 	BABY_CHOICES = (
-		('B', 'Born'),
-		('U', 'Unborn'),
+		('Born', 'Born'),
+		('Unborn', 'Unborn'),
 	)
-	baby_status = models.CharField(max_length = 1, choices=BABY_CHOICES)
+	baby_status = models.CharField(max_length = 6, choices=BABY_CHOICES)
 	due_date = models.DateField()
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name
@@ -31,12 +31,13 @@ class Nurse(models.Model):
 
 class Message(models.Model):
 	SENDER_CHOICES = (
-		('C', 'Client'),
-		('N', 'Nurse'),
+		('Client', 'Client'),
+		('Nurse', 'Nurse'),
+		('System', 'System'),
 	)
 	client_id = models.ForeignKey(Client)
 	user_id = models.ForeignKey(Nurse)
-	sent_by = models.CharField(max_length = 1, choices=SENDER_CHOICES)
+	sent_by = models.CharField(max_length = 6, choices=SENDER_CHOICES)
 	content = models.CharField(max_length=500)
 	priority = models.IntegerField()
 	date = models.DateTimeField(auto_now_add = True)
