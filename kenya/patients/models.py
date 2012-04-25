@@ -10,7 +10,7 @@ class Client(models.Model):
 	id = models.IntegerField(primary_key = True)
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
-	phone_number = models.IntegerField()
+	phone_number = models.CharField(max_length=50)
 	birth_date = models.DateField()
 	location = models.ForeignKey(Location)
 	STATUS_CHOICES = (
@@ -18,8 +18,14 @@ class Client(models.Model):
 		('Post-Partum', 'Post-Partum'),
 		('Failed Pregnancy', 'Failed Pregnancy'),
 	)
+	MARRIAGE_CHOICES = (
+		('Single', 'Single'),
+		('Married', 'Married'),
+	)
 	pregnancy_status = models.CharField(max_length = 20, choices=STATUS_CHOICES)
 	due_date = models.DateField()
+	marital_status = models.CharField(max_length = 20, choices=MARRIAGE_CHOICES)
+	years_of_education = models.IntegerField()
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name
 
