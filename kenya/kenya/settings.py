@@ -28,7 +28,7 @@ ROOT_PATH = os.path.dirname(__file__)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/mooch/Documents/Encouragement/kenya/kenya.db'
+        'NAME': str(ROOT_PATH) + '/../kenya.db'
     }
 }
 
