@@ -15,5 +15,6 @@ urlpatterns = patterns('',
 	url(r'^kenya/detail/(?P<id_number>\d+)/$', 'patients.views.detail'),
 	url(r'^kenya/message/(?P<id_number>\d+)/$', 'patients.views.add_message'),
 	url(r'^kenya/overview', 'patients.views.over'),
+    url(r'^kenya/smssync', 'patients.views.smssync'),
     url(r'^$', 'patients.views.over'),
 )

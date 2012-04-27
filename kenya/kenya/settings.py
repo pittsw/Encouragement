@@ -1,12 +1,8 @@
 # Django settings for kenya project.
 
-# TRANSPORT must be a Python object that has two methods: send and poll.
-# Send takes a patients.models.Client as its first argument and then
-# kwargs, while poll only takes kwargs.  See patients.transports.BaseTransport
-# for a good example.
-from patients.transports import BaseTransport
-TRANSPORT = BaseTransport
-TRANSPORT_KWARGS = {}
+# Necessary for SMSSync view.
+TRANSPORT = 'SMSSyncTransport'
+SMSSYNC_SECRET = 'Standards'
 
 # These settings must be set to use Celery
 import djcelery
@@ -32,7 +28,7 @@ ROOT_PATH = os.path.dirname(__file__)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '{path}/kenya.sqlite3'.format(path=ROOT_PATH),
+        'NAME': '/home/mooch/Documents/Encouragement/kenya/kenya.db'
     }
 }
 

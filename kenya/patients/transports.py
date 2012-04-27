@@ -1,18 +1,13 @@
-import logging
+from patients.models import SMSSyncOutgoing
 
-class BaseTransport(object):
-    """While it is not necessary to subclass BaseTransport, it is a good model
-    for how to properly write a transport.
+class SMSSyncTransport(object):
+    """A transport that sends a message through an SMSSync API.
 
     """
 
-    logger = logging.getLogger('transports.BaseTransport')
-
     @classmethod
-    def send(cls, client, **kwargs):
-        cls.logger.info("Sending a message to {client} with kwargs {kwargs}".
-            format(client=client, kwargs=kwargs))
+    def send(cls, target, content):
+        """Sends a message through the SMSSync protocol.
 
-    @classmethod
-    def poll(cls, **kwargs):
-        cls.logger.info("Polling with kwargs {kwargs}".format(kwargs=kwargs))
+        """
+        SMSSyncOutgoing(target=target, content=content).save()

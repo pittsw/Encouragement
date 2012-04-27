@@ -1,8 +1,12 @@
-from django.shortcuts import render_to_response
-from patients.models import Client, Message, Location, Nurse
-from django.views.decorators.csrf import csrf_exempt
-from patients.forms import ClientForm, MessageForm
+from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.utils import simplejson
+from django.views.decorators.csrf import csrf_exempt
+
+from patients.forms import ClientForm, MessageForm
+from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
+from patients.tasks import incoming_message
 
 def over(request):
 	return render_to_response("frame.html")
@@ -61,3 +65,32 @@ def add_message(request):
         return render_to_response("message.html", {
         "form": form,
         })
+
+@csrf_exempt
+def smssync(request):
+    secret = settings.SMSSYNC_SECRET
+    payload = {
+        "secret": secret,
+    }
+
+    if req.method == 'POST':
+        sender = req.POST['from']
+        msg = req.POST['message']
+        payload['success'] = "true" if incoming_message(sender, msg) else "false"
+
+    outgoing_messages = SMSSyncOutgoing.objects.all()
+    if len(outgoing_messages) > 0:
+        payload['task'] = "send"
+        messages = [{
+            "to": msg.target,
+            "message": msg.content,
+        } for msg in outgoing_messages]
+
+        if 'SMSSync' in req.META['HTTP_USER_AGENT']:
+            outgoing_messages.delete()
+        payload['messages'] = messages
+
+    reply = {
+        "payload": payload
+    }
+    return HttpResponse(simplejson.dumps(reply), mimetype="application/json")

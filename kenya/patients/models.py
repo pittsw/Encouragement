@@ -50,3 +50,6 @@ class Message(models.Model):
 	def __unicode__(self):
 		return self.content
 
+class SMSSyncOutgoing(models.Model):
+    target = models.CharField(max_length=50)
+    content = models.CharField(max_length=500)
