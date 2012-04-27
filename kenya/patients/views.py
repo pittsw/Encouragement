@@ -73,9 +73,9 @@ def smssync(request):
         "secret": secret,
     }
 
-    if req.method == 'POST':
-        sender = req.POST['from']
-        msg = req.POST['message']
+    if request.method == 'POST':
+        sender = request.POST['from']
+        msg = request.POST['message']
         payload['success'] = "true" if incoming_message(sender, msg) else "false"
 
     outgoing_messages = SMSSyncOutgoing.objects.all()
@@ -86,7 +86,7 @@ def smssync(request):
             "message": msg.content,
         } for msg in outgoing_messages]
 
-        if 'SMSSync' in req.META['HTTP_USER_AGENT']:
+        if 'SMSSync' in request.META['HTTP_USER_AGENT']:
             outgoing_messages.delete()
         payload['messages'] = messages
 
