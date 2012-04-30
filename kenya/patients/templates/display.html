@@ -9,20 +9,29 @@
 				<td><a href="/message/">Add Message</a></td>
 			</tr>
 		</table>
-		<table border="1">
-			<tr>
+		<table border="0" cellspacing="10">
+			<!--<tr>
 				<th>Date</th>
 				<th>Contact</th>
 				<th>Sent by</th>
 				<th>Content</th>
-			</tr>
+			</tr>-->
 			{% for x in messages %}
-			<tr>
+			<!--<tr>
 				<td>{{x.date}}</td>
 				<td>{{x.user_id}}</td>
 				<td>{{x.sent_by}}</td>
 				<td>{{x.content}}</td>
-			</tr>
+			</tr>-->
+			<tr>
+				{% if x.sent_by == "Nurse" or x.sent_by == "System" %}
+				<td></td>
+				<td>{{x.date}} {{x.user_id}}: {{x.content}}</td>
+				{% else %}
+				<td>{{x.date}} {{client}}: {{x.content}}</td>
+				<td></td>
+				{% endif %}
+			<tr>
 			{% endfor %}
 		</table>
 	</body>
