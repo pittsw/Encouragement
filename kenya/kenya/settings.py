@@ -16,6 +16,8 @@ BROKER_VHOST = "/"
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+AUTH_PROFILE_MODULE = 'patients.Nurse'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

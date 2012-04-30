@@ -11,9 +11,6 @@ from patients.tasks import incoming_message
 def over(request):
 	return render_to_response("frame.html")
 
-def index(request):
-	return render_to_response("index.html")
-
 def DoesNotExist(Exception):
 	def __init__(self, value):
 		self.value = value
@@ -33,12 +30,12 @@ def detail(request, id_number):
 		client = Client.objects.get(id=id_number)
 		messages = Message.objects.filter(client_id=client)
 		return render_to_response("detail.html", {"client":client, "messages":messages})
-	except Page.DoesNotExist:
+	except DoesNotExist:
 		return render_to_response("form.html")
 	
 def list_clients(request):
 	clients = Client.objects.all()
-	return render_to_response("list2.html", {"clients":clients})
+	return render_to_response("list.html", {"clients":clients})
 
 @csrf_exempt
 def add_client(request):
@@ -46,7 +43,7 @@ def add_client(request):
 		form = ClientForm(request.POST)
 		if form.is_valid():
 			f = form.save()
-		return HttpResponseRedirect('/kenya/add/')
+		return HttpResponseRedirect('/add/')
 	else:
 		form = ClientForm()
 		return render_to_response("form.html", {
@@ -59,7 +56,7 @@ def add_message(request):
         form = MessageForm(request.POST)
         if form.is_valid():
             f = form.save()
-        return HttpResponseRedirect('/kenya/message/')
+        return HttpResponseRedirect('/message/')
     else:
         form = MessageForm()
         return render_to_response("message.html", {

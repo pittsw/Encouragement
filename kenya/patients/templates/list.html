@@ -1,14 +1,18 @@
 <html>
+	<script type="text/javascript"> 
+		function load(link) {
+			var id = link.id
+			parent.message.location='/patient/'+id+'/'
+			parent.info.location='/detail/'+id+'/'
+		}
+	</script>
 	<head>
 		<title>List of Clients</title>
 	</head>
 	<body>
 		<table border="1">
 			<tr>
-				<td><a href="/kenya/">Home</a></td>
-				<td><a href="/kenya/demo/">List Clients</a></td>
-				<td><a href="/kenya/add/">Add Client</a></td>
-				<td><a href="/kenya/message/">Add Message</a></td>
+				<td><a href="/add/">Add Client</a></td>
 			</tr>
 		</table>
 		<h1>All Clients</h1>
@@ -18,21 +22,13 @@
 				<th>First Name</h>
 				<th>Last Name</th>
 				<th>Phone Number</th>
-				<th>Location</th>
-				<th>Birthday</th>
-				<th>Baby Status</th>
-				<th>Due Date</th>
 			</tr>
 			{% for x in clients %}
 			<tr>
-				<td><a href="/kenya/patient/{{x.id}}/">{{x.id}}</a></td>
+				<td><a id="{{x.id}}" onClick="load(this)" href=#>{{x.id}}</a></td>
 				<td>{{x.first_name}}</d>
 				<td>{{x.last_name}}</td>
 				<td>{{x.phone_number}}</td>
-				<td>{{x.location}}</td>
-				<td>{{x.birth_date}}</td>
-				<td>{{x.baby_status}}</td>
-				<td>{{x.due_date}}</td>
 			</tr>
 			{% endfor %}
 		</table>
