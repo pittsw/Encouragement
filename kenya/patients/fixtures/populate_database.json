@@ -29,7 +29,7 @@
 		}
 	}, 
 	{
-        "pk": 2, 
+        "pk": 20, 
         "model": "auth.user", 
         "fields": {
             "username": "Nurse", 
@@ -47,7 +47,7 @@
         }
     }, 
     {
-        "pk": 3, 
+        "pk": 30, 
         "model": "auth.user", 
         "fields": {
             "username": "System", 
@@ -68,7 +68,7 @@
     	"pk": 1000, 
     	"model": "patients.nurse", 
     	"fields": {
-    		"user": 2, 
+    		"user": 20, 
     		"location": 1
     	}
     }, 
@@ -76,7 +76,7 @@
     	"pk": 2000, 
     	"model": "patients.nurse", 
     	"fields": {
-    		"user": 3, 
+    		"user": 30, 
     		"location": 2
     	}
     }, 
@@ -88,7 +88,7 @@
     		"date": "2012-04-30T19:02:32.926Z", 
     		"user_id": 2000, 
     		"sent_by": "System",
-    		"client_id": 1
+    		"client_id": 100
     	}
     }
 ]
