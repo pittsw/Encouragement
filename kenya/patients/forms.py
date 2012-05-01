@@ -11,6 +11,3 @@ class MessageForm(ModelForm):
 	class Meta:
 		model = Message
         exclude = ('read')
-		
-
-	

@@ -7,7 +7,6 @@ from django.db import models
 class Location(models.Model):
 
     name = models.CharField(max_length=50)
-
     def __unicode__(self):
         return self.name
 
@@ -15,13 +14,13 @@ class Client(models.Model):
 
     class Meta:
         ordering = ['-urgent', '-pending', '-last_msg']
-    
+        
     STATUS_CHOICES = (
         ('Pregnant', 'Pregnant'),
         ('Post-Partum', 'Post-Partum'),
         ('Failed Pregnancy', 'Failed Pregnancy'),
     )
-
+    
     MARRIAGE_CHOICES = (
         ('Single', 'Single'),
         ('Married', 'Married'),
@@ -72,7 +71,7 @@ class Nurse(models.Model):
     user = models.OneToOneField(User)
 
     location = models.ForeignKey(Location)
-
+    
     def __unicode__(self):
         return self.user.first_name + ' ' + self.user.last_name
 
@@ -81,7 +80,6 @@ class Message(models.Model):
     class Meta:
         ordering = ['date']
         
-
     SENDER_CHOICES = (
         ('Client', 'Client'),
         ('Nurse', 'Nurse'),
