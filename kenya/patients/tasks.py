@@ -22,16 +22,44 @@ def send_all():
     if transport is None:
         return
 
-    print transport
-
     transport_kwargs = getattr(settings, 'TRANSPORT_KWARGS', {})
     for client in Client.objects.all():
-        message_client.delay(client, 'System', transport_kwargs, transport)
+        scheduled_message.delay(client, transport, transport_kwargs)
+
 
 @task
-def message_client(client, sender, transport_kwargs, transport=None):
-    """Calculates which message should be sent to the given client,
-    then sends it via the transport.
+def scheduled_message(client, transport, transport_kwargs):
+    """Calculates whether or not to message a client, and, if so, what
+    to send.  Then sends the message.
+
+    Arguments:
+    client - the client to send to
+    transport - the transport to send through
+    transport_kwargs - a dict containing options for the transport
+
+    """
+    # This is where all of the business logic of deciding messages
+    # would go.  For now, just send.
+    message_client(client, Nurse.objects.all()[0], 'System',
+                   'Automated message!', transport, transport_kwargs)
+
+
+def message_client(client, nurse, sender, content, transport=None,
+                   transport_kwargs={}):
+    """Sends the given message to the client.
+
+    Arguments:
+    client - a patients.models.Client object, representing the client
+             to send to
+    nurse - a patients.models.Nurse object, representing the nurse
+            who sent the message (or the special Nurse object
+            'System')
+    sender - 'Nurse' or 'System'
+    content - the message to send (a string)
+    transport - an object/class/whatever that has can be called with
+                transport.send
+    transport_kwargs - a dict containing any arguments the transport
+                       might need
 
     """
     if transport is None:
@@ -43,15 +71,15 @@ def message_client(client, sender, transport_kwargs, transport=None):
         if transport is None:
             return
 
-    content = "Thanks for using Encouragement!"
     Message(
         client_id=client,
-        user_id=Nurse.objects.all()[0],
+        user_id=nurse,
         sent_by=sender,
         content=content,
         date=datetime.now()
     ).save()
     transport.send(client.phone_number, content, **transport_kwargs)
+
 
 def incoming_message(phone_number, message):
     """Adds an incoming message to the database.
