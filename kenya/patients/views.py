@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
+from django.template import RequestContext
 
 from patients.forms import ClientForm, MessageForm
 from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
@@ -17,13 +18,19 @@ def DoesNotExist(Exception):
     def __str__(self):
         return repr(self.value)
 
+@csrf_exempt
 def client(request, id_number):
-    try:
+    if request.method == 'POST':
+        client = Client.objects.get(id=id_number)
+        nurse = Nurse.objects.get(user=request.user)
+        m = Message(client_id=client, user_id=nurse, sent_by = 'Nurse', content=request.POST['text'])
+        m.save()
+        messages = Message.objects.filter(client_id=client)
+        return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
+    else:
         client = Client.objects.get(id=id_number)
         messages = Message.objects.filter(client_id=client)
-        return render_to_response("display.html", {"client":client, "messages":messages})
-    except DoesNotExist:
-        return render_to_response("form.html")
+        return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):
     try:

@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
-
+from django.conf import settings
 import patients.views as views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from django.contrib import admin
 admin.autodiscover()
@@ -17,3 +18,4 @@ urlpatterns = patterns('',
     url(r'^smssync', views.smssync),
     url(r'^$', views.over),
 )
+urlpatterns += staticfiles_urlpatterns()

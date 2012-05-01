@@ -1,21 +1,24 @@
 <html>
 	<head>
 		<title>{{client.first_name}} {{client.last_name}}</title>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/messages.css"/>
 	</head>
 	<body>
-		<table border="1">
-			<tr>
-			<!-- Replace this with message box -->
-				<td><a href="/message/">Add Message</a></td>
-			</tr>
-		</table>
-			{% for x in messages %}
-				{% if x.sent_by == "Nurse" or x.sent_by == "System" %}
-				<div style="float:right; display:inline; width:70%; clear:both;">{{x.date}} {{x.user_id}}: {{x.content}}</div>
-				{% else %}
-				<div style="float:left; display:inline; width:70%; clear:both;">{{x.date}} {{client}}: {{x.content}}</div>
-				{% endif %}
+		<div class="Box">
+			<form method="post" action="">
+				<textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
+				<input type="submit" value="Send" />
+			</form>
+		</div>
 
-			{% endfor %}
+		<div class="Body">
+		{% for x in messages reversed %}
+			{% if x.sent_by == "Nurse" or x.sent_by == "System" %}
+			<div class={{x.sent_by}}>{{x.date}} {{x.user_id}}: {{x.content}}</div>
+			{% else %}
+			<div class="Client">{{x.date}} {{client}}: {{x.content}}</div>
+			{% endif %}
+		{% endfor %}
+		</div>
 	</body>
 </html>
