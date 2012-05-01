@@ -1,23 +1,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Add A Contact</title>
+        <title>Add A Client</title>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	</head>
 	<body>
-		<table border="1">
-			<tr>
-				<td><a href="/demo/">List Clients</a></td>
-			</tr>
-		</table>
-		
-		<form method="post" action="">
-			<table>
-				{{ form.as_table }}
-			</table>
-			<div>
-				<input type="submit" value="Add" />
-			</div>
+        <table border="1">
+            <tr>
+                <td><a href="/demo/">List Clients</a></td>
+            </tr>
+        </table>
+    
+        <form method="post" action="/add/">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <div>
+                <input type="submit" name="submit" value="Submit" />
+            </div>
 		</form>
 	</body>
 </html>

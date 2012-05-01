@@ -1,10 +1,12 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
-from patients.forms import ClientForm, MessageForm
+from patients.forms import AddClientForm, ClientForm, MessageForm
 from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
 from patients.tasks import incoming_message
 
@@ -37,20 +39,50 @@ def list_clients(request):
     clients = Client.objects.all()
     return render_to_response("list.html", {"clients":clients})
 
-@csrf_exempt
 def add_client(request):
-    if request.method == 'POST':
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            f = form.save()
-        return HttpResponseRedirect('/add/')
-    else:
-        form = ClientForm()
-        return render_to_response("form.html", {
+    form = None
+    if request.method == "GET":
+        form = AddClientForm()
+    elif request.method == "POST":
+        if request.POST.get("submit", ""):
+            form = AddClientForm(request.POST)
+            if form.is_valid():
+                id = form.cleaned_data['id']
+                client = form.save(commit=False)
+                client.id = id
+                client.save()
+                return list_clients(request)
+        else:
+            return list_clients(request)
+    c = {
+        'form': form
+    }
+    c.update(csrf(request))
+    return render_to_response('form.html', c)
+
+
+def edit_client(request, id):
+    client = get_object_or_404(Client, id=id)
+    form = None
+    if request.method == "GET":
+        form = ClientForm(instance=client)
+
+    if request.method == "POST":
+        form = ClientForm(request.POST, instance=client)
+        if request.POST.get("submit", ""):
+            # They clicked submit
+            if form.is_valid():
+                form.save()
+                return detail(request, id)
+        else:
+            # They clicked something else!?
+            return detail(request, id)
+    c = {
         "form": form,
-        })
+    }
+    c.update(csrf(request))
+    return render_to_response("edit_client.html", c)
     
-@csrf_exempt
 def add_message(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)

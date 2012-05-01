@@ -13,5 +13,11 @@
 		<p>Expected Due Date: {{client.due_date}}</p>
 		<p>Marital Status: {{client.marital_status}}</p>
 		<p>Education: {{client.years_of_education}}</p>
+        
+        <form method="get" action="/edit/{{ client.id }}/">
+        <div>
+        <input type="submit" value="Edit">
+        <div>
+        </form>
 	</body>
 </html>

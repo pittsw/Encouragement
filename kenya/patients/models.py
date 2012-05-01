@@ -26,7 +26,7 @@ class Client(models.Model):
         ('Married', 'Married'),
     )
 
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, editable=False)
 
     first_name = models.CharField(max_length=50)
 
@@ -46,11 +46,11 @@ class Client(models.Model):
 
     years_of_education = models.IntegerField()
 
-    urgent = models.BooleanField()
+    urgent = models.BooleanField(editable=False, default=False)
 
-    pending = models.IntegerField()
+    pending = models.IntegerField(editable=False, default=0)
 
-    last_msg = models.DateTimeField(blank=True, null=True)
+    last_msg = models.DateTimeField(blank=True, null=True, editable=False)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -96,7 +96,7 @@ class Message(models.Model):
 
     date = models.DateTimeField(auto_now_add = True)
 
-    read = models.BooleanField(default=False)
+    read = models.BooleanField(default=False, editable=False)
 
     def __unicode__(self):
         return self.content
