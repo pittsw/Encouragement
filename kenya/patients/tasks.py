@@ -90,11 +90,14 @@ def incoming_message(phone_number, message):
         # We got a message from someone who isn't registered
         return False
 
+    client = clients[0]
     Message(
-        client_id=clients[0],
+        client_id=client,
         user_id=Nurse.objects.all()[0],
         sent_by='Client',
         content=message,
-        date=datetime.now()
+        date=datetime.now(),
     ).save()
+    client.update()
+
     return True

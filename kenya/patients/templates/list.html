@@ -22,6 +22,9 @@
 				<th>First Name</h>
 				<th>Last Name</th>
 				<th>Phone Number</th>
+				<th>Pending Messages</th>
+				<th>Last Message</th>
+				<th>Urgent?</th>
 			</tr>
 			{% for x in clients %}
 			<tr>
@@ -29,6 +32,9 @@
 				<td>{{x.first_name}}</d>
 				<td>{{x.last_name}}</td>
 				<td>{{x.phone_number}}</td>
+				<td>{{x.pending}}</td>
+				<td>{{x.last_msg}}</td>
+				<td>{{x.urgent}}</td>
 			</tr>
 			{% endfor %}
 		</table>
