@@ -87,7 +87,7 @@
     		"content": "Test message: Hi, how are you?", 
     		"date": "2012-04-30T19:02:32.926Z", 
     		"user_id": 2000, 
-    		"sent_by": "System", 
+    		"sent_by": "System",
     		"client_id": 1
     	}
     }
