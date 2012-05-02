@@ -38,7 +38,7 @@ def detail(request, id_number):
     try:
         client = Client.objects.get(id=id_number)
         messages = Message.objects.filter(client_id=client)
-        return render_to_response("detail.html", {"client":client, "messages":messages})
+        return render_to_response("detail.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
     except DoesNotExist:
         return render_to_response("form.html")
     

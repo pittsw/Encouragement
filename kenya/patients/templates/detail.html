@@ -1,23 +1,22 @@
 <html>
 	<head>
 		<title>{{client.first_name}} {{client.last_name}}</title>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
 	</head>
 	<body>
 		<h1>{{client.first_name}} {{client.last_name}}</h1>
-		<p>ID number: {{client.id}}</p>
-		<p>Name: {{client.first_name}} {{client.last_name}}</p>
-		<p>Birthday: {{client.birth_date}}</p>
-		<p>Phone Number: {{client.phone_number}}</p>
-		<p>Location: {{client.location}}</p>
-		<p>Pregnancy Status: {{client.pregnancy_status}}</p>
-		<p>Expected Due Date: {{client.due_date}}</p>
-		<p>Marital Status: {{client.marital_status}}</p>
-		<p>Education: {{client.years_of_education}}</p>
+		<div>ID number: {{client.id}}</div>
+		<div>Name: {{client.first_name}} {{client.last_name}}</div>
+		<div>Birthday: {{client.birth_date}}</div>
+		<div>Phone Number: {{client.phone_number}}</div>
+		<div>Location: {{client.location}}</div>
+		<div>Pregnancy Status: {{client.pregnancy_status}}</div>
+		<div>Expected Due Date: {{client.due_date}}</div>
+		<div>Marital Status: {{client.marital_status}}</div>
+		<div>Education: {{client.years_of_education}}</div>
         
         <form method="get" action="/edit/{{ client.id }}/">
-        <div>
         <input type="submit" value="Edit">
-        <div>
         </form>
 	</body>
 </html>
