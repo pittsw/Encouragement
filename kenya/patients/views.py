@@ -44,7 +44,7 @@ def detail(request, id_number):
     
 def list_clients(request):
     clients = Client.objects.all()
-    return render_to_response("list.html", {"clients":clients})
+    return render_to_response("list.html", {"clients":clients}, context_instance=RequestContext(request))
 
 def add_client(request):
     form = None
@@ -65,7 +65,7 @@ def add_client(request):
         'form': form
     }
     c.update(csrf(request))
-    return render_to_response('form.html', c)
+    return render_to_response('form.html', c, context_instance=RequestContext(request))
 
 
 def edit_client(request, id):

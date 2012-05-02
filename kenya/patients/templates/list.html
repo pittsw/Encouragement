@@ -8,6 +8,7 @@
 	</script>
 	<head>
 		<title>List of Clients</title>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/list.css"/>
 	</head>
 	<body>
 		<table border="1">
@@ -16,26 +17,22 @@
 			</tr>
 		</table>
 		<h1>All Clients</h1>
-		<table border="1">
+		<!--<table border="1">
 			<tr>
 				<th>ID Number</th>
-				<th>First Name</h>
-				<th>Last Name</th>
-				<th>Phone Number</th>
+				<th>Name</h>
 				<th>Pending Messages</th>
 				<th>Last Message</th>
 				<th>Urgent?</th>
 			</tr>
+		</table>-->
 			{% for x in clients %}
-			<tr>
-				<td><a id="{{x.id}}" onClick="load(this)" href=#>{{x.id}}</a></td>
-				<td>{{x.first_name}}</d>
-				<td>{{x.last_name}}</td>
-				<td>{{x.phone_number}}</td>
-				<td>{{x.pending}}</td>
-				<td>{{x.last_msg}}</td>
-				<td>{{x.urgent}}</td>
-			</tr>
+			<div class="person">
+				<div class="detail"><a id="{{x.id}}" onClick="load(this)" href=#>{{x.id}} {{x.first_name}} {{x.last_name}}</a>
+				Pending Messages: {{x.pending}} urgent? {{x.urgent}}
+				</div>
+				<div class="message">Last Message: {{x.last_msg}}</div>
+			</div>
 			{% endfor %}
 		</table>
 	</body>
