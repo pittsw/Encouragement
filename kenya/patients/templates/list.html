@@ -1,14 +1,33 @@
 <html>
-	<script type="text/javascript"> 
-		function load(link) {
-			var id = link.id
-			parent.message.location='/patient/'+id+'/'
-			parent.info.location='/detail/'+id+'/'
-		}
-	</script>
+	
 	<head>
 		<title>List of Clients</title>
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/list.css"/>
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/dropincontentbox.css" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script src="{{ STATIC_URL }}javascript/jquery.easing.1.3.js"></script>
+        <script src="{{ STATIC_URL }}javascript/dropincontentbox.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/list.css"/>
+        <script type="text/javascript"> 
+        	function color() {
+				$(".person").css("background-color", "#00f5f5")
+			}
+			function load(link) {
+				color()
+				var id = link.id
+				parent.message.location='/patient/'+id+'/'
+				parent.info.location='/detail/'+id+'/'
+				$(link).css("background-color", "#3333CC")
+			}
+
+			
+			var dropinbox1 = new dropincontentbox({
+						   source:'#signup', //#id of DIV to show if defined inline
+						   cssclass:'dropinbox dropinboxaltstyle drop-shadow lifted',
+						   fx:'easeInExpo', //alternate drop animation keyword
+						   pos:[0, -15], //custom position of drop in box
+						   deferred: "fullon"
+						})
+		</script>
 	</head>
 	<body>
 		<table border="1">
@@ -17,23 +36,29 @@
 			</tr>
 		</table>
 		<h1>All Clients</h1>
-		<!--<table border="1">
-			<tr>
-				<th>ID Number</th>
-				<th>Name</h>
-				<th>Pending Messages</th>
-				<th>Last Message</th>
-				<th>Urgent?</th>
-			</tr>
-		</table>-->
 			{% for x in clients %}
-			<div class="person">
-				<div class="detail"><a id="{{x.id}}" onClick="load(this)" href=#>{{x.id}} {{x.first_name}} {{x.last_name}}</a>
+			<div class="person" id="{{x.id}}" onClick="load(this)">
+				<div class="detail">{{x.id}} {{x.first_name}} {{x.last_name}}
 				Pending Messages: {{x.pending}} urgent? {{x.urgent}}
 				</div>
 				<div class="message">Last Message: {{x.last_msg}}</div>
 			</div>
 			{% endfor %}
 		</table>
+		<div id="signup">
+			<a href="javascript:dropinbox1.hide()">Hide</a>
+			<form method="post" action="/add/">
+				{% csrf_token %}
+				<table>
+					{{ form.as_table }}
+				</table>
+				<div>
+					<input type="submit" name="submit" value="Submit" />
+				</div>
+			</form>
+		</div>
+		<div class="person" onClick="dropinbox1.show()">
+			<p>Add Client</p>
+		</div>
 	</body>
 </html>

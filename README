@@ -6,3 +6,7 @@ Running the server:
 
 Running the transports:
 `python manage.py celeryd -Bl info`
+
+Reinstalling the database:
+'rm kenya.db'
+'python manage.py loaddata patients/fixtures/populate_database.json'

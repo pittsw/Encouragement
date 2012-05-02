@@ -1,7 +1,8 @@
 .person
 {
-padding: 3px 3px 3px 3px;
-border: 1px solid grey;
+	padding: 3px 3px 3px 3px;
+	border: 1px solid grey;
+	background-color:rgb(0,245,245);
 }
 
 .detail
@@ -14,5 +15,5 @@ border: 1px solid grey;
 
 body
 {
-background-color:rgb(0,245,245);
+	background-color:rgb(0,245,245);
 }
