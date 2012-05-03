@@ -39,11 +39,11 @@
 			{% for x in clients %}
 			<div class="person" id="{{x.id}}" onClick="load(this)">
 				<div class="detail">{{x.id}} {{x.first_name}} {{x.last_name}}
-				Pending Messages: {{x.pending}} urgent? {{x.urgent}}
-				</div>
-				<div class="message">Last Message: {{x.last_msg}}</div>
+				Pending Messages: {{x.pending}} urgent? {{x.urgent}}</div>
+				<div class="message">Last Message: Do this next</div>
 			</div>
 			{% endfor %}
+			
 		</table>
 		<div id="signup">
 			<a href="javascript:dropinbox1.hide()">Hide</a>

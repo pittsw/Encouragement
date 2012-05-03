@@ -43,10 +43,9 @@ def detail(request, id_number):
         return render_to_response("form.html")
     
 def list_clients(request):
-	form = None
-	clients = Client.objects.all()
-	form = AddClientForm()
-	return render_to_response("list.html", {"clients":clients, "form": form}, context_instance=RequestContext(request))
+    clients = Client.objects.all()
+    form = AddClientForm()
+    return render_to_response("list.html", {"clients":clients, "form": form}, context_instance=RequestContext(request))
 
 def add_client(request):
     form = None
