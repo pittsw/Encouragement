@@ -1,8 +1,19 @@
-div
+p, .errorlist
 {
 background-color: rgb(245,242,231);
-padding: 10px 10px 10px 10px;
+padding: 5px 5px 5px 5px;
 border: 1px solid grey;
+margin: 0px;
+}
+
+ul
+{
+list-style-position: inside;
+}
+
+li
+{
+color: red;
 }
 
 body

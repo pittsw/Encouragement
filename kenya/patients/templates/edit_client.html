@@ -1,8 +1,17 @@
 <html>
 	<head>
-		<title>Dummy page</title>
+		<title>Edit {{form.instance.first_name}} {{form.instance.last_name}}</title>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
 	</head>
 	<body>
-		<div>This is a dummy page to hold the place of the edit client form when that is finished.</div>
+        <h1>{{form.instance.first_name}} {{form.instance.last_name}}</h1>
+        <form method="post" action="/edit/{{form.instance.pk}}/">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <div class="submit">
+            <input type="submit" name="submit" value="Submit" />
+            <input type="submit" name="cancel" value="Cancel" />
+        </form>
 	</body>
 </html>

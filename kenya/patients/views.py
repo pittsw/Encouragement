@@ -83,13 +83,13 @@ def edit_client(request, id):
                 form.save()
                 return detail(request, id)
         else:
-            # They clicked something else!?
             return detail(request, id)
     c = {
         "form": form,
     }
     c.update(csrf(request))
-    return render_to_response("edit_client.html", c)
+    return render_to_response("edit_client.html", c,
+                              context_instance=RequestContext(request))
     
 def add_message(request):
     if request.method == 'POST':
