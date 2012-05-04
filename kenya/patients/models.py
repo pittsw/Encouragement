@@ -7,8 +7,10 @@ from django.db import models
 class Location(models.Model):
 
     name = models.CharField(max_length=50)
+
     def __unicode__(self):
         return self.name
+
 
 class Client(models.Model):
 
@@ -64,6 +66,7 @@ class Client(models.Model):
         self.save()
         
 
+
 class Nurse(models.Model):
 
     id = models.IntegerField(primary_key = True)
@@ -74,6 +77,7 @@ class Nurse(models.Model):
     
     def __unicode__(self):
         return self.user.first_name + ' ' + self.user.last_name
+
 
 class Message(models.Model):
 
@@ -100,6 +104,7 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.content
+
 
 class SMSSyncOutgoing(models.Model):
 
