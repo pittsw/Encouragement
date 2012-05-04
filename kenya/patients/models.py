@@ -40,19 +40,23 @@ class Client(models.Model):
 
     location = models.ForeignKey(Location)
 
-    pregnancy_status = models.CharField(max_length = 20, choices=STATUS_CHOICES)
+    pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
     due_date = models.DateField()
 
-    marital_status = models.CharField(max_length = 20, choices=MARRIAGE_CHOICES)
+    marital_status = models.CharField(max_length=20, choices=MARRIAGE_CHOICES)
 
     years_of_education = models.IntegerField()
+
+    conditions = models.ManyToManyField('Condition')
 
     urgent = models.BooleanField(editable=False, default=False)
 
     pending = models.IntegerField(editable=False, default=0)
 
     last_msg = models.DateTimeField(blank=True, null=True, editable=False)
+
+    sent_messages = models.ManyToManyField('AutomatedMessage')
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -69,7 +73,7 @@ class Client(models.Model):
 
 class Nurse(models.Model):
 
-    id = models.IntegerField(primary_key = True)
+    id = models.IntegerField(primary_key=True)
 
     user = models.OneToOneField(User)
 
@@ -94,11 +98,11 @@ class Message(models.Model):
 
     user_id = models.ForeignKey(Nurse)
 
-    sent_by = models.CharField(max_length = 6, choices=SENDER_CHOICES)
+    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
     content = models.CharField(max_length=500)
 
-    date = models.DateTimeField(auto_now_add = True)
+    date = models.DateTimeField(auto_now_add=True)
 
     read = models.BooleanField(default=False, editable=False)
 
@@ -111,3 +115,57 @@ class SMSSyncOutgoing(models.Model):
     target = models.CharField(max_length=50)
 
     content = models.CharField(max_length=500)
+
+    def __unicode__(self):
+        return '"{cont}" >> {tar}'.format(cont=self.content, tar=self.target)
+
+
+class Condition(models.Model):
+    """Choo choo!
+
+    """
+
+    name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
+
+
+class AutomatedMessage(models.Model):
+    """These are the individual automated messages that are sent out
+    twice a week.
+
+    Fields:
+        condition - which condition this AutomatedMessage is a part of
+        priority - the priority of this message -- higher numbers better
+        message - the contents of the message
+        start_week - add this many weeks to the date of birth to
+                     calculate the earliest this message can be sent
+        end_week - add this many weeks to the date of birth to
+                   calculate the latest this message can be sent
+
+    """
+
+    class Meta:
+        ordering = ['-priority']
+
+    condition = models.ForeignKey(Condition)
+
+    priority = models.IntegerField(default=0)
+
+    message = models.CharField(max_length=144)
+
+    start_week = models.IntegerField()
+
+    end_week = models.IntegerField()
+
+    repeats = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return '{con} ({pri}): "{msg}", {stw} to {end}'.format(
+            con=self.condition,
+            pri=self.priority,
+            msg=self.message,
+            stw=self.start_week,
+            end=self.end_week,
+        )

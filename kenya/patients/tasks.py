@@ -1,11 +1,11 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import sys
 
 from celery.schedules import crontab
 from celery.task import periodic_task, task
 from django.conf import settings
 
-from patients.models import Client, Message, Nurse
+from patients.models import AutomatedMessage, Client, Message, Nurse
 import patients.transports
 
 @periodic_task(run_every=crontab(minute=0, hour=12, day_of_week="1,4"))
@@ -29,8 +29,7 @@ def send_all():
 
 @task
 def scheduled_message(client, transport, transport_kwargs):
-    """Calculates whether or not to message a client, and, if so, what
-    to send.  Then sends the message.
+    """Calculates which message to send to a client, then sends it.
 
     Arguments:
     client - the client to send to
@@ -38,10 +37,30 @@ def scheduled_message(client, transport, transport_kwargs):
     transport_kwargs - a dict containing options for the transport
 
     """
-    # This is where all of the business logic of deciding messages
-    # would go.  For now, just send.
+    week = int((date.today() - client.due_date).days / 7)
+    messages = AutomatedMessage.objects.filter(
+        condition__in=client.conditions.all(),
+        start_week__lte=week,
+        end_week__gte=week,
+    )
+    messages = [x for x in messages if x not in client.sent_messages.all()]
+    
+    if len(messages) == 0:
+        return {
+			'week': week,
+			'messages': messages,
+        }
+        
+    message = messages[0]
+    if not message.repeats:
+        client.sent_messages.add(message)
+        client.save()
     message_client(client, Nurse.objects.all()[0], 'System',
-                   'Automated message!', transport, transport_kwargs)
+                   message.message, transport, transport_kwargs)
+    return {
+		'week': week,
+		'messages': messages,
+    }
 
 
 def message_client(client, nurse, sender, content, transport=None,
