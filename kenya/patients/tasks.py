@@ -28,7 +28,7 @@ def send_all():
 
 
 @task
-def scheduled_message(client, transport, transport_kwargs):
+def scheduled_message(client, transport=None, transport_kwargs={}):
     """Calculates which message to send to a client, then sends it.
 
     Arguments:
