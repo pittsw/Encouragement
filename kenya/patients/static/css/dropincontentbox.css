@@ -69,3 +69,34 @@ left:auto;
 -o-transform:rotate(3deg);
 transform:rotate(3deg);
 }
+
+.addbutton
+{
+text-align:center;
+font-size:22px;
+border: 1px solid grey;
+}
+
+.person
+{
+padding: 3px 3px 3px 3px;
+border-bottom: 1px dashed grey;
+background-color:rgb(217,233,236);
+}
+
+.name
+{
+}
+
+.detail
+{
+}
+
+.message
+{
+}
+
+body
+{
+background-color:rgb(217,233,236);
+}

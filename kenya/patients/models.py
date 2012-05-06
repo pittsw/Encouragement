@@ -61,6 +61,13 @@ class Client(models.Model):
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
 
+    def last_message(self):
+        message = Message.objects.filter(client_id=self, sent_by='Client')
+        if message.count() < 1:
+            return "No messages yet"
+        else:
+            return message[0]
+
     def update(self):
         messages = Message.objects.filter(client_id=self,
                                           sent_by='Client')
@@ -81,7 +88,6 @@ class Nurse(models.Model):
     
     def __unicode__(self):
         return self.user.first_name + ' ' + self.user.last_name
-
 
 class Message(models.Model):
 
