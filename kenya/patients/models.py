@@ -66,7 +66,7 @@ class Client(models.Model):
         if message.count() < 1:
             return "No messages yet"
         else:
-            return message[0]
+            return message.reverse()[0]
 
     def update(self):
         messages = Message.objects.filter(client_id=self,
