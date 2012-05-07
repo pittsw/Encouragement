@@ -10,13 +10,25 @@
 				<input type="submit" value="Send" />
 			</form>
 		</div>
-
+		<div class="header">Communication History</div>
 		<div class="Body">
 		{% for x in messages reversed %}
 			{% if x.sent_by == "Nurse" or x.sent_by == "System" %}
-			<div class={{x.sent_by}}>{{x.date}} {{x.user_id}}: {{x.content}}</div>
+			<div class={{x.sent_by}}>
+				<div class="toplevel">
+					<div class="timestamp">{{x.date}}</div>
+					<div class="sender">{{x.user_id}}:</div>
+				</div>
+				<br>
+				<div class="content">{{x.content}}</div></div>
 			{% else %}
-			<div class="Client">{{x.date}} {{client}}: {{x.content}}</div>
+			<div class="Client">
+				<div class="toplevel">
+					<div class="timestamp">{{x.date}}</div>
+					<div class="sender">{{client}}:</div>
+				</div>
+				<br>
+				<div class="content">{{x.content}}</div></div>
 			{% endif %}
 		{% endfor %}
 		</div>
