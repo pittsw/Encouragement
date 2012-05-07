@@ -32,8 +32,8 @@
 		<div class="addbutton" onClick="dropinbox1.show()">Add Client</div>
 		{% for x in clients %}
 		<div class="person" id="{{x.id}}" onClick="load(this)">
-			<div class="name">{{x.id}} {{x.first_name}} {{x.last_name}}</div>
-			<div class="detail">Pending Messages: {{x.pending}}  Urgent? {{x.urgent}}</div>
+			<div class="name">{{x.first_name}} {{x.last_name}}</div>
+			<div class="detail">ID: {{x.id}} Pending Messages: {{x.pending}}  Urgent? {{x.urgent}}</div>
 			<div class="message">Last Message: {{x.last_message}}</div>
 		</div>
 		{% endfor %}

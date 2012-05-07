@@ -4,17 +4,45 @@
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
 	</head>
 	<body>
-		<h1>{{client.first_name}} {{client.last_name}}</h1>
-		<p>ID number: {{client.id}}</p>
-		<p>Name: {{client.first_name}} {{client.last_name}}</p>
-		<p>Birthday: {{client.birth_date}}</p>
-		<p>Phone Number: {{client.phone_number}}</p>
-		<p>Location: {{client.location}}</p>
-		<p>Pregnancy Status: {{client.pregnancy_status}}</p>
-		<p>Expected Due Date: {{client.due_date}}</p>
-		<p>Marital Status: {{client.marital_status}}</p>
-		<p>Education: {{client.years_of_education}}</p>
-        
+		<div class="header">Client Profile</div>
+		<table>
+			<tr>
+				<th class="title">ID number:</th>
+				<th class="data">{{client.id}}</th>
+			</tr>
+			<tr>
+				<td class="title">Name:</td>
+				<td class="data">{{client.first_name}} {{client.last_name}}</td>
+			</tr>
+			<tr>
+				<td class="title">Birthday:</td>
+				<td class="data">{{client.birth_date}}</td>
+			</tr>
+			<tr>
+				<td class="title">Phone Number:</td>
+				<td class="data">{{client.phone_number}}</td>
+			</tr>
+			<tr>
+				<td class="title">Location:</td>
+				<td class="data">{{client.location}}</td>
+			</tr>
+			<tr>
+				<td class="title">Pregnancy Status:</td>
+				<td class="data">{{client.pregnancy_status}}</td>
+			</tr>
+			<tr>
+				<td class="title">Expected Due Date:</td>
+				<td class="data">{{client.due_date}}</td>
+			</tr>
+			<tr>
+				<td class="title">Marital Status:</td>
+				<td class="data">{{client.marital_status}}</td>
+			</tr>
+			<tr>
+				<td class="title">Education:</td>
+				<td class="data">{{client.years_of_education}}</td>
+			</tr>
+		</table>
         <form method="get" action="/edit/{{ client.id }}/">
         <input type="submit" value="Edit">
         </form>

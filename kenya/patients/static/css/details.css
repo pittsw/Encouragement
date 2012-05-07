@@ -1,9 +1,56 @@
-p, .errorlist
+.errorlist
 {
 background-color: rgb(245,242,231);
 padding: 5px 5px 5px 5px;
 border: 1px solid grey;
 margin: 0px;
+}
+
+.header
+{
+background-color: rgb(208, 206, 196);
+font-weight: bold;
+font-size: 15px;
+padding: 5px 0px 5px 15px;
+}
+
+table
+{
+background-color: rgb(245, 242, 231);
+width: 100%;
+}
+
+th
+{
+font-weight: normal;
+}
+
+tr
+{
+padding: 10px;
+margin: 10px;
+height: 30px;
+}
+
+td
+{
+vertical-align:middle;
+border-top: 1px dashed grey;
+}
+
+.title
+{
+width: 40%;
+text-align: right;
+padding-right: 10px;
+}
+
+.data
+{
+width: 60%;
+padding: 0px;
+text-align: left;
+font-size: 20px;
 }
 
 ul
@@ -18,5 +65,5 @@ color: red;
 
 body
 {
-background-color:rgb(255,255,255);
+background-color: rgb(255,255,255);
 }
