@@ -106,8 +106,8 @@ def incoming_message(phone_number, message):
     """
     clients = Client.objects.filter(phone_number=phone_number)
     if len(clients) != 1:
-        # We got a message from someone who isn't registered
-        return False
+        # We got a message from someone without a registered phone number
+        add_client(phone_number, message)
 
     client = clients[0]
     Message(
@@ -120,3 +120,16 @@ def incoming_message(phone_number, message):
     client.update()
 
     return True
+
+
+def add_client(phone_number, message):
+    """When a client is added, we add everything except their phone number.
+    When the client texts a certain code, this is matched up and their phone
+    number is added.
+
+    """
+    clients = Client.objects.filter(phone_number=None)
+    for client in clients:
+        if message == client.generate_key:
+            client.phone_number = phone_number
+            client.save()

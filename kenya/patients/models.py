@@ -1,4 +1,5 @@
 from datetime import datetime
+from hashlib import sha256 as sha
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -38,10 +39,7 @@ class Client(models.Model):
 
     last_name = models.CharField(max_length=50)
 
-    phone_number = models.CharField(max_length=50, validators=[
-        RegexValidator(regex="\+(\d+)", message=("Phone numbers must be of the"
-            " form +XXXX...")),
-    ])
+    phone_number = models.CharField(max_length=50, blank=True, editable=False)
 
     birth_date = models.DateField()
 
@@ -74,6 +72,16 @@ class Client(models.Model):
             return "No messages yet"
         else:
             return message.reverse()[0]
+
+    def generate_key(self):
+        string = (sha(str(self.id) + self.first_name + self.last_name)
+            .hexdigest())
+        return "{p1}-{p2}-{p2}-{p4}".format(
+            p1=string[:3],
+            p2=string[3:6],
+            p3=string[6:9],
+            p4=string[9:12],
+        )
 
 
 class Nurse(models.Model):

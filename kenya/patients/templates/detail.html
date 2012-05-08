@@ -42,6 +42,10 @@
 				<td class="title">Education:</td>
 				<td class="data">{{client.years_of_education}}</td>
 			</tr>
+            <tr>
+                <td class="title">Registration Key:</td>
+                <td class="data">{{client.generate_key}}</td>
+            </tr>
 		</table>
         <form method="get" action="/edit/{{ client.id }}/">
         <input type="submit" value="Edit">
