@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -37,7 +38,10 @@ class Client(models.Model):
 
     last_name = models.CharField(max_length=50)
 
-    phone_number = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=50, validators=[
+        RegexValidator(regex="\+(\d+)", message=("Phone numbers must be of the"
+            " form +XXXX...")),
+    ])
 
     birth_date = models.DateField()
 
@@ -70,7 +74,7 @@ class Client(models.Model):
             return "No messages yet"
         else:
             return message.reverse()[0]
-        
+
 
 class Nurse(models.Model):
 
