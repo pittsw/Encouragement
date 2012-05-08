@@ -1,5 +1,9 @@
 # Django settings for kenya project.
 
+# Necessary for updating
+from datetime import timedelta
+URGENT = timedelta(days=14)
+
 # Necessary for SMSSync view.
 TRANSPORT = 'SMSSyncTransport'
 SMSSYNC_SECRET = 'Standards'

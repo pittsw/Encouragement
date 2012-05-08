@@ -3,6 +3,9 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import pytz
 
 class Location(models.Model):
 
@@ -67,16 +70,7 @@ class Client(models.Model):
             return "No messages yet"
         else:
             return message.reverse()[0]
-
-    def update(self):
-        messages = Message.objects.filter(client_id=self,
-                                          sent_by='Client')
-        self.last_msg = messages[0].date
-        self.pending = len(messages.filter(read=False))
-        self.urgent = (datetime.now() - self.last_msg) > URGENT
-        self.save()
         
-
 
 class Nurse(models.Model):
 
@@ -175,3 +169,21 @@ class AutomatedMessage(models.Model):
             stw=self.start_week,
             end=self.end_week,
         )
+
+
+@receiver(post_save, sender=Message, dispatch_uid="update_client")
+def update_client(sender, **kwargs):
+    if kwargs['raw']:
+        return
+
+    client = kwargs['instance'].client_id
+    messages = Message.objects.filter(client_id=client,
+                                      sent_by='Client')
+
+    if len(messages) == 0:
+        return
+
+    client.last_msg = messages[0].date
+    client.pending = len(messages.filter(read=False))
+    client.urgent = (datetime.now(pytz.utc) - client.last_msg) > settings.URGENT
+    client.save()
