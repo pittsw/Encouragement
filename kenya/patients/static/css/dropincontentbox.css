@@ -84,15 +84,16 @@ border-bottom: 1px dashed grey;
 background-color:rgb(217,233,236);
 }
 
-.pendingname
-{
-font-style: bold;
-font-size:20px;
-}
 
 .name
 {
 font-size: 18px;
+}
+
+.pendingname
+{
+font-style: bold;
+font-size:20px;
 }
 
 .message

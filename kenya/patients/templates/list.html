@@ -64,7 +64,7 @@
 		{% for x in clients %}
 		<div class="person" id="{{x.id}}" onClick="load(this)">
 			{% if x.pending > 0 %}
-			<div class="pendingname">{{x.first_name}} {{x.last_name}}</div>
+			<div class="name pendingname">{{x.first_name}} {{x.last_name}}</div>
 			{% else %}
 			<div class="name">{{x.first_name}} {{x.last_name}}</div>
 			{% endif %}
