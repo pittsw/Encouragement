@@ -18,7 +18,35 @@
 				$(link).css("background-color", "rgb(91,141,147)")
 			}
 
-			
+			$(document).ready(function() {
+				$('#searchtext').bind('keyup', function search(e) {
+					var code = (e.keyCode ? e.keyCode : e.which);
+					if (code == 27) {
+						$('#searchtext').val('');
+					}
+
+					var people = $(".person")
+					var name = $.trim($("#searchtext").val())
+
+					if (name == '') {
+						people.show()
+						return
+					} else {
+						people.hide()
+					}
+
+					var lowName = name.toLowerCase()
+					$(".person").each(function (i) {
+						$(this).show()
+						var e = $(this)
+						var x = e.find('.name').html().toLowerCase()
+						if (x.indexOf(lowName) < 0) {
+							e.hide()
+						}
+					})
+				})
+			})
+
 			var dropinbox1 = new dropincontentbox({
 						   source:'#signup', //#id of DIV to show if defined inline
 						   cssclass:'dropinbox dropinboxaltstyle drop-shadow lifted',
@@ -29,11 +57,14 @@
 		</script>
 	</head>
 	<body>
+		<div class="search">
+			<input type="text" id="searchtext"/>
+		<div>
 		<div class="addbutton" onClick="dropinbox1.show()">Add Client</div>
 		{% for x in clients %}
 		<div class="person" id="{{x.id}}" onClick="load(this)">
-			<div class="name">{{x.first_name}} {{x.last_name}}</div>
-			<div class="detail">ID: {{x.id}} Pending Messages: {{x.pending}}  Urgent? {{x.urgent}}</div>
+			<div class="name">{{x.id}} {{x.first_name}} {{x.last_name}}</div>
+			<div class="detail">Pending Messages: {{x.pending}}  Urgent? {{x.urgent}}</div>
 			<div class="message">Last Message: {{x.last_message}}</div>
 		</div>
 		{% endfor %}
