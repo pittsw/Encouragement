@@ -72,6 +72,7 @@ transform:rotate(3deg);
 
 .addbutton
 {
+float: right;
 text-align:center;
 font-size:22px;
 border: 1px solid grey;
@@ -84,6 +85,15 @@ border-bottom: 1px dashed grey;
 background-color:rgb(217,233,236);
 }
 
+.search
+{
+width: 50%;
+}
+
+.header
+{
+width: 100%;
+}
 
 .name
 {

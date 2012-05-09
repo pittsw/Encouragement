@@ -57,10 +57,12 @@
 		</script>
 	</head>
 	<body>
-		<div class="search">
-			<input type="text" id="searchtext"/>
-		<div>
-		<div class="addbutton" onClick="dropinbox1.show()">Add Client</div>
+		<div class="header">
+			<span class="search">
+				<input type="text" id="searchtext"/>
+			</span>
+			<span class="addbutton" onClick="dropinbox1.show()">Add Client</span>
+		</div>
 		{% for x in clients %}
 		<div class="person" id="{{x.id}}" onClick="load(this)">
 			{% if x.pending > 0 %}
