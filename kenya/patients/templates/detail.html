@@ -20,7 +20,11 @@
 			</tr>
 			<tr>
 				<td class="title">Phone Number:</td>
-				<td class="data">{{client.phone_number}}</td>
+                {% if client.phone_number %}
+				    <td class="data">{{client.phone_number}}</td>
+                {% else %}
+                    <td class="data">Please have client send registration key</td>
+                {% endif %}
 			</tr>
 			<tr>
 				<td class="title">Location:</td>
@@ -42,6 +46,10 @@
 				<td class="title">Education:</td>
 				<td class="data">{{client.years_of_education}}</td>
 			</tr>
+            <tr>
+                <td class="title">Registration Key:</td>
+                <td class="data">{{client.generate_key}}</td>
+            </tr>
 		</table>
         <form method="get" action="/edit/{{ client.id }}/">
         <input type="submit" value="Edit">

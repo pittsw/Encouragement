@@ -14,9 +14,8 @@
 				});
 			 
 				switch_tabs($('.defaulttab'));
-			 
 			});
-			 
+			
 			function switch_tabs(obj) {
 				$('.tab-content').hide();
 				$('.tabs a').removeClass("selected");
@@ -28,7 +27,8 @@
 		</script>
 	</head>
 	<body>
-		<div id="tabs">
+		<div id="tabs" class="Boxes">
+			<div class="header">{{client}}</div>
 			<ul class="tabs">
 				<li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
 				<li><a href="#" rel="tabs-2">Call Notes</a></li>
@@ -48,10 +48,16 @@
 		</div>
 		<div class="Body">
 		{% for x in messages reversed %}
-			{% if x.sent_by == "Nurse" or x.sent_by == "System" %}
-			<div class={{x.sent_by}}>{{x.date}} {{x.user_id}}: {{x.content}}</div>
+			{% if x.sent_by == "Client" %}
+			<div class="Client">
+				<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
+				<div class="Clientcontent">{{x.content}}</div>
+			</div>
 			{% else %}
-			<div class="Client">{{x.date}} {{client}}: {{x.content}}</div>
+			<div class={{x.sent_by}}>
+				<div class="top">{{x.user_id}}:<span class="date">{{x.date}}</span></div>
+				<div class="content">{{x.content}}</div>
+			</div>
 			{% endif %}
 		{% endfor %}
 		</div>

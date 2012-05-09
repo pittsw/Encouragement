@@ -1,8 +1,13 @@
 from datetime import datetime
+from hashlib import sha256 as sha
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import pytz
 
 class Location(models.Model):
 
@@ -34,7 +39,7 @@ class Client(models.Model):
 
     last_name = models.CharField(max_length=50)
 
-    phone_number = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=50, blank=True, editable=False)
 
     birth_date = models.DateField()
 
@@ -56,7 +61,7 @@ class Client(models.Model):
 
     last_msg = models.DateTimeField(blank=True, null=True, editable=False)
 
-    sent_messages = models.ManyToManyField('AutomatedMessage')
+    sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
@@ -68,14 +73,15 @@ class Client(models.Model):
         else:
             return message.reverse()[0]
 
-    def update(self):
-        messages = Message.objects.filter(client_id=self,
-                                          sent_by='Client')
-        self.last_msg = messages[0].date
-        self.pending = len(messages.filter(read=False))
-        self.urgent = (datetime.now() - self.last_msg) > URGENT
-        self.save()
-        
+    def generate_key(self):
+        string = (sha(str(self.id) + self.first_name + self.last_name)
+            .hexdigest())
+        return "{p1}-{p2}-{p2}-{p4}".format(
+            p1=string[:3],
+            p2=string[3:6],
+            p3=string[6:9],
+            p4=string[9:12],
+        )
 
 
 class Nurse(models.Model):
@@ -175,3 +181,21 @@ class AutomatedMessage(models.Model):
             stw=self.start_week,
             end=self.end_week,
         )
+
+
+@receiver(post_save, sender=Message, dispatch_uid="update_client")
+def update_client(sender, **kwargs):
+    if kwargs['raw']:
+        return
+
+    client = kwargs['instance'].client_id
+    messages = Message.objects.filter(client_id=client,
+                                      sent_by='Client')
+
+    if len(messages) == 0:
+        return
+
+    client.last_msg = messages[0].date
+    client.pending = len(messages.filter(read=False))
+    client.urgent = (datetime.now(pytz.utc) - client.last_msg) > settings.URGENT
+    client.save()
