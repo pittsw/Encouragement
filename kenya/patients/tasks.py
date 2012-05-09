@@ -8,7 +8,7 @@ from django.conf import settings
 from patients.models import AutomatedMessage, Client, Message, Nurse
 import patients.transports
 
-@periodic_task(run_every=crontab(minute=50, hour=17, day_of_week="tuesday"))
+@periodic_task(run_every=crontab(minute=0, hour=12, day_of_week="1,4"))
 def send_all():
     """Sends a reminder message to every client twice a week, unless there is
     no defined transport in settings.py.
