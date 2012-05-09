@@ -1,20 +1,16 @@
 .Client,.Nurse,.System{
-margin-top: 10px;
+margin: 5px 0px;
 padding: 3px 5px 3px 5px;
-max-width: 80%;
+width: 60%;
 clear: both;
-border: 1px solid grey;
-border-radius: 5px 5px 5px 0px;	
--webkit-border-radius: 5px 5px 5px 0px;
--moz-border-radius: 5px 5px 5px 0px;
--o-border-radius: 5px 5px 5px 0px;
--ms-border-radius: 5px 5px 5px 0px;
+color: rgb(255,255,255);
+font-family: sans-serif;
 }
 
 .Client{
 float: left;
 margin-right: auto;
-background-color: rgb(117,177,187);
+background-color: rgb(91,141,147);
 }
 
 .System,.Nurse{
@@ -25,10 +21,11 @@ text-align: right;
 
 .System{
 background-color: rgb(214,214,214);
+color: rgb(0,0,0);
 }
 
 .Nurse{
-background-color: rgb(212,200,156);
+background-color: rgb(168,140,91);
 }
 
 .Body{
@@ -60,13 +57,28 @@ body
 background-color:rgb(255,255,255);
 }
 
+.content
+{
+text-align: left;
+}
 
+.date
+{
+font-size: 10px;
+vertical-align: middle;
+float: right;
+}
 
+.top
+{
+font-size:14px;
+text-align: left;
+}
 
-
-
-
-
+.Clientcontent
+{
+font-size: 20px;
+}
 
 
 ul.tabs {
@@ -92,5 +104,4 @@ ul.tabs li a {
     font-weight:bold;
 }
 .tab-content {
-    
 }
