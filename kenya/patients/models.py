@@ -61,7 +61,7 @@ class Client(models.Model):
 
     last_msg = models.DateTimeField(blank=True, null=True, editable=False)
 
-    sent_messages = models.ManyToManyField('AutomatedMessage')
+    sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name

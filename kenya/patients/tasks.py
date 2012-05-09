@@ -8,7 +8,7 @@ from django.conf import settings
 from patients.models import AutomatedMessage, Client, Message, Nurse
 import patients.transports
 
-@periodic_task(run_every=crontab(minute=0, hour=12, day_of_week="1,4"))
+@periodic_task(run_every=crontab(minute=50, hour=17, day_of_week="tuesday"))
 def send_all():
     """Sends a reminder message to every client twice a week, unless there is
     no defined transport in settings.py.
@@ -105,9 +105,10 @@ def incoming_message(phone_number, message):
 
     """
     clients = Client.objects.filter(phone_number=phone_number)
-    if len(clients) != 1:
+    if len(clients) == 0:
         # We got a message from someone without a registered phone number
         add_client(phone_number, message)
+        return
 
     client = clients[0]
     Message(
@@ -117,7 +118,6 @@ def incoming_message(phone_number, message):
         content=message,
         date=datetime.now(),
     ).save()
-    client.update()
 
     return True
 
@@ -128,8 +128,9 @@ def add_client(phone_number, message):
     number is added.
 
     """
-    clients = Client.objects.filter(phone_number=None)
+    clients = Client.objects.filter(phone_number="")
+
     for client in clients:
-        if message == client.generate_key:
+        if message == client.generate_key():
             client.phone_number = phone_number
             client.save()

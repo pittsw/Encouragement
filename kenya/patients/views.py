@@ -9,7 +9,7 @@ from django.template import RequestContext
 
 from patients.forms import AddClientForm, ClientForm, MessageForm
 from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
-from patients.tasks import incoming_message
+from patients.tasks import incoming_message, message_client
 
 def over(request):
     return render_to_response("frame.html")
@@ -25,8 +25,7 @@ def client(request, id_number):
     if request.method == 'POST':
         client = Client.objects.get(id=id_number)
         nurse = Nurse.objects.get(user=request.user)
-        m = Message(client_id=client, user_id=nurse, sent_by = 'Nurse', content=request.POST['text'])
-        m.save()
+        message_client(client, nurse, 'Nurse', request.POST['text'])
         messages = Message.objects.filter(client_id=client)
         return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
     else:
