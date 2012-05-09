@@ -24,8 +24,9 @@ def DoesNotExist(Exception):
 def client(request, id_number):
     if request.method == 'POST':
         client = Client.objects.get(id=id_number)
-        nurse = Nurse.objects.get(user=request.user)
-        message_client(client, nurse, 'Nurse', request.POST['text'])
+        if request.POST['text']:
+            nurse = Nurse.objects.get(user=request.user)
+            message_client(client, nurse, 'Nurse', request.POST['text'])
         messages = Message.objects.filter(client_id=client)
         return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
     else:
