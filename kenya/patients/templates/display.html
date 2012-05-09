@@ -14,9 +14,8 @@
 				});
 			 
 				switch_tabs($('.defaulttab'));
-			 
 			});
-			 
+			
 			function switch_tabs(obj) {
 				$('.tab-content').hide();
 				$('.tabs a').removeClass("selected");
@@ -28,8 +27,8 @@
 		</script>
 	</head>
 	<body>
-		<div class="header">{{client}}</div>
-		<div id="tabs">
+		<div id="tabs" class="Boxes">
+			<div class="header">{{client}}</div>
 			<ul class="tabs">
 				<li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
 				<li><a href="#" rel="tabs-2">Call Notes</a></li>
