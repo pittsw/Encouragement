@@ -8,7 +8,23 @@ from django.conf import settings
 from patients.models import AutomatedMessage, Client, Message, Nurse
 import patients.transports
 
-@periodic_task(run_every=crontab(minute=0, hour=12, day_of_week="1,4"))
+
+@periodic_task(run_every=crontab(minute=0, hour=0))
+def update_all():
+    """Updates all clients to see if they are urgent.
+
+    """
+    for client in Client.objects.all():
+        update_client(client)
+
+@task
+def update_client(client):
+    """A wrapper to let us update a client asynchronously.
+
+    """
+    client.update()
+
+@periodic_task(run_every=crontab(minute=55, hour=16, day_of_week="wednesday"))
 def send_all():
     """Sends a reminder message to every client twice a week, unless there is
     no defined transport in settings.py.

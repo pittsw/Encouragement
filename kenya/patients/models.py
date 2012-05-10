@@ -1,5 +1,6 @@
 from datetime import datetime
 from hashlib import sha256 as sha
+import math
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -74,14 +75,23 @@ class Client(models.Model):
             return message.reverse()[0]
 
     def generate_key(self):
+        key_length = 7.0
+        chars = "ABCDEFGHIJKLMNOP"
         string = (sha(str(self.id) + self.first_name + self.last_name)
             .hexdigest())
-        return "{p1}-{p2}-{p2}-{p4}".format(
-            p1=string[:3],
-            p2=string[3:6],
-            p3=string[6:9],
-            p4=string[9:12],
-        )
+        step = int(math.ceil(len(string) / key_length))
+        return ''.join([chars[int(x, 16)] for x in string[::step]])
+
+    def update(self):
+        messages = Message.objects.filter(client_id=self,
+                                          sent_by='Client')
+        if len(messages) == 0:
+            return
+
+        self.last_msg = messages[0].date
+        self.pending = len(messages.filter(read=False))
+        self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
+        self.save()
 
 
 class Nurse(models.Model):
@@ -189,13 +199,5 @@ def update_client(sender, **kwargs):
         return
 
     client = kwargs['instance'].client_id
-    messages = Message.objects.filter(client_id=client,
-                                      sent_by='Client')
 
-    if len(messages) == 0:
-        return
-
-    client.last_msg = messages[0].date
-    client.pending = len(messages.filter(read=False))
-    client.urgent = (datetime.now(pytz.utc) - client.last_msg) > settings.URGENT
-    client.save()
+    client.update()

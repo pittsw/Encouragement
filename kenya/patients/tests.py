@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from django.test import TestCase
 
 from patients.models import *
-from patients.tasks import incoming_message, scheduled_message
+from patients.tasks import incoming_message, scheduled_message, update_all
 
 
 class TestTrains(TestCase):
@@ -100,7 +100,7 @@ class TestUpdate(TestCase):
         self.msg.read = False # restart our state
         self.msg.save()
         self.assertEqual(num_pending, 0)
-
+        
 
 class TestRegister(TestCase):
     """This test suite ensures that client registration works properly.
