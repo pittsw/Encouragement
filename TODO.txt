@@ -1,0 +1,13 @@
+Login page
+Visit history
+Phone calls
+Minimum width
+Icons
+Divs instead of frames
+Asynchronous search
+Screenshot of prototype
+White text for selected name
+Italicized messages for non-pending
+Nicer tabs
+Add characters out of 144 for sending messages
+GROUP: Generating Random Operations; Undoing Progress
