@@ -65,7 +65,7 @@ def add_client(request):
             client = form.save(commit=False)
             client.id = id
             client.save()
-            form = AddClientForm()
+            return redirect('/')
         else:
             c['autoOpen'] = True
     c['form'] = render_to_string("add_client.html", {'form': form},
