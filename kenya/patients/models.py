@@ -96,7 +96,7 @@ class Nurse(models.Model):
     location = models.ForeignKey(Location)
     
     def __unicode__(self):
-        return self.user.first_name + ' ' + self.user.last_name
+        return self.user.first_name
 
 class Message(models.Model):
 
@@ -111,7 +111,7 @@ class Message(models.Model):
 
     client_id = models.ForeignKey(Client)
 
-    user_id = models.ForeignKey(Nurse)
+    user_id = models.ForeignKey(Nurse, blank=True, null=True)
 
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
@@ -184,7 +184,6 @@ class AutomatedMessage(models.Model):
             stw=self.start_week,
             end=self.end_week,
         )
-
 
 @receiver(post_save, sender=Message, dispatch_uid="update_client")
 def update_client(sender, **kwargs):

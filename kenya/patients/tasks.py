@@ -71,7 +71,7 @@ def scheduled_message(client, transport=None, transport_kwargs={}):
     if not message.repeats:
         client.sent_messages.add(message)
         client.save()
-    message_client(client, Nurse.objects.all()[0], 'System',
+    message_client(client, None, 'System',
                    message.message, transport, transport_kwargs)
     return {
 		'week': week,

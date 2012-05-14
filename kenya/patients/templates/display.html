@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<div class="Body">
-		{% for x in messages reversed %}
+		{% for x in messages %}
 			{% if x.sent_by == "Client" %}
 			<div class="Client">
 				<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
