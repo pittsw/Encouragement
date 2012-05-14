@@ -29,11 +29,6 @@ class Client(models.Model):
         ('Failed Pregnancy', 'Failed Pregnancy'),
     )
     
-    MARRIAGE_CHOICES = (
-        ('Single', 'Single'),
-        ('Married', 'Married'),
-    )
-
     id = models.IntegerField(primary_key=True, editable=False)
 
     first_name = models.CharField(max_length=50)
@@ -49,8 +44,6 @@ class Client(models.Model):
     pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
     due_date = models.DateField()
-
-    marital_status = models.CharField(max_length=20, choices=MARRIAGE_CHOICES)
 
     years_of_education = models.IntegerField()
 
@@ -72,7 +65,7 @@ class Client(models.Model):
         if message.count() < 1:
             return "No messages yet"
         else:
-            return message.reverse()[0]
+            return message[0]
 
     def generate_key(self):
         key_length = 7.0
@@ -108,7 +101,7 @@ class Nurse(models.Model):
 class Message(models.Model):
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
         
     SENDER_CHOICES = (
         ('Client', 'Client'),
@@ -201,3 +194,13 @@ def update_client(sender, **kwargs):
     client = kwargs['instance'].client_id
 
     client.update()
+
+class Note(models.Model):
+    class Meta:
+        ordering = ['-date']
+    client_id = models.ForeignKey(Client)
+    author_id = models.ForeignKey(Nurse)
+    content = models.CharField(max_length=500)
+    date = models.DateTimeField(auto_now_add=True)
+    def __unicode__(self):
+        return self.content

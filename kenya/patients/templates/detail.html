@@ -7,8 +7,8 @@
 		<div class="header">Client Profile</div>
 		<table>
 			<tr>
-				<th class="title">ID number:</th>
-				<th class="data">{{client.id}}</th>
+				<td class="title">ID number:</td>
+				<td class="data">{{client.id}}</td>
 			</tr>
 			<tr>
 				<td class="title">Name:</td>
@@ -39,10 +39,6 @@
 				<td class="data">{{client.due_date}}</td>
 			</tr>
 			<tr>
-				<td class="title">Marital Status:</td>
-				<td class="data">{{client.marital_status}}</td>
-			</tr>
-			<tr>
 				<td class="title">Education:</td>
 				<td class="data">{{client.years_of_education}}</td>
 			</tr>
@@ -53,6 +49,20 @@
 		</table>
         <form method="get" action="/edit/{{ client.id }}/">
         <input type="submit" value="Edit">
+        </form>
+        
+        <div class="header">Notes</div>
+        <table>
+        	{% for note in notes %}
+        	<tr>
+        		<td class="content">{{note.content}}</td>
+        		<td class="date">{{note.date}}</td>
+        		<!--<td class="delete">X</td>-->
+        	</tr>
+        	{% endfor %}
+        </table>
+         <form method="get" action="/note/{{ client.id }}/">
+        <input type="submit" value="Add Note">
         </form>
 	</body>
 </html>

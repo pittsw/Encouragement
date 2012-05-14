@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<title>Add note</title>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
+	</head>
+	<body>
+        <form method="post" action="/note/{{client.id}}/">
+        {% csrf_token %}
+        <textarea cols=40 rows=5 name="text" value="Enter text..."></textarea>
+
+        <div class="submit">
+            <input type="submit" name="submit" value="Submit" />
+            <input type="submit" name="cancel" value="Cancel" />
+        </form>
+	</body>
+</html>

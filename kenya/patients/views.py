@@ -9,7 +9,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm
-from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
+from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing, Note
 from patients.tasks import incoming_message, message_client
 
 def over(request):
@@ -44,14 +44,28 @@ def client(request, id_number):
 def detail(request, id_number):
     try:
         client = Client.objects.get(id=id_number)
-        messages = Message.objects.filter(client_id=client)
-        return render_to_response("detail.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
+        notes = Note.objects.filter(client_id=client)
+        return render_to_response("detail.html", {"client":client, "notes":notes}, context_instance=RequestContext(request))
     except DoesNotExist:
         return render_to_response("form.html")
     
 def list_clients(request):
     clients = Client.objects.all()
     return render_to_response("list.html", {"clients":clients}, context_instance=RequestContext(request))
+
+def add_note(request, id):
+    client = get_object_or_404(Client, id=id)
+    if request.method == "POST":
+        nurse = Nurse.objects.get(user=request.user)
+        if request.POST.get("submit"):
+            # They clicked submit
+            n = Note(client_id=client, author_id=nurse, content=request.POST.get("text"))
+            n.save()
+            return detail(request, id)
+        else:
+            return detail(request, id)
+    return render_to_response("add_note.html", {"client":client}, context_instance=RequestContext(request))
+    
 
 def add_client(request):
     form = None

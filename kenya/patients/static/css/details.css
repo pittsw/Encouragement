@@ -36,11 +36,6 @@ background-color: rgb(245, 242, 231);
 width: 100%;
 }
 
-th
-{
-font-weight: normal;
-}
-
 tr
 {
 padding: 10px;
@@ -51,7 +46,21 @@ height: 30px;
 td
 {
 vertical-align:middle;
-border-top: 1px dashed grey;
+border-bottom: 1px dashed grey;
+}
+
+.content
+{
+width: 65%;
+font-size: 13px;
+}
+
+.date
+{
+width: 25%;
+font-size: 12px;
+font-style: italic;
+color: rgb(102,102,102);
 }
 
 .title
@@ -66,5 +75,12 @@ padding-right: 10px;
 width: 60%;
 padding: 0px;
 text-align: left;
+font-size: 20px;
+}
+
+.delete
+{
+width: 10%;
+text-align: center;
 font-size: 20px;
 }
