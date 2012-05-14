@@ -9,7 +9,12 @@
             $(function() {
                 $("#signup").dialog({
                     autoOpen: false,
-                    modal: true
+                    modal: true,
+                    buttons: {
+                        "Ok": function() {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
 			});
         });
@@ -34,9 +39,6 @@
         <table>
             {{ form.as_table }}
         </table>
-        <div>
-            <input type="submit" name="submit" value="Submit" />
-        </div>
     </form>
 </div>
 
