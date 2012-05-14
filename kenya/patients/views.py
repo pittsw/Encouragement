@@ -12,7 +12,12 @@ from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
 from patients.tasks import incoming_message, message_client
 
 def over(request):
-    return render_to_response("frame.html")
+    form = AddClientForm()
+    c = {
+        'form': form,
+    }
+    c.update(csrf(request))
+    return render_to_response("frame.html", c, context_instance=RequestContext(request))
 
 def DoesNotExist(Exception):
     def __init__(self, value):
@@ -44,8 +49,7 @@ def detail(request, id_number):
     
 def list_clients(request):
     clients = Client.objects.all()
-    form = AddClientForm()
-    return render_to_response("list.html", {"clients":clients, "form": form}, context_instance=RequestContext(request))
+    return render_to_response("list.html", {"clients":clients}, context_instance=RequestContext(request))
 
 def add_client(request):
     form = None
@@ -59,7 +63,7 @@ def add_client(request):
                 client = form.save(commit=False)
                 client.id = id
                 client.save()
-                return list_clients(request)
+                return over(request)
         else:
             return list_clients(request)
     c = {

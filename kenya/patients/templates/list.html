@@ -2,14 +2,19 @@
 	
 	<head>
 		<title>List of Clients</title>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.8.20.custom.css" />
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/dropincontentbox.css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-		<script src="{{ STATIC_URL }}javascript/jquery.easing.1.3.js"></script>
-        <script src="{{ STATIC_URL }}javascript/dropincontentbox.js"></script>
+        <!-- <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.ui.dialog.js"></script> -->
+        <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
         <script type="text/javascript"> 
         	function color() {
 				$(".person").css("background-color", "rgb(217,233,236)")
 			}
+
 			function load(link) {
 				color()
 				var id = link.id
@@ -45,15 +50,10 @@
 						}
 					})
 				})
-			})
+            })
 
-			var dropinbox1 = new dropincontentbox({
-						   source:'#signup', //#id of DIV to show if defined inline
-						   cssclass:'dropinbox dropinboxaltstyle drop-shadow lifted',
-						   fx:'easeInExpo', //alternate drop animation keyword
-						   pos:[0, -15], //custom position of drop in box
-						   deferred: "fullon"
-						})
+            var $jParent = window.parent.jQuery.noConflict();
+            var addClient = $jParent('#signup');
 		</script>
 	</head>
 	<body>
@@ -61,7 +61,7 @@
 			<span class="search">
 				<input type="text" id="searchtext"/>
 			</span>
-			<span class="addbutton" onClick="dropinbox1.show()">Add Client</span>
+			<span class="addbutton" id="add" onClick="addClient.dialog('open');">Add Client</span>
 		</div>
 		{% for x in clients %}
 		<div class="person" id="{{x.id}}" onClick="load(this)">
@@ -73,18 +73,5 @@
 			<div class="message">{{x.last_message}}</div>
 		</div>
 		{% endfor %}
-		
-		<div id="signup">
-			<a href="javascript:dropinbox1.hide()">Hide</a>
-			<form method="post" action="/add/">
-				{% csrf_token %}
-				<table>
-					{{ form.as_table }}
-				</table>
-				<div>
-					<input type="submit" name="submit" value="Submit" />
-				</div>
-			</form>
-		</div>
 	</body>
 </html>

@@ -1,4 +1,20 @@
 <html>
+<head>
+    <title>Encouragement System</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.8.20.custom.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                $("#signup").dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+			});
+        });
+    </script>
+</head>
 
 <!-- <frameset cols="35%,40%,25%">
 
@@ -11,5 +27,17 @@
 <iframe name="base" src="/demo/" width="30%" height="96%"></iframe>
 <iframe name="message" src="" width="39%" height="96%"></iframe>
 <iframe name="info" src="" width="29%" height="96%"></iframe>
+		
+<div style="display:none;" id="signup" title="Add a new client">
+    <form method="post" action="/add/">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <div>
+            <input type="submit" name="submit" value="Submit" />
+        </div>
+    </form>
+</div>
 
 </html>
