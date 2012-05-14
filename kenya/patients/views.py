@@ -3,16 +3,18 @@ from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
-from django.template import RequestContext
 
 from patients.forms import AddClientForm, ClientForm, MessageForm
 from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing
 from patients.tasks import incoming_message, message_client
 
 def over(request):
-    form = AddClientForm()
+    form = render_to_string("add_client.html", {"form": AddClientForm()},
+        context_instance=RequestContext(request))
     c = {
         'form': form,
     }
@@ -53,24 +55,23 @@ def list_clients(request):
 
 def add_client(request):
     form = None
+    c = {}
     if request.method == "GET":
         form = AddClientForm()
     elif request.method == "POST":
-        if request.POST.get("submit", ""):
-            form = AddClientForm(request.POST)
-            if form.is_valid():
-                id = form.cleaned_data['id']
-                client = form.save(commit=False)
-                client.id = id
-                client.save()
-                return over(request)
+        form = AddClientForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data['id']
+            client = form.save(commit=False)
+            client.id = id
+            client.save()
+            form = AddClientForm()
         else:
-            return list_clients(request)
-    c = {
-        'form': form
-    }
+            c['autoOpen'] = True
+    c['form'] = render_to_string("add_client.html", {'form': form},
+        context_instance=RequestContext(request))
     c.update(csrf(request))
-    return render_to_response('form.html', c, context_instance=RequestContext(request))
+    return render_to_response('frame.html', c, context_instance=RequestContext(request))
 
 
 def edit_client(request, id):

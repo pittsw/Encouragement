@@ -8,11 +8,11 @@
         $(document).ready(function() {
             $(function() {
                 $("#signup").dialog({
-                    autoOpen: false,
+                    {% if autoOpen %}autoOpen: true,{% else %}autoOpen: false,{% endif %}
                     modal: true,
                     buttons: {
                         "Ok": function() {
-                            $(this).dialog("close");
+                            document.forms["add_client_form"].submit();
                         }
                     }
                 });
@@ -34,12 +34,7 @@
 <iframe name="info" src="" width="29%" height="96%"></iframe>
 		
 <div style="display:none;" id="signup" title="Add a new client">
-    <form method="post" action="/add/">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-    </form>
+    {{ form }}
 </div>
 
 </html>
