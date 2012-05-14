@@ -1,5 +1,5 @@
-body
-{
-background-color:rgb(255,255,255);
-font-family: sans-serif;
+ul.errorlist {
+list-style-type: none;
+color: red;
+white-space: nowrap;
 }
