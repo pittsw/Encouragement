@@ -9,6 +9,20 @@
 		<script src="{{ STATIC_URL }}javascript/jquery.ui.tabs.js"></script>
 		<script>
 			$(document).ready(function() {
+                $('#message-box').bind('keyup', function(e) {
+                    var len = $('#message-box').val().length;
+                    var messages = Math.ceil(len / 144);
+                    var left = len % 144;
+                    if (left == 0 && messages > 0) {
+                        left = 144;
+                    }
+                    var str = left + "/144 characters, " + messages + " message";
+                    if (messages != 1) {
+                        str += "s";
+                    }
+                    $('#chars-left').text(str);
+                });
+
 				$('.tabs a').click(function(){
 					switch_tabs($(this));
 				});
@@ -41,8 +55,11 @@
 			</div>
 			<div class="Box tab-content" id="tabs-1">
 				<form method="post" action="">
-					<textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
-					<input type="submit" value="Send" />
+					<textarea id="message-box" cols=71 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
+                    <div style="text-align:right; padding-right:10px;">
+					    <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
+                        <input type="submit" value="Send" />
+                    </div>
 				</form>
 			</div>
 		</div>
