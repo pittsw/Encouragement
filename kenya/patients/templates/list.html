@@ -24,19 +24,20 @@
 			}
 
 			$(document).ready(function() {
-                var people = $(".person");
-                var timer = undefined, processor = undefined;
+                var people = $('.person');
+                var timer = undefined;
+                var processor = undefined;
                 function filter() {
                     if (processor) {
                         clearInterval(processor);
                     }
-                    var busy = false, i = 0, step = 5;
-					var name = $.trim($("#searchtext").val()).toLowerCase();
+                    var busy = false, i = 0, step=10;
+					var name = $.trim($('#searchtext').val()).toLowerCase();
                     processor = setInterval(function() {
                         if (!busy) {
                             busy = true;
                             var divs = people.slice(i, i + step);
-                            divs.each(function (i) {
+                            divs.each(function (num) {
                                 $(this).show();
                                 var e = $(this);
                                 var x = e.find('.name').html().toLowerCase();
@@ -59,39 +60,9 @@
                         // Clear on escape
                         $('#searchtext').val('');
                     }
-                    if (timer) {
-                        clearTimeout(timer);
-                    }
-                    // Wait one second before searching
-                    timer = setTimeout(filter, 1000);
+                    filter();
                 });
-				$('#searchtext').bind('keyup', function search(e) {
-					var code = (e.keyCode ? e.keyCode : e.which);
-					if (code == 27) {
-						$('#searchtext').val('');
-					}
-
-					var people = $(".person")
-					var name = $.trim($("#searchtext").val())
-
-					if (name == '') {
-						people.show()
-						return
-					} else {
-						people.hide()
-					}
-
-					var lowName = name.toLowerCase()
-					$(".person").each(function (i) {
-						$(this).show()
-						var e = $(this)
-						var x = e.find('.name').html().toLowerCase()
-						if (x.indexOf(lowName) < 0) {
-							e.hide()
-						}
-					})
-				})
-            })
+            });
 
             var $jParent = window.parent.jQuery.noConflict();
             var addClient = $jParent('#signup');
