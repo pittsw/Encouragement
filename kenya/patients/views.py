@@ -12,6 +12,7 @@ from patients.forms import AddClientForm, ClientForm, MessageForm
 from patients.models import Client, Message, Location, Nurse, SMSSyncOutgoing, Note
 from patients.tasks import incoming_message, message_client
 
+@login_required
 def over(request):
     form = render_to_string("add_client.html", {"form": AddClientForm()},
         context_instance=RequestContext(request))
