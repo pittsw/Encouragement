@@ -1,6 +1,6 @@
 <form id="add_client_form" method="post" action="/add/">
     {% csrf_token %}
     <table>
-        {{ form.as_table }}
+        {{ form }}
     </table>
 </form>

@@ -8,30 +8,26 @@
     <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
-                $.fn.clearForm = function() {
-                    return this.each(function() {
-                        var type = this.type, tag = this.tagName.toLowerCase();
-                        if (tag == 'form')
-                            return $(':input', this).clearForm();
-                        if (type == 'text' || type == 'password' || tag == 'textarea')
-                            this.value = '';
-                        else if (type == 'checkbox' || type == 'radio')
-                            this.checked = false;
-                        else if (tag == 'select')
-                            this.selectedIndex = -1;
-                    });
-                }
-
                 $("#signup").dialog({
-                    {% if autoOpen %}autoOpen: true,{% else %}autoOpen: false,{% endif %}
+                    autoOpen: false,
                     modal: true,
                     minWidth: 350,
                     buttons: {
                         "Ok": function() {
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "/add/", false);
+                            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xhr.send($("#add_client_form").serialize());
+                            var response = xhr.responseText;
+                            if (response.length == 0) {
+                                window.location("/");
+                            } else {
+                                $("#add_client_form").html(response);
+                            }
                         }
                     },
                     close: function(event, ui) {
-                        $("#add_client_form").clearForm();
+                        $("#add_client_form").load("/add/");
                     }
                 });
             });

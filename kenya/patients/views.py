@@ -80,13 +80,9 @@ def add_client(request):
             client = form.save(commit=False)
             client.id = id
             client.save()
-            return redirect('/')
-        else:
-            c['autoOpen'] = True
-    c['form'] = render_to_string("add_client.html", {'form': form},
-        context_instance=RequestContext(request))
-    c.update(csrf(request))
-    return render_to_response('frame.html', c, context_instance=RequestContext(request))
+            return HttpResponse('')
+    return render_to_response("add_client.html", {'form': form},
+                              context_instance=RequestContext(request))
 
 
 def edit_client(request, id):
