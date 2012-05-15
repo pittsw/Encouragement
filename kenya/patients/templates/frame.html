@@ -8,6 +8,7 @@
     <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
+                var addForm = $("#add_client_form");
                 $("#signup").dialog({
                     autoOpen: false,
                     modal: true,
@@ -17,17 +18,19 @@
                             var xhr = new XMLHttpRequest();
                             xhr.open("POST", "/add/", false);
                             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            xhr.send($("#add_client_form").serialize());
+                            xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                            xhr.send(addForm.serialize());
                             var response = xhr.responseText;
                             if (response.length == 0) {
                                 window.location.href = "/";
                             } else {
-                                $("#add_client_form").html(response);
+                                addForm.html(response);
+                                addForm.dialog("option", "width", "500");
                             }
                         }
                     },
                     close: function(event, ui) {
-                        $("#add_client_form").load("/add/");
+                        addForm.load("/add/");
                     }
                 });
             });
