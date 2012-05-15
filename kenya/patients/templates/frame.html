@@ -20,7 +20,7 @@
                             xhr.send($("#add_client_form").serialize());
                             var response = xhr.responseText;
                             if (response.length == 0) {
-                                window.location("/");
+                                window.location.href = "/";
                             } else {
                                 $("#add_client_form").html(response);
                             }
