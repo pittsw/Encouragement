@@ -1,7 +1,17 @@
-ul.errorlist {
-    list-style-type: none;
+.errors {
     color: red;
-    white-space: nowrap;
+}
+
+.errorlist {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    list-style-type: none;
+}
+
+.errorlist li {
+    display: inline;
+    list-style-type: none;
 }
 
 .header-bar {

@@ -3,10 +3,11 @@
     <table>
         {% for field in form %}
             <tr>
-                <td>{{ field.label_tag }}</td>
+                <td>
+                    {{ field.label_tag }}{% if field.errors %} <span class="errors">({{ field.errors }})</span>{% endif %}
+                </td>
                 <td>
                     <div>{{ field }}</div>
-                    <div>{{ field.errors }}</div>
                 </td>
             </tr>
         {% endfor %}
