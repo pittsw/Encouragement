@@ -7,4 +7,6 @@ Screenshot of prototype
 White text for selected name
 Italicized messages for non-pending
 Nicer tabs
+Date picker
+Input verification
 GROUP: Generating Random Operations; Undoing Progress
