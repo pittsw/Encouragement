@@ -6,23 +6,36 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $(function() {
+        (function($) {
+            $(document).ready(function() {
+                $.fn.clearForm = function() {
+                    return this.each(function() {
+                        var type = this.type, tag = this.tagName.toLowerCase();
+                        if (tag == 'form')
+                            return $(':input', this).clearForm();
+                        if (type == 'text' || type == 'password' || tag == 'textarea')
+                            this.value = '';
+                        else if (type == 'checkbox' || type == 'radio')
+                            this.checked = false;
+                        else if (tag == 'select')
+                            this.selectedIndex = -1;
+                    });
+                }
+
                 $("#signup").dialog({
                     {% if autoOpen %}autoOpen: true,{% else %}autoOpen: false,{% endif %}
                     modal: true,
                     minWidth: 350,
                     buttons: {
                         "Ok": function() {
-                            document.forms["add_client_form"].submit();
                         }
                     },
                     close: function(event, ui) {
-                        window.location = '/';
+                        $("#add_client_form").clearForm();
                     }
                 });
-			});
-        });
+            });
+        })(jQuery);
     </script>
 </head>
 
