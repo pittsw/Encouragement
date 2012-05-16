@@ -47,7 +47,7 @@
 	<body>
 		<div class="header msg_head">
             <span>Client Profile</span>
-            <span style="text-align:right;">
+            <span style="float:right; text-align:right;">
                 <button id="edit" class="view_buttons">Edit</button>
                 <button id="save" class="edit_buttons" style="display:none;">Save</button>
                 <button id="cancel" class="edit_buttons" style="display:none;">Cancel</button>
@@ -57,7 +57,12 @@
             {{fragment}}
         </div>
         
-        <div class="header">Notes</div>
+        <div class="header">
+            <span>Notes</span>
+            <span style="float:right; text-align:right;">
+        		<button id="note" class="add_note">Add Note</button>
+            </span>
+        </div>
         <table>
         	{% for note in notes %}
         	<tr>
@@ -67,8 +72,22 @@
         	</tr>
         	{% endfor %}
         </table>
-         <form method="get" action="/note/{{ client.id }}/">
-        <input type="submit" value="Add Note">
         </form>
+        
+        <div class="header">
+        	<span>Clinic Visit History</span>
+			<span style="float:right; text-align:right;">
+       	 		<button id="note" class="add_note">Add Visit</button>
+            </span>
+        </div>
+        <table>
+        	{% for v in history %}
+        	<tr>
+        		<td class="status">{{v.status}}</td>
+        		<td class="date">{{v.date}}</td>
+        	</tr>
+        	{% endfor %}
+        </table>
+        
 	</body>
 </html>
