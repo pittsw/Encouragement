@@ -33,7 +33,6 @@
                         $('.view_buttons').show();
                     });
 
-                    $(".msg_body").hide();
                     //toggle the componenet with class msg_body
                     $(".msg_head").click(function()
                       {
@@ -45,7 +44,7 @@
         </script>
 	</head>
 	<body>
-		<div class="header msg_head">
+		<div class="header msg_head" id="profile">
             <span>Client Profile</span>
             <span style="float:right; text-align:right;">
                 <button id="edit" class="view_buttons">Edit</button>
