@@ -36,6 +36,8 @@ background-color: rgb(208, 206, 196);
 font-weight: bold;
 font-size: 15px;
 padding: 5px 0px 5px 15px;
+height: auto;
+overflow: auto;
 }
 
 table
