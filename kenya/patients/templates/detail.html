@@ -32,12 +32,20 @@
                         $('.edit_buttons').hide();
                         $('.view_buttons').show();
                     });
+
+                    $(".msg_body").hide();
+                    //toggle the componenet with class msg_body
+                    $(".msg_head").click(function()
+                      {
+                        $(this).next(".msg_body").slideToggle(600);
+                      });
                 });
+               
             })(jQuery);
         </script>
 	</head>
 	<body>
-		<div class="header">
+		<div class="header msg_head">
             <span>Client Profile</span>
             <span style="text-align:right;">
                 <button id="edit" class="view_buttons">Edit</button>
@@ -45,7 +53,7 @@
                 <button id="cancel" class="edit_buttons" style="display:none;">Cancel</button>
             </span>
         </div>
-        <div id="client_fragment">
+        <div id="client_fragment" class="msg_body">
             {{fragment}}
         </div>
         
