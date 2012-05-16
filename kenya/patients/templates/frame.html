@@ -27,6 +27,21 @@
                             }
                         }
                     },
+                    open: function(event, ui) {
+                        $(".date input").each(function(index, element) {
+                            $(this).datepicker({
+                                changeMonth: true,
+                                changeYear: true,
+                                dateFormat: "yy-mm-dd",
+                                maxDate: "+2y",
+                                minDate: "-100y",
+                                selectOtherMonths: true,
+                                showOtherMonths: true,
+                                showOn: "button",
+                                yearRange: "-100:+2"
+                            });
+                        });
+                    },
                     close: function(event, ui) {
                         $("#add_client_form").load("/add/");
                     }

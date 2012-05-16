@@ -1,3 +1,5 @@
+{% load patient_tags %}
+
 <form id="add_client_form" method="post" action="/add/">
     {% csrf_token %}
     <table>
@@ -7,7 +9,11 @@
                     {{ field.label_tag }}{% if field.errors %} <span class="errors">({{ field.errors }})</span>{% endif %}
                 </td>
                 <td>
-                    <div>{{ field }}</div>
+                    {% if field.field|klass == "DateField" %}
+                        <div class="date">{{ field }}</div>
+                    {% else %}
+                        <div>{{ field }}</div>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
