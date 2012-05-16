@@ -102,17 +102,12 @@ def edit_client(request, id):
 
     if request.method == "POST":
         form = ClientForm(request.POST, instance=client)
-        if request.POST.get("submit", ""):
-            # They clicked submit
-            if form.is_valid():
-                form.save()
-                return detail(request, id)
-        else:
-            return detail(request, id)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('')
     c = {
         "form": form,
     }
-    c.update(csrf(request))
     return render_to_response("edit_client.html", c,
                               context_instance=RequestContext(request))
     

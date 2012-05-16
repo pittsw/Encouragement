@@ -7,18 +7,47 @@
         <script type="text/javascript">
             (function($) {
                 $(document).ready(function() {
+                    $('#edit').click(function(eventObject) {
+                        $('#client_fragment').load("/edit/{{ client.id }}/");
+                        $('.view_buttons').hide();
+                        $('.edit_buttons').show();
+                    });
+                    $('#save').click(function(eventObject) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/edit/{{ client.id }}/", false);
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                        xhr.send($('#edit_client').serialize());
+                        var response = xhr.responseText;
+                        if (response.length == 0) {
+                            $('#client_fragment').load("/fragment/{{ client.id }}/");
+                            $('.edit_buttons').hide();
+                            $('.view_buttons').show();
+                        } else {
+                            $('#client_fragment').html(response);
+                        }
+                    });
+                    $('#cancel').click(function(eventObject) {
+                        $('#client_fragment').load('/fragment/{{ client.id }}/');
+                        $('.edit_buttons').hide();
+                        $('.view_buttons').show();
+                    });
                 });
             })(jQuery);
         </script>
 	</head>
 	<body>
-		<div class="header">Client Profile</div>
+		<div class="header">
+            <span>Client Profile</span>
+            <span style="text-align:right;">
+                <button id="edit" class="view_buttons">Edit</button>
+                <button id="save" class="edit_buttons" style="display:none;">Save</button>
+                <button id="cancel" class="edit_buttons" style="display:none;">Cancel</button>
+            </span>
+        </div>
         <div id="client_fragment">
             {{fragment}}
         </div>
-        <form method="get" action="/edit/{{ client.id }}/">
-        <input type="submit" value="Edit">
-        </form>
         
         <div class="header">Notes</div>
         <table>

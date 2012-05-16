@@ -11,11 +11,15 @@ class AddClientForm(ModelForm):
             'conditions': CheckboxSelectMultiple,
         }
 
-    id = IntegerField()
+    id = IntegerField(required=False)
 
 class ClientForm(ModelForm):
-	class Meta:
-		model = Client
+    class Meta:
+        model = Client
+        fields = ('first_name', 'last_name', 'birth_date', 'location', 'pregnancy_status', 'conditions', 'due_date', 'years_of_education')
+        widgets = {
+            'conditions': CheckboxSelectMultiple,
+        }
 		
 class MessageForm(ModelForm):
 	class Meta:

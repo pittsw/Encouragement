@@ -1,17 +1,29 @@
-<form method="post" action="/edit/{{form.instance.pk}}/">
-    {% csrf_token %}
-    <table>
+<table>
+    <form id="edit_client" method="post" action="/edit/{{form.instance.pk}}/">
+        {% csrf_token %}
         <tr>
             <td class="title">ID number:</td>
             <td class="data">{{form.instance.id}}</td>
         </tr>
         <tr>
-            <td class="title">Name:</td>
-            <td class="data">{{form.first_name}} {{form.last_name}}</td>
+            <td class="title">First Name:</td>
+            <td class="data">
+                <div>{{form.first_name}}</div>
+                <div>{{form.first_name.errors}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="title">Last Name:</td>
+            <td class="data">
+                <div>{{form.last_name}}</div>
+                <div>{{form.last_name.errors}}</div></td>
         </tr>
         <tr>
             <td class="title">Birthday:</td>
-            <td class="data">{{form.birth_date}}</td>
+            <td class="data">
+                <div>{{form.birth_date}}</div>
+                <div>{{form.birth_date.errors}}</div>
+            </td>
         </tr>
         <tr>
             <td class="title">Phone Number:</td>
@@ -23,23 +35,43 @@
         </tr>
         <tr>
             <td class="title">Location:</td>
-            <td class="data">{{form.location}}</td>
+            <td class="data">
+                <div>{{form.location}}</div>
+                <div>{{form.location.errors}}</div>
+            </td>
         </tr>
         <tr>
             <td class="title">Pregnancy Status:</td>
-            <td class="data">{{form.pregnancy_status}}</td>
+            <td class="data">
+                <div>{{form.pregnancy_status}}</div>
+                <div>{{form.pregnancy_status.errors}}</div>
+            </td>
         </tr>
         <tr>
             <td class="title">Expected Due Date:</td>
-            <td class="data">{{form.due_date}}</td>
+            <td class="data">
+                <div>{{form.due_date}}</div>
+                <div>{{form.due_date.errors}}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="title">Conditions:</td>
+            <td class="data">
+                <div>{{form.conditions}}</div>
+                <div>{{form.conditions.errors}}</div>
+            </td>
         </tr>
         <tr>
             <td class="title">Education:</td>
-            <td class="data">{{form.years_of_education}}</td>
+            <td class="data">
+                <div>{{form.years_of_education}}</div>
+                <div>{{form.years_of_education.errors}}</div>
+            </td>
         </tr>
         <tr>
             <td class="title">Registration Key:</td>
-            <td class="data">{{form.generate_key}}</td>
+            <td class="data">{{form.instance.generate_key}}</td>
         </tr>
-    </table>
-</form>
+    </form>
+    {{ form.non_field_errors }}
+</table>
