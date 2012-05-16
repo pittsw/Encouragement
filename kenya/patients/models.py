@@ -127,6 +127,21 @@ class Nurse(models.Model):
     def __unicode__(self):
         return self.user.first_name
 
+class Interaction(models.Model):
+    class Meta:
+        ordering = ['-date']
+        
+    date = models.DateTimeField(auto_now_add=True)
+    
+    user_id = models.ForeignKey(Nurse, blank=True, null=True)
+    
+    client_id = models.ForeignKey(Client)
+    
+    content = models.CharField(max_length=500)
+    
+    def __unicode__(self):
+        return self.content
+
 class Message(Interaction):
     SENDER_CHOICES = (
         ('Client', 'Client'),
@@ -135,8 +150,6 @@ class Message(Interaction):
     )
 
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
-    
-    user_id = models.ForeignKey(Nurse, blank=True, null=True)
     
     read = models.BooleanField(default=False, editable=False)
 
@@ -241,17 +254,3 @@ class VisitHistory(models.Model):
 class PhoneCall(Interaction):
     duration = models.IntegerField()
 
-class Interaction(models.Model):
-    class Meta:
-        ordering = ['-date']
-        
-    date = models.DateTimeField(auto_now_add=True)
-    
-    user_id = models.ForeignKey(Nurse)
-    
-    client_id = models.ForeignKey(Client)
-    
-    content = models.CharField(max_length=500)
-    
-    def __unicode__(self):
-        return self.content

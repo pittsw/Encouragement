@@ -1,3 +1,5 @@
+{% load patient_tags %}
+
 <html>
 	<head>
 		<title>{{client.first_name}} {{client.last_name}}</title>
@@ -65,7 +67,7 @@
 		</div>
 		<div class="Body">
 		{% for x in messages %}
-			{% if x|klass == "PhoneCall %}
+			{% if x|klass == "PhoneCall" %}
 			<div class="Phone">
 				<div class="top"></div>
 				<div class="content">{{x.content}}</div>
