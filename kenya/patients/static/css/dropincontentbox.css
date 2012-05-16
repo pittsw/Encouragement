@@ -83,6 +83,7 @@ border: 1px solid grey;
 padding: 3px 3px 3px 3px;
 border-bottom: 1px dashed grey;
 background-color:rgb(217,233,236);
+color:rgb(1,1,1);
 }
 
 .search
@@ -100,6 +101,11 @@ width: 100%;
 font-size: 18px;
 }
 
+.nonpending
+{
+font-style:italic;
+}
+
 .pendingname
 {
 font-style: bold;
@@ -109,6 +115,7 @@ font-size:20px;
 .message
 {
 font-size: 14px;
+color:rgb(0,0,0);
 }
 
 body

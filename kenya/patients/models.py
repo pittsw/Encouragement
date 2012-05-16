@@ -232,3 +232,12 @@ class Note(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.content
+
+class VisitHistory(models.Model):
+    class Meta:
+        ordering = ['-date']
+    client_id = models.ForeignKey(Client)
+    status = models.CharField(max_length=100)
+    date = models.DateTimeField()
+    def __unicode__(self):
+        return self.date
