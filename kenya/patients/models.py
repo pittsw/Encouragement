@@ -241,3 +241,10 @@ class VisitHistory(models.Model):
     date = models.DateTimeField()
     def __unicode__(self):
         return self.date
+        
+class PhoneCall(models.Model):
+    date = models.DateTimeField()
+
+#class GenericMessage(models.Model):
+    # implement a super class for messages so 
+    # phone messages and regular messages can exist in the same space.

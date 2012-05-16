@@ -8,3 +8,4 @@ Date picker
 Input verification
 Make Note adding and visit adding look/act like edit client. 
 Only refresh parts of page when changing people.
+Make phone calls and messages subclass a generic message class
