@@ -9,20 +9,20 @@
             <td class="title">First Name:</td>
             <td class="data">
                 <div>{{form.first_name}}</div>
-                <div>{{form.first_name.errors}}</div>
+                <div class="collapseerrors">{{form.first_name.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Last Name:</td>
             <td class="data">
                 <div>{{form.last_name}}</div>
-                <div>{{form.last_name.errors}}</div></td>
+                <div class="collapseerrors">{{form.last_name.errors}}</div></td>
         </tr>
         <tr>
             <td class="title">Birthday:</td>
             <td class="data">
                 <div>{{form.birth_date}}</div>
-                <div>{{form.birth_date.errors}}</div>
+                <div class="collapseerrors">{{form.birth_date.errors}}</div>
             </td>
         </tr>
         <tr>
@@ -37,41 +37,45 @@
             <td class="title">Location:</td>
             <td class="data">
                 <div>{{form.location}}</div>
-                <div>{{form.location.errors}}</div>
+                <div class="collapseerrors">{{form.location.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Pregnancy Status:</td>
             <td class="data">
                 <div>{{form.pregnancy_status}}</div>
-                <div>{{form.pregnancy_status.errors}}</div>
+                <div class="collapseerrors">{{form.pregnancy_status.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Expected Due Date:</td>
             <td class="data">
                 <div>{{form.due_date}}</div>
-                <div>{{form.due_date.errors}}</div>
+                <div class="collapseerrors">{{form.due_date.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Conditions:</td>
             <td class="data">
                 <div>{{form.conditions}}</div>
-                <div>{{form.conditions.errors}}</div>
+                <div class="collapseerrors">{{form.conditions.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Education:</td>
             <td class="data">
                 <div>{{form.years_of_education}}</div>
-                <div>{{form.years_of_education.errors}}</div>
+                <div class="collapseerrors">{{form.years_of_education.errors}}</div>
             </td>
         </tr>
         <tr>
             <td class="title">Registration Key:</td>
             <td class="data">{{form.instance.generate_key}}</td>
         </tr>
+        {% if form.non_field_errors %}
+            <tr>
+                <td class="title" colspan="2" style="text-align:left;">{{ form.non_field_errors }}</td>
+            </tr>
+        {% endif %}
     </form>
-    {{ form.non_field_errors }}
 </table>

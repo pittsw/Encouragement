@@ -6,7 +6,7 @@ border: 1px solid grey;
 margin: 0px;
 }
 
-ul
+.collapseerrors > ul
 {
 margin: 0;
 padding: 0;
@@ -14,12 +14,8 @@ display: inline;
 list-style-type: none;
 }
 
-.errorlist li
+.collapseerrors > .errorlist li
 {
-margin: 0;
-padding: 0;
-display: inline;
-list-style-type: none;
 font-size: 16px;
 color: red;
 }
