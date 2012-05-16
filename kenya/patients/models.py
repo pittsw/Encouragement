@@ -80,7 +80,7 @@ class Client(models.Model):
                 high_age=high_age))
         if (self.due_date - today) > one_year:
             errors.append('Expected due date is over a year away')
-        if (today.years - self.birth_date.years) <= self.years_of_education:
+        if (today.year - self.birth_date.year) <= self.years_of_education:
             errors.append("Client has been in school longer than she's been "
                 "alive")
         if errors:

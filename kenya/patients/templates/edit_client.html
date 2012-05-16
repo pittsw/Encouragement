@@ -1,17 +1,45 @@
-<html>
-	<head>
-		<title>Edit {{form.instance.first_name}} {{form.instance.last_name}}</title>
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
-	</head>
-	<body>
-        <h1>{{form.instance.first_name}} {{form.instance.last_name}}</h1>
-        <form method="post" action="/edit/{{form.instance.pk}}/">
-        {% csrf_token %}
-        {{form.as_p}}
-
-        <div class="submit">
-            <input type="submit" name="submit" value="Submit" />
-            <input type="submit" name="cancel" value="Cancel" />
-        </form>
-	</body>
-</html>
+<form method="post" action="/edit/{{form.instance.pk}}/">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td class="title">ID number:</td>
+            <td class="data">{{form.instance.id}}</td>
+        </tr>
+        <tr>
+            <td class="title">Name:</td>
+            <td class="data">{{form.first_name}} {{form.last_name}}</td>
+        </tr>
+        <tr>
+            <td class="title">Birthday:</td>
+            <td class="data">{{form.birth_date}}</td>
+        </tr>
+        <tr>
+            <td class="title">Phone Number:</td>
+            {% if form.instance.phone_number %}
+                <td class="data">{{form.instance.phone_number}}</td>
+            {% else %}
+                <td class="data">Please have client send registration key</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="title">Location:</td>
+            <td class="data">{{form.location}}</td>
+        </tr>
+        <tr>
+            <td class="title">Pregnancy Status:</td>
+            <td class="data">{{form.pregnancy_status}}</td>
+        </tr>
+        <tr>
+            <td class="title">Expected Due Date:</td>
+            <td class="data">{{form.due_date}}</td>
+        </tr>
+        <tr>
+            <td class="title">Education:</td>
+            <td class="data">{{form.years_of_education}}</td>
+        </tr>
+        <tr>
+            <td class="title">Registration Key:</td>
+            <td class="data">{{form.generate_key}}</td>
+        </tr>
+    </table>
+</form>

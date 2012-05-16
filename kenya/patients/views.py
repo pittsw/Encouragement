@@ -46,7 +46,10 @@ def detail(request, id_number):
     try:
         client = Client.objects.get(id=id_number)
         notes = Note.objects.filter(client_id=client)
-        return render_to_response("detail.html", {"client":client, "notes":notes}, context_instance=RequestContext(request))
+        fragment = render_to_string("client_fragment.html", {"client":client})
+        return render_to_response("detail.html", {
+            "client":client, "notes":notes, "fragment": fragment},
+            context_instance=RequestContext(request))
     except DoesNotExist:
         return render_to_response("form.html")
     
@@ -82,6 +85,12 @@ def add_client(request):
             client.save()
             return HttpResponse('')
     return render_to_response("add_client.html", {'form': form},
+                              context_instance=RequestContext(request))
+
+
+def client_fragment(request, id):
+    client = get_object_or_404(Client, id=id)
+    return render_to_response("client_fragment.html", {'client': client},
                               context_instance=RequestContext(request))
 
 
