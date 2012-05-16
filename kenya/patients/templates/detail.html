@@ -11,6 +11,7 @@
                         $('#client_fragment').load("/edit/{{ client.id }}/");
                         $('.view_buttons').hide();
                         $('.edit_buttons').show();
+                        return false;
                     });
                     $('#save').click(function(eventObject) {
                         var xhr = new XMLHttpRequest();
@@ -26,11 +27,13 @@
                         } else {
                             $('#client_fragment').html(response);
                         }
+                        return false;
                     });
                     $('#cancel').click(function(eventObject) {
                         $('#client_fragment').load('/fragment/{{ client.id }}/');
                         $('.edit_buttons').hide();
                         $('.view_buttons').show();
+                        return false;
                     });
 
                     //toggle the componenet with class msg_body
