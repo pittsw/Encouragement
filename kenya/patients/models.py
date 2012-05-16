@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from hashlib import sha256 as sha
 import math
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -56,6 +57,34 @@ class Client(models.Model):
     last_msg = models.DateTimeField(blank=True, null=True, editable=False)
 
     sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
+
+    def clean(self):
+        if None in [self.birth_date, self.due_date, self.years_of_education]:
+            return
+        low_age = 10
+        high_age = 100
+        one_year = timedelta(days=365)
+        today = date.today()
+        errors = []
+        if self.pregnancy_status == 'Pregnant' and self.due_date < today:
+            errors.append('Client is pregnant but expected delivery '
+                'date is in the past')
+        if self.pregnancy_status == 'Post-Partum' and self.due_date > today:
+            errors.append('Client has given birth by date of birth of '
+                'the child is in the future.')
+        if today.year - low_age < self.birth_date.year:
+            errors.append('Client is under {low_age} years old'.format(
+                low_age=low_age))
+        if today.year - high_age > self.birth_date.year:
+            errors.append('Client is over {high_age} years old'.format(
+                high_age=high_age))
+        if (self.due_date - today) > one_year:
+            errors.append('Expected due date is over a year away')
+        if (today.years - self.birth_date.years) <= self.years_of_education:
+            errors.append("Client has been in school longer than she's been "
+                "alive")
+        if errors:
+            raise ValidationError(errors)
 
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name

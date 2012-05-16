@@ -8,6 +8,22 @@
     <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
+                var setCalendars = function() {
+                    $(".date input").each(function(index, element) {
+                        $(this).datepicker({
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: "yy-mm-dd",
+                            maxDate: "+2y",
+                            minDate: "-100y",
+                            selectOtherMonths: true,
+                            showOtherMonths: true,
+                            showOn: "button",
+                            yearRange: "-100:+2"
+                        });
+                    });
+                }
+
                 $("#signup").dialog({
                     autoOpen: false,
                     modal: true,
@@ -24,23 +40,12 @@
                                 window.location.href = "/";
                             } else {
                                 $("#add_client_form").html(response);
+                                setCalendars();
                             }
                         }
                     },
                     open: function(event, ui) {
-                        $(".date input").each(function(index, element) {
-                            $(this).datepicker({
-                                changeMonth: true,
-                                changeYear: true,
-                                dateFormat: "yy-mm-dd",
-                                maxDate: "+2y",
-                                minDate: "-100y",
-                                selectOtherMonths: true,
-                                showOtherMonths: true,
-                                showOn: "button",
-                                yearRange: "-100:+2"
-                            });
-                        });
+                        setCalendars();
                     },
                     close: function(event, ui) {
                         $("#add_client_form").load("/add/");

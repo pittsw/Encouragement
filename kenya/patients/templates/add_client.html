@@ -6,7 +6,7 @@
         {% for field in form %}
             <tr>
                 <td>
-                    {{ field.label_tag }}{% if field.errors %} <span class="errors">({{ field.errors }})</span>{% endif %}
+                    {{ field.label_tag }}{% if field.errors %} <span class="errors"><span class="collapse">({{ field.errors }})</span></span>{% endif %}
                 </td>
                 <td>
                     {% if field.field|klass == "DateField" %}
@@ -18,4 +18,7 @@
             </tr>
         {% endfor %}
     </table>
+    <div class="errors">
+        {{ form.non_field_errors }}
+    </div>
 </form>

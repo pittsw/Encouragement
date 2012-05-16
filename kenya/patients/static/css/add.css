@@ -3,15 +3,13 @@
 }
 
 ul {
-    margin: 0;
-    padding: 0;
-    display: inline;
     list-style-type: none;
 }
 
-.errorlist li {
+.collapse ul {
+    margin: 0;
+    padding: 0;
     display: inline;
-    list-style-type: none;
 }
 
 .header-bar {
