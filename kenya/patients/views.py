@@ -9,7 +9,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm
-from patients.models import Client, Message, Location, Nurse, VisitHistory, SMSSyncOutgoing, Note
+from patients.models import Client, Message, Location, Nurse, VisitHistory, SMSSyncOutgoing, Note, Interaction
 from patients.tasks import incoming_message, message_client
 
 @login_required
@@ -35,11 +35,11 @@ def client(request, id_number):
         if request.POST['text']:
             nurse = Nurse.objects.get(user=request.user)
             message_client(client, nurse, 'Nurse', request.POST['text'])
-        messages = Message.objects.filter(client_id=client)
+        messages = Interaction.objects.filter(client_id=client)
         return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
     else:
         client = Client.objects.get(id=id_number)
-        messages = Message.objects.filter(client_id=client)
+        messages = Interaction.objects.filter(client_id=client)
         return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):
