@@ -75,6 +75,7 @@ body {
     float: right;
     width: 40px;
     height: 24px;
+    padding-top: 4px;
     background-image: url('/static/images/add_client.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -220,6 +221,16 @@ body {
     background-image: url("/static/images/plus.png");
     background-repeat: no-repeat;
     float: right;
+}
+
+.info .add_note {
+    background-color: rgb(159, 157, 150);
+    color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
 }
 /* End styles for client details pane. */
 

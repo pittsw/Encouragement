@@ -82,7 +82,7 @@
             var client_id = link.id;
             $(".message-list").load("/fragment/message/" + client_id + "/");
             $(".client-profile").load("/detail/" + client_id + "/", function() {
-                loadEditHandlers(client_id);
+                loadEditHandlers(link);
             });
             $(link).css("background-color", "rgb(91,141,147)");
             $(link).css("color", "rgb(217,233,236)");
@@ -132,24 +132,13 @@
         });
 
         // Load the client editing fragment when they click edit
-        var loadEditHandlers = function(client_id) {
+        var loadEditHandlers = function(link) {
+            var client_id = link.id;
             $('.info #edit').on("click", function(eventObject) {
                 $('.view_buttons').hide();
                 $('.edit_buttons').show();
                 $('#client_fragment').load("/edit/" + client_id + "/", function() {
-                    $('.info .date input').each(function(index, element) {
-                        $(this).datepicker({
-                            changeMonth: true,
-                            changeYear: true,
-                            dateFormat: "yy-mm-dd",
-                            maxDate: "+2y",
-                            minDate: "-100y",
-                            selectOtherMonths: true,
-                            showOtherMonths: true,
-                            showOn: "button",
-                            yearRange: "-100:+2"
-                        });
-                    });
+                    setCalendars();
                 });
                 return false;
             });
@@ -188,6 +177,18 @@
                 } else {
                     $(this).addClass('info_expanded').removeClass('info_collapsed');
                 }
+            });
+
+            // Hook in note saving
+            $('.info .add_note').on("click", function(eventObject) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    load(link);
+                }
+                xhr.open("POST", "/note/" + client_id + "/", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                xhr.send($('#add_note_form').serialize());
             });
         };
     });

@@ -31,7 +31,6 @@ def DoesNotExist(Exception):
     def __str__(self):
         return repr(self.value)
 
-@csrf_exempt
 def client(request, id_number):
     if request.method == 'POST':
         client = Client.objects.get(id=id_number)
@@ -71,13 +70,9 @@ def add_note(request, id):
     client = get_object_or_404(Client, id=id)
     if request.method == "POST":
         nurse = Nurse.objects.get(user=request.user)
-        if request.POST.get("submit"):
-            # They clicked submit
-            n = Note(client_id=client, author_id=nurse, content=request.POST.get("text"))
-            n.save()
-            return detail(request, id)
-        else:
-            return detail(request, id)
+        n = Note(client_id=client, author_id=nurse, content=request.POST.get("text"))
+        n.save()
+        return detail(request, id)
     return render_to_response("add_note.html", {"client":client}, context_instance=RequestContext(request))
     
 

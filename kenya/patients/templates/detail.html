@@ -16,6 +16,13 @@
 </div>
 <div class="msg_body">
 <table>
+    <form id="add_note_form" method="post" action="/note/{{ client.id }}/" style="display:hidden;">
+        {% csrf_token %}
+        <tr>
+            <td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
+            <td><div class="add_note">Add</div></td>
+        <tr>
+    </form>
     {% for note in notes %}
     <tr>
         <td class="content">{{note.content}}</td>
