@@ -68,7 +68,11 @@
             }
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) {
+                    return;
+                }
                 $(".message-list").load("/fragment/message/" + client_id + "/");
+                $(".messages #message-box").val("").keyup();
             }
             xhr.open("POST", "/message/" + client_id + "/", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
