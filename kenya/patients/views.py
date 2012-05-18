@@ -79,7 +79,6 @@ def add_note(request, id):
         else:
             return detail(request, id)
     return render_to_response("add_note.html", {"client":client}, context_instance=RequestContext(request))
-    
 
 def add_client(request):
     form = None

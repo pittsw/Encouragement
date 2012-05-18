@@ -1,12 +1,9 @@
-Visit history (partway completed)
-Phone calls
-Minimum width
-Icons
-Divs instead of frames
+Visit adding
+adding and removing notes
+Adding Phone calls
+Sending messages
+Format client list
+More icons
 Nicer tabs
-Date picker
-Input verification
-Make Note adding and visit adding look/act like edit client. 
-Only refresh parts of page when changing people.
-Make phone calls and messages subclass a generic message class
-Repair css mappings
+Date picker (1/2)
+Message display styling
