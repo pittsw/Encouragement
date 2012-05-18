@@ -38,6 +38,7 @@ body {
     margin-left: -2px;
 }
 
+
 .logout {
     float: right;
     margin-right: 0.5em;
@@ -108,11 +109,18 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.patient_bar {
+    background-color: rgb(200, 200, 200);
+    padding: 5px 0px 0px 5px;
+    height:20px;
+    font-size:12px;
+}
 /* End search bar styles */
 
 /* Styles for the client list. */
 .client_list {
-    height: 650px;
+    height: 625px;
     overflow: auto;
 }
 
@@ -121,6 +129,7 @@ body {
     border-bottom: 1px dashed grey;
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
+    height: 72px;
 }
 
 .list .header {
@@ -134,9 +143,26 @@ body {
 .list .pendingname {
     font-style: bold;
     font-size:20px;
-    background-image: url("/static/images/pending_message.png");
     background-position: right;
     background-repeat: no-repeat;
+}
+
+.list .urgent {
+    float: right;
+    background-image: url("/static/images/urgent.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.list .pending {
+    float: right;
+    background-image: url("/static/images/pending_message.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
 }
 /* End styles for the client list. */
 
