@@ -72,8 +72,15 @@ def add_note(request, id):
         nurse = Nurse.objects.get(user=request.user)
         n = Note(client_id=client, author_id=nurse, content=request.POST.get("text"))
         n.save()
-        return detail(request, id)
+        return HttpResponse('')
     return render_to_response("add_note.html", {"client":client}, context_instance=RequestContext(request))
+
+
+def delete_note(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    if request.method == "POST":
+        note.delete()
+        return HttpResponse('')
     
 
 def add_client(request):

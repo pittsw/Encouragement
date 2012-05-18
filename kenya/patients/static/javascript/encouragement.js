@@ -1,6 +1,31 @@
 (function($) {
     $(document).ready(function() {
 
+        // Set up AJAX to allow posts
+        $.ajaxSetup({ 
+             beforeSend: function(xhr, settings) {
+                 function getCookie(name) {
+                     var cookieValue = null;
+                     if (document.cookie && document.cookie != '') {
+                         var cookies = document.cookie.split(';');
+                         for (var i = 0; i < cookies.length; i++) {
+                             var cookie = jQuery.trim(cookies[i]);
+                             // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+                 }
+                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                     // Only send the token to relative URLs i.e. locally.
+                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 }
+             } 
+        });
+
         // Sets up the characters left view.
         $('#message-box').bind('keyup', function(e) {
             var len = $('#message-box').val().length;
@@ -170,13 +195,29 @@
             });
 
             //toggle the componenet with class msg_body
-            $(".info .msg_head").click(function() {
+            $(".info .msg_head").on('click', function() {
                 $(this).next(".msg_body").slideToggle(600);
                 if ($(this).hasClass('info_expanded')) {
                     $(this).addClass('info_collapsed').removeClass('info_expanded');
                 } else {
                     $(this).addClass('info_expanded').removeClass('info_collapsed');
                 }
+            });
+
+            // Hook in note adding
+            $('.info .add').on('click', function() {
+                $('.info #note').show();
+                return false;
+            });
+
+            // Hook in note deleting
+            $('.info .delete').each(function(i, e) {
+                var pk = $(this).attr('id');
+                $(this).on('click', function() {
+                    $.post("/delete_note/" + pk + "/", {}, function() {
+                        load(link);
+                    });
+                });
             });
 
             // Hook in note saving

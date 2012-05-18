@@ -12,22 +12,22 @@
 
 <div class="header msg_head info_expanded">
     <span>Notes</span>
-    <span id="note" class="add"></span>
+    <span class="add"></span>
 </div>
 <div class="msg_body">
 <table>
-    <form id="add_note_form" method="post" action="/note/{{ client.id }}/" style="display:hidden;">
-        {% csrf_token %}
-        <tr>
-            <td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
-            <td><div class="add_note">Add</div></td>
-        <tr>
-    </form>
+        <tr id="note" style="display:none;">
+            <form id="add_note_form" method="post" action="/note/{{ client.id }}/">
+                {% csrf_token %}
+                <td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
+                <td><div class="add_note">Add</div></td>
+            </form>
+        </tr>
     {% for note in notes %}
     <tr>
         <td class="content">{{note.content}}</td>
         <td class="date">{{note.date}}</td>
-        <td class="delete">X</td>
+        <td class="delete" id="{{ note.pk }}">X</td>
     </tr>
     {% endfor %}
 </table>
@@ -36,7 +36,7 @@
 
 <div class="header msg_head info_expanded">
     <span>Clinic Visit History</span>
-    <add id="visit" class="add"></span>
+    <span id="visit" class="add"></span>
 </div>
 <div class="msg_body">
 <table>
