@@ -88,6 +88,45 @@
         $(".person").on("click", function(e) {
             load(this);
         });
+
+        // Set up the asynchronous search
+        var people = $('.person');
+        var timer = undefined;
+        var processor = undefined;
+        function filter() {
+            if (processor) {
+                clearInterval(processor);
+            }
+            var busy = false, i = 0, step=10;
+            var name = $.trim($('#searchtext').val()).toLowerCase();
+            processor = setInterval(function() {
+                if (!busy) {
+                    busy = true;
+                    var divs = people.slice(i, i + step);
+                    divs.each(function (num) {
+                        $(this).show();
+                        var e = $(this);
+                        var x = e.find('.name').html().toLowerCase();
+                        if (x.indexOf(name) < 0) {
+                            e.hide();
+                        }
+                    });
+                    i += step;
+                    if (i >= people.length) {
+                        clearInterval(processor);
+                    }
+                    busy = false;
+                }
+            }, 1);
+        }
+        $('#searchtext').bind('keyup', function(e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 27) {
+                // Clear on escape
+                $('#searchtext').val('');
+            }
+            filter();
+        });
     });
 })(jQuery);
 

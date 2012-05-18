@@ -212,6 +212,15 @@ body {
     background-image: url("/static/images/cancel.png");
     float: right;
 }
+
+.info .add {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/plus.png");
+    background-repeat: no-repeat;
+    float: right;
+}
 /* End styles for client details pane. */
 
 
