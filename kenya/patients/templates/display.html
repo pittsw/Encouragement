@@ -1,3 +1,5 @@
+{% load patient_tags %}
+
 <html>
 	<head>
 		<title>{{client.first_name}} {{client.last_name}}</title>
@@ -65,14 +67,19 @@
 		</div>
 		<div class="Body">
 		{% for x in messages %}
-			{% if x.sent_by == "Client" %}
+			{% if x|klass == "PhoneCall" %}
+			<div class="Phone">
+				<div class="top"></div>
+				<div class="content">{{x.content}}</div>
+			</div>
+			{% elif x.sent_by == "Client" %}
 			<div class="Client">
 				<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
 				<div class="Clientcontent">{{x.content}}</div>
 			</div>
 			{% else %}
 			<div class={{x.sent_by}}>
-				<div class="top">{{x.user_id}}:<span class="date">{{x.date}}</span></div>
+				<div class="top">{% if x.user_id %}{{x.user_id}}{% else %}System{% endif %}:<span class="date">{{x.date}}</span></div>
 				<div class="content">{{x.content}}</div>
 			</div>
 			{% endif %}

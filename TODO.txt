@@ -1,12 +1,11 @@
-Visit history
+Visit history (partway completed)
 Phone calls
 Minimum width
 Icons
 Divs instead of frames
-Screenshot of prototype
-White text for selected name
-Italicized messages for non-pending
 Nicer tabs
 Date picker
 Input verification
-GROUP: Generating Random Operations; Undoing Progress
+Make Note adding and visit adding look/act like edit client. 
+Only refresh parts of page when changing people.
+Make phone calls and messages subclass a generic message class

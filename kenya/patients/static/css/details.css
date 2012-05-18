@@ -6,7 +6,7 @@ border: 1px solid grey;
 margin: 0px;
 }
 
-ul
+.collapseerrors > ul
 {
 margin: 0;
 padding: 0;
@@ -14,12 +14,8 @@ display: inline;
 list-style-type: none;
 }
 
-.errorlist li
+.collapseerrors > .errorlist li
 {
-margin: 0;
-padding: 0;
-display: inline;
-list-style-type: none;
 font-size: 16px;
 color: red;
 }
@@ -36,12 +32,15 @@ background-color: rgb(208, 206, 196);
 font-weight: bold;
 font-size: 15px;
 padding: 5px 0px 5px 15px;
+height: auto;
+overflow: auto;
 }
 
 table
 {
 background-color: rgb(245, 242, 231);
 width: 100%;
+margin: 0px 0px 10px 0px;
 }
 
 tr

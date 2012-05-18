@@ -127,31 +127,31 @@ class Nurse(models.Model):
     def __unicode__(self):
         return self.user.first_name
 
-class Message(models.Model):
-
+class Interaction(models.Model):
     class Meta:
         ordering = ['-date']
         
+    date = models.DateTimeField(auto_now_add=True)
+    
+    user_id = models.ForeignKey(Nurse, blank=True, null=True)
+    
+    client_id = models.ForeignKey(Client)
+    
+    content = models.CharField(max_length=500)
+    
+    def __unicode__(self):
+        return self.content
+
+class Message(Interaction):
     SENDER_CHOICES = (
         ('Client', 'Client'),
         ('Nurse', 'Nurse'),
         ('System', 'System'),
     )
 
-    client_id = models.ForeignKey(Client)
-
-    user_id = models.ForeignKey(Nurse, blank=True, null=True)
-
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
-
-    content = models.CharField(max_length=500)
-
-    date = models.DateTimeField(auto_now_add=True)
-
+    
     read = models.BooleanField(default=False, editable=False)
-
-    def __unicode__(self):
-        return self.content
 
 
 class SMSSyncOutgoing(models.Model):
@@ -226,9 +226,31 @@ def update_client(sender, **kwargs):
 class Note(models.Model):
     class Meta:
         ordering = ['-date']
+        
     client_id = models.ForeignKey(Client)
+    
     author_id = models.ForeignKey(Nurse)
+    
     content = models.CharField(max_length=500)
+    
     date = models.DateTimeField(auto_now_add=True)
+    
     def __unicode__(self):
         return self.content
+
+class VisitHistory(models.Model):
+    class Meta:
+        ordering = ['-date']
+        
+    client_id = models.ForeignKey(Client)
+    
+    status = models.CharField(max_length=100)
+    
+    date = models.DateTimeField()
+    
+    def __unicode__(self):
+        return self.date
+        
+class PhoneCall(Interaction):
+    duration = models.IntegerField()
+
