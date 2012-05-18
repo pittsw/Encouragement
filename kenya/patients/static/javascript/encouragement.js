@@ -83,6 +83,7 @@
             $(".client-profile").load("/detail/" + id + "/");
             $(link).css("background-color", "rgb(91,141,147)");
             $(link).css("color", "rgb(217,233,236)");
+            $('.name_bar').html($(link).find('.name').html());
         }
         $(".person").on("click", function(e) {
             load(this);
