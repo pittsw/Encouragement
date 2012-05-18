@@ -122,9 +122,20 @@ body {
     font-weight: bold;
     font-size: 15px;
     padding: 5px;
+    padding-left: 20px;
     margin-right: 5px;
     height: auto;
     overflow: auto;
+    background-position: 5px center;
+    background-repeat: no-repeat;
+}
+
+.info_expanded {
+    background-image: url("/static/images/expanded.png");
+}
+
+.info_collapsed {
+    background-image: url("/static/images/collapsed.png");
 }
 
 .info table {

@@ -54,6 +54,11 @@
                     $(".msg_head").click(function()
                       {
                         $(this).next(".msg_body").slideToggle(600);
+                        if ($(this).hasClass('info_expanded')) {
+                            $(this).addClass('info_collapsed').removeClass('info_expanded');
+                        } else {
+                            $(this).addClass('info_expanded').removeClass('info_collapsed');
+                        }
                       });
                 });
                
@@ -61,7 +66,7 @@
         </script>
 	</head>
 	<body>
-		<div class="header msg_head" id="profile">
+		<div class="header msg_head info_expanded" id="profile">
             <span>Client Profile</span>
             <span id="edit" class="view_buttons">&nbsp;</span>
             <span class="edit_buttons" style="display:none;">
@@ -73,7 +78,7 @@
             {{fragment}}
         </div>
         
-        <div class="header msg_head">
+        <div class="header msg_head info_expanded">
             <span>Notes</span>
             <span style="float:right; text-align:right;">
         		<button id="note" class="add_note">Add Note</button>
@@ -92,7 +97,7 @@
         </div>
 
         
-        <div class="header msg_head">
+        <div class="header msg_head info_expanded">
         	<span>Clinic Visit History</span>
 			<span style="float:right; text-align:right;">
        	 		<button id="note" class="add_note">Add Visit</button>
