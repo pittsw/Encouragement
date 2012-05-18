@@ -15,22 +15,22 @@
     <span class="add"></span>
 </div>
 <div class="msg_body">
-<table>
-        <tr id="note" style="display:none;">
-            <form id="add_note_form" method="post" action="/note/{{ client.id }}/">
-                {% csrf_token %}
-                <td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
-                <td><div class="add_note gray_button">Add</div></td>
-            </form>
-        </tr>
-    {% for note in notes %}
-    <tr>
-        <td class="content">{{note.content}}</td>
-        <td class="date">{{note.date}}</td>
-        <td class="delete" id="{{ note.pk }}">X</td>
-    </tr>
-    {% endfor %}
-</table>
+	<table>
+		<tr id="note" style="display:none;">
+			<form id="add_note_form" method="post" action="/note/{{ client.id }}/">
+				{% csrf_token %}
+				<td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
+				<td><div class="add_note gray_button">Add</div></td>
+			</form>
+		</tr>
+		{% for note in notes %}
+		<tr>
+			<td class="content">{{note.content}}</td>
+			<td class="date">{{note.date}}</td>
+			<td class="delete" id="{{ note.pk }}">X</td>
+		</tr>
+		{% endfor %}
+	</table>
 </div>
 
 
