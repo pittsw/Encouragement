@@ -1,89 +1,20 @@
-{% load patient_tags %}
-
-<html>
-	<head>
-		<title>{{client.first_name}} {{client.last_name}}</title>
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/message.css"/>
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.ui.all.css">
-		<script src="{{ STATIC_URL }}javascript/jquery-1.7.2.js"></script>
-		<script src="{{ STATIC_URL }}javascript/jquery.ui.core.js"></script>
-		<script src="{{ STATIC_URL }}javascript/jquery.ui.widget.js"></script>
-		<script src="{{ STATIC_URL }}javascript/jquery.ui.tabs.js"></script>
-		<script>
-			$(document).ready(function() {
-                $('#message-box').bind('keyup', function(e) {
-                    var len = $('#message-box').val().length;
-                    var messages = Math.ceil(len / 144);
-                    var left = len % 144;
-                    if (left == 0 && messages > 0) {
-                        left = 144;
-                    }
-                    var str = left + "/144 characters, " + messages + " message";
-                    if (messages != 1) {
-                        str += "s";
-                    }
-                    $('#chars-left').text(str);
-                });
-
-				$('.tabs a').click(function(){
-					switch_tabs($(this));
-				});
-			 
-				switch_tabs($('.defaulttab'));
-			});
-			
-			function switch_tabs(obj) {
-				$('.tab-content').hide();
-				$('.tabs a').removeClass("selected");
-				var id = obj.attr("rel");
-			 
-				$('#'+id).show();
-				obj.addClass("selected");
-			}
-		</script>
-	</head>
-	<body>
-		<div id="tabs" class="Boxes">
-			<div class="header">{{client}}</div>
-			<ul class="tabs">
-				<li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
-				<li><a href="#" rel="tabs-2">Call Notes</a></li>
-			</ul>
-			<div class="Box1 tab-content" id="tabs-2">
-				<form method="post" action="">
-					<textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
-					<input type="submit" value="Send" />
-				</form>
-			</div>
-			<div class="Box tab-content" id="tabs-1">
-				<form method="post" action="">
-					<textarea id="message-box" cols=71 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
-                    <div style="text-align:right; padding-right:10px;">
-					    <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
-                        <input type="submit" value="Send" />
-                    </div>
-				</form>
-			</div>
-		</div>
-		<div class="Body">
-		{% for x in messages %}
-			{% if x|klass == "PhoneCall" %}
-			<div class="Phone">
-				<div class="top"></div>
-				<div class="content">{{x.content}}</div>
-			</div>
-			{% elif x.sent_by == "Client" %}
-			<div class="Client">
-				<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
-				<div class="Clientcontent">{{x.content}}</div>
-			</div>
-			{% else %}
-			<div class={{x.sent_by}}>
-				<div class="top">{% if x.user_id %}{{x.user_id}}{% else %}System{% endif %}:<span class="date">{{x.date}}</span></div>
-				<div class="content">{{x.content}}</div>
-			</div>
-			{% endif %}
-		{% endfor %}
-		</div>
-	</body>
-</html>
+<div class="message-list">
+{% for x in messages %}
+    {% if x|klass == "PhoneCall" %}
+    <div class="Phone">
+        <div class="top"></div>
+        <div class="content">{{x.content}}</div>
+    </div>
+    {% elif x.sent_by == "Client" %}
+    <div class="Client">
+        <div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
+        <div class="Clientcontent">{{x.content}}</div>
+    </div>
+    {% else %}
+    <div class={{x.sent_by}}>
+        <div class="top">{% if x.user_id %}{{x.user_id}}{% else %}System{% endif %}:<span class="date">{{x.date}}</span></div>
+        <div class="content">{{x.content}}</div>
+    </div>
+    {% endif %}
+{% endfor %}
+</div>
