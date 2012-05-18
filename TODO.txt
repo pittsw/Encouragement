@@ -1,10 +1,11 @@
 Visit adding
 adding and removing notes
-Adding Phone calls
+Adding Phone calls/phone adding interface
 Sending messages
 Format client list
 More icons
-Nicer tabs
 Date picker (1/2)
 Message display styling
 Adjust visit interface
+
+Fix all the things!

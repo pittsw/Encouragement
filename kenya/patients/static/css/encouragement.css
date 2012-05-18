@@ -69,6 +69,7 @@ body {
     border-width: 2px;
     border-color: rgb(121, 121, 121);
     margin-right: -2px;
+    padding-top: 4px;
 }
 
 .search_bar .addbutton {
@@ -286,7 +287,6 @@ body {
 .messages .message-box {
     top: 50px; 
     left: 0px; 
-    width: 100%; 
     background-color: rgb(240,240,240); 
     overflow: hidden; 
     border-style: solid;
@@ -297,7 +297,6 @@ body {
 .messages .phone-box {
     top: 50px; 
     left: 0px; 
-    width: 100%; 
     background-color: rgb(120,240,240); 
     overflow: hidden; 
     border-style: solid;
@@ -391,4 +390,21 @@ body {
     text-decoration:none;
 }
 
+.messagetable {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messagetable th {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messagetable td {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
 /* End messages styles. */
