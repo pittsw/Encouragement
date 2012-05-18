@@ -292,8 +292,8 @@ body {
 }
 
 .messages .message-list {
-	margin: 50px 5px;
-    height: 475px;
+	margin: 55px 5px;
+    height: 470px;
     overflow: auto;
 }
 
