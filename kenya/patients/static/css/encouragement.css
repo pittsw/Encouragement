@@ -69,6 +69,7 @@ body {
     border-width: 2px;
     border-color: rgb(121, 121, 121);
     margin-right: -2px;
+    padding-top: 4px;
 }
 
 .search_bar .addbutton {
@@ -106,6 +107,9 @@ body {
 .list .pendingname {
     font-style: bold;
     font-size:20px;
+    background-image: url("/static/images/pending_message.png");
+    background-position: right;
+    background-repeat: no-repeat;
 }
 /* End styles for the client list. */
 
@@ -284,27 +288,70 @@ body {
 }
 
 .messages .Boxes {
-    height: 100px;
+    height: 120px;
     top: 0px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
     background-color: rgb(255,255,255);
 }
 
 .messages .message-box {
     top: 50px; 
     left: 0px; 
-    width: 100%; 
     background-color: rgb(240,240,240); 
     overflow: hidden; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
 }
 
 .messages .phone-box {
     top: 50px; 
     left: 0px; 
-    width: 100%; 
     background-color: rgb(120,240,240); 
     overflow: hidden; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messages .envelopepic .tab {
+	width: 60px;
+	height: 20px;
+	background-image: url("/static/images/message.png");
+	background-repeat: no-repeat;
+	background-position: center;
+
+}
+
+.messages .phonepic .tab {
+	width: 60px;
+	height: 20px;
+	background-image: url("/static/images/call.png");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.messages .tab {
+	margin-top: 5px;
+	border-radius: 10px 10px 0px 0px;
+	border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messages .phonepic .selected {
+	background-image: url("/static/images/call_large.png");
+	width: 80px;
+	height: 23px;
+	margin-top:2px;
+}
+
+.messages .envelopepic .selected {
+    background-image: url("/static/images/message_large.png");
+    width: 80px;
+	height: 23px;
+	margin-top:2px;
 }
 
 .messages .header {
@@ -341,7 +388,7 @@ body {
 .messages ul.tabs li {
     display:block;
     float:left;
-    padding:0 5px;
+    padding:0 1px;
 }
 
 .messages ul.tabs li a {
@@ -354,10 +401,21 @@ body {
     text-decoration:none;
 }
 
-.messages .selected {
-    font-weight:bold;
+.messagetable {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
 }
 
-.messages .tab-content {
+.messagetable th {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messagetable td {
+	border-style: solid;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
 }
 /* End messages styles. */
