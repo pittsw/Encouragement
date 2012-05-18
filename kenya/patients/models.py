@@ -256,7 +256,7 @@ class Visit(models.Model):
     date = models.DateTimeField()
     
     def __unicode__(self):
-        return self.date
+        return self.status
         
 class PhoneCall(Interaction):
     duration = models.IntegerField()

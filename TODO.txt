@@ -7,3 +7,4 @@ More icons
 Nicer tabs
 Date picker (1/2)
 Message display styling
+Adjust visit interface
