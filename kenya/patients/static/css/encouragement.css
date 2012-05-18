@@ -76,7 +76,6 @@ body {
     float: right;
     width: 40px;
     height: 24px;
-    padding-top: 4px;
     background-image: url('/static/images/add_client.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -290,8 +289,8 @@ body {
 .messages .Boxes {
     height: 120px;
     top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
     background-color: rgb(255,255,255);
 }
 
