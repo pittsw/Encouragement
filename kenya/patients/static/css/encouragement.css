@@ -81,6 +81,14 @@ body {
     border-width: 1px;
     margin-right: 5px;
 }
+
+.cancel {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/cancel.png");
+    float: right;
+}
 /* End full page styles. */
 
 /* Search bar styles */
@@ -229,14 +237,6 @@ body {
     float: right;
 }
 
-.info #cancel {
-    background-position: center;
-    width: 16px;
-    height: 16px;
-    background-image: url("/static/images/cancel.png");
-    float: right;
-}
-
 .info .add {
     background-position: center;
     width: 16px;
@@ -252,7 +252,6 @@ body {
 .messages {
     background-color:rgb(255,255,255);
     height: 645px;
-    overflow: auto;
     border-left-style: solid;
     border-width: 2px;
     border-color: rgb(121, 121, 121);
@@ -294,6 +293,8 @@ body {
 
 .messages .message-list {
 	margin: 50px 5px;
+    height: 475px;
+    overflow: auto;
 }
 
 .messages .Boxes {

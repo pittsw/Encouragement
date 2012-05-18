@@ -239,7 +239,7 @@
             });
 
             // Hook in note adding
-            $('.info .add').on('click', function() {
+            $('.info #notes_add').on('click', function() {
                 $('.info #note').show();
                 return false;
             });
