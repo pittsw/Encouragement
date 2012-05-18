@@ -3,57 +3,14 @@
         "pk": 1, 
         "model": "patients.location", 
         "fields": {
-            "name": "Kenya"
+            "name": "Seattle"
         }
-    }, 
+    },
     {
         "pk": 2, 
         "model": "patients.location", 
         "fields": {
-            "name": "Seattle"
-        }
-    }, 
-    {
-        "pk": 100, 
-        "model": "patients.client", 
-        "fields": {
-            "phone_number": "5551234", 
-            "due_date": "2012-06-01", 
-            "first_name": "Pregnant", 
-            "last_name": "Woman", 
-            "last_msg": "2012-05-16T23:28:28.052Z", 
-            "years_of_education": 8, 
-            "urgent": false, 
-            "sent_messages": [], 
-            "location": 1, 
-            "birth_date": "1990-01-01", 
-            "pregnancy_status": "Pregnant", 
-            "conditions": [
-                1
-            ], 
-            "pending": 1
-        }
-    }, 
-    {
-        "pk": 101, 
-        "model": "patients.client", 
-        "fields": {
-            "phone_number": "5551235", 
-            "due_date": "2012-06-01", 
-            "first_name": "High", 
-            "last_name": "Blood Pressure", 
-            "last_msg": null, 
-            "years_of_education": 8, 
-            "urgent": false, 
-            "sent_messages": [], 
-            "location": 1, 
-            "birth_date": "1990-01-01", 
-            "pregnancy_status": "Pregnant", 
-            "conditions": [
-                1, 
-                2
-            ], 
-            "pending": 0
+            "name": "Kenya"
         }
     },
     {
@@ -75,64 +32,163 @@
         }
     }, 
     {
-        "pk": 30, 
-        "model": "auth.user", 
+        "pk": 1, 
+        "model": "patients.client", 
         "fields": {
-            "username": "System", 
-            "first_name": "System", 
-            "last_name": "", 
-            "is_active": true, 
-            "is_superuser": false, 
-            "is_staff": false, 
-            "last_login": "2012-04-30T19:12:29Z", 
-            "groups": [], 
-            "user_permissions": [], 
-            "password": "pbkdf2_sha256$10000$p3HlXJ7VPO9M$4Ox3qHqeyg18/E2saU1L+vJCtmPHEziNccfCQANnIB0=", 
-            "email": "", 
-            "date_joined": "2012-04-30T19:12:29Z"
+            "phone_number": "", 
+            "due_date": "2012-05-18", 
+            "first_name": "Pregnant", 
+            "last_name": "Woman", 
+            "last_msg": "2012-05-18T07:17:26.868Z", 
+            "years_of_education": 11, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "location": 1, 
+            "birth_date": "1990-12-30", 
+            "pregnancy_status": "Pregnant", 
+            "conditions": [
+                1
+            ], 
+            "id": 1234, 
+            "pending": 1
         }
-    },
+    }, 
     {
-        "pk": 1000, 
+        "pk": 2, 
+        "model": "patients.client", 
+        "fields": {
+            "phone_number": "", 
+            "due_date": "2012-01-01", 
+            "first_name": "Not Pregnant", 
+            "last_name": "Woman", 
+            "last_msg": null, 
+            "years_of_education": 5, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "location": 1, 
+            "birth_date": "1992-01-15", 
+            "pregnancy_status": "Failed Pregnancy", 
+            "conditions": [
+                2
+            ], 
+            "id": 2351235, 
+            "pending": 0
+        }
+    }, 
+    {
+        "pk": 101010, 
         "model": "patients.nurse", 
         "fields": {
-            "user": 20, 
+            "user": 2, 
             "location": 1
         }
     }, 
     {
-        "pk": 12301403, 
-        "model": "patients.nurse", 
+        "pk": 4, 
+        "model": "patients.interaction", 
         "fields": {
-            "user": 1, 
-            "location": 2
+            "date": "2012-05-18T07:17:58.759Z", 
+            "content": "This is a phone call", 
+            "user_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2012-05-18T07:17:39.997Z", 
+            "content": "System to client", 
+            "user_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2012-05-18T07:17:26.868Z", 
+            "content": "Client to nurse", 
+            "user_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2012-05-18T07:17:14.386Z", 
+            "content": "This is a message from nurse to client", 
+            "user_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.message", 
+        "fields": {
+            "read": false, 
+            "sent_by": "System"
         }
     }, 
     {
         "pk": 2, 
         "model": "patients.message", 
         "fields": {
-            "date": "2012-05-16T23:28:47.931Z", 
-            "content": "Hi there", 
-            "user_id": null, 
-            "client_id": 100,
             "read": false, 
-            "sent_by": "System"
+            "sent_by": "Client"
         }
     }, 
     {
         "pk": 1, 
         "model": "patients.message", 
         "fields": {
-            "date": "2012-05-16T23:28:28.052Z", 
-            "content": "Hi there how are you?", 
-            "user_id": 1000, 
-            "client_id": 100,
             "read": false, 
-            "sent_by": "Client"
+            "sent_by": "Nurse"
         }
     }, 
     {
+        "pk": 1, 
+        "model": "patients.condition", 
+        "fields": {
+            "name": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.condition", 
+        "fields": {
+            "name": "Dead"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.note", 
+        "fields": {
+            "content": "This client has a severe case of severed limb.", 
+            "date": "2012-05-18T09:12:52.519Z", 
+            "author_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.note", 
+        "fields": {
+            "content": "This client is suffering from delusions.", 
+            "date": "2012-05-18T09:12:34.796Z", 
+            "author_id": 101010, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "patients.phonecall", 
+        "fields": {
+            "duration": 23
+        }
+    }
+        {
         "pk": 1, 
         "model": "patients.condition", 
         "fields": {
