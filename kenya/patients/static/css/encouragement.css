@@ -300,6 +300,8 @@ body {
     background-color: rgb(240,240,240); 
     overflow: hidden; 
     border-style: solid;
+    width: 100%;
+    margin: -1px;
     border-width: 1px;
     border-color: rgb(121, 121, 121);
 }
@@ -310,6 +312,8 @@ body {
     background-color: rgb(120,240,240); 
     overflow: hidden; 
     border-style: solid;
+    width: 100%;
+    margin: -1px;
     border-width: 1px;
     border-color: rgb(121, 121, 121);
 }
