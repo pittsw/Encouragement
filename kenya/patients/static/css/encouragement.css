@@ -176,13 +176,30 @@ body {
 }
 
 .info #edit {
-    float:right;
-    margin-right: 5px;
     background-position: center;
     width: 16px;
     height: 16px;
     background-image: url("/static/images/gear.png");
     background-repeat: no-repeat;
+    float: right;
+}
+
+.info #save {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background-image: url("/static/images/plus.png");
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.info #cancel {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/cancel.png");
+    float: right;
 }
 /* End styles for client details pane. */
 
