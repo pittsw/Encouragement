@@ -1,6 +1,9 @@
 (function($) {
     $(document).ready(function() {
 
+        // The id of the currently selected client
+        var client_id = undefined;
+
         // Set up AJAX to allow posts
         $.ajaxSetup({ 
              beforeSend: function(xhr, settings) {
@@ -26,8 +29,9 @@
              } 
         });
 
+
         // Sets up the characters left view.
-        $('#message-box').bind('keyup', function(e) {
+        $('#message-box').on('keyup', function(e) {
             var len = $('#message-box').val().length;
             var messages = Math.ceil(len / 144);
             var left = len % 144;
@@ -41,11 +45,41 @@
             $('#chars-left').text(str);
         });
 
-        // Sets up tab switching for the message boxes
-        $('.tabs a').click(function(){
+        // Switch tabs
+        var switch_tabs = function(obj) {
+            $('.tab-content').hide();
+            $('.tabs a').removeClass("selected");
+            var id = obj.attr("rel");
+         
+            $('#'+id).show();
+            obj.addClass("selected");
+        }
+
+        // Hook in tab switching
+        $('.tabs a').on('click', function(){
             switch_tabs($(this));
         });
         switch_tabs($('.defaulttab'));
+
+        // Send a message when the nurse cliecks send
+        $('.messages #send_message').on('click', function() {
+            if (client_id === undefined) {
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) {
+                    return;
+                }
+                $(".message-list").load("/fragment/message/" + client_id + "/");
+                $(".messages #message-box").val("").keyup();
+            }
+            xhr.open("POST", "/message/" + client_id + "/", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+            xhr.send($('#message-box').serialize());
+        });
+
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
@@ -102,9 +136,10 @@
             $(".person").css("color", "rgb(0, 0, 0)");
         }
 
+        // Load the middle and right panes when a new client is selected
         var load = function(link) {
             resetColors();
-            var client_id = link.id;
+            client_id = link.id;
             $(".message-list").load("/fragment/message/" + client_id + "/");
             $(".client-profile").load("/detail/" + client_id + "/", function() {
                 loadEditHandlers(link);
@@ -158,7 +193,6 @@
 
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {
-            var client_id = link.id;
             $('.info #edit').on("click", function(eventObject) {
                 $('.view_buttons').hide();
                 $('.edit_buttons').show();
@@ -234,12 +268,3 @@
         };
     });
 })(jQuery);
-
-function switch_tabs(obj) {
-    $('.tab-content').hide();
-    $('.tabs a').removeClass("selected");
-    var id = obj.attr("rel");
- 
-    $('#'+id).show();
-    obj.addClass("selected");
-}

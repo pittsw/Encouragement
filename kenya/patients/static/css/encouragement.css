@@ -61,6 +61,26 @@ body {
     display: inline;
     list-style-type: none;
 }
+
+.gray_button {
+    background-color: rgb(159, 157, 150);
+    color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
+}
+
+.blue_button {
+    background-color: rgb(91,141,147);
+    color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
+}
 /* End full page styles. */
 
 /* Search bar styles */
@@ -224,16 +244,6 @@ body {
     background-image: url("/static/images/plus.png");
     background-repeat: no-repeat;
     float: right;
-}
-
-.info .add_note {
-    background-color: rgb(159, 157, 150);
-    color: rgb(255, 255, 255);
-    padding: 2px 7px 2px 7px;
-    border-style: solid;
-    border-color: rgb(0, 0, 0);
-    border-width: 1px;
-    margin-right: 5px;
 }
 /* End styles for client details pane. */
 
