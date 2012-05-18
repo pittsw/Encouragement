@@ -142,7 +142,7 @@ class Interaction(models.Model):
     content = models.CharField(max_length=500)
     
     def hasphoneattr(self):
-        return hasattr(obj, 'phonecall')
+        return hasattr(self, 'phonecall')
     
     def __unicode__(self):
         return self.content
