@@ -6,9 +6,7 @@
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.8.20.custom.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.ui.all.css">
         <script src="{{ STATIC_URL }}javascript/jquery-1.7.2.js"></script>
-        <script src="{{ STATIC_URL }}javascript/jquery.ui.core.js"></script>
-        <script src="{{ STATIC_URL }}javascript/jquery.ui.widget.js"></script>
-        <script src="{{ STATIC_URL }}javascript/jquery.ui.tabs.js"></script>
+        <script src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
         <script src="{{ STATIC_URL }}javascript/encouragement.js"></script>
 	</head>
 	<body class="container_16" style="border-style:solid;border-width:5px;">
@@ -34,6 +32,7 @@
 		</div>
 		<div class="grid_7 message">
 			<div class= "messages">
+<<<<<<< HEAD
 				<div id="tabs" class="Boxes">
 					<div class="header">{{client}}</div>
 					<ul class="tabs">
@@ -56,12 +55,18 @@
 						</form>
 					</div>
 				</div>
-				<div id="Body">
+				<div class="message-list">
 				</div>
 			</div>
 		</div>
 	
-		<div class="grid_5 info"></div>
-	
+		<div class="grid_5 info">
+            <div class="client-profile">
+            </div>
+		</div>
+
+    	<div style="display:none;" id="signup" title="Add a new client">
+        	{{ form }}
+    	</div>
 	</body>
 </html>
