@@ -245,7 +245,7 @@ class Note(models.Model):
     def __unicode__(self):
         return self.content
 
-class VisitHistory(models.Model):
+class Visit(models.Model):
     class Meta:
         ordering = ['-date']
         

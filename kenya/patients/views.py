@@ -9,7 +9,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm
-from patients.models import Client, Message, Location, Nurse, VisitHistory, SMSSyncOutgoing, Note, Interaction
+from patients.models import Client, Message, Location, Nurse, Visit, SMSSyncOutgoing, Note, Interaction
 from patients.tasks import incoming_message, message_client
 
 @login_required
@@ -55,7 +55,7 @@ def detail(request, id_number):
     try:
         client = Client.objects.get(id=id_number)
         notes = Note.objects.filter(client_id=client)
-        history = VisitHistory.objects.filter(client_id=client)
+        history = Visit.objects.filter(client_id=client)
         fragment = render_to_string("client_fragment.html", {"client":client})
         return render_to_response("detail.html", {
             "client":client, "notes":notes, "history": history, "fragment": fragment},
