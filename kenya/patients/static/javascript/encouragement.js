@@ -269,12 +269,47 @@
             $('.info .add_note').on("click", function(eventObject) {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
+                    if (xhr.readyState != 4) {
+                        return;
+                    }
                     load(link);
                 }
                 xhr.open("POST", "/note/" + client_id + "/", true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
                 xhr.send($('#add_note_form').serialize());
+            });
+
+            // Hook in visit adding
+            $('.info #visit_add').on("click", function(eventObject) {
+                $('.info #visit_form_container').show();
+                $(this).hide();
+                $('.info #visit_hide').show();
+                return false;
+            });
+
+            // Hook in visit hiding
+            $('.info #visit_hide').on("click", function(eventObject) {
+                $('.info #visit_form_container').hide();
+                $(this).hide();
+                $('.info #visit_add').show();
+                return false;
+            });
+            $('.info #visit_form_container').hide();
+
+            // Hook in visit saving
+            $('.info #add_visit').on("click", function(eventObject) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState != 4) {
+                        return;
+                    }
+                    load(link);
+                }
+                xhr.open("POST", "/visit/" + client_id + "/", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                xhr.send($('#add_visit_form').serialize());
             });
         };
     });

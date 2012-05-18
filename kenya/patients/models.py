@@ -253,7 +253,7 @@ class Visit(models.Model):
     
     status = models.CharField(max_length=100)
     
-    date = models.DateTimeField()
+    date = models.DateField()
     
     def __unicode__(self):
         return self.status

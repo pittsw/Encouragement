@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
-from patients.forms import AddClientForm, ClientForm, MessageForm
+from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
 from patients.models import Client, Message, Location, Nurse, Visit, SMSSyncOutgoing, Note, Interaction
 from patients.tasks import incoming_message, message_client
 
@@ -56,9 +56,14 @@ def detail(request, id_number):
         notes = Note.objects.filter(client_id=client)
         history = Visit.objects.filter(client_id=client)
         fragment = render_to_string("client_fragment.html", {"client":client})
+        visit_form = render_to_string("visit_form.html", {"form": VisitForm()})
         return render_to_response("detail.html", {
-            "client":client, "notes":notes, "history": history, "fragment": fragment},
-            context_instance=RequestContext(request))
+            "client": client,
+            "notes": notes,
+            "history": history,
+            "fragment": fragment,
+            "form": visit_form,
+        }, context_instance=RequestContext(request))
     except DoesNotExist:
         return render_to_response("form.html")
     
@@ -81,7 +86,28 @@ def delete_note(request, pk):
     if request.method == "POST":
         note.delete()
         return HttpResponse('')
-    
+
+
+def add_visit(request, id):
+    form = None
+    client = get_object_or_404(Client, id=id);
+    if request.method == "GET":
+        form = VisitForm()
+    elif request.method == "POST":
+        form = VisitForm(request.POST)
+        if form.is_valid():
+            status = form.cleaned_data['status']
+            date = form.cleaned_data['date']
+            Visit(client_id=client, status=status, date=date).save()
+            form = VisitForm()
+            return HttpResponse('')
+    return render_to_response('visit_form.html', {'form': form})
+
+def delete_visit(request, pk):
+    visit = get_object_or_404(Visit, pk=pk)
+    if request.method == "POST":
+        visit.delete()
+        return HttpResponse('')
 
 def add_client(request):
     form = None

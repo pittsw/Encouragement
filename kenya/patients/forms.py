@@ -1,7 +1,8 @@
-from django.forms import IntegerField, ModelForm
+from django.forms import IntegerField, CharField, DateField, Form, ModelForm
 from django.forms.widgets import CheckboxSelectMultiple
 
-from patients.models import Client, Message
+from patients.models import Client, Message, Visit
+
 
 class AddClientForm(ModelForm):
     class Meta:
@@ -13,6 +14,7 @@ class AddClientForm(ModelForm):
 
     id = IntegerField(required=False)
 
+
 class ClientForm(ModelForm):
     class Meta:
         model = Client
@@ -21,6 +23,12 @@ class ClientForm(ModelForm):
             'conditions': CheckboxSelectMultiple,
         }
 		
+
 class MessageForm(ModelForm):
 	class Meta:
 		model = Message
+
+
+class VisitForm(Form):
+    status = CharField(max_length=100)
+    date = DateField()

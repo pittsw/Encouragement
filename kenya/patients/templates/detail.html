@@ -38,9 +38,16 @@
 <div class="header msg_head info_expanded">
     <span>Clinic Visit History</span>
     <span id="visit_add" class="add"></span>
+    <span id="visit_hide" class="cancel"></span>
 </div>
 <div class="msg_body">
-	<table>
+    <table>
+        <tr id="visit_form_container">
+            <td>{{ form }}</td>
+            <td>
+                <span id="add_visit" class="gray_button">Add</span>
+            </td>
+        </tr>
 		{% for v in history %}
 		<tr>
 			<td class="status">{{v.status}}</td>
