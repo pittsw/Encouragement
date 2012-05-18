@@ -110,7 +110,7 @@ body {
 
 /* Styles for the client details pane. */
 .info {
-    height: 650px;
+    height: 645px;
     background-color: rgb(255, 255, 255);
     padding-top: 5px;
 }
@@ -207,7 +207,7 @@ body {
 /* Styles for the message page. */
 .messages {
     background-color:rgb(255,255,255);
-    height: 650px;
+    height: 645px;
     border-left-style: solid;
     border-width: 2px;
     border-color: rgb(121, 121, 121);
