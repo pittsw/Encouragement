@@ -11,24 +11,27 @@
 	</head>
 	<body class="container_16">
 		<div class="header-bar grid_16">
-		    <span class="title">Encouragement System</span>
-		    <span class="logout">
-		        <a href="/accounts/logout"><button type="button">Log out</button></a>
-		    </span>
+            <div class="border">
+                <span class="title">Encouragement System</span>
+                <span class="logout">
+                    <a href="/accounts/logout"><button type="button">Log out</button></a>
+                </span>
+            </div>
 		</div>
 		<div class="grid_4 list_search">
 			<div class="search_bar">
 				<span class="search">
-					<input type="text" size=20 id="searchtext"/>
+					<input type="text" size=22 id="searchtext"/>
 				</span>
 				<span class="addbutton" id="add"></span>
 			</div>
 		</div>
 		<div class="grid_12 name_bar">
-			FIRST NAME LAST NAME
 		</div>
-		<div class="grid_4 list base">
-			{{listf}}
+		<div class="grid_4 base">
+            <div class="client_list">
+			    {{listf}}
+            </div>
 		</div>
 		<div class="grid_7 messages">
 			<div>
@@ -40,13 +43,13 @@
 		            </ul>
 		            <div class="Box1 tab-content" id="tabs-2">
 		                <form method="post" action="">
-		                    <textarea cols=55 rows=5 name="text" style="margin:10px" value="Enter text..."></textarea>
+		                    <textarea cols=46 rows=5 name="text" style="margin:10px" value="Enter text..."></textarea>
 		                    <input type="submit" value="Send" />
 		                </form>
 		            </div>
 		            <div class="Box tab-content" id="tabs-1">
 		                <form method="post" action="">
-		                    <textarea id="message-box" cols=55 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
+		                    <textarea id="message-box" cols=46 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
 		                    <div style="text-align:right; padding-right:10px;">
 		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
 		                        <input type="submit" value="Send" />
