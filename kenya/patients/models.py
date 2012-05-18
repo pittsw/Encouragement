@@ -141,6 +141,9 @@ class Interaction(models.Model):
     
     def __unicode__(self):
         return self.content
+        
+    def getClassName(self):
+        return self.__class__.__name__
 
 class Message(Interaction):
     SENDER_CHOICES = (
@@ -148,11 +151,20 @@ class Message(Interaction):
         ('Nurse', 'Nurse'),
         ('System', 'System'),
     )
-
-    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
     
-    read = models.BooleanField(default=False, editable=False)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    user_id = models.ForeignKey(Nurse, blank=True, null=True)
+    
+    client_id = models.ForeignKey(Client)
+    
+    content = models.CharField(max_length=500)
+    
+    def __unicode__(self):
+        return self.content
+    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
+    read = models.BooleanField(default=False, editable=False)
 
 class SMSSyncOutgoing(models.Model):
 
@@ -252,5 +264,17 @@ class VisitHistory(models.Model):
         return self.date
         
 class PhoneCall(Interaction):
+
+    date = models.DateTimeField(auto_now_add=True)
+    
+    user_id = models.ForeignKey(Nurse, blank=True, null=True)
+    
+    client_id = models.ForeignKey(Client)
+    
+    content = models.CharField(max_length=500)
+    
+    def __unicode__(self):
+        return self.content
+    
     duration = models.IntegerField()
 

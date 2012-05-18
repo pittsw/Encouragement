@@ -110,28 +110,12 @@
     }, 
     {
         "pk": 2, 
-        "model": "patients.interaction", 
+        "model": "patients.message", 
         "fields": {
             "date": "2012-05-16T23:28:47.931Z", 
             "content": "Hi there", 
             "user_id": null, 
-            "client_id": 100
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "patients.interaction", 
-        "fields": {
-            "date": "2012-05-16T23:28:28.052Z", 
-            "content": "Hi there how are you?", 
-            "user_id": 1000, 
-            "client_id": 100
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "patients.message", 
-        "fields": {
+            "client_id": 100,
             "read": false, 
             "sent_by": "System"
         }
@@ -140,6 +124,10 @@
         "pk": 1, 
         "model": "patients.message", 
         "fields": {
+            "date": "2012-05-16T23:28:28.052Z", 
+            "content": "Hi there how are you?", 
+            "user_id": 1000, 
+            "client_id": 100,
             "read": false, 
             "sent_by": "Client"
         }

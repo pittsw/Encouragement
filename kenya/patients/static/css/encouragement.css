@@ -234,6 +234,10 @@ body {
     text-align: left;
 }
 
+.messages .Client > .content {
+	font-size: 20px;
+}
+
 .messages .date {
     font-size: 10px;
     vertical-align: middle;
@@ -243,10 +247,6 @@ body {
 .messages .top {
     font-size:14px;
     text-align: left;
-}
-
-.messages .Clientcontent {
-    font-size: 20px;
 }
 
 .messages ul.tabs {
