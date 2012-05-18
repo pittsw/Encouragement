@@ -245,6 +245,10 @@ body {
     background-repeat: no-repeat;
     float: right;
 }
+
+.info .cancel {
+    display: none;
+}
 /* End styles for client details pane. */
 
 

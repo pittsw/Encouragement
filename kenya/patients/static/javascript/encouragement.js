@@ -241,6 +241,17 @@
             // Hook in note adding
             $('.info #notes_add').on('click', function() {
                 $('.info #note').show();
+                $('.info #notes_hide').show();
+                $(this).hide();
+                return false;
+            });
+
+            // Hook in hiding the note form
+            $('.info #notes_hide').on('click', function() {
+                $('.info #note').hide();
+                $('.info #note [name=text]').val('');
+                $('.info #notes_add').show();
+                $(this).hide();
                 return false;
             });
 
