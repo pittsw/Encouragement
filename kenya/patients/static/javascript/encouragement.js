@@ -79,7 +79,7 @@
         var load = function(link) {
             resetColors();
             var id = link.id;
-            $(".message-list").load("/fragment/message/messages/" + id + "/");
+            $(".message-list").load("/fragment/message/" + id + "/");
             $(".client-profile").load("/detail/" + id + "/");
             $(link).css("background-color", "rgb(91,141,147)");
             $(link).css("color", "rgb(217,233,236)");
