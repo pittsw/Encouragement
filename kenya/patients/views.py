@@ -47,7 +47,7 @@ def client(request, id_number):
 def message_fragment(request, id):
     client = Client.objects.get(id=id)
     messages = Interaction.objects.filter(client_id=client)
-    #return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+    return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
     return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):
@@ -127,17 +127,13 @@ def edit_client(request, id):
     return render_to_response("edit_client.html", c,
                               context_instance=RequestContext(request))
     
-def add_message(request):
+def add_message(request, id_number):
     if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            f = form.save()
-        return HttpResponseRedirect('/message/')
-    else:
-        form = MessageForm()
-        return render_to_response("message.html", {
-        "form": form,
-        })
+        text = request.POST['text']
+        nurse = Nurse.objects.get(user=request.user)
+        client = get_object_or_404(Client, id=id_number)
+        message_client(client, nurse, 'Nurse', text)
+        return HttpResponse('')
 
 @csrf_exempt
 def smssync(request):

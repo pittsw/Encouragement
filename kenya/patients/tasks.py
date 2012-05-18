@@ -111,7 +111,6 @@ def message_client(client, nurse, sender, content, transport=None,
         user_id=nurse,
         sent_by=sender,
         content=content,
-        date=datetime.now()
     ).save()
     transport.send(client.phone_number, content, **transport_kwargs)
 
