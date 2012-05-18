@@ -155,7 +155,7 @@ body {
 
 
 /* Styles for the message page. */
-.messages > .Client, .messages > .Nurse, .messages > .System {
+.messages > .Client, .messages > .Nurse, .messages > .System, .messages > .Phone {
     margin: 5px 0px;
     padding: 3px 5px 3px 5px;
     width: 60%;
@@ -169,10 +169,14 @@ body {
     background-color: rgb(91,141,147);
 }
 
-.messages > .System, .messages > .Nurse {
+.messages > .System, .messages > .Nurse, .messages > .Phone {
     float: right;
     margin-left: auto;
     text-align: right;
+}
+
+.messages > .Phone {
+	background-color: rgb(205, 124, 163);
 }
 
 .messages > .System {

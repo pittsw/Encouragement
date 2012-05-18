@@ -13,19 +13,7 @@ from patients.models import Client, Message, Location, Nurse, VisitHistory, SMSS
 from patients.tasks import incoming_message, message_client
 
 @login_required
-def over(request):
-    form = render_to_string("add_client.html", {"form": AddClientForm()},
-        context_instance=RequestContext(request))
-    clients = Client.objects.all()
-    listf = render_to_string("list_fragment.html", {'clients': clients})
-    c = {
-        'form': form,
-        'listf' : listf,
-    }
-    c.update(csrf(request))
-    return render_to_response("frame.html", c, context_instance=RequestContext(request))
-
-def test(request):
+def index(request):
     form = render_to_string("add_client.html", {"form": AddClientForm()},
         context_instance=RequestContext(request))
     clients = Client.objects.all()
