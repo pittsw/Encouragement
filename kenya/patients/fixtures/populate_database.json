@@ -99,7 +99,6 @@
         "fields": {
             "date": "2012-05-18T07:17:39.997Z", 
             "content": "System to client", 
-            "user_id": 101010, 
             "client_id": 1
         }
     }, 
