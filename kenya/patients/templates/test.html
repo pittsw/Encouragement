@@ -11,10 +11,12 @@
 	</head>
 	<body class="container_16">
 		<div class="header-bar grid_16">
-		    <span class="title">Encouragement System</span>
-		    <span class="logout">
-		        <a href="/accounts/logout"><button type="button">Log out</button></a>
-		    </span>
+            <div class="border">
+                <span class="title">Encouragement System</span>
+                <span class="logout">
+                    <a href="/accounts/logout"><button type="button">Log out</button></a>
+                </span>
+            </div>
 		</div>
 		<div class="grid_4 list_search">
 			<div class="search_bar">
@@ -27,8 +29,10 @@
 		<div class="grid_12 name_bar">
 			FIRST NAME LAST NAME
 		</div>
-		<div class="grid_4 list base">
-			{{listf}}
+		<div class="grid_4 base">
+            <div class="client_list">
+			    {{listf}}
+            </div>
 		</div>
 		<div class="grid_7 messages">
 			<div>
