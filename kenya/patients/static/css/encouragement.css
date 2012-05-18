@@ -16,7 +16,7 @@ body {
     text-transform: uppercase;
 }
 
-.header-bar > .title {
+.header-bar .title {
     padding-left: 15px;
 }
 
@@ -27,8 +27,7 @@ body {
     font-weight: bold;
     height: 24px;
     color: rgb(51, 51, 51);
-    padding-top: 5px;
-    margin-bottom: 0px;
+    padding-top: 6px;
 }
 
 .logout {
@@ -41,14 +40,14 @@ body {
     color: red;
 }
 
-.collapseerrors > ul {
+.collapseerrors ul {
     margin: 0;
     padding: 0;
     display: inline;
     list-style-type: none;
 }
 
-.collapseerrors > .errorlist li {
+.collapseerrors .errorlist li {
     margin: 0;
     padding: 0;
     display: inline;
@@ -62,34 +61,35 @@ body {
     margin-right: 15px;
 }
 
-.client > .addbutton {
+.search_bar .addbutton {
     float: right;
     width: 40px;
-    height: 30px;
-    background-image: url('/static/images/add_client.png')
+    height: 24px;
+    background-image: url('/static/images/add_client.png');
+    background-position: center;
     background-repeat: no-repeat;
 }
 
-.client > .person {
+.client .person {
     padding: 3px 3px 3px 3px;
     border-bottom: 1px dashed grey;
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
 }
 
-.client > .search {
+.client .search {
     width: 50%;
 }
 
-.client > .header {
+.client .header {
     width: 100%;
 }
 
-.client > .name {
+.client .name {
     font-size: 18px;
 }
 
-.client > .pendingname {
+.client .pendingname {
     font-style: bold;
     font-size:20px;
 }
@@ -97,7 +97,7 @@ body {
 
 
 /* Styles for the client details pane. */
-.detail > .header {
+.info .header {
     background-color: rgb(208, 206, 196);
     font-weight: bold;
     font-size: 15px;
@@ -106,49 +106,49 @@ body {
     overflow: auto;
 }
 
-.detail > table {
+.info table {
     background-color: rgb(245, 242, 231);
     width: 100%;
     margin: 0px 0px 10px 0px;
 }
 
-.detail > tr {
+.info tr {
     padding: 10px;
     margin: 10px;
     height: 30px;
 }
 
-.detail > td {
+.info td {
     vertical-align:middle;
     border-bottom: 1px dashed grey;
 }
 
-.detail > .content {
+.info .content {
     width: 65%;
     font-size: 13px;
 }
 
-.detail > .date {
+.info .date {
     width: 25%;
     font-size: 12px;
     font-style: italic;
     color: rgb(102,102,102);
 }
 
-.detail > .title {
+.info .title {
     width: 40%;
     text-align: right;
     padding-right: 10px;
 }
 
-.detail > .data {
+.info .data {
     width: 60%;
     padding: 0px;
     text-align: left;
     font-size: 20px;
 }
 
-.detail > .delete {
+.info .delete {
     width: 10%;
     text-align: center;
     font-size: 20px;
@@ -162,7 +162,7 @@ body {
     height: 658px;
 }
 
-.messages > .Client, .messages > .Nurse, .messages > .System, .messages > .Phone {
+.messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
     margin: 5px 0px;
     padding: 3px 5px 3px 5px;
     width: 60%;
@@ -170,43 +170,43 @@ body {
     color: rgb(255,255,255);
 }
 
-.messages > .Client {
+.messages .Client {
     float: left;
     margin-right: auto;
     background-color: rgb(91,141,147);
 }
 
-.messages > .System, .messages > .Nurse, .messages > .Phone {
+.messages .System, .messages .Nurse, .messages .Phone {
     float: right;
     margin-left: auto;
     text-align: right;
 }
 
-.messages > .Phone {
+.messages .Phone {
 	background-color: rgb(205, 124, 163);
 }
 
-.messages > .System {
+.messages .System {
     background-color: rgb(214,214,214);
     color: rgb(0,0,0);
 }
 
-.messages > .Nurse {
+.messages .Nurse {
     background-color: rgb(168,140,91);
 }
 
-.messages > .message-list {
+.messages .message-list {
     margin-top: 200px;
 }
 
-.messages > .Boxes {
+.messages .Boxes {
     width: 100%;
     height: 100px;
     top: 0px;
     background-color: rgb(255,255,255);
 }
 
-.messages > .message-box {
+.messages .message-box {
     top: 50px; 
     left: 0px; 
     width: 100%; 
@@ -214,7 +214,7 @@ body {
     overflow: hidden; 
 }
 
-.messages > .phone-box {
+.messages .phone-box {
     top: 50px; 
     left: 0px; 
     width: 100%; 
@@ -222,44 +222,44 @@ body {
     overflow: hidden; 
 }
 
-.messages > .header {
+.messages .header {
     background-color: rgb(212,200,156);
     text-align: center;
     font-size: 20px;
 }
 
-.messages > .content {
+.messages .content {
     text-align: left;
 }
 
-.messages > .date {
+.messages .date {
     font-size: 10px;
     vertical-align: middle;
     float: right;
 }
 
-.messages > .top {
+.messages .top {
     font-size:14px;
     text-align: left;
 }
 
-.messages > .Clientcontent {
+.messages .Clientcontent {
     font-size: 20px;
 }
 
-.messages > ul.tabs {
+.messages ul.tabs {
     width:250px;
     margin:0;
     padding:0;
 }
 
-.messages > ul.tabs li {
+.messages ul.tabs li {
     display:block;
     float:left;
     padding:0 5px;
 }
 
-.messages > ul.tabs li a {
+.messages ul.tabs li a {
     display:block;
     float:left;
     padding:5px;
@@ -269,10 +269,10 @@ body {
     text-decoration:none;
 }
 
-.messages > .selected {
+.messages .selected {
     font-weight:bold;
 }
 
-.messages > .tab-content {
+.messages .tab-content {
 }
 /* End messages styles. */

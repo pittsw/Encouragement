@@ -16,17 +16,17 @@
 		        <a href="/accounts/logout"><button type="button">Log out</button></a>
 		    </span>
 		</div>
-	<div>
 		<div class="grid_4 list_search">
-			<span class="search">
-                <input type="text" size=20 id="searchtext"/>
-            </span>
-            <span class="addbutton" id="add"><img src="/static/images/add_client.png" /></span>
+			<div class="search_bar">
+				<span class="search">
+					<input type="text" size=20 id="searchtext"/>
+				</span>
+				<span class="addbutton" id="add"></span>
+			</div>
 		</div>
 		<div class="grid_12 name_bar">
 			FIRST NAME LAST NAME
 		</div>
-	</div>
 		<div class="grid_4 list base">
 			{{listf}}
 		</div>
@@ -58,15 +58,14 @@
         </div>
     </div>
 		</div>
-
+	
 		<div class="grid_5 info">
             <div class="client-profile">
             </div>
 		</div>
 
-    <div style="display:none;" id="signup" title="Add a new client">
-        {{ form }}
-    </div>
-
+    	<div style="display:none;" id="signup" title="Add a new client">
+        	{{ form }}
+    	</div>
 	</body>
 </html>
