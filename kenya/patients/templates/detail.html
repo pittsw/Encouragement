@@ -1,114 +1,43 @@
-<html>
-	<head>
-		<title>{{client.first_name}} {{client.last_name}}</title>
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.8.20.custom.css" />
-		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/details.css"/>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
-        <script type="text/javascript">
-            (function($) {
-                $(document).ready(function() {
-                    $('#edit').on("click", function(eventObject) {
-                        $('#client_fragment').load("/edit/{{ client.id }}/");
-                        $('.view_buttons').hide();
-                        $('.edit_buttons').show();
-                        $('.date input').each(function(index, element) {
-                            $(this).datepicker({
-                                changeMonth: true,
-                                changeYear: true,
-                                dateFormat: "yy-mm-dd",
-                                maxDate: "+2y",
-                                minDate: "-100y",
-                                selectOtherMonths: true,
-                                showOtherMonths: true,
-                                showOn: "button",
-                                yearRange: "-100:+2"
-                            });
-                        });
-                        return false;
-                    });
-                    $('#save').on("click", function(eventObject) {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "/edit/{{ client.id }}/", false);
-                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                        xhr.send($('#edit_client').serialize());
-                        var response = xhr.responseText;
-                        if (response.length == 0) {
-                            $('#client_fragment').load("/fragment/{{ client.id }}/");
-                            $('.edit_buttons').hide();
-                            $('.view_buttons').show();
-                        } else {
-                            $('#client_fragment').html(response);
-                        }
-                        return false;
-                    });
-                    $('#cancel').on("click", function(eventObject) {
-                        $('#client_fragment').load('/fragment/{{ client.id }}/');
-                        $('.edit_buttons').hide();
-                        $('.view_buttons').show();
-                        return false;
-                    });
+<div class="header msg_head info_expanded" id="profile">
+    <span>Client Profile</span>
+    <span id="edit" class="view_buttons">&nbsp;</span>
+    <span class="edit_buttons" style="display:none;">
+        <span id="cancel">&nbsp;</span>
+        <span id="save">&nbsp;</span>
+    </span>
+</div>
+<div id="client_fragment" class="msg_body">
+    {{fragment}}
+</div>
 
-                    //toggle the componenet with class msg_body
-                    $(".msg_head").click(function()
-                      {
-                        $(this).next(".msg_body").slideToggle(600);
-                        if ($(this).hasClass('info_expanded')) {
-                            $(this).addClass('info_collapsed').removeClass('info_expanded');
-                        } else {
-                            $(this).addClass('info_expanded').removeClass('info_collapsed');
-                        }
-                      });
-                });
-               
-            })(jQuery);
-        </script>
-	</head>
-	<body>
-		<div class="header msg_head info_expanded" id="profile">
-            <span>Client Profile</span>
-            <span id="edit" class="view_buttons">&nbsp;</span>
-            <span class="edit_buttons" style="display:none;">
-                <span id="cancel">&nbsp;</span>
-                <span id="save">&nbsp;</span>
-            </span>
-        </div>
-        <div id="client_fragment" class="msg_body">
-            {{fragment}}
-        </div>
-        
-        <div class="header msg_head info_expanded">
-            <span>Notes</span>
-            <span id="note" class="add"></span>
-        </div>
-        <div class="msg_body">
-        <table>
-        	{% for note in notes %}
-        	<tr>
-        		<td class="content">{{note.content}}</td>
-        		<td class="date">{{note.date}}</td>
-        		<td class="delete">X</td>
-        	</tr>
-        	{% endfor %}
-        </table>
-        </div>
+<div class="header msg_head info_expanded">
+    <span>Notes</span>
+    <span id="note" class="add"></span>
+</div>
+<div class="msg_body">
+<table>
+    {% for note in notes %}
+    <tr>
+        <td class="content">{{note.content}}</td>
+        <td class="date">{{note.date}}</td>
+        <td class="delete">X</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
 
-        
-        <div class="header msg_head info_expanded">
-        	<span>Clinic Visit History</span>
-       	 	<add id="visit" class="add"></span>
-        </div>
-        <div class="msg_body">
-        <table>
-        	{% for v in history %}
-        	<tr>
-        		<td class="status">{{v.status}}</td>
-        		<td class="date">{{v.date}}</td>
-        	</tr>
-        	{% endfor %}
-        </table>
-        </div>
-        
-	</body>
-</html>
+
+<div class="header msg_head info_expanded">
+    <span>Clinic Visit History</span>
+    <add id="visit" class="add"></span>
+</div>
+<div class="msg_body">
+<table>
+    {% for v in history %}
+    <tr>
+        <td class="status">{{v.status}}</td>
+        <td class="date">{{v.date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
