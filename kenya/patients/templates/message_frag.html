@@ -1,8 +1,7 @@
 {% load patient_tags %}
 
 {% for x in messages %}
-	<p>{{x|klass}}</p>
-    {% if x.getClassName == "PhoneCall" %}
+	{% if x.hasphoneattr %}
     <div class="Phone">
         <div class="top">Logged Phone Call<span class="date">{{x.date}}</span></div>
         <div class="content">{{x.content}}</div>
