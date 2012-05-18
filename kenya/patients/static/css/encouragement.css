@@ -26,7 +26,7 @@ body {
     font-weight: bold;
     height: 24px;
     color: rgb(51, 51, 51);
-    padding-top: 5px;
+    padding-top: 6px;
 }
 
 .logout {
@@ -60,11 +60,12 @@ body {
     margin-right: 15px;
 }
 
-.client > .addbutton {
+.search_bar > .addbutton {
     float: right;
     width: 40px;
-    height: 30px;
-    background-image: url('/static/images/add_client.png')
+    height: 24px;
+    background-image: url('/static/images/add_client.png');
+    background-position: center;
     background-repeat: no-repeat;
 }
 

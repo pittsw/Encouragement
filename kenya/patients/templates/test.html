@@ -18,52 +18,50 @@
 		        <a href="/accounts/logout"><button type="button">Log out</button></a>
 		    </span>
 		</div>
-	<div>
 		<div class="grid_4 list_search">
-			<span class="search">
-                <input type="text" size=20 id="searchtext"/>
-            </span>
-            <span class="addbutton" id="add">Add Client</span>
+			<div class="search_bar">
+				<span class="search">
+					<input type="text" size=20 id="searchtext"/>
+				</span>
+				<span class="addbutton" id="add"></span>
+			</div>
 		</div>
 		<div class="grid_12 name_bar">
 			FIRST NAME LAST NAME
 		</div>
-	</div>
 		<div class="grid_4 list base">
 			{{listf}}
 		</div>
 		<div class="grid_7 message">
 			<div class= "messages">
-		        <div id="tabs" class="Boxes">
-		            <div class="header">{{client}}</div>
-		            <ul class="tabs">
-		                <li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
-		                <li><a href="#" rel="tabs-2">Call Notes</a></li>
-		            </ul>
-		            <div class="Box1 tab-content" id="tabs-2">
-		                <form method="post" action="">
-		                    <textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
-		                    <input type="submit" value="Send" />
-		                </form>
-		            </div>
-		            <div class="Box tab-content" id="tabs-1">
-		                <form method="post" action="">
-		                    <textarea id="message-box" cols=71 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
-		                    <div style="text-align:right; padding-right:10px;">
-		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
-		                        <input type="submit" value="Send" />
-		                    </div>
-		                </form>
-		            </div>
-		        </div>
-        	<div id="Body">
-        </div>
-    </div>
+				<div id="tabs" class="Boxes">
+					<div class="header">{{client}}</div>
+					<ul class="tabs">
+						<li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
+						<li><a href="#" rel="tabs-2">Call Notes</a></li>
+					</ul>
+					<div class="Box1 tab-content" id="tabs-2">
+						<form method="post" action="">
+							<textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
+							<input type="submit" value="Send" />
+						</form>
+					</div>
+					<div class="Box tab-content" id="tabs-1">
+						<form method="post" action="">
+							<textarea id="message-box" cols=71 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
+							<div style="text-align:right; padding-right:10px;">
+								<span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
+								<input type="submit" value="Send" />
+							</div>
+						</form>
+					</div>
+				</div>
+				<div id="Body">
+				</div>
+			</div>
 		</div>
-
-		<div class="grid_5 info">
-
-		</div>
-
+	
+		<div class="grid_5 info"></div>
+	
 	</body>
 </html>
