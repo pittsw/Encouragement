@@ -79,7 +79,7 @@
         "pk": 101010, 
         "model": "patients.nurse", 
         "fields": {
-            "user": 2, 
+            "user": 20, 
             "location": 1
         }
     }, 
@@ -187,14 +187,14 @@
         "fields": {
             "duration": 23
         }
-    }
-        {
+    },
+    {
         "pk": 1, 
         "model": "patients.condition", 
         "fields": {
             "name": "General pregnancy"
         }
-    }, 
+    },
     {
         "pk": 2, 
         "model": "patients.condition", 
