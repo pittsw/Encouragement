@@ -2,7 +2,6 @@
 body {
     font-family: sans-serif;
     background-color: rgb(217,233,236);
-    height: 720px;
 }
 
 .header-bar {
@@ -56,7 +55,7 @@ body {
 /* End full page styles. */
 
 /* Search bar styles */
-.search_bar > .addbutton {
+.search_bar .addbutton {
     float: right;
     width: 40px;
     height: 24px;
@@ -66,10 +65,9 @@ body {
 }
 /* End search bar styles */
 
-
 /* Styles for the client list. */
 .list {
-    margin-right: 15px;
+    height: 650px;
 }
 
 .list .person {
@@ -77,10 +75,6 @@ body {
     border-bottom: 1px dashed grey;
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
-}
-
-.list .search {
-    width: 50%;
 }
 
 .list .header {
@@ -99,6 +93,10 @@ body {
 
 
 /* Styles for the client details pane. */
+.info {
+    height: 650px;
+}
+
 .info .header {
     background-color: rgb(208, 206, 196);
     font-weight: bold;
@@ -161,7 +159,7 @@ body {
 /* Styles for the message page. */
 .messages {
     background-color:rgb(255,255,255);
-    height: 658px;
+    height: 650px;
 }
 
 .messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
