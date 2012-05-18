@@ -256,7 +256,7 @@
             });
 
             // Hook in note deleting
-            $('.info .delete').each(function(i, e) {
+            $('.info #notes .delete').each(function(i, e) {
                 var pk = $(this).attr('id');
                 $(this).on('click', function() {
                     $.post("/delete_note/" + pk + "/", {}, function() {
@@ -310,6 +310,16 @@
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
                 xhr.send($('#add_visit_form').serialize());
+            });
+
+            // Hook in visit deleting
+            $('.info #visits .delete').each(function(i, e) {
+                var pk = $(this).attr('id');
+                $(this).on('click', function() {
+                    $.post("/delete_visit/" + pk + "/", {}, function() {
+                        load(link);
+                    });
+                });
             });
         };
     });

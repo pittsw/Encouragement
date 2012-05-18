@@ -15,7 +15,7 @@
     <span id="notes_add" class="add"></span>
     <span id="notes_hide" class="cancel"></span>
 </div>
-<div class="msg_body">
+<div class="msg_body" id="notes">
 	<table>
 		<tr id="note" style="display:none;">
 			<form id="add_note_form" method="post" action="/note/{{ client.id }}/">
@@ -40,15 +40,16 @@
     <span id="visit_add" class="add"></span>
     <span id="visit_hide" class="cancel"></span>
 </div>
-<div class="msg_body">
+<div class="msg_body" id="visits">
     <table>
         <tr id="visit_form_container">
-            <td colspan="2">{{ form }}</td>
+            <td colspan="3">{{ form }}</td>
         </tr>
 		{% for v in history %}
 		<tr>
 			<td class="status">{{v.status}}</td>
 			<td class="date">{{v.date}}</td>
+            <td class="delete" id="{{v.pk}}">X</td>
 		</tr>
 		{% endfor %}
 	</table>
