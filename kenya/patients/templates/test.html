@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<title>Encouragement System</title>
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/grid.css" />
+
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.8.20.custom.css" />
+    	<link rel="stylesheet" href="{{ STATIC_URL }}css/add.css" />
+
+    	<link rel="stylesheet" href="{{ STATIC_URL }}css/dropincontentbox.css" />
+
+    	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/message.css"/>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.ui.all.css">
+        <script src="{{ STATIC_URL }}javascript/jquery-1.7.2.js"></script>
+        <script src="{{ STATIC_URL }}javascript/jquery.ui.core.js"></script>
+        <script src="{{ STATIC_URL }}javascript/jquery.ui.widget.js"></script>
+        <script src="{{ STATIC_URL }}javascript/jquery.ui.tabs.js"></script>
+        
+
+
+
+
+
+        
+	</head>
+	<body class="container_16">
+		<div class="header-bar grid_16">
+		    <span>Encouragement System</span>
+		    <span class="panel">
+		        <a href="/accounts/logout"><button type="button">Log out</button></a>
+		    </span>
+		</div>
+	<div>
+		<div class="grid_4 list_search">
+			<span class="search">
+                <input type="text" size=20 id="searchtext"/>
+            </span>
+            <span class="addbutton" id="add" onClick="addClient.dialog('open');">Add Client</span>
+		</div>
+		<div class="grid_12 name_brown">
+			<p> kdfjlkdsjfkldjfkljfkljkldjlkdsjlkdjkl;sdjkfjdsal;fjdsakl;fjl;</p>
+		</div>
+	</div>
+		<div class="grid_4 list base">
+			{{listf}}
+		</div>
+		<div class="grid_7 message">
+			<div class= "message_l">
+		        <div id="tabs" class="Boxes">
+		            <div class="header">{{client}}</div>
+		            <ul class="tabs">
+		                <li><a href="#" class="defaulttab" rel="tabs-1">Message</a></li>
+		                <li><a href="#" rel="tabs-2">Call Notes</a></li>
+		            </ul>
+		            <div class="Box1 tab-content" id="tabs-2">
+		                <form method="post" action="">
+		                    <textarea cols=60 rows=5 name="text" value="Enter text..."></textarea>
+		                    <input type="submit" value="Send" />
+		                </form>
+		            </div>
+		            <div class="Box tab-content" id="tabs-1">
+		                <form method="post" action="">
+		                    <textarea id="message-box" cols=71 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
+		                    <div style="text-align:right; padding-right:10px;">
+		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
+		                        <input type="submit" value="Send" />
+		                    </div>
+		                </form>
+		            </div>
+		        </div>
+        	<div id="Body">
+        </div>
+    </div>
+		</div>
+
+		<div class="grid_5 info">
+
+		</div>
+
+	</body>
+</html>

@@ -16,11 +16,26 @@ from patients.tasks import incoming_message, message_client
 def over(request):
     form = render_to_string("add_client.html", {"form": AddClientForm()},
         context_instance=RequestContext(request))
+    clients = Client.objects.all()
+    listf = render_to_string("list_fragment.html", {'clients': clients})
     c = {
         'form': form,
+        'listf' : listf,
     }
     c.update(csrf(request))
     return render_to_response("frame.html", c, context_instance=RequestContext(request))
+
+def test(request):
+    form = render_to_string("add_client.html", {"form": AddClientForm()},
+        context_instance=RequestContext(request))
+    clients = Client.objects.all()
+    listf = render_to_string("list_fragment.html", {'clients': clients})
+    c = {
+        'form': form,
+        'listf' : listf,
+    }
+    c.update(csrf(request))
+    return render_to_response("test.html", c, context_instance=RequestContext(request))
 
 def DoesNotExist(Exception):
     def __init__(self, value):
@@ -41,6 +56,12 @@ def client(request, id_number):
         client = Client.objects.get(id=id_number)
         messages = Interaction.objects.filter(client_id=client)
         return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
+
+def message_fragment(request, id_number):
+    client = Client.objects.get(id=id_number)
+    messages = Interaction.objects.filter(client_id=client)
+    return render_to_response("message_frag.html", {"client": client, "messages":messages},
+                              context_instance=RequestContext(request))
         
 def detail(request, id_number):
     try:
@@ -94,6 +115,10 @@ def client_fragment(request, id):
     return render_to_response("client_fragment.html", {'client': client},
                               context_instance=RequestContext(request))
 
+def list_fragment(request):
+    clients = Client.objects.all()
+    return render_to_response("list_fragment.html", {'clients': clients},
+                              context_instance=RequestContext(request))
 
 def edit_client(request, id):
     client = get_object_or_404(Client, id=id)
