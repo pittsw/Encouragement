@@ -112,27 +112,31 @@ body {
 .info {
     height: 650px;
     background-color: rgb(255, 255, 255);
+    padding-top: 5px;
 }
 
 .info .header {
     background-color: rgb(208, 206, 196);
     font-weight: bold;
     font-size: 15px;
-    padding: 5px 0px 5px 15px;
+    margin-left: 5px;
+    padding: 5px;
+    margin-right: 5px;
     height: auto;
     overflow: auto;
 }
 
 .info table {
     background-color: rgb(245, 242, 231);
-    width: 100%;
-    margin: 0px 0px 10px 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
 }
 
 .info tr {
     padding: 10px;
-    margin: 10px;
     height: 30px;
+    margin-right: 5px;
 }
 
 .info td {
@@ -170,6 +174,16 @@ body {
     text-align: center;
     font-size: 20px;
 }
+
+.info #edit {
+    float:right;
+    margin-right: 5px;
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/gear.png");
+    background-repeat: no-repeat;
+}
 /* End styles for client details pane. */
 
 
@@ -180,6 +194,7 @@ body {
     border-left-style: solid;
     border-width: 2px;
     border-color: rgb(121, 121, 121);
+    padding-top: 5px;
 }
 
 .messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
