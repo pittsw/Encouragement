@@ -26,8 +26,9 @@
              } 
         });
 
+
         // Sets up the characters left view.
-        $('#message-box').bind('keyup', function(e) {
+        $('#message-box').on('keyup', function(e) {
             var len = $('#message-box').val().length;
             var messages = Math.ceil(len / 144);
             var left = len % 144;
@@ -41,11 +42,25 @@
             $('#chars-left').text(str);
         });
 
-        // Sets up tab switching for the message boxes
+        // Switch tabs
+        var switch_tabs = function(obj) {
+            $('.tab-content').hide();
+            $('.tabs a').removeClass("selected");
+            var id = obj.attr("rel");
+         
+            $('#'+id).show();
+            obj.addClass("selected");
+        }
+
+        // Hook in tab switching
         $('.tabs a').click(function(){
             switch_tabs($(this));
         });
         switch_tabs($('.defaulttab'));
+
+        // Send a message when the nurse cliecks send
+
+
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
@@ -234,12 +249,3 @@
         };
     });
 })(jQuery);
-
-function switch_tabs(obj) {
-    $('.tab-content').hide();
-    $('.tabs a').removeClass("selected");
-    var id = obj.attr("rel");
- 
-    $('#'+id).show();
-    obj.addClass("selected");
-}

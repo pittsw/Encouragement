@@ -20,7 +20,7 @@
             <form id="add_note_form" method="post" action="/note/{{ client.id }}/">
                 {% csrf_token %}
                 <td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
-                <td><div class="add_note">Add</div></td>
+                <td><div class="add_note gray_button">Add</div></td>
             </form>
         </tr>
     {% for note in notes %}
