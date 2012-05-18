@@ -30,7 +30,9 @@ class Client(models.Model):
         ('Failed Pregnancy', 'Failed Pregnancy'),
     )
     
-    id = models.IntegerField(primary_key=True, editable=False)
+    primary_key = models.AutoField(primary_key=True)
+    
+    id = models.IntegerField(unique=True)
 
     first_name = models.CharField(max_length=50)
 
@@ -139,8 +141,14 @@ class Interaction(models.Model):
     
     content = models.CharField(max_length=500)
     
+    def hasphoneattr(self):
+        return hasattr(obj, 'phonecall')
+    
     def __unicode__(self):
         return self.content
+        
+    def getClassName(self):
+        return self.__class__.__name__
 
 class Message(Interaction):
     SENDER_CHOICES = (
@@ -148,11 +156,10 @@ class Message(Interaction):
         ('Nurse', 'Nurse'),
         ('System', 'System'),
     )
-
-    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
     
-    read = models.BooleanField(default=False, editable=False)
+    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
+    read = models.BooleanField(default=False, editable=False)
 
 class SMSSyncOutgoing(models.Model):
 
