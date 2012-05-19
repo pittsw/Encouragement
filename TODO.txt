@@ -4,5 +4,7 @@ Format client list
 More icons
 Date picker (1/2)
 Adjust visit interface (size of things?)
+Consider switching to a 4/8/4 column layout and making the font size smaller on the details page. User testing shows that it draws a bit too much attention.
+Consider replacing white text in message boxes with black, for readability, and making the backgrounds lighter colors to go with. Possibly implement rounded corners again?
 
 Fix all the things!
