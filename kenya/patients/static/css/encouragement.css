@@ -275,6 +275,14 @@ body {
 }
 
 .info .cancel {
+    float: right;
+}
+
+.info #notes_hide {
+    display: none;
+}
+
+.info #visit_hide {
     display: none;
 }
 /* End styles for client details pane. */
