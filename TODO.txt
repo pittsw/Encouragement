@@ -1,7 +1,6 @@
 Adding Phone calls
 Adjust interface for adding phone calls
 Format client list
-Date picker (1/2)
 Adjust visit interface (size of things?)
 Consider making the font size smaller on the details page. User testing shows that it draws way too much attention.
 Consider replacing white text in message boxes with black, for readability, and making the backgrounds lighter colors to go with (also user testing).
