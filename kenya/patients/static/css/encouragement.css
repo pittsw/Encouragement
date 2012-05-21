@@ -25,6 +25,7 @@ body {
 
 .list_search {
     background-color: rgb(217,233,236);
+    margin-bottom: -1px;
 }
 
 .name_bar {
@@ -117,8 +118,9 @@ body {
 .patient_bar {
     background-color: rgb(200, 200, 200);
     padding: 5px 0px 0px 5px;
-    height:20px;
-    font-size:12px;
+    height: 20px;
+    font-size: 12px;
+    margin-top: -1px;
 }
 /* End search bar styles */
 
