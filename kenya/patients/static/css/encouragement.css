@@ -25,7 +25,7 @@ body {
 
 .list_search {
     background-color: rgb(217,233,236);
-    margin-bottom: -1px;
+    height: 32px;
 }
 
 .name_bar {
@@ -120,7 +120,6 @@ body {
     padding: 5px 0px 0px 5px;
     height: 20px;
     font-size: 12px;
-    margin-top: -1px;
 }
 /* End search bar styles */
 
