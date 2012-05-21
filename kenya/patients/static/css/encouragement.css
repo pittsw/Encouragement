@@ -141,6 +141,7 @@ body {
 }
 
 .list .pendingname {
+    display: inline;
     font-style: bold;
     font-size:20px;
     background-position: right;
@@ -148,6 +149,7 @@ body {
 }
 
 .list .urgent {
+    display: inline;
     float: right;
     background-image: url("/static/images/urgent.png");
     background-position: center;
