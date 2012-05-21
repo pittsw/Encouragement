@@ -47,7 +47,7 @@
 		            <div class="phone-box tab-content" id="tabs-2">
 		                <form method="post" action="">
 		                {% csrf_token %}
-		                    <textarea cols=46 rows=5 name="text" style="margin:10px" value="Enter text..."></textarea>
+		                    <textarea cols=46 rows=5 name="text" style="margin:10px; resize:none" value="Enter text..."></textarea>
                             <div style="text-align;right;padding-right:10px;">
                                 <span id="save_call" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
                                 <span id="clear_call" style="float:right;font-size:12px;" class="gray_button">Clear</span>
@@ -57,7 +57,7 @@
 		            <div class="message-box tab-content" id="tabs-1">
 		                <form method="post" action="">
 		                {% csrf_token %}
-		                    <textarea id="message-box" cols=46 rows=5 style="margin:10px" name="text" value="Enter text..."></textarea>
+		                    <textarea id="message-box" cols=46 rows=5 style="margin:10px; resize:none" name="text" value="Enter text..."></textarea>
 		                    <div style="text-align:right; padding-right:10px;">
 		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
 		                        <span id="send_message" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Send</span>
@@ -65,18 +65,17 @@
 		                </form>
 		            </div>
 		        </div>
-        	<div class="message-list"></div>
-        </div>
-    </div>
-		</div>
+        		<div class="message-list"></div>
+        	</div>
+    	</div>
 	
 		<div class="grid_5 info">
-            <div class="client-profile">
-            </div>
+			<div class="client-profile">
+			</div>
 		</div>
 
-    	<div style="display:none;" id="signup" title="Add a new client">
-        	{{ form }}
-    	</div>
+   		<div style="display:none;" id="signup" title="Add a new client">
+       	{{ form }}
+   		</div>
 	</body>
 </html>

@@ -1,10 +1,16 @@
-Visit adding
-Adding Phone calls/phone adding interface
+Tie in adding visits
+Finalize visit notation and view.
+Adding Phone calls
+Adjust interface for adding phone calls
 Format client list
+Re-add sending message functionality
 More icons
 Date picker (1/2)
 Adjust visit interface (size of things?)
-Consider switching to a 4/8/4 column layout and making the font size smaller on the details page. User testing shows that it draws a bit too much attention.
-Consider replacing white text in message boxes with black, for readability, and making the backgrounds lighter colors to go with. Possibly implement rounded corners again?
+Consider switching to a 4/8/4 column layout and making the font size smaller on the details page. User testing shows that it draws way too much attention.
+Consider replacing white text in message boxes with black, for readability, and making the backgrounds lighter colors to go with (also user testing).
+Possibly implement rounded corners again? (again, user testing)
+Start on a client upon refreshing page, to prevent send message errors.
+Fix the height of the page so it maxes out vertically at the size of the window, and individual sections scroll instead of the whole thing.
 
 Fix all the things!
