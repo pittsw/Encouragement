@@ -176,7 +176,11 @@
             resetColors();
             client_id = link.id;
             client_name = $(link).find('.name').html();
-            $(".message-list").load("/fragment/message/" + client_id + "/");
+            if($("#select_msg").val() == "list") {
+                $(".message-list").load("/fragment/message_list/" + client_id + "/");
+            } else {
+                $(".message-list").load("/fragment/message/" + client_id + "/");
+            }
             $(".client-profile").load("/detail/" + client_id + "/", function() {
                 loadEditHandlers(link);
             });
@@ -190,8 +194,12 @@
             load(this);
         });
 
-        $("#change").on("click", function(e) {
-            $(".message-list").load("/fragment/message_list/" + client_id + "/");
+        $("#select_msg").on("change", function(e) {
+            if($("#select_msg").val() == "list") {
+                $(".message-list").load("/fragment/message_list/" + client_id + "/");
+            } else {
+                $(".message-list").load("/fragment/message/" + client_id + "/");
+            }
         });
 
         // Set up the asynchronous search
