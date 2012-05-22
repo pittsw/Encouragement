@@ -45,9 +45,6 @@
             $('call_notes').val("");
         });
 
-
-=======
-
         // Sets up the characters left view.
         $('#message-box').on('keyup', function(e) {
             var len = $('#message-box').val().length;
