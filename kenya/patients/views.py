@@ -20,7 +20,6 @@ def index(request):
         context_instance=RequestContext(request))
     clients = Client.objects.all()
     listf = render_to_string("list_fragment.html", {'clients': clients})
-    add_call = render_to_string("add_call.html")
     reasons = NoConnectionReason.objects.all()
     c = {
         'form': form,
@@ -171,8 +170,7 @@ def add_call(request, id_number):
         nurse = Nurse.objects.get(user=request.user)
         client = get_object_or_404(Client, id=id_number)
         call = PhoneCall(content=request.POST['content'])
-    return render_to_response("add_call.html", {'form': form},
-                              context_instance=RequestContext(request))
+    return HttpResponse('')
 
 def csv_helper(**filter_kwargs):
     field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',
