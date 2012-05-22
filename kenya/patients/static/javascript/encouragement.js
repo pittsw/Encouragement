@@ -41,6 +41,13 @@
 		
 		$('.duration').hide();
 
+        $('#clear_call').on('click', function(e) {
+            $('call_notes').val("");
+        });
+
+
+=======
+
         // Sets up the characters left view.
         $('#message-box').on('keyup', function(e) {
             var len = $('#message-box').val().length;
