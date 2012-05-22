@@ -180,10 +180,10 @@ def csv_helper(**filter_kwargs):
     clients = Client.objects.all().order_by('id').filter(**filter_kwargs).values(*field_list)
     field_list += ['location', 'conditions']
     field_list.remove('location_id')
-    response = HttpResponse(','.join(field_list) + "\n", mimetype="text/csv")
+    response = HttpResponse(';'.join(field_list) + "\n", mimetype="text/csv")
     locations = dict([(loc.pk, loc.name) for loc in Location.objects.all()])
     conditions = dict([(cond.pk, cond.name) for cond in Condition.objects.all()])
-    writer = DictWriter(response, field_list)
+    writer = DictWriter(response, field_list, delimiter=";")
     for client in clients:
         client_obj = Client.objects.get(id=client['id'])
         client['location'] = locations[client['location_id']]
