@@ -139,7 +139,7 @@ class Interaction(models.Model):
     
     client_id = models.ForeignKey(Client)
     
-    content = models.CharField(max_length=500)
+    content = models.CharField(max_length=1000)
     
     def hasphoneattr(self):
         return hasattr(self, 'phonecall')
@@ -165,7 +165,7 @@ class SMSSyncOutgoing(models.Model):
 
     target = models.CharField(max_length=50)
 
-    content = models.CharField(max_length=500)
+    content = models.CharField(max_length=1000)
 
     def __unicode__(self):
         return '"{cont}" >> {tar}'.format(cont=self.content, tar=self.target)
@@ -258,6 +258,10 @@ class Visit(models.Model):
     def __unicode__(self):
         return self.status
         
+class NoConnectionReason(models.Model):
+    reason = models.CharField(max_length=100)
+        
 class PhoneCall(Interaction):
-    duration = models.IntegerField()
-
+    duration = models.IntegerField(default=0)
+    
+    reason = models.ForeignKey(NoConnectionReason, blank=True, null=True)

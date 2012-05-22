@@ -354,10 +354,11 @@ body {
     background-color: rgb(255,255,255);
 }
 
-.messages .message-box {
-    top: 50px; 
+.messages .phone-box, .messages .message-box {
+	top: 50px; 
     left: 0px; 
-    background-color: rgb(240,240,240); 
+    height: 130px;
+    background-color: rgb(255,255,255); 
     overflow: hidden; 
     border-style: solid;
     width: 100%;
@@ -366,16 +367,12 @@ body {
     border-color: rgb(121, 121, 121);
 }
 
+.messages .message-box {
+    
+}
+
 .messages .phone-box {
-    top: 50px; 
-    left: 0px; 
-    background-color: rgb(220,220,220); 
-    overflow: hidden; 
-    border-style: solid;
-    width: 100%;
-    margin: -1px;
-    border-width: 1px;
-    border-color: rgb(121, 121, 121);
+    
 }
 
 .messages .envelopepic .tab {
@@ -405,6 +402,7 @@ body {
 
 .messages .phonepic .selected {
 	background-image: url("/static/images/call_large.png");
+	background-color: rgb(255,255,255);
 	width: 80px;
 	height: 23px;
 	margin-top:2px;
@@ -412,6 +410,7 @@ body {
 
 .messages .envelopepic .selected {
     background-image: url("/static/images/message_large.png");
+   	background-color: rgb(255,255,255);
     width: 80px;
 	height: 23px;
 	margin-top:2px;
