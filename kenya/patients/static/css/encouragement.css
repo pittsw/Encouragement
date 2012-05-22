@@ -152,7 +152,6 @@ body {
 
 .list .left {
     float: left;
-    width: 190px;
 }
 
 .list .right {
@@ -187,8 +186,6 @@ body {
 .list .urgent {
     display: inline;
     float: right;
-    position: relative;
-    top: 5px;
     background-image: url("/static/images/urgent.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -199,8 +196,6 @@ body {
 .list .pending {
     display: inline;
     float: right;
-    position: relative;
-    top: 5px;
     background-image: url("/static/images/pending_message.png");
     background-position: center;
     background-repeat: no-repeat;
