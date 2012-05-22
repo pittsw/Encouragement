@@ -2,6 +2,8 @@ Add messages to csv output
 Make sure phone call adding works successfully
 Maybe move the script mentioned ~line 50 of encouragement.js out of message_listmode.html.
 Add javascript to apply click effects to buttons to make them interactive. 
-
+Add the language(s) spoken by the patient.
+Indicate whether a phone was shared or personal.
+Provide more granularity than just the morning/evening/afternoon for message frequency. For example, 8-10 a.m., 2-4 p.m., 7-10 p.m.
 
 Fix all the things!
