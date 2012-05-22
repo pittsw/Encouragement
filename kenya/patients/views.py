@@ -50,7 +50,11 @@ def message_fragment(request, id):
     client = Client.objects.get(id=id)
     messages = Interaction.objects.filter(client_id=client)
     return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
-    #return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+
+def message_list_frag(request, id):
+    client = Client.objects.get(id=id)
+    messages = Interaction.objects.filter(client_id=client)
+    return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):
     try:
