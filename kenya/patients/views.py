@@ -9,7 +9,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
-from patients.models import Client, Message, Location, Nurse, Visit, SMSSyncOutgoing, Note, Interaction
+from patients.models import Client, Message, Location, Nurse, Visit, SMSSyncOutgoing, Note, Interaction, PhoneCall, NoConnectionReason
 from patients.tasks import incoming_message, message_client
 
 @login_required
@@ -18,9 +18,12 @@ def index(request):
         context_instance=RequestContext(request))
     clients = Client.objects.all()
     listf = render_to_string("list_fragment.html", {'clients': clients})
+    add_call = render_to_string("add_call.html")
+    reasons = NoConnectionReason.objects.all()
     c = {
         'form': form,
         'listf' : listf,
+        'reasons' : reasons,
     }
     c.update(csrf(request))
     return render_to_response("test.html", c, context_instance=RequestContext(request))
@@ -160,6 +163,14 @@ def add_message(request, id_number):
         client = get_object_or_404(Client, id=id_number)
         message_client(client, nurse, 'Nurse', text)
         return HttpResponse('')
+
+def add_call(request, id_number):
+    if request.method == "POST":
+        nurse = Nurse.objects.get(user=request.user)
+        client = get_object_or_404(Client, id=id_number)
+        call = PhoneCall(content=request.POST['content'])
+    return render_to_response("add_call.html", {'form': form},
+                              context_instance=RequestContext(request))
 
 @csrf_exempt
 def smssync(request):

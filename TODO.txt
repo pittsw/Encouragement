@@ -3,7 +3,7 @@ Adjust interface for adding phone calls
 Format client list
 Consider replacing white text in message boxes with black, for readability, and making the backgrounds lighter colors to go with (also user testing).
 Export to csv for client list, each client, and messages. 
-id #s
+Add name and id number to message sending
 toggle list view
 
 
