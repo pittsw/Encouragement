@@ -267,7 +267,7 @@ textarea {
 
 .info .content {
     width: 65%;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .info .comments {
@@ -366,13 +366,13 @@ textarea {
     border-radius: 5px;
     width: 60%;
     clear: both;
-    color: rgb(255,255,255);
+    color: rgb(0,0,0);
 }
 
 .messages .Client {
     float: left;
     margin-right: auto;
-    background-color: rgb(91,141,147);
+    background-color: rgb(171,198,202);
 }
 
 .messages .System, .messages .Nurse, .messages .Phone {
@@ -382,16 +382,15 @@ textarea {
 }
 
 .messages .Phone {
-	background-color: rgb(205, 124, 163);
+	background-color: rgb(198, 184, 190);
 }
 
 .messages .System {
     background-color: rgb(214,214,214);
-    color: rgb(0,0,0);
 }
 
 .messages .Nurse {
-    background-color: rgb(168,140,91);
+    background-color: rgb(207,200,172);
 }
 
 .messages .message-list {
@@ -564,7 +563,7 @@ textarea {
     border-width: 0px 1px 1px 0px;
     border-style: solid;
     border-color: rgb(140,140,140);
-
+	background-color: rgb(214,214,214);
 }
 
 .messagetable td {
@@ -573,6 +572,7 @@ textarea {
     border-style: solid;
     border-color: rgb(140,140,140);
     margin: 0px;
+    background-color: rgb(214,214,214);
 }
 
 .messagetable .sender {
