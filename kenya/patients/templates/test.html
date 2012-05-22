@@ -49,20 +49,20 @@
 		            </ul>
 		            <div class="phone-box tab-content" id="tabs-2">
 		                <form method="post" action="">
-		                	<div class="completion_checkbox">Call Completed 
-		                		<input id="complete" type="checkbox" name="completed" value="Completed"/>
-		                	</div>
-		                	<div class="duration">Duration: <input type="text" name="Duration" />
-		                	</div>
-		                	<div class="reason">Reason: 
-		                		<select name="Reason">
-		                			{% for choice in reasons %}
-										<option value="{{choice}}">{{ choice }}</option>
-									{% endfor %}
-								</select>
+		                {% csrf_token %}
+		                	<div class="wrapper">
+								<div class="completion_checkbox">Call Completed<input id="complete" type="checkbox" name="completed" value="Completed"/>
+								</div>
+								<div class="duration">Duration: <input type="text" name="Duration" />
+								</div>
+								<div class="reason">Reason:<select name="Reason">
+										{% for choice in reasons %}
+											<option value="{{choice}}">{{ choice }}</option>
+										{% endfor %}
+									</select>
+								</div>
 							</div>
-							<div>Content: 
-								<textarea rows="3" cols="30" name="content" style="resize:none"></textarea>
+							<div>Notes:<textarea rows="3" cols="30" name="content" style="resize:none"></textarea>
 							</div>
                             <div style="text-align;right;padding-right:10px;">
                                 <span id="save_call" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>

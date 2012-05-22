@@ -392,6 +392,7 @@ body {
     overflow: hidden; 
     border-style: solid;
     width: 100%;
+    padding-top: 5px;
     margin: -1px;
     border-width: 1px;
     border-color: rgb(121, 121, 121);
@@ -405,8 +406,19 @@ body {
     
 }
 
+.messages .phone-box .wrapper {
+	height: 25px;
+}
+
 .messages .phone-box .completion_checkbox {
-	margin: 5px 10px 0px 0px;
+	margin: 10px 40px 0px 10px;
+	display: inline;
+}
+
+.messages .phone-box .reason, .messages .phone-box .duration {
+	margin 10px 0px 0px 0px;
+	display: inline;
+	height: 20px;
 }
 
 .messages .envelopepic .tab {
