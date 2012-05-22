@@ -2,12 +2,12 @@
 	{% for x in clients %}
     <div class="person" id="{{x.id}}">
         <div class="left">
-            {% if x.pending > 0 %}
+            {% if x.pending > 0 or x.urgent %}
             <div class="name pendingname">
             {% else %}
             <div class="name">
             {% endif %}
-                <div>{{x.first_name}}</div>
+                {{x.first_name}}
             </div>
             <div class="client_id">(#{{x.id}})</div>
             {% if x.pending > 0 %}
