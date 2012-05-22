@@ -416,9 +416,8 @@ body {
 }
 
 .messages .phone-box .reason, .messages .phone-box .duration {
-	margin 10px 0px 0px 0px;
 	display: inline;
-	height: 20px;
+	height: 22px;
 }
 
 .messages .envelopepic .tab {
