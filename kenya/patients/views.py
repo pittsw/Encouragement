@@ -167,7 +167,14 @@ def add_call(request, id_number):
     if request.method == "POST":
         nurse = Nurse.objects.get(user=request.user)
         client = get_object_or_404(Client, id=id_number)
-        call = PhoneCall(content=request.POST['content'])
+        content = POST['call_notes']
+        duration = content['duration']
+        PhoneCall(
+            user_id=nurse,
+            client_id=client,
+            content=content,
+            duration=duration,
+        ).save()
     return HttpResponse('')
 
 def csv_helper(**filter_kwargs):

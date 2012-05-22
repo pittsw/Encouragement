@@ -96,6 +96,25 @@
         });
 
         // Save a call when the nurse clicks save
+        $('.messages #save_call').on('click', function() {
+            if (client_id == undefined) {
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) {
+                    return;
+                }
+                $(".message-list").load("/fragment/message/" + client_id + "/");
+                $(".messages #complete").val('');
+                $(".messages .duration").val('');
+                $(".messages #call_notes").val('');
+            }
+            xhr.open("POST", "/add_call/" + client_id + "/", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+            xhr.send($('#phone-box').serialize());
+        });
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
