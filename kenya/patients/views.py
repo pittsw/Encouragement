@@ -167,8 +167,12 @@ def add_call(request, id_number):
     if request.method == "POST":
         nurse = Nurse.objects.get(user=request.user)
         client = get_object_or_404(Client, id=id_number)
-        content = POST['call_notes']
-        duration = content['duration']
+        content = request.POST['content']
+        duration = request.POST['duration']
+        try:
+            duration = int(duration)
+        except ValueError:
+            duration = 0
         PhoneCall(
             user_id=nurse,
             client_id=client,
