@@ -29,7 +29,17 @@
              } 
         });
 		
-        // clear phone call box
+        // Swap the boxes in add call when the call completed button is changed
+		$('#complete').on('change', function(e) {
+			if (this.checked) {
+				$('.duration').show();
+			} else {
+				$('#duration').val('');
+				$('.duration').hide();			
+			}
+		});
+		$('.duration').hide();
+
         $('#clear_call').on('click', function(e) {
             $('call_notes').val("");
         });
