@@ -1,5 +1,4 @@
 Adjust interface for adding phone calls
-Add name and id number to message sending
 toggle list view
 
 
