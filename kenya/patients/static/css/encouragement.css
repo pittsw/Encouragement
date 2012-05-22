@@ -128,7 +128,7 @@ body {
 .patient_bar {
     background-color: rgb(200, 200, 200);
     font-weight: bold;
-    padding: 5px 5px 0px 5px;
+    padding: 5px 5px 0px 10px;
     height: 20px;
     font-size: 12px;
 }
@@ -142,7 +142,7 @@ body {
 }
 
 .list .person {
-    padding: 3px 3px 3px 3px;
+    padding: 3px 3px 3px 10px;
     border-bottom: 1px dashed grey;
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
@@ -421,6 +421,7 @@ body {
 }
 
 .messages .phone-box .wrapper {
+	padding-top: 5px;
 	height: 25px;
 }
 
