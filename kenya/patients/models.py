@@ -221,14 +221,6 @@ class AutomatedMessage(models.Model):
             end=self.end_week,
         )
 
-@receiver(post_save, sender=Message, dispatch_uid="update_client")
-def update_client(sender, **kwargs):
-    if kwargs['raw']:
-        return
-
-    client = kwargs['instance'].client_id
-
-    client.update()
 
 class Note(models.Model):
     class Meta:
