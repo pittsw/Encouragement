@@ -28,7 +28,7 @@ body {
     height: 32px;
 }
 
-.name_bar {
+.center_bar {
     background-color: rgb(212, 200, 156);
     text-align: center;
     font-size: 16px;
@@ -43,6 +43,16 @@ body {
     margin-left: -2px;
 }
 
+.center_bar .name_bar {
+    display: inline;
+}
+
+.center_bar .download {
+    display: inline;
+    padding: 2px 5px 0px 0px;
+    font-size: 12px;
+    float: right;
+}
 
 .logout {
     float: right;
@@ -117,7 +127,8 @@ body {
 
 .patient_bar {
     background-color: rgb(200, 200, 200);
-    padding: 5px 0px 0px 5px;
+    font-weight: bold;
+    padding: 5px 5px 0px 5px;
     height: 20px;
     font-size: 12px;
 }
@@ -136,6 +147,17 @@ body {
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
     height: 72px;
+    font-size: 12px;
+}
+
+.list .left {
+    float: left;
+    width: 190px;
+}
+
+.list .right {
+    float: right;
+    width: 40px;
 }
 
 .list .header {
@@ -143,34 +165,47 @@ body {
 }
 
 .list .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 16px;
 }
 
-.list .pendingname {
+.list .client_id {
     display: inline;
-    font-style: bold;
-    font-size:20px;
-    background-position: right;
-    background-repeat: no-repeat;
+    font-weight: bold;
+}
+
+.list .pendingname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size:16px;
 }
 
 .list .urgent {
     display: inline;
     float: right;
+    position: relative;
+    top: 5px;
     background-image: url("/static/images/urgent.png");
     background-position: center;
     background-repeat: no-repeat;
     width: 40px;
-    height: 40px;
+    height: 30px;
 }
 
 .list .pending {
+    display: inline;
     float: right;
+    position: relative;
+    top: 5px;
     background-image: url("/static/images/pending_message.png");
     background-position: center;
     background-repeat: no-repeat;
     width: 40px;
-    height: 40px;
+    height: 30px;
 }
 /* End styles for the client list. */
 

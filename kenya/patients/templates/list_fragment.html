@@ -1,17 +1,28 @@
 <div class="list">
 	{% for x in clients %}
     <div class="person" id="{{x.id}}">
-        {% if x.pending > 0 %}
+        <div class="left">
+            {% if x.pending > 0 or x.urgent %}
             <div class="name pendingname">
-        {% else %}
+            {% else %}
             <div class="name">
-        {% endif %}
-            <div>{{x.first_name}} {{x.last_name}}</div>
+            {% endif %}
+                {{x.first_name}}
+            </div>
+            <div class="client_id">(#{{x.id}})</div>
             {% if x.pending > 0 %}
-                <div class="pending"></div>
+                <div>{{x.pending}} unread messages.</div>
             {% endif %}
             {% if x.urgent %}
+                <div>No reply since {{x.last_msg}}.</div>
+            {% endif %}
+        </div>
+        <div class="right">
+            {% if x.urgent %}
                 <div class="urgent"></div>
+            {% endif %}
+            {% if x.pending > 0 %}
+                <div class="pending"></div>
             {% endif %}
         </div>
     </div>
