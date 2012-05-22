@@ -1,5 +1,16 @@
 {% load patient_tags %}
+<script>
+	$(document).ready(function(){
+		$('.messagetable td .content').on('click', function(e) {
 
+			if ($(this).css("white-space") == "nowrap") {
+				$(this).css("white-space", "normal");
+			} else {
+				$(this).css("white-space", "nowrap");
+			}
+		});
+	});
+</script>
 <table class="messagetable">
 	<tr>
 		<th>Date</th>
@@ -10,11 +21,11 @@
 	<tr>
 		<td>{{x.date|date:"SHORT_DATE_FORMAT"}}</td>
 		{% if x.hasphoneattr %}
-		<td>Phone Log</td>
+		<td class="sender">Phone Log</td>
 		{% else %}
-		<td>{{x.message.sent_by}}</td>
+		<td class="sender">{{x.message.sent_by}}</td>
 		{% endif %}
-		<td>{{x.content}}</td>
+		<td><div class="content">{{x.content}}</div></td>
 	</tr>
 	{% endfor %}
 </table>

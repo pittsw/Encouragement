@@ -8,6 +8,14 @@ body {
     height: 715px;
 }
 
+input[type="text"] {
+	width:180px;
+}
+
+textarea {
+	resize: none;
+}
+
 .header-bar {
     background-color: rgb(120, 177, 189);
     color: #FFFFFF;
@@ -244,7 +252,6 @@ body {
 .info table {
     background-color: rgb(245, 242, 231);
     margin-right: 5px;
-    margin-bottom: 10px;
 }
 
 .info tr {
@@ -445,7 +452,7 @@ body {
 }
 
 .messages .phone-box .phone-content {
-	padding: 0px 0px 0px 10px;
+	
 }
 
 .messages .envelopepic .tab {
@@ -545,21 +552,38 @@ body {
 }
 
 .messagetable {
-	border-style: solid;
-    border-width: 1px;
-    border-color: rgb(121, 121, 121);
     font-size: 12px;
+    width: 410px;
+    border-width: 1px 0px 0px 1px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+    border-spacing: 0px;
 }
 
 .messagetable th {
-	border-style: solid;
-    border-width: 1px;
-    border-color: rgb(121, 121, 121);
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+
 }
 
 .messagetable td {
-	border-style: solid;
-    border-width: 1px;
-    border-color: rgb(121, 121, 121);
+    padding: 0px 2px;
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+    margin: 0px;
+}
+
+.messagetable .sender {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.messagetable td .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 260px;
 }
 /* End messages styles. */
