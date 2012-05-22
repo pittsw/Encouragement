@@ -29,6 +29,7 @@
              } 
         });
 		
+        // Swap the boxes in add call when the call completed button is changed
 		$('#complete').on('change', function(e) {
 			if (this.checked) {
 				$('.reason').hide();
@@ -38,15 +39,11 @@
 				$('.reason').show();
 			}
 		});
-		
 		$('.duration').hide();
 
         $('#clear_call').on('click', function(e) {
             $('call_notes').val("");
         });
-
-
-=======
 
         // Sets up the characters left view.
         $('#message-box').on('keyup', function(e) {
@@ -79,7 +76,7 @@
         });
         switch_tabs($('.defaulttab'));
 
-        // Send a message when the nurse cliecks send
+        // Send a message when the nurse clicks send
         $('.messages #send_message').on('click', function() {
             if (client_id === undefined) {
                 return;
@@ -98,6 +95,7 @@
             xhr.send($('#message-box').serialize());
         });
 
+        // Save a call when the nurse clicks save
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
