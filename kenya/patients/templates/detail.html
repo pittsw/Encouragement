@@ -1,0 +1,56 @@
+<div class="header msg_head info_expanded" id="profile">
+    <span>Client Profile</span>
+    <span id="edit" class="view_buttons">&nbsp;</span>
+    <span class="edit_buttons" style="display:none;">
+        <span id="cancel" class="cancel">&nbsp;</span>
+        <span id="save">&nbsp;</span>
+    </span>
+</div>
+<div id="client_fragment" class="msg_body">
+    {{fragment}}
+</div>
+
+<div class="header msg_head info_expanded">
+    <span>Notes</span>
+    <span id="notes_add" class="add"></span>
+    <span id="notes_hide" class="cancel"></span>
+</div>
+<div class="msg_body" id="notes">
+	<table>
+		<tr id="note" style="display:none;">
+			<form id="add_note_form" method="post" action="/note/{{ client.id }}/">
+				{% csrf_token %}
+				<td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
+				<td><div class="add_note gray_button">Add</div></td>
+			</form>
+		</tr>
+		{% for note in notes %}
+		<tr>
+			<td class="content">{{note.content}}</td>
+			<td class="date">{{note.date}}</td>
+			<td class="delete" id="{{ note.pk }}">X</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+
+
+<div class="header msg_head info_expanded">
+    <span>Clinic Visit History</span>
+    <span id="visit_add" class="add"></span>
+    <span id="visit_hide" class="cancel"></span>
+</div>
+<div class="msg_body" id="visits">
+    <table>
+        <tr id="visit_form_container">
+            <td colspan="3">{{ form }}</td>
+        </tr>
+		{% for v in history %}
+		<tr>
+			<td class="status">{{v.status}}</td>
+			<td class="date">{{v.date}}</td>
+            <td class="delete" id="{{v.pk}}">X</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
