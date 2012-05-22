@@ -237,7 +237,7 @@
         "pk": 1, 
         "model": "patients.visit", 
         "fields": {
-            "status": "This visit went well!", 
+            "comments": "This visit went well!", 
             "date": "2012-05-21", 
             "client_id": 1
         }

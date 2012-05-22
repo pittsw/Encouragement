@@ -256,6 +256,10 @@ body {
     font-size: 13px;
 }
 
+.info .comments {
+	font-size: 14px;
+}
+
 .info .date {
     width: 25%;
     font-size: 12px;

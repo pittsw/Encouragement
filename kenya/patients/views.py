@@ -114,9 +114,9 @@ def add_visit(request, id):
     elif request.method == "POST":
         form = VisitForm(request.POST)
         if form.is_valid():
-            status = form.cleaned_data['status']
+            comments = form.cleaned_data['comments']
             date = form.cleaned_data['date']
-            Visit(client_id=client, status=status, date=date).save()
+            Visit(client_id=client, comments=comments, date=date).save()
             form = VisitForm()
             return HttpResponse('')
     return render_to_response('visit_form.html', {'form': form})

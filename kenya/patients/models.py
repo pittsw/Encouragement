@@ -251,12 +251,12 @@ class Visit(models.Model):
         
     client_id = models.ForeignKey(Client)
     
-    status = models.CharField(max_length=100)
+    comments = models.CharField(max_length=100)
     
     date = models.DateField()
     
     def __unicode__(self):
-        return self.status
+        return self.comments
         
 class PhoneCall(Interaction):
     duration = models.IntegerField(default=0)

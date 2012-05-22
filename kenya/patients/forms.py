@@ -30,5 +30,5 @@ class MessageForm(ModelForm):
 
 
 class VisitForm(Form):
-    status = CharField(max_length=100)
+    comments = CharField(max_length=100)
     date = DateField()
