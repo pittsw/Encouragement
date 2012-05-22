@@ -407,17 +407,22 @@ body {
 }
 
 .messages .phone-box .wrapper {
+	padding: 5px 0px 0px 0px;
 	height: 25px;
 }
 
 .messages .phone-box .completion_checkbox {
-	margin: 10px 40px 0px 10px;
+	margin: 10px 10px 0px 10px;
 	display: inline;
 }
 
 .messages .phone-box .reason, .messages .phone-box .duration {
 	display: inline;
-	height: 22px;
+	height: 20px;
+}
+
+.messages .phone-box .phone-content {
+	padding: 0px 0px 0px 10px;
 }
 
 .messages .envelopepic .tab {

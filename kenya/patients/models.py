@@ -258,12 +258,5 @@ class Visit(models.Model):
     def __unicode__(self):
         return self.status
         
-class NoConnectionReason(models.Model):
-    reason = models.CharField(max_length=100)
-    def __unicode__(self):
-        return self.reason 
-        
 class PhoneCall(Interaction):
     duration = models.IntegerField(default=0)
-    
-    reason = models.ForeignKey(NoConnectionReason, blank=True, null=True)

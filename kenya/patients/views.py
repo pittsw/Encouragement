@@ -20,11 +20,9 @@ def index(request):
         context_instance=RequestContext(request))
     clients = Client.objects.all()
     listf = render_to_string("list_fragment.html", {'clients': clients})
-    reasons = NoConnectionReason.objects.all()
     c = {
         'form': form,
         'listf' : listf,
-        'reasons' : reasons,
     }
     c.update(csrf(request))
     return render_to_response("test.html", c, context_instance=RequestContext(request))

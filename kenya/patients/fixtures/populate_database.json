@@ -243,25 +243,10 @@
         }
     }, 
     {
-        "pk": 2, 
-        "model": "patients.noconnectionreason", 
-        "fields": {
-            "reason": "No Credit"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "patients.noconnectionreason", 
-        "fields": {
-            "reason": "No Answer"
-        }
-    }, 
-    {
         "pk": 5, 
         "model": "patients.phonecall", 
         "fields": {
             "duration": 0, 
-            "reason": 3
         }
     }, 
     {
@@ -269,7 +254,6 @@
         "model": "patients.phonecall", 
         "fields": {
             "duration": 15, 
-            "reason": null
         }
     },
     {
