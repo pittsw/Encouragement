@@ -55,6 +55,7 @@ def message_fragment(request, id):
             message.message.save()
         except Message.DoesNotExist:
             continue
+    client.update()
     return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
 
 def message_list_frag(request, id):
@@ -66,6 +67,7 @@ def message_list_frag(request, id):
             message.message.save()
         except Message.DoesNotExist:
             continue
+    client.update()
     return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):
