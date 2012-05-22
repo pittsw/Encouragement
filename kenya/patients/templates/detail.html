@@ -28,7 +28,7 @@
 		<tr>
 			<td class="content">{{note.content}}</td>
 			<td class="date">{{note.date}}</td>
-			<td class="delete" id="{{ note.pk }}">X</td>
+			<td class="delete" id="{{ note.pk }}"><span class="cancel" style="display: inline; "></span></td>
 		</tr>
 		{% endfor %}
 	</table>
@@ -49,7 +49,7 @@
 		<tr>
 			<td class="comments">{{v.comments}}</td>
 			<td class="date">{{v.date}}</td>
-            <td class="delete" id="{{v.pk}}">X</td>
+            <td class="delete" id="{{v.pk}}"><span class="cancel" style="display: inline; "></span></td>
 		</tr>
 		{% endfor %}
 	</table>
