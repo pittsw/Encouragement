@@ -307,7 +307,8 @@ body {
 
 .messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
     margin: 5px 15px 5px 10px;
-    padding: 3px 5px 3px 5px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
     width: 60%;
     clear: both;
     color: rgb(255,255,255);
@@ -467,6 +468,7 @@ body {
 	border-style: solid;
     border-width: 1px;
     border-color: rgb(121, 121, 121);
+    font-size: 12px;
 }
 
 .messagetable th {
