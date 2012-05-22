@@ -1,3 +1,5 @@
+from csv import DictWriter
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
@@ -9,7 +11,7 @@ from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
-from patients.models import Client, Message, Location, Nurse, Visit, SMSSyncOutgoing, Note, Interaction, PhoneCall, NoConnectionReason
+from patients.models import *
 from patients.tasks import incoming_message, message_client
 
 @login_required
@@ -171,6 +173,31 @@ def add_call(request, id_number):
         call = PhoneCall(content=request.POST['content'])
     return render_to_response("add_call.html", {'form': form},
                               context_instance=RequestContext(request))
+
+def csv_helper(**filter_kwargs):
+    field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',
+        'location_id', 'pregnancy_status', 'due_date', 'years_of_education']
+    clients = Client.objects.all().order_by('id').filter(**filter_kwargs).values(*field_list)
+    field_list += ['location', 'conditions']
+    field_list.remove('location_id')
+    response = HttpResponse(';'.join(field_list) + "\n", mimetype="text/csv")
+    locations = dict([(loc.pk, loc.name) for loc in Location.objects.all()])
+    conditions = dict([(cond.pk, cond.name) for cond in Condition.objects.all()])
+    writer = DictWriter(response, field_list, delimiter=";")
+    for client in clients:
+        client_obj = Client.objects.get(id=client['id'])
+        client['location'] = locations[client['location_id']]
+        del client['location_id']
+        client['conditions'] = [conditions[x.pk] for x in client_obj.conditions.all()]
+        writer.writerow(client)
+    response['Content-Disposition'] = ('attachment; filename=clients.csv')
+    return response
+
+def csv(request):
+    return csv_helper()
+
+def clientcsv(request, id_number):
+    return csv_helper(id=id_number)
 
 @csrf_exempt
 def smssync(request):
