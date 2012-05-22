@@ -48,13 +48,13 @@
 		                <li class="phonepic"><a href="#" class="tab" rel="tabs-2"></a></li>
 		            </ul>
 		            <div class="phone-box tab-content" id="tabs-2">
-		                <form method="post" action="">
+		                <form id="phone-box" method="post" action="">
 		                {% csrf_token %}
 		                	<div class="wrapper">
 								<div class="completion_checkbox">Call Completed<input id="complete" type="checkbox" name="completed" value="Completed"/>
 								</div>
-								<span class="duration">Duration: <input type="text" id="duration" name="Duration"/>
-								</span>
+								<div class="duration">Duration: <input type="text" name="duration"/>
+								</div>
 							</div>
 							<div class="phone-content">Notes:<textarea rows="3" cols="30" id="call_notes" name="content" style="resize:none"></textarea>
 							</div>
