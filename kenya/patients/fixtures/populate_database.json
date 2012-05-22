@@ -12,7 +12,25 @@
         "fields": {
             "name": "Kenya"
         }
-    }, 
+    },
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "Nurse", 
+            "first_name": "Nurse", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-04-30T19:12:14Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$4SqRw58fJZ3c$KNwrRt/jOWh5IZodLE4VzGxz7InhYeA1Vwweje/0vVk=", 
+            "email": "", 
+            "date_joined": "2012-04-30T19:12:14Z"
+        }
+    },
     {
         "pk": 1, 
         "model": "patients.client", 
@@ -64,14 +82,6 @@
         "fields": {
             "user": 2, 
             "location": 2
-        }
-    }, 
-    {
-        "pk": 20, 
-        "model": "patients.nurse", 
-        "fields": {
-            "user": 1, 
-            "location": 1
         }
     }, 
     {
