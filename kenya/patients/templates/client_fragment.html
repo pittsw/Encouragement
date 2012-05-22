@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <td class="title">ID number:</td>
+        <td class="data">{{client.id}}</td>
+    </tr>
+    <tr>
+        <td class="title">Name:</td>
+        <td class="data">{{client.first_name}} {{client.last_name}}</td>
+    </tr>
+    <tr>
+        <td class="title">Birthday:</td>
+        <td class="data">{{client.birth_date}}</td>
+    </tr>
+    <tr>
+        <td class="title">Phone Number:</td>
+        {% if client.phone_number %}
+            <td class="data">{{client.phone_number}}</td>
+        {% else %}
+            <td class="data">Please have client send registration key</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <td class="title">Location:</td>
+        <td class="data">{{client.location}}</td>
+    </tr>
+    <tr>
+        <td class="title">Pregnancy Status:</td>
+        <td class="data">{{client.pregnancy_status}}</td>
+    </tr>
+    <tr>
+        <td class="title">Expected Due Date:</td>
+        <td class="data">{{client.due_date}}</td>
+    </tr>
+    <tr>
+        <td class="title">Education:</td>
+        <td class="data">{{client.years_of_education}}</td>
+    </tr>
+    <tr>
+        <td class="title">Registration Key:</td>
+        <td class="data">{{client.generate_key}}</td>
+    </tr>
+</table>

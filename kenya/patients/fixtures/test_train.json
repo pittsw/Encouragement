@@ -1,0 +1,129 @@
+[
+    {
+        "pk": 1, 
+        "model": "patients.location", 
+        "fields": {
+            "name": "Seattle"
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "patients.client", 
+        "fields": {
+            "phone_number": "5551234", 
+            "due_date": "2012-06-01", 
+            "first_name": "Pregnant", 
+            "last_name": "Woman", 
+            "years_of_education": 8, 
+            "marital_status": "Married", 
+            "location": 1, 
+            "birth_date": "1990-01-01", 
+            "pregnancy_status": "Pregnant",
+            "conditions": [1]
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "patients.client", 
+        "fields": {
+            "phone_number": "5551235", 
+            "due_date": "2012-06-01", 
+            "first_name": "High", 
+            "last_name": "Blood Pressure", 
+            "years_of_education": 8, 
+            "marital_status": "Married", 
+            "location": 1, 
+            "birth_date": "1990-01-01", 
+            "pregnancy_status": "Pregnant",
+            "conditions": [1, 2]
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "Nurse", 
+            "first_name": "Nurse", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-04-30T19:12:14Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$4SqRw58fJZ3c$KNwrRt/jOWh5IZodLE4VzGxz7InhYeA1Vwweje/0vVk=", 
+            "email": "", 
+            "date_joined": "2012-04-30T19:12:14Z"
+        }
+    }, 
+    {
+        "pk": 1000, 
+        "model": "patients.nurse", 
+        "fields": {
+            "user": 20, 
+            "location": 1
+        }
+    }, 
+    {
+        "pk": 1,
+        "model": "patients.condition",
+        "fields": {
+            "name": "General pregnancy"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "patients.condition",
+        "fields": {
+            "name": "High blood pressure"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 1,
+            "priority": 0,
+            "message": "Generalized pregnancy message!",
+            "start_week": -50,
+            "end_week": 50,
+            "repeats": true
+        }
+    },
+    {
+        "pk": 2,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 1,
+            "priority": 1,
+            "message": "Third trimester message!",
+            "start_week": -12,
+            "end_week": 0,
+            "repeats": false
+        }
+    },
+    {
+        "pk": 3,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 2,
+            "priority": 5,
+            "message": "Blood pressure message one!",
+            "start_week": -50,
+            "end_week": 50,
+            "repeats": false
+        }
+    },
+    {
+        "pk": 4,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 2,
+            "priority": 4,
+            "message": "Blood pressure message two!",
+            "start_week": -50,
+            "end_week": 50,
+            "repeats": false
+        }
+    }
+]
