@@ -471,6 +471,11 @@ body {
 	margin-top:2px;
 }
 
+.messages .message-view-select {
+	float: right;
+	vertical-align: middle;
+}
+
 .messages .header {
     background-color: rgb(212,200,156);
     text-align: center;
