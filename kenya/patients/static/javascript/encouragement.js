@@ -28,7 +28,18 @@
                  }
              } 
         });
-
+		
+		$('#complete').on('change', function(e) {
+			if (this.checked) {
+				$('.reason').hide();
+				$('.duration').show();
+			} else {
+				$('.duration').hide();
+				$('.reason').show();
+			}
+		});
+		
+		$('.duration').hide();
 
         // Sets up the characters left view.
         $('#message-box').on('keyup', function(e) {

@@ -410,6 +410,10 @@ body {
     
 }
 
+.messages .phone-box .completion_checkbox {
+	margin: 5px 10px 0px 0px;
+}
+
 .messages .envelopepic .tab {
 	width: 60px;
 	height: 20px;
