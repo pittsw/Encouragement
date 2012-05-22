@@ -88,6 +88,16 @@ body {
     margin-right: 5px;
 }
 
+.message_bar {
+	background-color: rgb(121,121,121);
+	color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
+}
+
 .blue_button {
     background-color: rgb(91,141,147);
     color: rgb(255, 255, 255);
