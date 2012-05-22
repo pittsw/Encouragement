@@ -67,7 +67,7 @@
 		            <div class="message-box tab-content" id="tabs-1">
 		                <form method="post" action="">
 		                {% csrf_token %}
-		                    <div class="send-to">To:</div>
+		                <!-- put the name and id number here! -->
 		                    <textarea id="message-box" cols=46 rows=3 style="margin:10px; resize:none" name="text" value="Enter text..."></textarea>
 		                    <div style="text-align:right; padding-right:10px;">
 		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
@@ -76,7 +76,10 @@
 		                </form>
 		            </div>
 		        </div>
-        		<div class="message-list"></div>
+		        <div>
+			        <div id="change" class="blue_button">Change</div>
+	        		<div class="message-list"></div>
+        		</div>
         	</div>
     	</div>
 	

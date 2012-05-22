@@ -336,11 +336,6 @@ body {
     padding-top: 5px;
 }
 
-.messages .send-to {
-    padding: 5px 0px 0px 10px;
-    text-transform: uppercase;
-}
-
 .messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
     margin: 5px 15px 5px 10px;
     padding: 10px 10px 10px 10px;
@@ -376,9 +371,13 @@ body {
 }
 
 .messages .message-list {
-	margin: 55px 5px;
+	margin: 0px 5px 55px 5px;
     height: 470px;
     overflow: auto;
+}
+
+.messages #change {
+    margin-top: 55px;
 }
 
 .messages .Boxes {
