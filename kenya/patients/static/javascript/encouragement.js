@@ -42,7 +42,7 @@
 		$('.duration').hide();
 
         $('#clear_call').on('click', function(e) {
-            $('call_notes').val("");
+            $('#call_notes').val("");
         });
 
         // Sets up the characters left view.
