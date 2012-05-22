@@ -136,6 +136,17 @@ body {
     background-color:rgb(217,233,236);
     color:rgb(1,1,1);
     height: 72px;
+    font-size: 12px;
+}
+
+.list .left {
+    float: left;
+    width: 190px;
+}
+
+.list .right {
+    float: right;
+    width: 40px;
 }
 
 .list .header {
@@ -147,8 +158,8 @@ body {
 }
 
 .list .client_id {
-    font-size: 12px;
     display: inline;
+    font-weight: bold;
 }
 
 .list .pendingname {
@@ -162,20 +173,25 @@ body {
 .list .urgent {
     display: inline;
     float: right;
+    position: relative;
+    top: 5px;
     background-image: url("/static/images/urgent.png");
     background-position: center;
     background-repeat: no-repeat;
     width: 40px;
-    height: 40px;
+    height: 30px;
 }
 
 .list .pending {
+    display: inline;
     float: right;
+    position: relative;
+    top: 5px;
     background-image: url("/static/images/pending_message.png");
     background-position: center;
     background-repeat: no-repeat;
     width: 40px;
-    height: 40px;
+    height: 30px;
 }
 /* End styles for the client list. */
 

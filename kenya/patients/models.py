@@ -56,7 +56,7 @@ class Client(models.Model):
 
     pending = models.IntegerField(editable=False, default=0)
 
-    last_msg = models.DateTimeField(blank=True, null=True, editable=False)
+    last_msg = models.DateField(blank=True, null=True, editable=False)
 
     sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
 

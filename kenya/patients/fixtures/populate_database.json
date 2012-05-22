@@ -39,7 +39,7 @@
             "due_date": "2012-05-18", 
             "first_name": "Pregnant", 
             "last_name": "Woman", 
-            "last_msg": "2012-05-18T07:17:26.868Z", 
+            "last_msg": "2012-05-18", 
             "years_of_education": 11, 
             "urgent": false, 
             "sent_messages": [], 
@@ -61,9 +61,9 @@
             "due_date": "2012-01-01", 
             "first_name": "Not Pregnant", 
             "last_name": "Woman", 
-            "last_msg": null, 
+            "last_msg": "2012-04-18", 
             "years_of_education": 5, 
-            "urgent": false, 
+            "urgent": true, 
             "sent_messages": [], 
             "location": 1, 
             "birth_date": "1992-01-15", 
@@ -73,6 +73,28 @@
             ], 
             "id": 2351235, 
             "pending": 0
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.client", 
+        "fields": {
+            "phone_number": "", 
+            "due_date": "2012-01-01", 
+            "first_name": "Really Not", 
+            "last_name": "Pregnant Woman", 
+            "last_msg": "2012-04-18", 
+            "years_of_education": 5, 
+            "urgent": true, 
+            "sent_messages": [], 
+            "location": 1, 
+            "birth_date": "1992-01-15", 
+            "pregnancy_status": "Failed Pregnancy", 
+            "conditions": [
+                2
+            ], 
+            "id": 23512353849, 
+            "pending": 1
         }
     }, 
     {
