@@ -416,13 +416,14 @@ body {
 
 .messages .phone-box .completion_checkbox {
 	margin-left: 10px;
-	margin-right: 10px;
-	display: inline;
 	vertical-align: middle;
+	display: inline;
 }
 
 .messages .phone-box .duration {
 	display: inline;
+	float: right;
+	margin-right: 10px;
 }
 
 .messages .phone-box .phone-content {
