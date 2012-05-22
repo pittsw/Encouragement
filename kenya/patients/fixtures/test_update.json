@@ -1,0 +1,119 @@
+[
+    {
+        "pk": 1, 
+        "model": "patients.location", 
+        "fields": {
+            "name": "Kenya"
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "patients.client", 
+        "fields": {
+            "phone_number": "5551234", 
+            "due_date": "2012-06-01", 
+            "first_name": "Pregnant", 
+            "last_name": "Woman", 
+            "years_of_education": 8, 
+            "marital_status": "Married", 
+            "location": 1, 
+            "birth_date": "1990-01-01", 
+            "pregnancy_status": "Pregnant",
+            "conditions": [1]
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "Nurse", 
+            "first_name": "Nurse", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-04-30T19:12:14Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$4SqRw58fJZ3c$KNwrRt/jOWh5IZodLE4VzGxz7InhYeA1Vwweje/0vVk=", 
+            "email": "", 
+            "date_joined": "2012-04-30T19:12:14Z"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "System", 
+            "first_name": "System", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2012-04-30T19:12:29Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$p3HlXJ7VPO9M$4Ox3qHqeyg18/E2saU1L+vJCtmPHEziNccfCQANnIB0=", 
+            "email": "", 
+            "date_joined": "2012-04-30T19:12:29Z"
+        }
+    },
+    {
+        "pk": 1000, 
+        "model": "patients.nurse", 
+        "fields": {
+            "user": 20, 
+            "location": 1
+        }
+    }, 
+    {
+        "pk": 2000, 
+        "model": "patients.nurse", 
+        "fields": {
+            "user": 30, 
+            "location": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.message", 
+        "fields": {
+            "content": "Test message: Hi, how are you?", 
+            "date": "2012-04-30T19:02:32.926Z", 
+            "user_id": 2000, 
+            "sent_by": "System",
+            "client_id": 100
+        }
+    },
+    {
+        "pk": 1,
+        "model": "patients.condition",
+        "fields": {
+            "name": "General pregnancy"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 1,
+            "priority": 0,
+            "message": "Generalized pregnancy message!",
+            "start_week": -50,
+            "end_week": 50,
+            "repeats": true
+        }
+    },
+    {
+        "pk": 2,
+        "model": "patients.automatedmessage",
+        "fields": {
+            "condition": 1,
+            "priority": 1,
+            "message": "Third trimester message!",
+            "start_week": -12,
+            "end_week": 0,
+            "repeats": false
+        }
+    }
+]

@@ -1,0 +1,12 @@
+Installing dependencies:
+`sudo ./install.sh`
+
+Running the server:
+`python manage.py runserver`
+
+Running the transports:
+`python manage.py celeryd -Bl info`
+
+Reinstalling the database:
+'rm kenya.db'
+'python manage.py loaddata patients/fixtures/populate_database.json'
