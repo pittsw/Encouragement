@@ -3,7 +3,6 @@
 
         // The id of the currently selected client
         var client_id = undefined;
-        var client_name = undefined;
 
         // Set up AJAX to allow posts
         $.ajaxSetup({ 
@@ -175,19 +174,21 @@
         var load = function(link) {
             resetColors();
             client_id = link.id;
-            client_name = $(link).find('.name').html();
             $(".message-list").load("/fragment/message/" + client_id + "/");
             $(".client-profile").load("/detail/" + client_id + "/", function() {
                 loadEditHandlers(link);
             });
             $(link).css("background-color", "rgb(91,141,147)");
             $(link).css("color", "rgb(217,233,236)");
-            $('.name_bar').html(client_name);
+            $('.name_bar').html($(link).find('.name').html());
             $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
-            $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
         }
         $(".person").on("click", function(e) {
             load(this);
+        });
+
+        $("#change").on("click", function(e) {
+            $(".message-list").load("/fragment/message_list/" + client_id + "/");
         });
 
         // Set up the asynchronous search
