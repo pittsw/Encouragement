@@ -146,6 +146,11 @@ body {
     font-size: 16px;
 }
 
+.list .client_id {
+    font-size: 12px;
+    display: inline;
+}
+
 .list .pendingname {
     display: inline;
     font-style: bold;

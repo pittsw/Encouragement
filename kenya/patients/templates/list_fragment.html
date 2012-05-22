@@ -2,11 +2,12 @@
 	{% for x in clients %}
     <div class="person" id="{{x.id}}">
         {% if x.pending > 0 %}
-            <div class="name pendingname">
+        <div class="name pendingname">
         {% else %}
-            <div class="name">
+        <div class="name">
         {% endif %}
-            <div>{{x.first_name}} {{x.last_name}}</div>
+            <div>{{x.first_name}}</div>
+            <div class="client_id">(#{{x.id}})</div>
             {% if x.pending > 0 %}
                 <div class="pending"></div>
             {% endif %}
