@@ -408,7 +408,6 @@ body {
 
 .messages .phone-box .wrapper {
 	height: 25px;
-
 }
 
 .messages .phone-box .completion_checkbox {
@@ -419,6 +418,7 @@ body {
 }
 
 .messages .phone-box .duration {
+	display: inline;
 }
 
 .messages .phone-box .phone-content {
