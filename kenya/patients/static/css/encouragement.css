@@ -395,7 +395,7 @@ textarea {
 
 .messages .message-list {
 	margin: 0px 5px 55px 5px;
-    height: 470px;
+    height: 448px;
     overflow: auto;
 }
 
@@ -552,7 +552,7 @@ textarea {
 
 .messagetable {
     font-size: 12px;
-    width: 410px;
+    width: 395px;
     border-width: 1px 0px 0px 1px;
     border-style: solid;
     border-color: rgb(140,140,140);

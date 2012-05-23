@@ -6,6 +6,9 @@ Add the language(s) spoken by the patient.
 Indicate whether a phone was shared or personal.
 Provide more granularity than just the morning/evening/afternoon for message frequency. For example, 8-10 a.m., 2-4 p.m., 7-10 p.m.
 Clear phone call needs to clear everything, not just the content.
+Sending messages needs to not overwrite the current display setting.
+Clicking send just sent a blank message. That's not right.
+Gets REALLY slow with over 1000 messages.
 
 
 Fix all the things!
