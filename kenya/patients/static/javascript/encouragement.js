@@ -3,7 +3,12 @@
 
         // The id of the currently selected client
         var client_id = undefined;
+
+        // The name of the currently selected client
         var client_name = undefined;
+
+        // The load timer that automatically refreshed the page
+        var load_timer = undefined;
 
         // Set up AJAX to allow posts
         $.ajaxSetup({ 
@@ -175,22 +180,35 @@
             $("#signup").dialog("open");
         });
 
-        // Set up our handlers for client clicks
-        var resetColors = function() {
-            $(".person").css("background-color", "rgb(217, 233, 236)");
-            $(".person").css("color", "rgb(0, 0, 0)");
+        // Refresh the client list page
+        var patientRefresh = function() {
+            load($('.list #' + client_id).get()[0]);
         }
 
-        // Load the middle and right panes when a new client is selected
+        // Load the middle and right panes when a new client is selected. We
+        // have to clear the load_timer to avoid race conditions
         var load = function(link) {
-            resetColors();
+            if (load_timer != undefined) {
+                clearInterval(load_timer);
+            }
             client_id = link.id;
             client_name = $(link).find('.name').html();
+
+            // Load the client list...
+            $('.client_list').load("/fragment/list/" + client_id + "/", function() {
+                $(".person").on("click", function() {
+                    load(this);
+                });
+            });
+
+            // ...load the message list...
             if($("#select_msg").val() == "list") {
                 $(".message-list").load("/fragment/message_list/" + client_id + "/");
             } else {
                 $(".message-list").load("/fragment/message/" + client_id + "/");
             }
+
+            // ...and load the client profile.
             $(".client-profile").load("/detail/" + client_id + "/", function() {
                 loadEditHandlers(link);
             });
@@ -199,11 +217,16 @@
             $('.name_bar').html(client_name);
             $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
             $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
+            load_timer = setInterval(patientRefresh, 60000);
         }
+        // Hook in client selecting...
         $(".person").on("click", function(e) {
             load(this);
         });
+        // ...and make refreshes automatic
+        load_timer = setInterval(patientRefresh, 60000);
 
+        // Change message displays when the user selects the pulldown
         $("#select_msg").on("change", function(e) {
             if($("#select_msg").val() == "list") {
                 $(".message-list").load("/fragment/message_list/" + client_id + "/");
