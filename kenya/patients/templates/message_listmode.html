@@ -1,8 +1,7 @@
 {% load patient_tags %}
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('.messagetable td .content').on('click', function(e) {
-
 			if ($(this).css("white-space") == "nowrap") {
 				$(this).css("white-space", "normal");
 			} else {
@@ -11,6 +10,7 @@
 		});
 	});
 </script>
+
 <table class="messagetable">
 	<tr>
 		<th>Date</th>
