@@ -54,9 +54,7 @@
         });
 
 		// Expand and contract a message upon click while in list view
-		// Didn't work here for some reason I couldn't figure out, so
-		// I put it directly into message_listmode.html.
-		// Fix this if you want. -David
+		
 
         // Sets up the characters left view.
         $('#message-box').on('keyup', function(e) {
