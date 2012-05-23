@@ -210,6 +210,8 @@
             // Load the client list...
             $('.client_list').load("/fragment/list/" + client_id + "/", function() {
                 registerClientHandlers();
+                $(".list #" + client_id).css("background-color", "rgb(91,141,147)");
+                $(".list #" + client_id).css("color", "rgb(217,233,236)");
             });
 
             // ...load the message list...
@@ -223,8 +225,6 @@
             $(".client-profile").load("/detail/" + client_id + "/", function() {
                 loadEditHandlers(link);
             });
-            $(link).css("background-color", "rgb(91,141,147)");
-            $(link).css("color", "rgb(217,233,236)");
             $('.name_bar').html(client_name);
             $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
             $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
