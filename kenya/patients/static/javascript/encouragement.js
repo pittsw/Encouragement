@@ -83,7 +83,7 @@
 
         // Send a message when the nurse clicks send
         $('.messages #send_message').on('click', function() {
-            if (client_id === undefined) {
+            if (client_id === undefined || $(".messages #message-box").val() == "") {
                 return;
             }
             var xhr = new XMLHttpRequest();
