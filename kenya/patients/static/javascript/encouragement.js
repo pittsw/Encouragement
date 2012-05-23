@@ -43,6 +43,9 @@
 
         $('#clear_call').on('click', function(e) {
             $('#call_notes').val("");
+            $('#duration').val('');
+            $('#complete').attr('checked', false);
+            $('.duration').hide();
         });
 
 		// Expand and contract a message upon click while in list view
