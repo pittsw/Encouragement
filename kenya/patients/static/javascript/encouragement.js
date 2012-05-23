@@ -101,7 +101,11 @@
                 if (xhr.readyState != 4) {
                     return;
                 }
-                $(".message-list").load("/fragment/message/" + client_id + "/");
+                if($("#select_msg").val() == "list") {
+                    $(".message-list").load("/fragment/message_list/" + client_id + "/");
+                } else {
+                    $(".message-list").load("/fragment/message/" + client_id + "/");
+                }
                 $(".messages #message-box").val("").keyup();
             }
             xhr.open("POST", "/message/" + client_id + "/", true);
@@ -120,7 +124,11 @@
                 if (xhr.readyState != 4) {
                     return;
                 }
-                $(".message-list").load("/fragment/message/" + client_id + "/");
+                if($("#select_msg").val() == "list") {
+                    $(".message-list").load("/fragment/message_list/" + client_id + "/");
+                } else {
+                    $(".message-list").load("/fragment/message/" + client_id + "/");
+                }
                 $(".messages #complete").val('');
                 $(".messages .duration").val('');
                 $(".messages #call_notes").val('');
