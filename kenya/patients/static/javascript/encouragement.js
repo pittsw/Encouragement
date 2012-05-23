@@ -185,20 +185,31 @@
             load($('.list #' + client_id).get()[0]);
         }
 
+        // Register click handlers on all clients
+        var registerClientHandlers = function() {
+            $(".person").on("click", function() {
+                load(this);
+            });
+        }
+
         // Load the middle and right panes when a new client is selected. We
         // have to clear the load_timer to avoid race conditions
         var load = function(link) {
             if (load_timer != undefined) {
                 clearInterval(load_timer);
             }
+            if (!link) {
+                $('.client_list').load("/fragment/list", function() {
+                    registerClientHandlers();
+                });
+                return;
+            }
             client_id = link.id;
             client_name = $(link).find('.name').html();
 
             // Load the client list...
             $('.client_list').load("/fragment/list/" + client_id + "/", function() {
-                $(".person").on("click", function() {
-                    load(this);
-                });
+                registerClientHandlers();
             });
 
             // ...load the message list...
@@ -220,9 +231,7 @@
             load_timer = setInterval(patientRefresh, 60000);
         }
         // Hook in client selecting...
-        $(".person").on("click", function(e) {
-            load(this);
-        });
+        registerClientHandlers();
         // ...and make refreshes automatic
         load_timer = setInterval(patientRefresh, 60000);
 
