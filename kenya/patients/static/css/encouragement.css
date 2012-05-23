@@ -582,7 +582,7 @@ textarea {
     margin: 0px;
     
 }
-<span id="notes_hide" class="cancel" style="display: inline; "></span>
+
 .messagetable .sender {
 	white-space: nowrap;
 	text-align: center;
@@ -592,6 +592,6 @@ textarea {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 260px;
+    width: 250px;
 }
 /* End messages styles. */
