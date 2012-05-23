@@ -127,9 +127,10 @@
                 } else {
                     $(".message-list").load("/fragment/message/" + client_id + "/");
                 }
-                $(".messages #complete").val('');
-                $(".messages .duration").val('');
-                $(".messages #call_notes").val('');
+                $('#call_notes').val("");
+                $('#duration').val('');
+                $('#complete').attr('checked', false);
+                $('.duration').hide();
             }
             xhr.open("POST", "/add_call/" + client_id + "/", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
