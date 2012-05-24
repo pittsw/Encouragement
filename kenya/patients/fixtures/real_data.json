@@ -196,7 +196,7 @@
         "pk": 10, 
         "model": "patients.nurse", 
         "fields": {
-            "user": 1, 
+            "user": 2, 
             "location": 1
         }
     }, 
@@ -204,7 +204,7 @@
         "pk": 20, 
         "model": "patients.nurse", 
         "fields": {
-            "user": 2, 
+            "user": 3, 
             "location": 2
         }
     }, 
