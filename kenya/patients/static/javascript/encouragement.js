@@ -219,6 +219,7 @@
                 registerClientHandlers();
                 $(".list #" + client_id).css("background-color", "rgb(91,141,147)");
                 $(".list #" + client_id).css("color", "rgb(217,233,236)");
+                people = $(".person");
             });
 
             // ...load the message list...
