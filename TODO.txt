@@ -6,8 +6,6 @@ Indicate whether a phone was shared or personal.
 Clear phone call needs to clear everything in the div, not just the content.
 Sending messages needs to not overwrite the current display setting (adding a message from list mode should not result in switching to conversation mode)
 Gets REALLY slow with over 1000 messages.
-Remove the pending field from messages, remove counting pending messages from update_client, and use F() expressions in a post_save listener instead (I'll handle this one [not because it's hard, but because that nasty grody paradigm was my fault in the first place] -Will)
-HOOK SEARCHING BACK IN, GOD
 
 
 Fix all the things!
