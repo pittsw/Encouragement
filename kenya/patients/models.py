@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import F
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
@@ -113,7 +114,6 @@ class Client(models.Model):
             return
 
         self.last_msg = messages[0].date
-        self.pending = len(messages.filter(read=False))
         self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
         self.save()
 
@@ -158,8 +158,6 @@ class Message(Interaction):
     )
     
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
-
-    read = models.BooleanField(default=False, editable=False)
 
 class SMSSyncOutgoing(models.Model):
 
@@ -252,3 +250,12 @@ class Visit(models.Model):
         
 class PhoneCall(Interaction):
     duration = models.IntegerField(default=0)
+
+
+@receiver(post_save, sender=Message, dispatch_uid="pending_update")
+def increment_pending(sender, **kwargs):
+    instance = kwargs['instance']
+    if instance.sent_by == 'Client' and kwargs['created'] and not kwargs['raw']:
+        client = instance.client_id
+        client.pending = F('pending') + 1
+        client.save()

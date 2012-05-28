@@ -34,20 +34,11 @@ def DoesNotExist(Exception):
         return repr(self.value)
 
 def client(request, id_number):
-    if request.method == 'POST':
-        client = Client.objects.get(id=id_number)
+    client = Client.objects.get(id=id_number)
+    if request.POST:
         if request.POST['text']:
             nurse = Nurse.objects.get(user=request.user)
             message_client(client, nurse, 'Nurse', request.POST['text'])
-        messages = Interaction.objects.filter(client_id=client)
-        return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
-    else:
-        client = Client.objects.get(id=id_number)
-        messages = Interaction.objects.filter(client_id=client)
-        return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
-
-def message_fragment(request, id):
-    client = Client.objects.get(id=id)
     messages = Interaction.objects.filter(client_id=client)
     for message in messages:
         try:
@@ -55,19 +46,22 @@ def message_fragment(request, id):
             message.message.save()
         except Message.DoesNotExist:
             continue
-    client.update()
+    client.pending = 0
+    client.save()
+    return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
+
+def message_fragment(request, id):
+    client = Client.objects.get(id=id)
+    client.pending = 0
+    client.save()
+    messages = Interaction.objects.filter(client_id=client)
     return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
 
 def message_list_frag(request, id):
     client = Client.objects.get(id=id)
+    client.pending = 0
+    client.save()
     messages = Interaction.objects.filter(client_id=client)
-    for message in messages:
-        try:
-            message.message.read = True
-            message.message.save()
-        except Message.DoesNotExist:
-            continue
-    client.update()
     return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
         
 def detail(request, id_number):

@@ -262,7 +262,6 @@
         "pk": 3, 
         "model": "patients.message", 
         "fields": {
-            "read": false, 
             "sent_by": "System"
         }
     }, 
@@ -270,7 +269,6 @@
         "pk": 2, 
         "model": "patients.message", 
         "fields": {
-            "read": false, 
             "sent_by": "Nurse"
         }
     }, 
@@ -278,7 +276,6 @@
         "pk": 1, 
         "model": "patients.message", 
         "fields": {
-            "read": false, 
             "sent_by": "Client"
         }
     }, 
