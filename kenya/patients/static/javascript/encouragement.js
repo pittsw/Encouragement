@@ -88,9 +88,10 @@
         switch_tabs($('.defaulttab'));
 
         // Send a message when the nurse clicks send
-        $('.messages #send_message').on('click', function() {
-             $("#send_message").css("background-color", "rgb(217, 233, 236)");
-            setTimeout( function(){$("#send_message").css("background-color", "rgb(91,141,147)")}, 100);
+        $('.messages #send_message').on("mousedown", function() {
+            $("#send_message").css("background-color", "rgb(217, 233, 236)");
+            }).on('mouseup mouseleave', function() {
+            $("#send_message").css("background-color", "rgb(91,141,147)");
             if (client_id === undefined || $(".messages #message-box").val() == "") {
                 return;
             }
