@@ -1,9 +1,5 @@
-Maybe move the script mentioned ~line 50 of encouragement.js out of message_listmode.html.
-Javascript up some button pressing effects.
 Add the language(s) spoken by the patient.
 Indicate whether a phone was shared or personal.
-Clear phone call needs to clear everything in the div, not just the content.
-Sending messages needs to not overwrite the current display setting (adding a message from list mode should not result in switching to conversation mode)
 Gets REALLY slow with over 1000 messages.
 
 

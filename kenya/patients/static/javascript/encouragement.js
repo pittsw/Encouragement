@@ -216,8 +216,10 @@
             client_name = $(link).find('.name').html();
 
             // Load the client list...
-            $('.client_list').load("/fragment/list/" + client_id + "/", function() {
+            $('.client_list').load("/fragment/list/", function() {
                 registerClientHandlers();
+                $(".person").css("background-color", "rgb(217,233,236)");
+                $(".person").css("color", "rgb(1,1,1)");
                 $(".list #" + client_id).css("background-color", "rgb(91,141,147)");
                 $(".list #" + client_id).css("color", "rgb(217,233,236)");
                 people = $(".person");

@@ -145,11 +145,8 @@ def client_fragment(request, id):
     return render_to_response("client_fragment.html", {'client': client},
                               context_instance=RequestContext(request))
 
-def list_fragment(request, id_number=None):
-    clients = [x for x in Client.objects.all().exclude(id=id_number)]
-    if id_number:
-        top_client = Client.objects.get(id=id_number)
-        clients = [top_client] + clients
+def list_fragment(request):
+    clients = Client.objects.all()
     return render_to_response("list_fragment.html", {'clients': clients},
                               context_instance=RequestContext(request))
 
