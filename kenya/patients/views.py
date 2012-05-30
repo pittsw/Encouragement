@@ -212,7 +212,7 @@ def csv_helper(**filter_kwargs):
         del client['location_id']
         client['conditions'] = [conditions[x.pk] for x in client_obj.conditions.all()]
         writer.writerow(client)
-    response['Content-Disposition'] = ('attachment; filename=clients.csv')
+    response['Content-Disposition'] = 'attachment; filename=clients.csv'
     return response
 
 def csv(request):
@@ -220,6 +220,21 @@ def csv(request):
 
 def clientcsv(request, id_number):
     return csv_helper(id=id_number)
+
+def message_csv(request, id_number):
+    client = get_object_or_404(Client, id=id_number)
+    field_list = ['date', 'from', 'message']
+    response = HttpResponse(';'.join(field_list) + "\n", mimetype="text/csv")
+    writer = DictWriter(response, field_list, delimiter=";")
+    for x in Interaction.objects.filter(client_id=client):
+        row = {
+            'date': x.date,
+            'from': 'Phone Log' if x.hasphoneattr else x.message.sent_by,
+            'message': x.content,
+        }
+        writer.writerow(x)
+    response['Content-Disposition'] = 'attachment; filename=messages.csv'
+    return response
 
 @csrf_exempt
 def smssync(request):
