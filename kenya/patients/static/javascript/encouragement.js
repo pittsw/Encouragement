@@ -223,6 +223,7 @@
             });
 
             // ...load the message list...
+            $('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
             if($("#select_msg").val() == "list") {
                 $(".message-list").load("/fragment/message_list/" + client_id + "/");
             } else {

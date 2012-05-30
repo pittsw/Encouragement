@@ -229,10 +229,10 @@ def message_csv(request, id_number):
     for x in Interaction.objects.filter(client_id=client):
         row = {
             'date': x.date,
-            'from': 'Phone Log' if x.hasphoneattr else x.message.sent_by,
+            'from': 'Phone Log' if x.hasphoneattr() else x.message.sent_by,
             'message': x.content,
         }
-        writer.writerow(x)
+        writer.writerow(row)
     response['Content-Disposition'] = 'attachment; filename=messages.csv'
     return response
 

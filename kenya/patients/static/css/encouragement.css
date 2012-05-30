@@ -502,6 +502,10 @@ textarea {
 	vertical-align: middle;
 }
 
+.messages .download {
+    font-size: 12px;
+}
+
 .messages .header {
     background-color: rgb(212,200,156);
     text-align: center;
