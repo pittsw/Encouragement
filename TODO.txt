@@ -1,4 +1,3 @@
-Add messages to csv output
 Maybe move the script mentioned ~line 50 of encouragement.js out of message_listmode.html.
 Javascript up some button pressing effects.
 Add the language(s) spoken by the patient.
