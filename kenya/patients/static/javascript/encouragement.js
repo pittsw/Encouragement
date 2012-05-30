@@ -88,9 +88,14 @@
         switch_tabs($('.defaulttab'));
 
         // Send a message when the nurse clicks send
+        
+        $('.messages #send_message').on("mouseleave", function() {
+        	$("#send_message").css("background-color", "rgb(91,141,147)");
+        });
+        
         $('.messages #send_message').on("mousedown", function() {
             $("#send_message").css("background-color", "rgb(217, 233, 236)");
-            }).on('mouseup mouseleave', function() {
+            }).on('mouseup', function() {
             $("#send_message").css("background-color", "rgb(91,141,147)");
             if (client_id === undefined || $(".messages #message-box").val() == "") {
                 return;
@@ -114,7 +119,14 @@
         });
 
         // Save a call when the nurse clicks save
-        $('.messages #save_call').on('click', function() {
+         $('.messages #save_call').on("mouseleave", function() {
+        	$("#save_call").css("background-color", "rgb(91,141,147)");
+        });
+        
+        $('.messages #save_call').on("mousedown", function() {
+            $("#save_call").css("background-color", "rgb(217, 233, 236)");
+            }).on('mouseup', function() {
+            $("#save_call").css("background-color", "rgb(91,141,147)");
             if (client_id == undefined) {
                 return;
             }

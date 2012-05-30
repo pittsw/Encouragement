@@ -1,6 +1,7 @@
 Add the language(s) spoken by the patient.
 Indicate whether a phone was shared or personal.
 Gets REALLY slow with over 1000 messages.
+Still freaks out a bit with resolving pending messages. No longer jumps them to the top however, so it's an improvement.
 
 
 Fix all the things!
