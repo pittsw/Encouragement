@@ -120,6 +120,9 @@ textarea {
     background-image: url("/static/images/cancel.png");
     float: right;
 }
+
+
+
 /* End full page styles. */
 
 /* Search bar styles */
@@ -340,6 +343,10 @@ textarea {
 
 .info #visit_hide {
     display: none;
+}
+
+.msg_head {
+	margin-top: 10px;
 }
 /* End styles for client details pane. */
 
