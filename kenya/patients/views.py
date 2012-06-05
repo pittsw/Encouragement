@@ -94,13 +94,11 @@ def add_note(request, id):
         return HttpResponse('')
     return render_to_response("add_note.html", {"client":client}, context_instance=RequestContext(request))
 
-
 def delete_note(request, pk):
     note = get_object_or_404(Note, pk=pk)
     if request.method == "POST":
         note.delete()
         return HttpResponse('')
-
 
 def add_visit(request, id):
     form = None

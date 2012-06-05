@@ -134,6 +134,10 @@ textarea {
     padding-top: 4px;
 }
 
+.search {
+	margin-left: 10px;
+}
+
 .search_bar .addbutton {
     float: right;
     width: 40px;
