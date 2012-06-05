@@ -7,7 +7,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^patient/(?P<id_number>\d+)/', views.client),
     url(r'^detail/(?P<id_number>\d+)/', views.detail),
     url(r'^message/(?P<id_number>\d+)/', views.add_message),
     url(r'^add_call/(?P<id_number>\d+)/', views.add_call),

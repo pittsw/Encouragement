@@ -14,15 +14,27 @@ from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
 from patients.models import *
 from patients.tasks import incoming_message, message_client
 
+def get_object_or_default(klass, default, **kwargs):
+    """Performs a get query, but instead of throwing an exception returns
+    the default value if a matching object is not found.
+
+    """
+    try:
+        return klass.objects.get(**kwargs)
+    except:
+        return default
+
 @login_required
 def index(request):
     form = render_to_string("add_client.html", {"form": AddClientForm()},
         context_instance=RequestContext(request))
     clients = Client.objects.all()
     listf = render_to_string("list_fragment.html", {'clients': clients})
+    nurse = get_object_or_default(Nurse, "Administrator", user=request.user)
     c = {
         'form': form,
-        'listf' : listf,
+        'listf': listf,
+        'nurse': nurse,
     }
     c.update(csrf(request))
     return render_to_response("test.html", c, context_instance=RequestContext(request))
@@ -32,23 +44,6 @@ def DoesNotExist(Exception):
         self.value = value
     def __str__(self):
         return repr(self.value)
-
-def client(request, id_number):
-    client = Client.objects.get(id=id_number)
-    if request.POST:
-        if request.POST['text']:
-            nurse = Nurse.objects.get(user=request.user)
-            message_client(client, nurse, 'Nurse', request.POST['text'])
-    messages = Interaction.objects.filter(client_id=client)
-    for message in messages:
-        try:
-            message.message.read = True
-            message.message.save()
-        except Message.DoesNotExist:
-            continue
-    client.pending = 0
-    client.save()
-    return render_to_response("display.html", {"client":client, "messages":messages}, context_instance=RequestContext(request))
 
 def message_fragment(request, id):
     client = Client.objects.get(id=id)
@@ -88,7 +83,7 @@ def list_clients(request):
 def add_note(request, id):
     client = get_object_or_404(Client, id=id)
     if request.method == "POST":
-        nurse = Nurse.objects.get(user=request.user)
+        nurse = get_object_or_default(Nurse, None, user=request.user)
         n = Note(client_id=client, author_id=nurse, content=request.POST.get("text"))
         n.save()
         return HttpResponse('')
@@ -168,14 +163,18 @@ def edit_client(request, id):
 def add_message(request, id_number):
     if request.method == 'POST':
         text = request.POST['text']
-        nurse = Nurse.objects.get(user=request.user)
+        nurse = get_object_or_default(Nurse, None, user=request.user)
+        if nurse:
+            sender = 'Nurse'
+        else:
+            sender = 'System'
         client = get_object_or_404(Client, id=id_number)
-        message_client(client, nurse, 'Nurse', text)
+        message_client(client, nurse, sender, text)
         return HttpResponse('')
 
 def add_call(request, id_number):
     if request.method == "POST":
-        nurse = Nurse.objects.get(user=request.user)
+        nurse = get_object_or_default(Nurse, None, user=request.user)
         client = get_object_or_404(Client, id=id_number)
         content = request.POST['content']
         duration = request.POST['duration']

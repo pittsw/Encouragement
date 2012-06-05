@@ -226,7 +226,7 @@ class Note(models.Model):
         
     client_id = models.ForeignKey(Client)
     
-    author_id = models.ForeignKey(Nurse)
+    author_id = models.ForeignKey(Nurse, blank=True, null=True)
     
     content = models.CharField(max_length=500)
     

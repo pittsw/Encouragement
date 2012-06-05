@@ -66,6 +66,8 @@ textarea {
     float: right;
     margin-right: 0.5em;
     padding-top: 0px;
+    font-size: 10px;
+    text-transform: capitalize;
 }
 
 .errors {
