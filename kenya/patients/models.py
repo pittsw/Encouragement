@@ -128,6 +128,7 @@ class Nurse(models.Model):
     
     def __unicode__(self):
         return self.user.first_name
+        # consider making this first AND last names.
 
 class Interaction(models.Model):
     class Meta:
