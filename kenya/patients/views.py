@@ -176,7 +176,7 @@ def add_call(request, id_number):
     if request.method == "POST":
         nurse = get_object_or_default(Nurse, None, user=request.user)
         client = get_object_or_404(Client, id=id_number)
-        content = request.POST['content']
+        content = request.POST['text']
         duration = request.POST['duration']
         try:
             duration = int(duration)
