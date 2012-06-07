@@ -1,7 +1,8 @@
-from django.conf.urls import patterns, include, url
 from django.conf import settings
-import patients.views as views
+from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+import patients.views as views
+import smssync.urls
 
 from django.contrib import admin
 admin.autodiscover()
@@ -21,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^visit/(?P<id>\d+)/', views.add_visit),
     url(r'^delete_visit/(?P<pk>\d+)/', views.delete_visit),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^smssync', views.smssync),
     url(r'^$', views.index),
     url(r'^csv/', views.csv),
     url(r'^clientcsv/(?P<id_number>\d+)/', views.clientcsv),
@@ -29,5 +29,6 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login'),
+    url(r'^smssync/', include(smssync.urls)),
 )
 urlpatterns += staticfiles_urlpatterns()

@@ -160,16 +160,6 @@ class Message(Interaction):
     
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
-class SMSSyncOutgoing(models.Model):
-
-    target = models.CharField(max_length=50)
-
-    content = models.CharField(max_length=1000)
-
-    def __unicode__(self):
-        return '"{cont}" >> {tar}'.format(cont=self.content, tar=self.target)
-
-
 class Condition(models.Model):
     """Choo choo!
 

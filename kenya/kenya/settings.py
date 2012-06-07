@@ -5,7 +5,7 @@ from datetime import timedelta
 URGENT = timedelta(days=14)
 
 # Necessary for SMSSync view.
-TRANSPORT = 'SMSSyncTransport'
+TRANSPORT = 'smssync'
 SMSSYNC_SECRET = 'Standards'
 
 # These settings must be set to use Celery
@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'patients',
+    'smssync',
     'djcelery',
 )
 

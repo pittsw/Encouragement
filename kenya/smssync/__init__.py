@@ -1,6 +1,7 @@
-from patients.models import SMSSyncOutgoing
+from transports import BaseTransport
+from smssync.models import SMSSyncOutgoing
 
-class SMSSyncTransport(object):
+class Transport(BaseTransport):
     """A transport that sends a message through an SMSSync API.
 
     """

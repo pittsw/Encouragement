@@ -9,7 +9,6 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils import simplejson
-from django.views.decorators.csrf import csrf_exempt
 
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
 from patients.models import *
@@ -162,16 +161,19 @@ def edit_client(request, id):
                               context_instance=RequestContext(request))
     
 def add_message(request, id_number):
-    if request.method == 'POST':
-        text = request.POST['text']
-        nurse = get_object_or_default(Nurse, None, user=request.user)
-        if nurse:
-            sender = 'Nurse'
-        else:
-            sender = 'System'
-        client = get_object_or_404(Client, id=id_number)
-        message_client(client, nurse, sender, text)
-        return HttpResponse('')
+    try:
+        if request.method == 'POST':
+            text = request.POST['text']
+            nurse = get_object_or_default(Nurse, None, user=request.user)
+            if nurse:
+                sender = 'Nurse'
+            else:
+                sender = 'System'
+            client = get_object_or_404(Client, id=id_number)
+            message_client(client, nurse, sender, text)
+            return HttpResponse('')
+    except Exception as e:
+        print >> sys.stderr, e
 
 def add_call(request, id_number):
     if request.method == "POST":
@@ -230,38 +232,3 @@ def message_csv(request, id_number):
         writer.writerow(row)
     response['Content-Disposition'] = 'attachment; filename=messages.csv'
     return response
-
-@csrf_exempt
-def smssync(request):
-    try:
-        secret = settings.SMSSYNC_SECRET
-        payload = {
-            "secret": secret,
-        }
-
-        if request.method == 'POST':
-            sender = request.POST['from']
-            msg = request.POST['message']
-            print >> sys.stderr, "{sender}: {msg}".format(sender=sender, msg=msg)
-            payload['success'] = "true" if incoming_message(sender, msg) else "false"
-
-        outgoing_messages = SMSSyncOutgoing.objects.all()
-        if len(outgoing_messages) > 0:
-            payload['task'] = "send"
-            messages = [{
-                "to": msg.target,
-                "message": msg.content,
-            } for msg in outgoing_messages]
-
-            if ('HTTP_USER_AGENT' not in request.META
-                    or 'SMSSync' in request.META['HTTP_USER_AGENT']):
-                outgoing_messages.delete()
-            payload['messages'] = messages
-
-        reply = {
-            "payload": payload
-        }
-        return HttpResponse(simplejson.dumps(reply), mimetype="application/json")
-    except Exception as e:
-        print >> sys.stderr, "Exception: {e}".format(e=e)
-        sys.stderr.flush()

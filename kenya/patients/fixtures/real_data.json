@@ -281,22 +281,6 @@
     }, 
     {
         "pk": 1, 
-        "model": "patients.smssyncoutgoing", 
-        "fields": {
-            "content": "Sending a message?", 
-            "target": ""
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "patients.smssyncoutgoing", 
-        "fields": {
-            "content": "Yay!", 
-            "target": ""
-        }
-    }, 
-    {
-        "pk": 1, 
         "model": "patients.condition", 
         "fields": {
             "name": "Sickle Cell Anemia"

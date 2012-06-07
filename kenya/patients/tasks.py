@@ -4,9 +4,9 @@ import sys
 from celery.schedules import crontab
 from celery.task import periodic_task, task
 from django.conf import settings
+from django.utils.importlib import import_module
 
 from patients.models import AutomatedMessage, Client, Message, Nurse
-import patients.transports
 
 
 @periodic_task(run_every=crontab(minute=0, hour=0))
@@ -30,13 +30,7 @@ def send_all():
     no defined transport in settings.py.
 
     """
-    transport = getattr(
-        sys.modules['patients.transports'],
-        settings.TRANSPORT,
-        None
-    )
-    if transport is None:
-        return
+    transport = import_module(settings.TRANSPORT).Transport
 
     transport_kwargs = getattr(settings, 'TRANSPORT_KWARGS', {})
     for client in Client.objects.all():
@@ -98,13 +92,7 @@ def message_client(client, nurse, sender, content, transport=None,
 
     """
     if transport is None:
-        transport = getattr(
-            sys.modules['patients.transports'],
-            settings.TRANSPORT,
-            None
-        )
-        if transport is None:
-            return
+        transport = import_module(settings.TRANSPORT).Transport
 
     Message(
         client_id=client,
