@@ -1,4 +1,5 @@
 from csv import DictWriter
+import sys
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -232,29 +233,35 @@ def message_csv(request, id_number):
 
 @csrf_exempt
 def smssync(request):
-    secret = settings.SMSSYNC_SECRET
-    payload = {
-        "secret": secret,
-    }
+    try:
+        secret = settings.SMSSYNC_SECRET
+        payload = {
+            "secret": secret,
+        }
 
-    if request.method == 'POST':
-        sender = request.POST['from']
-        msg = request.POST['message']
-        payload['success'] = "true" if incoming_message(sender, msg) else "false"
+        if request.method == 'POST':
+            sender = request.POST['from']
+            msg = request.POST['message']
+            print >> sys.stderr, "{sender}: {msg}".format(sender=sender, msg=msg)
+            payload['success'] = "true" if incoming_message(sender, msg) else "false"
 
-    outgoing_messages = SMSSyncOutgoing.objects.all()
-    if len(outgoing_messages) > 0:
-        payload['task'] = "send"
-        messages = [{
-            "to": msg.target,
-            "message": msg.content,
-        } for msg in outgoing_messages]
+        outgoing_messages = SMSSyncOutgoing.objects.all()
+        if len(outgoing_messages) > 0:
+            payload['task'] = "send"
+            messages = [{
+                "to": msg.target,
+                "message": msg.content,
+            } for msg in outgoing_messages]
 
-        if 'SMSSync' in request.META['HTTP_USER_AGENT']:
-            outgoing_messages.delete()
-        payload['messages'] = messages
+            if ('HTTP_USER_AGENT' not in request.META
+                    or 'SMSSync' in request.META['HTTP_USER_AGENT']):
+                outgoing_messages.delete()
+            payload['messages'] = messages
 
-    reply = {
-        "payload": payload
-    }
-    return HttpResponse(simplejson.dumps(reply), mimetype="application/json")
+        reply = {
+            "payload": payload
+        }
+        return HttpResponse(simplejson.dumps(reply), mimetype="application/json")
+    except Exception as e:
+        print >> sys.stderr, "Exception: {e}".format(e=e)
+        sys.stderr.flush()
