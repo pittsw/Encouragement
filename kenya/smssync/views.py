@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 
+from patients.tasks import incoming_message
 from smssync.models import SMSSyncOutgoing
 
 @csrf_exempt
@@ -19,7 +20,11 @@ def smssync(request):
             sender = request.POST['from']
             msg = request.POST['message']
             print >> sys.stderr, "{sender}: {msg}".format(sender=sender, msg=msg)
+            sys.stderr.flush()
             payload['success'] = "true" if incoming_message(sender, msg) else "false"
+        else:
+            print >> sys.stderr, "GET!?"
+            sys.stderr.flush()
 
         outgoing_messages = SMSSyncOutgoing.objects.all()
         if len(outgoing_messages) > 0:

@@ -12,7 +12,7 @@ from django.utils import simplejson
 
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
 from patients.models import *
-from patients.tasks import incoming_message, message_client
+from patients.tasks import message_client
 
 def get_object_or_default(klass, default, **kwargs):
     """Performs a get query, but instead of throwing an exception returns
