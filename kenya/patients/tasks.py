@@ -1,9 +1,8 @@
 from datetime import date, datetime, timedelta
 import sys
 
-from celery import group
 from celery.schedules import crontab
-from celery.task import periodic_task, task
+from celery.task import group, periodic_task, task
 from django.conf import settings
 from django.utils.importlib import import_module
 
@@ -34,7 +33,7 @@ def send_all_scheduled():
     transport = import_module(settings.TRANSPORT).Transport
 
     transport_kwargs = getattr(settings, 'TRANSPORT_KWARGS', {})
-    batch = group([scheduled_message.s(client, transport, transport_kwargs)
+    batch = group([scheduled_message.subtask(args=(client,))
         for client in Client.objects.all()])
     messages = batch.apply_async().join()
     transport.send_batch(messages)
@@ -59,22 +58,24 @@ def scheduled_message(client):
     )
     messages = [x for x in messages if x not in client.sent_messages.all()]
     
+    content = ""
     if len(messages) == 0:
-        return (client.phone_number, "Error: please contact clinic")
-        
-    message = messages[0]
-    if not message.repeats:
-        client.sent_messages.add(message)
-        client.save()
+        content = "Error: please report this error to your clinic."
+    else:
+        message = messages[0]
+        content = message.message
+        if not message.repeats:
+            client.sent_messages.add(message)
+            client.save()
 
     Message(
         client_id=client,
         user_id=None,
         sent_by="System",
-        content=message.message
+        content=content
     ).save()
 
-    return (client.phone_number, message.message)
+    return (client.phone_number, content)
 
 
 def message_client(client, nurse, sender, content, transport=None,

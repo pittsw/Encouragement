@@ -27,4 +27,4 @@ class BaseTransport(object):
 
         """
         for target, content in lst:
-            send(target, content)
+            cls.send(target, content)
