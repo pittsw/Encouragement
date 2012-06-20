@@ -1,6 +1,7 @@
 from datetime import date, datetime, timedelta
 import sys
 
+from celery import group
 from celery.schedules import crontab
 from celery.task import periodic_task, task
 from django.conf import settings
@@ -25,7 +26,7 @@ def update_client(client):
     client.update()
 
 @periodic_task(run_every=crontab(minute=55, hour=16, day_of_week="wednesday"))
-def send_all():
+def send_all_scheduled():
     """Sends a reminder message to every client twice a week, unless there is
     no defined transport in settings.py.
 
@@ -33,18 +34,21 @@ def send_all():
     transport = import_module(settings.TRANSPORT).Transport
 
     transport_kwargs = getattr(settings, 'TRANSPORT_KWARGS', {})
-    for client in Client.objects.all():
-        scheduled_message.delay(client, transport, transport_kwargs)
+    batch = group([scheduled_message.s(client, transport, transport_kwargs)
+        for client in Client.objects.all()])
+    messages = batch.apply_async().join()
+    transport.send_batch(messages)
 
 
 @task
-def scheduled_message(client, transport=None, transport_kwargs={}):
+def scheduled_message(client):
     """Calculates which message to send to a client, then sends it.
 
     Arguments:
     client - the client to send to
-    transport - the transport to send through
-    transport_kwargs - a dict containing options for the transport
+
+    Returns:
+    A tuple in the form (phone number, message) for this client
 
     """
     week = int((date.today() - client.due_date).days / 7)
@@ -56,21 +60,21 @@ def scheduled_message(client, transport=None, transport_kwargs={}):
     messages = [x for x in messages if x not in client.sent_messages.all()]
     
     if len(messages) == 0:
-        return {
-			'week': week,
-			'messages': messages,
-        }
+        return (client.phone_number, "Error: please contact clinic")
         
     message = messages[0]
     if not message.repeats:
         client.sent_messages.add(message)
         client.save()
-    message_client(client, None, 'System',
-                   message.message, transport, transport_kwargs)
-    return {
-		'week': week,
-		'messages': messages,
-    }
+
+    Message(
+        client_id=client,
+        user_id=None,
+        sent_by="System",
+        content=message.message
+    ).save()
+
+    return (client.phone_number, message.message)
 
 
 def message_client(client, nurse, sender, content, transport=None,
