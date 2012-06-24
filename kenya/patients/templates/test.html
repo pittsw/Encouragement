@@ -13,7 +13,7 @@
 		<div class="header-bar grid_16">
             <div class="border">
                 <span class="title">Encouragement System</span>
-                <span class="logout">
+                <span class="logout">{% if nurse %}
                     Currently logged in as {{nurse}}
                     <a href="/accounts/logout"><button type="button">Log out</button></a>
                 </span>
