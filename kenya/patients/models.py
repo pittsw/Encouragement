@@ -19,7 +19,7 @@ class Location(models.Model):
     def __unicode__(self):
         return self.name
 
-
+#add network
 class Client(models.Model):
 
     class Meta:
@@ -31,6 +31,27 @@ class Client(models.Model):
         ('Failed Pregnancy', 'Failed Pregnancy'),
     )
     
+    DAY_CHOICES = (
+		(1,'Monday'),
+		(2,'Tuesday'),
+		(3,'Wednesday'),
+		(4,'Thursday'),
+		(5,'Friday'),
+		(6,'Saturday'),
+		(0,'Sunday'),
+	)
+	
+    TIME_CHOICES = (
+		(8,"Morning"),
+		(13,"Afternoon"),
+		(19,"Evening"),
+	)
+	
+    NETWORK_CHOICES = (
+		("safaricom","Safaricom"),
+		("airtelkenya","Airtel"),
+	)
+    
     primary_key = models.AutoField(primary_key=True)
     
     id = models.IntegerField(unique=True)
@@ -38,12 +59,22 @@ class Client(models.Model):
     first_name = models.CharField(max_length=50)
 
     last_name = models.CharField(max_length=50)
+    
+    nickname = models.CharField(max_length=50)
 
     phone_number = models.CharField(max_length=50, blank=True, editable=False)
+    
+    #phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom", blank=True, editable=False)
+    
+    message_day = models.IntegerField(choices=DAY_CHOICES, default=3)
+    
+    message_time = models.IntegerField(choices=TIME_CHOICES, default=13)
 
     birth_date = models.DateField()
 
     location = models.ForeignKey(Location)
+    
+    father = models.CharField(max_length=50, blank=True)    
 
     pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
@@ -100,7 +131,7 @@ class Client(models.Model):
             return message[0]
 
     def generate_key(self):
-        key_length = 7.0
+        key_length = 5.0
         chars = "ABCDEFGHIJKLMNOP"
         string = (sha(str(self.id) + self.first_name + self.last_name)
             .hexdigest())
@@ -151,6 +182,7 @@ class Interaction(models.Model):
     def getClassName(self):
         return self.__class__.__name__
 
+#add shuja id
 class Message(Interaction):
     SENDER_CHOICES = (
         ('Client', 'Client'),
@@ -193,21 +225,17 @@ class AutomatedMessage(models.Model):
 
     priority = models.IntegerField(default=0)
 
-    message = models.CharField(max_length=144)
+    message = models.CharField(max_length=200)
 
-    start_week = models.IntegerField()
+    days_till_edd = models.IntegerField()
 
-    end_week = models.IntegerField()
-
-    repeats = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return '{con} ({pri}): "{msg}", {stw} to {end}'.format(
+        return '{con} ({pri}): "{msg}", send {edd}'.format(
             con=self.condition,
             pri=self.priority,
             msg=self.message,
-            stw=self.start_week,
-            end=self.end_week,
+            edd=self.days_till_edd,
         )
 
 
