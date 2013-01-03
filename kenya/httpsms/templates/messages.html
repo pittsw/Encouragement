@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+        <title>HTTP Sync Messages</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<style>
+		table {
+			border:1px solid black;
+			border-collapse: collapse;
+			width:90%;
+			margin:auto;
+		}
+		th,td {
+			padding: 10px;
+			border:1px solid black;
+		}
+		
+		h1 {
+			text-align:center;
+		}
+		</style>
+	</head>
+	<body>
+            {% csrf_token %}
+            {% if messages %}
+            <h1>Received Messages</h1>
+            <table>
+				<tr>
+				<th></th><th>To</th><th>Message</th>
+				</tr>
+                {% for message in messages %}
+                <tr>
+					<th>{{ message.id }}</th>
+					<td>{{ message.target }}</td>
+					<td>{{ message.content }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            No Messages
+            {% endif %}
+	</body>
+</html>
