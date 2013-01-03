@@ -120,7 +120,7 @@ def add_client(request):
     form = None
     c = {}
     if request.method == "GET":
-        form = AddClientForm()
+        form = AddClientForm(initial={"message_day":5,"years_of_education":"1"})
     elif request.method == "POST":
         form = AddClientForm(request.POST)
         if form.is_valid():
