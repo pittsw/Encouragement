@@ -157,7 +157,7 @@
     }, 
     {
         "pk": 1, 
-        "model": "patients.smssyncoutgoing", 
+        "model": "smssync.smssyncoutgoing", 
         "fields": {
             "content": "Sending a message?", 
             "target": ""
@@ -165,59 +165,10 @@
     }, 
     {
         "pk": 2, 
-        "model": "patients.smssyncoutgoing", 
+        "model": "smssync.smssyncoutgoing", 
         "fields": {
             "content": "Yay!", 
             "target": ""
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Dead"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Broken Leg"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Flu"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "HIV positive"
-        }
-    }, 
-    {
-        "pk": 5, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Pregnant"
-        }
-    }, 
-    {
-        "pk": 6, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Frequently Pregnant"
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "patients.condition", 
-        "fields": {
-            "name": "Prone to miscarry"
         }
     }, 
     {
@@ -252,53 +203,5 @@
         "fields": {
             "duration": 15
         }
-    },
-    {
-        "pk": 3, 
-        "model": "patients.automatedmessage", 
-        "fields": {
-            "start_week": -50, 
-            "priority": 5, 
-            "condition": 2, 
-            "message": "Blood pressure message one!", 
-            "repeats": false, 
-            "end_week": 50
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "patients.automatedmessage", 
-        "fields": {
-            "start_week": -50, 
-            "priority": 4, 
-            "condition": 2, 
-            "message": "Blood pressure message two!", 
-            "repeats": false, 
-            "end_week": 50
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "patients.automatedmessage", 
-        "fields": {
-            "start_week": -12, 
-            "priority": 1, 
-            "condition": 1, 
-            "message": "Third trimester message!", 
-            "repeats": false, 
-            "end_week": 0
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "patients.automatedmessage", 
-        "fields": {
-            "start_week": -50, 
-            "priority": 0, 
-            "condition": 1, 
-            "message": "Generalized pregnancy message!", 
-            "repeats": true, 
-            "end_week": 50
-        }
-    }
+    }   
 ]
