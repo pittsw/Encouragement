@@ -115,8 +115,8 @@ def incoming_message(phone_number, message):
     clients = Client.objects.filter(phone_number=phone_number)
     if len(clients) == 0:
         # We got a message from someone without a registered phone number
-        add_client(phone_number, message)
-        return
+        return add_client(phone_number, message)
+        
 
     client = clients[0]
     Message(
@@ -136,9 +136,11 @@ def add_client(phone_number, message):
     number is added.
 
     """
-    clients = Client.objects.filter(phone_number="")
+    unregistared_clients = Client.objects.filter(phone_number="")
 
-    for client in clients:
+    for client in unregistared_clients:
         if message == client.generate_key():
             client.phone_number = phone_number
             client.save()
+            return True
+    return False
