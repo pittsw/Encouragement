@@ -73,8 +73,9 @@
 
         // Switch tabs
         var switch_tabs = function(obj) {
-            $('.tab-content').hide();
-            $('.tabs a').removeClass("selected");
+            var tabs = $(obj.parents()[2])
+            tabs.children('.tab-content').hide();
+            tabs.find('.tabs a').removeClass("selected");
             var id = obj.attr("rel");
          
             $('#'+id).show();
@@ -85,7 +86,8 @@
         $('.tabs a').on('click', function(){
             switch_tabs($(this));
         });
-        switch_tabs($('.defaulttab'));
+        //Set Default Tabs
+        $('.defaulttab').each(function(i,ele){switch_tabs($(ele))});
 
         // Send a message when the nurse clicks send
         
