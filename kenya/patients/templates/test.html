@@ -27,12 +27,7 @@
 				</span>
 				<span class="addbutton" id="add"></span>
 			</div>
-		</div>
-		<div class="grid_12 center_bar">
-            <div class="name_bar"></div>
-            <div class="download">Download</div>
-		</div>
-		<div class="grid_4 base">
+	
             <div class="patient_bar">
                 <div style="display:inline;text-transform:uppercase;">Patient List</div>
                 <div style="display:inline;float:right;"><a href="/csv/">Download</a></div>
@@ -57,62 +52,8 @@
 			    {{listf}}
             </div>
 		</div>
-		<div class="grid_7 messages">
-			<div>
-		        <div id="tabs" class="Boxes">
-		            <div class="header">{{client}}</div>
-		            <ul class="tabs">
-		                <li class="envelopepic"><a href="#" class="defaulttab tab" rel="tabs-1"></a></li>
-		                <li class="phonepic"><a href="#" class="tab" rel="tabs-2"></a></li>
-		            </ul>
-		            <div class="phone-box tab-content" id="tabs-2">
-		                <form id="phone-box" method="post" action="">
-		                {% csrf_token %}
-		                	<div class="wrapper">
-								<div class="completion_checkbox">Call Completed <input id="complete" type="checkbox" name="completed" value="Completed"/>
-								</div>
-								<div class="duration">Duration: <input type="text" id="duration" name="duration" placeholder="In minutes"/>
-								</div>
-							</div>
-							<div class="phone-content"><textarea id="call_notes" cols=46 rows=3 style="margin:3px 10px 10px 10px;" placeholder="Enter Call Notes" name="text" value=""></textarea>
-							</div>
-                            <div style="text-align;right;padding-right:10px;">
-                                <span id="save_call" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
-                                <span id="clear_call" style="float:right;font-size:12px;" class="gray_button">Clear</span>
-                            </div>
-		                </form>
-		            </div>
-		            <div class="message-box tab-content" id="tabs-1">
-		                <form method="post" action="">
-		                {% csrf_token %}
-		                    <div class="send-to">To:</div>
-		                    <textarea id="message-box" cols=46 rows=3 style="margin:10px;" name="text" value="" placeholder="Send message"></textarea>
-		                    <div style="text-align:right; padding-right:10px;">
-		                        <span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
-		                        <span id="send_message" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Send</span>
-		                    </div>
-		                </form>
-		            </div>
-		        </div>
-		        <div>
-			        <div id="change" class="message_bar">Message History<span class="message-view-select">
-                        <span class="download">Download</span>
-			        		<select id="select_msg">
-								<option value="conversation">Conversation</option>
-								<option value="list">List</option>
-							</select>
-						</span>
-					</div>
-	        		<div class="message-list"></div>
-        		</div>
-        	</div>
-    	</div>
-	
-		<div class="grid_5 info">
-			<div class="client-profile">
-			</div>
+	<div class="grid_12" id="main_content">
 		</div>
-
    		<div style="display:none;" id="signup" title="Add a new client">
        	{{ form }}
    		</div>

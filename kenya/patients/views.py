@@ -58,7 +58,13 @@ def message_list_frag(request, id):
     client.save()
     messages = Interaction.objects.filter(client_id=client)
     return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
-        
+
+def client(request,id):
+	client = Client.objects.get(id=id)
+	
+	return render_to_response("display_client_fragment.html")
+
+    
 def detail(request, id_number):
     try:
         client = Client.objects.get(id=id_number)
@@ -75,10 +81,6 @@ def detail(request, id_number):
         }, context_instance=RequestContext(request))
     except DoesNotExist:
         return render_to_response("form.html")
-    
-def list_clients(request):
-    clients = Client.objects.all()
-    return render_to_response("list.html", {"clients":clients}, context_instance=RequestContext(request))
 
 def add_note(request, id):
     client = get_object_or_404(Client, id=id)

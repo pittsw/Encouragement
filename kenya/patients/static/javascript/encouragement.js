@@ -34,44 +34,156 @@
                  }
              } 
         });
+        
+         //Load Client View Into Main Content
+        var load_client = function(client_obj) { //FIX: Load Id from client_obj
+			$('#main_content').load("/fragment/display_client/1000",function() {load_client_complete(client_obj)})
+		}
+		load_client();
 		
-        // Swap the boxes in add call when the call completed button is changed
-		$('#complete').on('change', function(e) {
-			if (this.checked) {
-				$('.duration').show();
-			} else {
-				$('#duration').val('');
-				$('.duration').hide();			
+		var load_client_complete = function(client_obj) {
+			
+			load_message_call_tabs();
+			
+			 // Change message displays when the user selects the pulldown
+			$("#select_msg").on("change", function(e) {
+				if($("#select_msg").val() == "list") {
+					$(".message-list").load("/fragment/message_list/" + client_id + "/");
+				} else {
+					$(".message-list").load("/fragment/message/" + client_id + "/");
+				}
+			});
+			
+			if(!client_obj) {
+				return; // do not load client info
 			}
-		});
-		$('.duration').hide();
+			
+			client_id = client_obj.id;
+            client_name = $(client_obj).find('.name').html();
+            
+             // ...load the message list...
+            $('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
+            if($("#select_msg").val() == "list") {
+                $(".message-list").load("/fragment/message_list/" + client_id + "/");
+            } else {
+                $(".message-list").load("/fragment/message/" + client_id + "/");
+             }
+             
+              // ...and load the client profile.
+            $(".client-profile").load("/detail/" + client_id + "/", function() {
+                loadEditHandlers(client_obj);
+            });
+            $('.name_bar').html(client_name);
+            $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
+            $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
+        }
+        
+        var load_message_call_tabs = function () {
+			 // Swap the boxes in add call when the call completed button is changed
+			$('#complete').on('change', function(e) {
+				if (this.checked) {
+					$('.duration').show();
+				} else {
+					$('#duration').val('');
+					$('.duration').hide();			
+				}
+			});
+			$('.duration').hide();
 
-        $('#clear_call').on('click', function(e) {
-            $('#call_notes').val("");
-            $('#duration').val('');
-            $('#complete').attr('checked', false);
-            $('.duration').hide();
-        });
+			$('#clear_call').on('click', function(e) {
+				$('#call_notes').val("");
+				$('#duration').val('');
+				$('#complete').attr('checked', false);
+				$('.duration').hide();
+			});
+			
+			// Sets up the characters left view.
+			$('#message-box').on('keyup', function(e) {
+				var len = $('#message-box').val().length;
+				var messages = Math.ceil(len / 144);
+				var left = len % 144;
+				if (left == 0 && messages > 0) {
+					left = 144;
+				}
+				var str = left + "/144 characters, " + messages + " message";
+				if (messages != 1) {
+					str += "s";
+				}
+				$('#chars-left').text(str);
+			});
+            
+            // Send a message when the nurse clicks send
+        
+			$('.messages #send_message').on("mouseleave", function() {
+				$("#send_message").css("background-color", "rgb(91,141,147)");
+			});
+			
+			$('.messages #send_message').on("mousedown", function() {
+				$("#send_message").css("background-color", "rgb(217, 233, 236)");
+				}).on('mouseup', function() {
+				$("#send_message").css("background-color", "rgb(91,141,147)");
+				if (client_id === undefined || $(".messages #message-box").val() == "") {
+					return;
+				}
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState != 4) {
+						return;
+					}
+					if($("#select_msg").val() == "list") {
+						$(".message-list").load("/fragment/message_list/" + client_id + "/");
+					} else {
+						$(".message-list").load("/fragment/message/" + client_id + "/");
+					}
+					$(".messages #message-box").val("").keyup();
+				}
+				xhr.open("POST", "/message/" + client_id + "/", true);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+				xhr.send($('#message-box').serialize());
+			});
 
-		// Expand and contract a message upon click while in list view
-		
-
-        // Sets up the characters left view.
-        $('#message-box').on('keyup', function(e) {
-            var len = $('#message-box').val().length;
-            var messages = Math.ceil(len / 144);
-            var left = len % 144;
-            if (left == 0 && messages > 0) {
-                left = 144;
-            }
-            var str = left + "/144 characters, " + messages + " message";
-            if (messages != 1) {
-                str += "s";
-            }
-            $('#chars-left').text(str);
-        });
-
-        // Switch tabs
+			// Save a call when the nurse clicks save
+			 $('.messages #save_call').on("mouseleave", function() {
+				$("#save_call").css("background-color", "rgb(91,141,147)");
+			});
+			
+			$('.messages #save_call').on("mousedown", function() {
+				$("#save_call").css("background-color", "rgb(217, 233, 236)");
+				}).on('mouseup', function() {
+				$("#save_call").css("background-color", "rgb(91,141,147)");
+				if (client_id == undefined) {
+					return;
+				}
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState != 4) {
+						return;
+					}
+					if($("#select_msg").val() == "list") {
+						$(".message-list").load("/fragment/message_list/" + client_id + "/");
+					} else {
+						$(".message-list").load("/fragment/message/" + client_id + "/");
+					}
+					$('#call_notes').val("");
+					$('#duration').val('');
+					$('#complete').attr('checked', false);
+					$('.duration').hide();
+				}
+				xhr.open("POST", "/add_call/" + client_id + "/", true);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+				xhr.send($('#phone-box').serialize());
+			});
+			
+			create_tabs($('.messages #tabs'));
+		}
+        
+        var load_add_client = function() {
+			$('#main_content').load("/add");
+		}
+        
+           // Switch tabs
         var switch_tabs = function(obj) {
             var tabs = $(obj.parents()[2])
             tabs.children('.tab-content').hide();
@@ -80,78 +192,17 @@
          
             $('#'+id).show();
             obj.addClass("selected");
-        }
+         }
 
-        // Hook in tab switching
-        $('.tabs a').on('click', function(){
-            switch_tabs($(this));
-        });
-        //Set Default Tabs
-        $('.defaulttab').each(function(i,ele){switch_tabs($(ele))});
-
-        // Send a message when the nurse clicks send
-        
-        $('.messages #send_message').on("mouseleave", function() {
-        	$("#send_message").css("background-color", "rgb(91,141,147)");
-        });
-        
-        $('.messages #send_message').on("mousedown", function() {
-            $("#send_message").css("background-color", "rgb(217, 233, 236)");
-            }).on('mouseup', function() {
-            $("#send_message").css("background-color", "rgb(91,141,147)");
-            if (client_id === undefined || $(".messages #message-box").val() == "") {
-                return;
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) {
-                    return;
-                }
-                if($("#select_msg").val() == "list") {
-                    $(".message-list").load("/fragment/message_list/" + client_id + "/");
-                } else {
-                    $(".message-list").load("/fragment/message/" + client_id + "/");
-                }
-                $(".messages #message-box").val("").keyup();
-            }
-            xhr.open("POST", "/message/" + client_id + "/", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-            xhr.send($('#message-box').serialize());
-        });
-
-        // Save a call when the nurse clicks save
-         $('.messages #save_call').on("mouseleave", function() {
-        	$("#save_call").css("background-color", "rgb(91,141,147)");
-        });
-        
-        $('.messages #save_call').on("mousedown", function() {
-            $("#save_call").css("background-color", "rgb(217, 233, 236)");
-            }).on('mouseup', function() {
-            $("#save_call").css("background-color", "rgb(91,141,147)");
-            if (client_id == undefined) {
-                return;
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState != 4) {
-                    return;
-                }
-                if($("#select_msg").val() == "list") {
-                    $(".message-list").load("/fragment/message_list/" + client_id + "/");
-                } else {
-                    $(".message-list").load("/fragment/message/" + client_id + "/");
-                }
-                $('#call_notes').val("");
-                $('#duration').val('');
-                $('#complete').attr('checked', false);
-                $('.duration').hide();
-            }
-            xhr.open("POST", "/add_call/" + client_id + "/", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-            xhr.send($('#phone-box').serialize());
-        });
+		var create_tabs = function(obj) {
+			// Hook in tab switching
+			obj.find('.tabs a').on('click', function(){
+				switch_tabs($(this));
+			});
+			//Set Default Tabs
+			obj.find('.defaulttab').each(function(i,ele){switch_tabs($(ele))});
+		}
+        create_tabs($('#group-tabs'));
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
@@ -199,18 +250,18 @@
             }
         });
         $("#add").on("click", function() {
-            $("#signup").dialog("open");
+            load_add_client();
         });
 
-        // Refresh the client list page
+        // Refresh the client list page. Why is this here?
         var patientRefresh = function() {
-            load($('.list #' + client_id).get()[0]);
+           // load($('.list #' + client_id).get()[0]);
         }
 
         // Register click handlers on all clients
         var registerClientHandlers = function() {
             $(".person").on("click", function() {
-                load(this);
+                load_client(this);
             });
         }
 
@@ -238,7 +289,7 @@
                 $(".list #" + client_id).css("color", "rgb(217,233,236)");
                 people = $(".person");
             });
-
+            
             // ...load the message list...
             $('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
             if($("#select_msg").val() == "list") {
@@ -260,15 +311,6 @@
         registerClientHandlers();
         // ...and make refreshes automatic
         load_timer = setInterval(patientRefresh, 60000);
-
-        // Change message displays when the user selects the pulldown
-        $("#select_msg").on("change", function(e) {
-            if($("#select_msg").val() == "list") {
-                $(".message-list").load("/fragment/message_list/" + client_id + "/");
-            } else {
-                $(".message-list").load("/fragment/message/" + client_id + "/");
-            }
-        });
 
         // Set up the asynchronous search
         var people = $('.person');
