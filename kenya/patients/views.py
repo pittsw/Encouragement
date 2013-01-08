@@ -37,7 +37,7 @@ def index(request):
         'nurse': nurse,
     }
     c.update(csrf(request))
-    return render_to_response("test.html", c, context_instance=RequestContext(request))
+    return render_to_response("index.html", c, context_instance=RequestContext(request))
 
 def DoesNotExist(Exception):
     def __init__(self, value):
@@ -59,8 +59,28 @@ def message_list_frag(request, id):
     messages = Interaction.objects.filter(client_id=client)
     return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
 
-def client(request,id):
-	client = Client.objects.get(id=id)
+def client(request):
+	if request.method == "GET":
+		if "id" in request.GET:
+			client = Client.objects.get(id=request.GET["id"])
+			isList = request.GET.get('list')
+			client.pending = 0
+			client.save()
+			messages = Interaction.objects.filter(client_id=client)
+			if isList is None:
+				message_fragment = render_to_string("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+			else:
+				message_fragment = render_to_string("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+			
+			return render_to_response("display_client_fragment.html",
+				{"client":client,
+				"list":isList,
+				"notes": Note.objects.filter(client_id=client),
+				"history": Visit.objects.filter(client_id=client),
+				"client_fragment": render_to_string("client_fragment.html", {"client":client}),
+				"message_fragment":message_fragment,
+				"visit_form": render_to_string("visit_form.html", {"form": VisitForm()}),
+				}, context_instance=RequestContext(request) )
 	
 	return render_to_response("display_client_fragment.html")
 

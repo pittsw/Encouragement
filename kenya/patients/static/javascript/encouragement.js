@@ -35,9 +35,30 @@
              } 
         });
         
+        // Register click handlers on all clients
+        var registerClientHandlers = function() {
+            $(".person").on("click", function() {
+               //change css on selected person
+               $(".person_selected").removeClass("person_selected");
+               $(".list #"+this.id).addClass("person_selected");
+                load_client(this);
+            });
+        }
+		registerClientHandlers();
+        
          //Load Client View Into Main Content
         var load_client = function(client_obj) { //FIX: Load Id from client_obj
-			$('#main_content').load("/fragment/display_client/1000",function() {load_client_complete(client_obj)})
+			var fragment_url = "/fragment/display_client/?";
+			if(client_obj){
+				fragment_url += "id="+client_obj.id;
+			}
+			if($("#select_msg") && $("#select_msg").val() == "list") {
+				if (fragment_url.length > 26) { //second get vaiable
+					fragment_url += "&";
+				}
+				fragment_url += "list=1";
+			}
+			$('#main_content').load(fragment_url,function() {load_client_complete(client_obj)})
 		}
 		load_client();
 		
@@ -48,34 +69,18 @@
 			 // Change message displays when the user selects the pulldown
 			$("#select_msg").on("change", function(e) {
 				if($("#select_msg").val() == "list") {
-					$(".message-list").load("/fragment/message_list/" + client_id + "/");
+					$(".message-list").load("/fragment/message_list/" + client_obj.id + "/");
 				} else {
-					$(".message-list").load("/fragment/message/" + client_id + "/");
+					$(".message-list").load("/fragment/message/" + client_obj.id + "/");
 				}
 			});
 			
-			if(!client_obj) {
-				return; // do not load client info
+			if(client_obj) {
+				client_id = client_obj.id;
+				client_name = $(client_obj).find('.name').html();
 			}
-			
-			client_id = client_obj.id;
-            client_name = $(client_obj).find('.name').html();
             
-             // ...load the message list...
-            $('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
-            if($("#select_msg").val() == "list") {
-                $(".message-list").load("/fragment/message_list/" + client_id + "/");
-            } else {
-                $(".message-list").load("/fragment/message/" + client_id + "/");
-             }
-             
-              // ...and load the client profile.
-            $(".client-profile").load("/detail/" + client_id + "/", function() {
-                loadEditHandlers(client_obj);
-            });
-            $('.name_bar').html(client_name);
-            $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
-            $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
+			loadEditHandlers(client_obj);
         }
         
         var load_message_call_tabs = function () {
@@ -258,16 +263,10 @@
            // load($('.list #' + client_id).get()[0]);
         }
 
-        // Register click handlers on all clients
-        var registerClientHandlers = function() {
-            $(".person").on("click", function() {
-                load_client(this);
-            });
-        }
-
+        
         // Load the middle and right panes when a new client is selected. We
         // have to clear the load_timer to avoid race conditions
-        var load = function(link) {
+        var loade = function(link) {
             if (load_timer != undefined) {
                 clearInterval(load_timer);
             }
@@ -308,9 +307,9 @@
             load_timer = setInterval(patientRefresh, 60000);
         }
         // Hook in client selecting...
-        registerClientHandlers();
+        
         // ...and make refreshes automatic
-        load_timer = setInterval(patientRefresh, 60000);
+        //load_timer = setInterval(patientRefresh, 60000);
 
         // Set up the asynchronous search
         var people = $('.person');

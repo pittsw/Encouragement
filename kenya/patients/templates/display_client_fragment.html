@@ -1,12 +1,13 @@
+{%  if client %}
 <div class="grid_12 center_bar">
-	<div class="name_bar"></div>
-	<div class="download">Download</div>
+	<div class="name_bar">{{client}}</div>
+	<div class="download"><a href="/clientcsv/{{client.id}}/">Download</a></div>
 </div>
+
 
 <div class="grid_7 messages alpha">
 	<div>
 		<div id="tabs" class="Boxes">
-			<div class="header">{{client}}</div>
 			<ul class="tabs">
 				<li class="envelopepic"><a href="#" class="defaulttab tab" rel="tabs-1"></a></li>
 				<li class="phonepic"><a href="#" class="tab" rel="tabs-2"></a></li>
@@ -31,7 +32,7 @@
 			<div class="message-box tab-content" id="tabs-1">
 				<form method="post" action="">
 				{% csrf_token %}
-					<div class="send-to">To:</div>
+					<div class="send-to">To: {{client}} (#{{client.id}})</div>
 					<textarea id="message-box" cols=46 rows=3 style="margin:10px;" name="text" value="" placeholder="Send message"></textarea>
 					<div style="text-align:right; padding-right:10px;">
 						<span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
@@ -45,16 +46,75 @@
 				<span class="download">Download</span>
 					<select id="select_msg">
 						<option value="conversation">Conversation</option>
-						<option value="list">List</option>
+						<option {% if list %} selected {% endif %} value="list">List</option>
 					</select>
 				</span>
 			</div>
-			<div class="message-list"></div>
+			<div class="message-list">
+			{{ message_fragment }}
+			</div>
 		</div>
 	</div>
 </div>
 
 <div class="grid_5 info omega">
 	<div class="client-profile">
+			<div class="header msg_head info_expanded" id="profile">
+			<span>Patient Information</span>
+			<span id="edit" class="view_buttons">&nbsp;</span>
+			<span class="edit_buttons" style="display:none;">
+				<span id="cancel" class="cancel">&nbsp;</span>
+				<span id="save">&nbsp;</span>
+			</span>
+		</div>
+		<div id="client_fragment" class="msg_body">
+			{{client_fragment}}
+		</div>
+
+		<div class="header msg_head info_expanded">
+			<span>Notes</span>
+			<span id="notes_add" class="add"></span>
+			<span id="notes_hide" class="cancel"></span>
+		</div>
+		<div class="msg_body" id="notes">
+			<table>
+				<tr id="note" style="display:none;">
+					<form id="add_note_form" method="post" action="/note/{{ client.id }}/">
+						{% csrf_token %}
+						<td colspan=2><textarea cols=24 rows=2 name="text" style="margin:5px;" />
+						<td><div class="add_note gray_button">Add</div></td>
+					</form>
+				</tr>
+				{% for note in notes %}
+				<tr>
+					<td class="content">{{note.content}}</td>
+					<td class="date">{{note.date}}</td>
+					<td class="delete" id="{{ note.pk }}"><span class="cancel" style="display: inline; "></span></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+
+
+		<div class="header msg_head info_expanded">
+			<span>Clinic Visit History</span>
+			<span id="visit_add" class="add"></span>
+			<span id="visit_hide" class="cancel"></span>
+		</div>
+		<div class="msg_body" id="visits">
+			<table>
+				<tr id="visit_form_container">
+					<td colspan="3">{{ visit_form }}</td>
+				</tr>
+				{% for v in history %}
+				<tr>
+					<td class="comments">{{v.comments}}</td>
+					<td class="date">{{v.date}}</td>
+					<td class="delete" id="{{v.pk}}"><span class="cancel" style="display: inline; "></span></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
 	</div>
 </div>
+{% endif %}

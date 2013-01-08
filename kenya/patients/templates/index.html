@@ -39,7 +39,9 @@
 					<li class="tab-control"><a href="#" class="tab" rel="tab-control">Control</a></li>
 				</ul>
 				<div class="tab-content" id="tab-two-way">
-					Two way
+					<div class="client_list">
+						{{listf}}
+					</div>
 				</div>
 				<div class="tab-content" id="tab-one-way">
 					One way
@@ -48,12 +50,9 @@
 					Control
 				</div>
             </div>
-            <div class="client_list">
-			    {{listf}}
-            </div>
+            
 		</div>
-	<div class="grid_12" id="main_content">
-		</div>
+	<div class="grid_12" id="main_content"></div></div>
    		<div style="display:none;" id="signup" title="Add a new client">
        	{{ form }}
    		</div>
