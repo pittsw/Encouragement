@@ -84,24 +84,6 @@ def client(request):
 	
 	return render_to_response("display_client_fragment.html")
 
-    
-def detail(request, id_number):
-    try:
-        client = Client.objects.get(id=id_number)
-        notes = Note.objects.filter(client_id=client)
-        history = Visit.objects.filter(client_id=client)
-        fragment = render_to_string("client_fragment.html", {"client":client})
-        visit_form = render_to_string("visit_form.html", {"form": VisitForm()})
-        return render_to_response("detail.html", {
-            "client": client,
-            "notes": notes,
-            "history": history,
-            "fragment": fragment,
-            "form": visit_form,
-        }, context_instance=RequestContext(request))
-    except DoesNotExist:
-        return render_to_response("form.html")
-
 def add_note(request, id):
     client = get_object_or_404(Client, id=id)
     if request.method == "POST":
@@ -142,15 +124,15 @@ def add_client(request):
     form = None
     c = {}
     if request.method == "GET":
-        form = AddClientForm(initial={"message_day":5,"years_of_education":"1"})
+        form = AddClientForm(initial={"years_of_education":"1"})
     elif request.method == "POST":
-        form = AddClientForm(request.POST)
-        if form.is_valid():
-            id = form.cleaned_data['id']
-            client = form.save(commit=False)
-            client.id = id
-            client.save()
-            return HttpResponse('')
+		form = AddClientForm(request.POST)
+		if form.is_valid():
+			id = form.cleaned_data['id']
+			client = form.save(commit=False)
+			client.id = id
+			client.save()
+			return HttpResponse('')
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
 

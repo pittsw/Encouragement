@@ -1,24 +1,29 @@
 {% load patient_tags %}
-Hello World
-<form id="add_client_form" method="post" action="/add/">
+
+<div class="grid_12 center_bar">
+	<div class="name_bar">Add Patient</div>
+</div>
+
+<div class="grid_12 add_client"><div>
+<form id="add_client_form">
     {% csrf_token %}
-    <table>
         {% for field in form %}
-            <tr>
-                <td>
-                    {{ field.label_tag }}{% if field.errors %} <span class="errors"><span class="collapse">({{ field.errors }})</span></span>{% endif %}
-                </td>
-                <td>
-                    {% if field.field|klass == "DateField" %}
-                        <div class="date">{{ field }}</div>
-                    {% else %}
-                        <div>{{ field }}</div>
-                    {% endif %}
-                </td>
-            </tr>
+			<div class="grid_4 form_label">
+                   <span>{{ field.label_tag }}</span>
+            </div>
+            <div class="grid_4 suffix_3">
+				{% if field.field|klass == "DateField" %}
+					<div class="date">{{ field }}</div>
+				{% else %}
+					<div>{{ field }}</div>
+				{% endif %}
+            </div>
+            
+            {% if field.errors %} <div class="prefix_3 grid_4 suffix_4"><span class="errors"><span class="collapse">{{ field.errors }}</span></span></div>{% endif %}
         {% endfor %}
-    </table>
+    <div class="grid_4 prefix_4" style="text-align:center"><input type="button" value="Add" id="submit"/></div>
     <div class="errors">
         {{ form.non_field_errors }}
     </div>
 </form>
+</div></div>

@@ -60,7 +60,6 @@
 			}
 			$('#main_content').load(fragment_url,function() {load_client_complete(client_obj)})
 		}
-		load_client();
 		
 		var load_client_complete = function(client_obj) {
 			
@@ -185,8 +184,62 @@
 		}
         
         var load_add_client = function() {
-			$('#main_content').load("/add");
+			$('#main_content').load("/add", function() {load_add_client_complete()});
 		}
+		
+		var load_add_client_complete = function() {
+			setCalendars();
+			//randomize day
+			$("#id_message_day").val(Math.floor(Math.random()*7));
+			$("#add_client_form #submit").on("click", function () {
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", "/add/", false);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+				var data = $("#add_client_form").serialize()
+				data = data.slice(0,data.lastIndexOf("csrfmiddle")); //HACK: serialize was doubling the form!
+				xhr.send(data);
+				var response = xhr.responseText;
+				if (response.length == 0) {
+					window.location.href = "/";
+				} else {
+					$("#main_content").html(response);
+					load_add_client_complete();
+				}
+			});
+		}
+		
+        // Create the add client dialog
+        $("#signup").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 'auto',
+            buttons: {
+                "Ok": function() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/add/", false);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                    xhr.send($("#add_client_form").serialize());
+                    var response = xhr.responseText;
+                    if (response.length == 0) {
+                        window.location.href = "/";
+                    } else {
+                        $("#add_client_form").html(response);
+                        setCalendars();
+                    }
+                }
+            },
+            open: function(event, ui) {
+                setCalendars();
+            },
+            close: function(event, ui) {
+                $("#add_client_form").load("/add/");
+            }
+        });
+        $("#add").on("click", function() {
+            load_add_client();
+        });
         
            // Switch tabs
         var switch_tabs = function(obj) {
@@ -226,88 +279,10 @@
             });
         }
 
-        // Create the add client dialog
-        $("#signup").dialog({
-            autoOpen: false,
-            modal: true,
-            width: 'auto',
-            buttons: {
-                "Ok": function() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/add/", false);
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                    xhr.send($("#add_client_form").serialize());
-                    var response = xhr.responseText;
-                    if (response.length == 0) {
-                        window.location.href = "/";
-                    } else {
-                        $("#add_client_form").html(response);
-                        setCalendars();
-                    }
-                }
-            },
-            open: function(event, ui) {
-                setCalendars();
-            },
-            close: function(event, ui) {
-                $("#add_client_form").load("/add/");
-            }
-        });
-        $("#add").on("click", function() {
-            load_add_client();
-        });
-
         // Refresh the client list page. Why is this here?
         var patientRefresh = function() {
            // load($('.list #' + client_id).get()[0]);
         }
-
-        
-        // Load the middle and right panes when a new client is selected. We
-        // have to clear the load_timer to avoid race conditions
-        var loade = function(link) {
-            if (load_timer != undefined) {
-                clearInterval(load_timer);
-            }
-            if (!link) {
-                $('.client_list').load("/fragment/list", function() {
-                    registerClientHandlers();
-                });
-                return;
-            }
-            client_id = link.id;
-            client_name = $(link).find('.name').html();
-
-            // Load the client list...
-            $('.client_list').load("/fragment/list/", function() {
-                registerClientHandlers();
-                $(".person").css("background-color", "rgb(217,233,236)");
-                $(".person").css("color", "rgb(1,1,1)");
-                $(".list #" + client_id).css("background-color", "rgb(91,141,147)");
-                $(".list #" + client_id).css("color", "rgb(217,233,236)");
-                people = $(".person");
-            });
-            
-            // ...load the message list...
-            $('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
-            if($("#select_msg").val() == "list") {
-                $(".message-list").load("/fragment/message_list/" + client_id + "/");
-            } else {
-                $(".message-list").load("/fragment/message/" + client_id + "/");
-            }
-
-            // ...and load the client profile.
-            $(".client-profile").load("/detail/" + client_id + "/", function() {
-                loadEditHandlers(link);
-            });
-            $('.name_bar').html(client_name);
-            $('.center_bar .download').html('<a href="/clientcsv/' + client_id + '/">Download</a>');
-            $('.send-to').html('To: ' + client_name + '(#' + client_id + ')');
-            load_timer = setInterval(patientRefresh, 60000);
-        }
-        // Hook in client selecting...
-        
         // ...and make refreshes automatic
         //load_timer = setInterval(patientRefresh, 60000);
 

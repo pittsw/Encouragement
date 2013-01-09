@@ -31,6 +31,12 @@ class Client(models.Model):
         ('Failed Pregnancy', 'Failed Pregnancy'),
     )
     
+    RELATIONSHIP_CHOICES = (
+		('Single','Single'),
+		('Parner','Parner'),
+		('Married','Married'),
+    )
+    
     DAY_CHOICES = (
 		(1,'Monday'),
 		(2,'Tuesday'),
@@ -66,21 +72,25 @@ class Client(models.Model):
     
     #phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom", blank=True, editable=False)
     
-    message_day = models.IntegerField(choices=DAY_CHOICES, default=3)
+    send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
     
-    message_time = models.IntegerField(choices=TIME_CHOICES, default=13)
+    send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
 
     birth_date = models.DateField()
 
-    location = models.ForeignKey(Location)
+    relationship_status = models.CharField(max_length=25, choices=RELATIONSHIP_CHOICES, default="Married")
     
-    father = models.CharField(max_length=50, blank=True)    
+    partner_name = models.CharField(max_length=50, blank=True)    
 
-    pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
 
     due_date = models.DateField()
 
     years_of_education = models.IntegerField()
+    
+    living_children = models.IntegerField(default=0)
+    
+    previous_pregnacies = models.IntegerField(default=0)
 
     conditions = models.ManyToManyField('Condition')
 
@@ -91,6 +101,8 @@ class Client(models.Model):
     last_msg = models.DateField(blank=True, null=True, editable=False)
 
     sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
+    
+    study_group = models.IntegerField(editable=False)
 
     def clean(self):
         if None in [self.birth_date, self.due_date, self.years_of_education]:

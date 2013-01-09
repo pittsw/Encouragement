@@ -6,8 +6,8 @@ import random
 class AddClientForm(ModelForm):
 	class Meta:
 		model = Client
-		fields = ('id', 'first_name', 'last_name', 'nickname','birth_date', 'location', 'pregnancy_status', 'father', 'conditions', 'due_date', \
-			'years_of_education','message_day','message_time')
+		fields = ('id', 'first_name', 'last_name', 'nickname','birth_date', 'pregnancy_status', 'conditions', 'due_date', 'relationship_status', 'partner_name', \
+			'living_children', 'previous_pregnacies','years_of_education','send_day','send_time')
 		widgets = {
 			'conditions': CheckboxSelectMultiple,
 		}
@@ -19,7 +19,8 @@ class ClientForm(ModelForm):
 	
     class Meta:
         model = Client
-        fields = ('first_name', 'last_name', 'birth_date', 'location', 'pregnancy_status', 'conditions', 'due_date', 'years_of_education','message_day')
+        fields = ('first_name', 'last_name', 'birth_date', 'pregnancy_status', 'conditions', 'due_date', 'years_of_education',\
+        'send_day','send_time')
         widgets = {
             'conditions': CheckboxSelectMultiple,
         }
