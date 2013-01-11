@@ -159,30 +159,55 @@ textarea {
 .patient_bar {
     background-color: rgb(200, 200, 200);
     font-weight: bold;
-    padding: 5px 5px 0px 10px;
+    padding: 5px 5px 0px 5px;
     height: 20px;
     font-size: 12px;
+}
+
+.patient_bar select {
+	position:relative;
+	top:-4px;
+	font-size:10px;
 }
 /* End search bar styles */
 
 /* Styles for the client list. */
-.client_list {
+#patient_list {
     height: 625px;
     background-color: rgb(217,233,236);
     overflow: auto;
 }
 
+.person .name div{
+    display: inline;
+    float: left;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 20	px;
+}
+
+.two_way_patient {
+	    background-image: url("/static/images/patient-two_way-2.png");
+}
+
+.one_way_patient {
+	    background-image: url("/static/images/patient-one_way-1.png");
+}
+
+.control_patient {
+	    background-image: url("/static/images/patient-control-0.png");
+}
+
 .list .person {
-    padding: 3px 3px 3px 10px;
+    padding: 5px;
     border-bottom: 1px dashed grey;
-    background-color:rgb(217,233,236);
     color:rgb(1,1,1);
-    height: 72px;
-    font-size: 12px;
 }
 
 .list .person:hover {
 	background-color:rgb(120, 177, 189);
+	cursor:pointer;
 }
 
 .list .person_selected {
@@ -192,10 +217,6 @@ textarea {
 
 .list .person_selected:hover {
 	background-color: rgb(91,141,147);
-}
-
-.list .left {
-    float: left;
 }
 
 .list .right {
@@ -217,6 +238,9 @@ textarea {
 .list .client_id {
     display: inline;
     font-weight: bold;
+    font-size:10px;
+    position:relative;
+    top:-3px;
 }
 
 .list .pendingname {

@@ -29,26 +29,25 @@
 			</div>
 	
             <div class="patient_bar">
-                <div style="display:inline;text-transform:uppercase;">Patient List</div>
-                <div style="display:inline;float:right;"><a href="/csv/">Download</a></div>
+                <div style="display:inline;text-transform:uppercase;">Filter</div>
+                <select id="group_select">
+					<option value="3">All</option>
+					<option value="2">Two-Way</option>
+					<option value="1">One-Way</option>
+					<option value="0">No Phone</option>
+                </select>
+                <div style="display:inline;text-transform:uppercase;">Sort</div>
+                <select id="sort_select">
+					<option value="-study_group">Group</option>
+					<option value="last_name">Last Name</option>
+					<option value="first_name">First Name</option>
+					<option value="id">Id</option>
+                </select>
+                
+                <!-- <div style="display:inline;float:right;"><a href="/csv/">Download</a></div>-->
             </div>
-            <div id="group-tabs">
-				<ul class="tabs">
-					<li class="tab-two-way"><a href="#" class="defaulttab tab" rel="tab-two-way">Two Way</a></li>
-					<li class="tab-one-way"><a href="#" class="tab" rel="tab-one-way">One Way</a></li>
-					<li class="tab-control"><a href="#" class="tab" rel="tab-control">Control</a></li>
-				</ul>
-				<div class="tab-content" id="tab-two-way">
-					<div class="client_list">
-						{{listf}}
-					</div>
-				</div>
-				<div class="tab-content" id="tab-one-way">
-					One way
-				</div>
-				<div class="tab-content" id="tab-control">
-					Control
-				</div>
+            <div id="patient_list" class="list">
+				{{patient_list}}
             </div>
             
 		</div>

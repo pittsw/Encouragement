@@ -36,18 +36,19 @@
         });
         
         // Register click handlers on all clients
-        var registerClientHandlers = function() {
+        var load_client_list_complete = function() {
             $(".person").on("click", function() {
                //change css on selected person
                $(".person_selected").removeClass("person_selected");
                $(".list #"+this.id).addClass("person_selected");
                 load_client(this);
             });
+            people = $('.person');
         }
-		registerClientHandlers();
+		load_client_list_complete();
         
          //Load Client View Into Main Content
-        var load_client = function(client_obj) { //FIX: Load Id from client_obj
+        var load_client = function(client_obj) {
 			var fragment_url = "/fragment/display_client/?";
 			if(client_obj){
 				fragment_url += "id="+client_obj.id;
@@ -65,7 +66,13 @@
 			
 			load_message_call_tabs();
 			
+			if(client_obj) {
+				client_id = client_obj.id;
+				client_name = $(client_obj).find('.name').html();
+			}
+			
 			 // Change message displays when the user selects the pulldown
+			$('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
 			$("#select_msg").on("change", function(e) {
 				if($("#select_msg").val() == "list") {
 					$(".message-list").load("/fragment/message_list/" + client_obj.id + "/");
@@ -73,11 +80,6 @@
 					$(".message-list").load("/fragment/message/" + client_obj.id + "/");
 				}
 			});
-			
-			if(client_obj) {
-				client_id = client_obj.id;
-				client_name = $(client_obj).find('.name').html();
-			}
             
 			loadEditHandlers(client_obj);
         }
@@ -209,34 +211,6 @@
 			});
 		}
 		
-        // Create the add client dialog
-        $("#signup").dialog({
-            autoOpen: false,
-            modal: true,
-            width: 'auto',
-            buttons: {
-                "Ok": function() {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/add/", false);
-                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                    xhr.send($("#add_client_form").serialize());
-                    var response = xhr.responseText;
-                    if (response.length == 0) {
-                        window.location.href = "/";
-                    } else {
-                        $("#add_client_form").html(response);
-                        setCalendars();
-                    }
-                }
-            },
-            open: function(event, ui) {
-                setCalendars();
-            },
-            close: function(event, ui) {
-                $("#add_client_form").load("/add/");
-            }
-        });
         $("#add").on("click", function() {
             load_add_client();
         });
@@ -260,7 +234,6 @@
 			//Set Default Tabs
 			obj.find('.defaulttab').each(function(i,ele){switch_tabs($(ele))});
 		}
-        create_tabs($('#group-tabs'));
 
         // Adds a date picker to every field marked as being a date
         var setCalendars = function() {
@@ -279,16 +252,8 @@
             });
         }
 
-        // Refresh the client list page. Why is this here?
-        var patientRefresh = function() {
-           // load($('.list #' + client_id).get()[0]);
-        }
-        // ...and make refreshes automatic
-        //load_timer = setInterval(patientRefresh, 60000);
-
         // Set up the asynchronous search
         var people = $('.person');
-        var timer = undefined;
         var processor = undefined;
         function filter() {
             if (processor) {
@@ -302,10 +267,9 @@
                     var divs = people.slice(i, i + step);
                     divs.each(function (num) {
                         $(this).show();
-                        var e = $(this);
-                        var x = e.find('.name').html().toLowerCase();
-                        if (x.indexOf(name) < 0) {
-                            e.hide();
+                        var temp_name = $(this).find('.client_name').html().toLowerCase();
+                        if (temp_name.indexOf(name) < 0) {
+                            $(this).hide();
                         }
                     });
                     i += step;
@@ -324,9 +288,19 @@
             }
             filter();
         });
-
+        
+        //Add Filter Actions
+        var load_client_list = function(e) {
+			var url = "/fragment/list/?group=";
+			url+=$('#group_select').val()+"&sort="+$('#sort_select').val();
+			$('#patient_list').load(url,load_client_list_complete);
+		}
+		$('#group_select').on('change',load_client_list);
+        $('#sort_select').on('change',load_client_list);
+        
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {
+			setCalendars();
             $('.info #edit').on("click", function(eventObject) {
                 $('.view_buttons').hide();
                 $('.edit_buttons').show();
@@ -370,7 +344,9 @@
                 } else {
                     $(this).addClass('info_expanded').removeClass('info_collapsed');
                 }
-            });
+            }
+            
+            );
 
             // Hook in note adding
             $('.info #notes_add').on('click', function() {
@@ -394,7 +370,7 @@
                 var pk = $(this).attr('id');
                 $(this).on('click', function() {
                     $.post("/delete_note/" + pk + "/", {}, function() {
-                        load(link);
+                        load_client(link);
                     });
                 });
             });
@@ -406,7 +382,7 @@
                     if (xhr.readyState != 4) {
                         return;
                     }
-                    load(link);
+                    load_client(link);
                 }
                 xhr.open("POST", "/note/" + client_id + "/", true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -416,6 +392,9 @@
 
             // Hook in visit adding
             $('.info #visit_add').on("click", function(eventObject) {
+				if($(this).parent().hasClass('info_collapsed')){
+					toggle_msg($(this).parent())
+				}
                 $('.info #visit_form_container').show();
                 $(this).hide();
                 $('.info #visit_hide').show();
@@ -438,7 +417,7 @@
                     if (xhr.readyState != 4) {
                         return;
                     }
-                    load(link);
+                    load_client(link);
                 }
                 xhr.open("POST", "/visit/" + client_id + "/", true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -451,10 +430,19 @@
                 var pk = $(this).attr('id');
                 $(this).on('click', function() {
                     $.post("/delete_visit/" + pk + "/", {}, function() {
-                        load(link);
+                        load_client(link);
                     });
                 });
             });
         };
+        
+        var toggle_msg = function(obj) {
+                $(obj).next(".msg_body").slideToggle(600);
+                if ($(obj).hasClass('info_expanded')) {
+                    $(obj).addClass('info_collapsed').removeClass('info_expanded');
+                } else {
+                    $(obj).addClass('info_expanded').removeClass('info_collapsed');
+                }
+            }
     });
 })(jQuery);

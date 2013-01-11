@@ -1,5 +1,5 @@
 from csv import DictWriter
-import sys
+import sys, random
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -28,12 +28,12 @@ def get_object_or_default(klass, default, **kwargs):
 def index(request):
     form = render_to_string("add_client.html", {"form": AddClientForm()},
         context_instance=RequestContext(request))
-    clients = Client.objects.all()
-    listf = render_to_string("list_fragment.html", {'clients': clients})
+    clients = Client.objects.all().order_by("-study_group")
+    patients = render_to_string("list_fragment.html", {'clients': clients})
     nurse = get_object_or_default(Nurse, "Administrator", user=request.user)
     c = {
         'form': form,
-        'listf': listf,
+        'patient_list': patients,
         'nurse': nurse,
     }
     c.update(csrf(request))
@@ -71,15 +71,16 @@ def client(request):
 				message_fragment = render_to_string("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
 			else:
 				message_fragment = render_to_string("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
-			
+				history = Visit.objects.filter(client_id=client),
+				print history
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,
 				"notes": Note.objects.filter(client_id=client),
 				"history": Visit.objects.filter(client_id=client),
-				"client_fragment": render_to_string("client_fragment.html", {"client":client}),
+				"client_fragment": render_to_string("client_fragment.html", {"client":client}, context_instance=RequestContext(request)),
 				"message_fragment":message_fragment,
-				"visit_form": render_to_string("visit_form.html", {"form": VisitForm()}),
+				"visit_form": render_to_string("visit_form.html", {"form": VisitForm()}, context_instance=RequestContext(request)),
 				}, context_instance=RequestContext(request) )
 	
 	return render_to_response("display_client_fragment.html")
@@ -131,11 +132,14 @@ def add_client(request):
 			id = form.cleaned_data['id']
 			client = form.save(commit=False)
 			client.id = id
+			client.study_group = study_group()
 			client.save()
 			return HttpResponse('')
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
-
+                              
+def study_group():
+	return random.randint(0,2)
 
 def client_fragment(request, id):
     client = get_object_or_404(Client, id=id)
@@ -144,6 +148,11 @@ def client_fragment(request, id):
 
 def list_fragment(request):
     clients = Client.objects.all()
+    sort = request.GET.get("sort","-study_group")
+    clients = clients.order_by(sort)
+    group = request.GET.get("group",3)
+    if int(group) != 3:
+		clients = clients.filter(study_group__exact=int(group))
     return render_to_response("list_fragment.html", {'clients': clients},
                               context_instance=RequestContext(request))
 
@@ -199,18 +208,14 @@ def add_call(request, id_number):
 
 def csv_helper(**filter_kwargs):
     field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',
-        'location_id', 'pregnancy_status', 'due_date', 'years_of_education']
+         'pregnancy_status', 'due_date', 'years_of_education']
     clients = Client.objects.all().order_by('id').filter(**filter_kwargs).values(*field_list)
-    field_list += ['location', 'conditions']
-    field_list.remove('location_id')
+    field_list += ['conditions']
     response = HttpResponse(';'.join(field_list) + "\n", mimetype="text/csv")
-    locations = dict([(loc.pk, loc.name) for loc in Location.objects.all()])
     conditions = dict([(cond.pk, cond.name) for cond in Condition.objects.all()])
     writer = DictWriter(response, field_list, delimiter=";")
     for client in clients:
         client_obj = Client.objects.get(id=client['id'])
-        client['location'] = locations[client['location_id']]
-        del client['location_id']
         client['conditions'] = [conditions[x.pk] for x in client_obj.conditions.all()]
         writer.writerow(client)
     response['Content-Disposition'] = 'attachment; filename=clients.csv'

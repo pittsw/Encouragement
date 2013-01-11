@@ -7,7 +7,7 @@ class AddClientForm(ModelForm):
 	class Meta:
 		model = Client
 		fields = ('id', 'first_name', 'last_name', 'nickname','birth_date', 'pregnancy_status', 'conditions', 'due_date', 'relationship_status', 'partner_name', \
-			'living_children', 'previous_pregnacies','years_of_education','send_day','send_time')
+			'living_children', 'previous_pregnacies','years_of_education','send_day','send_time','next_visit')
 		widgets = {
 			'conditions': CheckboxSelectMultiple,
 		}
@@ -19,8 +19,8 @@ class ClientForm(ModelForm):
 	
     class Meta:
         model = Client
-        fields = ('first_name', 'last_name', 'birth_date', 'pregnancy_status', 'conditions', 'due_date', 'years_of_education',\
-        'send_day','send_time')
+        fields = ('first_name', 'last_name', 'nickname','birth_date', 'pregnancy_status', 'conditions', 'due_date', 'years_of_education',\
+        'send_day','send_time','next_visit')
         widgets = {
             'conditions': CheckboxSelectMultiple,
         }
@@ -32,5 +32,7 @@ class MessageForm(ModelForm):
 
 
 class VisitForm(Form):
-    comments = CharField(max_length=100)
-    date = DateField()
+	date = DateField()
+	comments = CharField(max_length=100)
+	next_visit = DateField()
+    

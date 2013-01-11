@@ -93,6 +93,8 @@ class Client(models.Model):
     previous_pregnacies = models.IntegerField(default=0)
 
     conditions = models.ManyToManyField('Condition')
+    
+    next_visit = models.DateField(blank=True, null=True)
 
     urgent = models.BooleanField(editable=False, default=False)
 
