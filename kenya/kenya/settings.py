@@ -5,8 +5,11 @@ from datetime import timedelta
 URGENT = timedelta(days=14)
 
 # Necessary for SMSSync view.
-TRANSPORT = 'smssync'
+TRANSPORT = 'shujaa'
 SMSSYNC_SECRET = 'Standards'
+
+# DEFAULT ENCOURAGMENT SETTINGS
+DEFAULT_NURSE_NAME = "your friend"
 
 # These settings must be set to use Celery
 import djcelery
@@ -146,6 +149,8 @@ INSTALLED_APPS = (
     'patients',
     'smssync',
     'djcelery',
+    'httpsms',
+    'shujaa',
 )
 
 # A sample logging configuration. The only tangible logging

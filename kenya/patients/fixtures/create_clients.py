@@ -53,5 +53,9 @@ def name_from_num(i):
 clients = []
 for c in client_names(int(sys.argv[1])):
 	clients.append(client(*c))
-	
-print json.dumps(clients,indent=4)
+
+pre = open("pre.txt")
+for line in pre:
+	print line
+print json.dumps(clients,indent=4)[2:-2]
+print "]" #post

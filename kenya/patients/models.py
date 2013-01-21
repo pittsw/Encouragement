@@ -12,13 +12,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 
-class Location(models.Model):
-
-    name = models.CharField(max_length=50)
-
-    def __unicode__(self):
-        return self.name
-
 #add network
 class Client(models.Model):
 
@@ -68,14 +61,6 @@ class Client(models.Model):
     
     nickname = models.CharField(max_length=50)
 
-    phone_number = models.CharField(max_length=50, blank=True, editable=False)
-    
-    #phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom", blank=True, editable=False)
-    
-    send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
-    
-    send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
-
     birth_date = models.DateField()
 
     relationship_status = models.CharField(max_length=25, choices=RELATIONSHIP_CHOICES, default="Married")
@@ -88,14 +73,24 @@ class Client(models.Model):
 
     years_of_education = models.IntegerField()
     
-    living_children = models.IntegerField(default=0)
+    living_children = models.IntegerField()
     
-    previous_pregnacies = models.IntegerField(default=0)
+    previous_pregnacies = models.IntegerField()
 
     conditions = models.ManyToManyField('Condition')
     
     next_visit = models.DateField(blank=True, null=True)
-
+    
+    #Send Message Attributes
+    phone_number = models.CharField(max_length=50, blank=True,)
+    
+    phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom")
+    
+    send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
+    
+    send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
+    
+    #Attributes to be edited by system only
     urgent = models.BooleanField(editable=False, default=False)
 
     pending = models.IntegerField(editable=False, default=0)
@@ -105,6 +100,8 @@ class Client(models.Model):
     sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
     
     study_group = models.IntegerField(editable=False)
+    
+    signup_date = models.DateField(editable=False, auto_now_add=True)
 
     def clean(self):
         if None in [self.birth_date, self.due_date, self.years_of_education]:
@@ -165,15 +162,13 @@ class Client(models.Model):
 
 class Nurse(models.Model):
 
-    id = models.IntegerField(primary_key=True)
+	id = models.IntegerField(primary_key=True)
 
-    user = models.OneToOneField(User)
+	user = models.OneToOneField(User)
 
-    location = models.ForeignKey(Location)
-    
-    def __unicode__(self):
-        return self.user.first_name
-        # consider making this first AND last names.
+	def __unicode__(self):
+		return self.user.first_name
+		# consider making this first AND last names.
 
 class Interaction(models.Model):
     class Meta:
@@ -207,10 +202,8 @@ class Message(Interaction):
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
 class Condition(models.Model):
-    """Choo choo!
-
+    """Used to determine which automated messages a patient gets
     """
-
     name = models.CharField(max_length=200)
 
     def __unicode__(self):
@@ -222,15 +215,17 @@ class AutomatedMessage(models.Model):
     twice a week.
 
     Fields:
-        condition - which condition this AutomatedMessage is a part of
-        priority - the priority of this message -- higher numbers better
-        message - the contents of the message
-        start_week - add this many weeks to the date of birth to
-                     calculate the earliest this message can be sent
-        end_week - add this many weeks to the date of birth to
-                   calculate the latest this message can be sent
-
+        condition: which condition this AutomatedMessage is a part of
+        priority: the priority of this message -- the higher the more important and sent first
+        message: the contents of the message
+		send_base: The place to start counting sending from (signup, estimated delivery, anytime)
+		send_offset: The offset number from send_base to send.  For anytime messages this is the sequance number.
     """
+    
+    SEND_BASE_CHOICES = ( ('signup','Sign Up'),
+    				('edd','Delivery Date'),
+    				('anytime','Anytime'),)
+    
 
     class Meta:
         ordering = ['-priority']
@@ -241,15 +236,18 @@ class AutomatedMessage(models.Model):
 
     message = models.CharField(max_length=200)
 
-    days_till_edd = models.IntegerField()
+    send_base = models.CharField(max_length=10, choices=SEND_BASE_CHOICES, default="edd")
+    
+    send_offset = models.IntegerField(default=0)
 
 
     def __unicode__(self):
-        return '{con} ({pri}): "{msg}", send {edd}'.format(
+        return '{con} ({pri}): "{msg}", send {send_offset} from {send_base}'.format(
             con=self.condition,
             pri=self.priority,
             msg=self.message,
-            edd=self.days_till_edd,
+            send_base=self.send_base,
+            send_offset=self.send_offset,
         )
 
 

@@ -1,0 +1,3903 @@
+[
+    {
+        "pk": 14, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "automatedmessage", 
+            "name": "automated message", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "client", 
+            "name": "client", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "condition", 
+            "name": "condition", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "contenttype", 
+            "name": "content type", 
+            "app_label": "contenttypes"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "crontabschedule", 
+            "name": "crontab", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "group", 
+            "name": "group", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "httpsmsoutgoing", 
+            "name": "httpsms outgoing", 
+            "app_label": "httpsms"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "interaction", 
+            "name": "interaction", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "intervalschedule", 
+            "name": "interval", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "location", 
+            "name": "location", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "logentry", 
+            "name": "log entry", 
+            "app_label": "admin"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "message", 
+            "name": "message", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "note", 
+            "name": "note", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "nurse", 
+            "name": "nurse", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "periodictask", 
+            "name": "periodic task", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "periodictasks", 
+            "name": "periodic tasks", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "permission", 
+            "name": "permission", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "phonecall", 
+            "name": "phone call", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "tasksetmeta", 
+            "name": "saved group result", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "session", 
+            "name": "session", 
+            "app_label": "sessions"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "shujaaoutgoing", 
+            "name": "shujaa outgoing", 
+            "app_label": "shujaa"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "site", 
+            "name": "site", 
+            "app_label": "sites"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "smssyncoutgoing", 
+            "name": "sms sync outgoing", 
+            "app_label": "smssync"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "taskstate", 
+            "name": "task", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "taskmeta", 
+            "name": "task state", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "user", 
+            "name": "user", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "visit", 
+            "name": "visit", 
+            "app_label": "patients"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "workerstate", 
+            "name": "worker", 
+            "app_label": "djcelery"
+        }
+    }, 
+    {
+        "pk": "a2dd0f2ac27f757d7e64245e8dee232b", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-01-25T01:47:40.392Z", 
+            "session_data": "MDk2MGQ0ZmQ0NWVlNDFiNTJhOGFlNzEzZTY1YjNlMzc3ZGRkZmQ3YTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    }, 
+    {
+        "pk": "2628c36a8c6b412b286cfcfa5b8615a2", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-01-28T06:49:09.896Z", 
+            "session_data": "MjMzOWNjOWE1OTg4MGE0ZDIzMmM1MGZiODg2MzRkYmE3ZjY5NDc4ZjqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n"
+        }
+    }, 
+    {
+        "pk": "f01d14ee38c5e2f122a27318506caa02", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-03T01:12:02.864Z", 
+            "session_data": "MDk2MGQ0ZmQ0NWVlNDFiNTJhOGFlNzEzZTY1YjNlMzc3ZGRkZmQ3YTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+        }
+    }, 
+    {
+        "pk": "57f617d4662b768526248129b60466a3", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-03T02:25:15.157Z", 
+            "session_data": "ZWI5NjcxZmQ5ZWYwOGU3NDMxYTdjZjM4YzQyMTg2ODVjZDQ2OGY3NTqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "example.com", 
+            "name": "example.com"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "A_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 1000, 
+            "next_visit": null, 
+            "first_name": "A_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "A", 
+            "study_group": 1, 
+            "birth_date": "1992-08-24", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "B_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 2000, 
+            "next_visit": null, 
+            "first_name": "B_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "B", 
+            "study_group": 1, 
+            "birth_date": "1970-04-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "C_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 3000, 
+            "next_visit": null, 
+            "first_name": "C_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-22", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "C", 
+            "study_group": 1, 
+            "birth_date": "1971-02-20", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "D_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 4000, 
+            "next_visit": null, 
+            "first_name": "D_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-02", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "D", 
+            "study_group": 1, 
+            "birth_date": "1989-11-09", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "E_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 5000, 
+            "next_visit": null, 
+            "first_name": "E_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-11", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "E", 
+            "study_group": 0, 
+            "birth_date": "1992-11-19", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "F_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 6000, 
+            "next_visit": null, 
+            "first_name": "F_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-25", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "F", 
+            "study_group": 1, 
+            "birth_date": "1976-08-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "G_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 7000, 
+            "next_visit": null, 
+            "first_name": "G_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-08", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "G", 
+            "study_group": 0, 
+            "birth_date": "1972-11-17", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "H_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 8000, 
+            "next_visit": null, 
+            "first_name": "H_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-06", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "H", 
+            "study_group": 1, 
+            "birth_date": "1988-12-12", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "I_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 9000, 
+            "next_visit": null, 
+            "first_name": "I_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-01", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "I", 
+            "study_group": 1, 
+            "birth_date": "1970-03-09", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "J_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 10000, 
+            "next_visit": null, 
+            "first_name": "J_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "J", 
+            "study_group": 2, 
+            "birth_date": "1980-01-15", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "K_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 11000, 
+            "next_visit": null, 
+            "first_name": "K_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "K", 
+            "study_group": 0, 
+            "birth_date": "1984-05-26", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "L_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 12000, 
+            "next_visit": null, 
+            "first_name": "L_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-02", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "L", 
+            "study_group": 0, 
+            "birth_date": "1991-01-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "M_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 13000, 
+            "next_visit": null, 
+            "first_name": "M_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-10-11", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "M", 
+            "study_group": 1, 
+            "birth_date": "1987-10-18", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "N_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 14000, 
+            "next_visit": null, 
+            "first_name": "N_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-05", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "N", 
+            "study_group": 1, 
+            "birth_date": "1974-04-04", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "O_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 15000, 
+            "next_visit": null, 
+            "first_name": "O_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "O", 
+            "study_group": 0, 
+            "birth_date": "1991-11-17", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "P_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 16000, 
+            "next_visit": null, 
+            "first_name": "P_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-24", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "P", 
+            "study_group": 0, 
+            "birth_date": "1985-03-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Q_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 17000, 
+            "next_visit": null, 
+            "first_name": "Q_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-15", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "Q", 
+            "study_group": 1, 
+            "birth_date": "1982-07-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "R_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 18000, 
+            "next_visit": null, 
+            "first_name": "R_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-26", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "R", 
+            "study_group": 0, 
+            "birth_date": "1979-11-21", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "S_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 19000, 
+            "next_visit": null, 
+            "first_name": "S_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "S", 
+            "study_group": 2, 
+            "birth_date": "1972-04-15", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "T_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 20000, 
+            "next_visit": null, 
+            "first_name": "T_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-17", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "T", 
+            "study_group": 2, 
+            "birth_date": "1982-10-24", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "U_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 21000, 
+            "next_visit": null, 
+            "first_name": "U_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "U", 
+            "study_group": 0, 
+            "birth_date": "1987-11-08", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "V_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 22000, 
+            "next_visit": null, 
+            "first_name": "V_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-08", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "V", 
+            "study_group": 1, 
+            "birth_date": "1974-03-26", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "W_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 23000, 
+            "next_visit": null, 
+            "first_name": "W_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-25", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "W", 
+            "study_group": 0, 
+            "birth_date": "1971-05-23", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "X_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 24000, 
+            "next_visit": null, 
+            "first_name": "X_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-07", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "X", 
+            "study_group": 2, 
+            "birth_date": "1986-09-26", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Y_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 25000, 
+            "next_visit": null, 
+            "first_name": "Y_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "Y", 
+            "study_group": 2, 
+            "birth_date": "1984-08-28", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "A1_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 26000, 
+            "next_visit": null, 
+            "first_name": "A1_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-22", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "A1", 
+            "study_group": 0, 
+            "birth_date": "1984-10-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AA_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 27000, 
+            "next_visit": null, 
+            "first_name": "AA_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-16", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AA", 
+            "study_group": 2, 
+            "birth_date": "1977-09-06", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AB_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 28000, 
+            "next_visit": null, 
+            "first_name": "AB_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-28", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AB", 
+            "study_group": 2, 
+            "birth_date": "1979-10-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AC_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 29000, 
+            "next_visit": null, 
+            "first_name": "AC_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-09", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AC", 
+            "study_group": 2, 
+            "birth_date": "1974-04-10", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AD_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 30000, 
+            "next_visit": null, 
+            "first_name": "AD_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-04", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AD", 
+            "study_group": 2, 
+            "birth_date": "1970-08-19", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AE_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 31000, 
+            "next_visit": null, 
+            "first_name": "AE_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-07", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AE", 
+            "study_group": 2, 
+            "birth_date": "1979-07-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AF_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 32000, 
+            "next_visit": null, 
+            "first_name": "AF_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-06-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AF", 
+            "study_group": 2, 
+            "birth_date": "1986-10-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AG_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 33000, 
+            "next_visit": null, 
+            "first_name": "AG_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-01", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AG", 
+            "study_group": 1, 
+            "birth_date": "1982-03-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AH_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 34000, 
+            "next_visit": null, 
+            "first_name": "AH_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-22", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AH", 
+            "study_group": 1, 
+            "birth_date": "1980-05-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AI_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 35000, 
+            "next_visit": null, 
+            "first_name": "AI_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-23", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AI", 
+            "study_group": 0, 
+            "birth_date": "1974-02-13", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AJ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 36000, 
+            "next_visit": null, 
+            "first_name": "AJ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-13", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AJ", 
+            "study_group": 2, 
+            "birth_date": "1976-08-21", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AK_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 37000, 
+            "next_visit": null, 
+            "first_name": "AK_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AK", 
+            "study_group": 0, 
+            "birth_date": "1971-08-13", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AL_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 38000, 
+            "next_visit": null, 
+            "first_name": "AL_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-09", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AL", 
+            "study_group": 1, 
+            "birth_date": "1974-01-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AM_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 39000, 
+            "next_visit": null, 
+            "first_name": "AM_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-04", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AM", 
+            "study_group": 0, 
+            "birth_date": "1987-01-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AN_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 40000, 
+            "next_visit": null, 
+            "first_name": "AN_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-19", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AN", 
+            "study_group": 0, 
+            "birth_date": "1982-04-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AO_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 41000, 
+            "next_visit": null, 
+            "first_name": "AO_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AO", 
+            "study_group": 0, 
+            "birth_date": "1989-02-22", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AP_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 42000, 
+            "next_visit": null, 
+            "first_name": "AP_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-05", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AP", 
+            "study_group": 2, 
+            "birth_date": "1970-10-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AQ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 43000, 
+            "next_visit": null, 
+            "first_name": "AQ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AQ", 
+            "study_group": 2, 
+            "birth_date": "1985-06-14", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AR_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 44000, 
+            "next_visit": null, 
+            "first_name": "AR_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AR", 
+            "study_group": 1, 
+            "birth_date": "1987-02-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AS_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 45000, 
+            "next_visit": null, 
+            "first_name": "AS_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-13", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AS", 
+            "study_group": 1, 
+            "birth_date": "1978-09-16", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AT_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 46000, 
+            "next_visit": null, 
+            "first_name": "AT_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-16", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AT", 
+            "study_group": 0, 
+            "birth_date": "1979-01-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AU_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 47000, 
+            "next_visit": null, 
+            "first_name": "AU_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AU", 
+            "study_group": 1, 
+            "birth_date": "1988-05-15", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AV_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 48000, 
+            "next_visit": null, 
+            "first_name": "AV_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-03", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AV", 
+            "study_group": 1, 
+            "birth_date": "1981-10-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AW_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 49000, 
+            "next_visit": null, 
+            "first_name": "AW_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-16", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AW", 
+            "study_group": 0, 
+            "birth_date": "1985-05-04", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AX_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 50000, 
+            "next_visit": null, 
+            "first_name": "AX_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-23", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AX", 
+            "study_group": 0, 
+            "birth_date": "1981-07-19", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "AY_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 51000, 
+            "next_visit": null, 
+            "first_name": "AY_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-11", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "AY", 
+            "study_group": 1, 
+            "birth_date": "1977-10-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "B1_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 52000, 
+            "next_visit": null, 
+            "first_name": "B1_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-06", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "B1", 
+            "study_group": 2, 
+            "birth_date": "1987-07-10", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BA_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 53000, 
+            "next_visit": null, 
+            "first_name": "BA_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BA", 
+            "study_group": 0, 
+            "birth_date": "1971-08-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BB_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 54000, 
+            "next_visit": null, 
+            "first_name": "BB_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-13", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BB", 
+            "study_group": 1, 
+            "birth_date": "1970-07-08", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BC_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 55000, 
+            "next_visit": null, 
+            "first_name": "BC_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BC", 
+            "study_group": 0, 
+            "birth_date": "1971-05-18", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BD_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 56000, 
+            "next_visit": null, 
+            "first_name": "BD_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-01", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BD", 
+            "study_group": 0, 
+            "birth_date": "1979-10-13", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BE_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 57000, 
+            "next_visit": null, 
+            "first_name": "BE_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-07", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BE", 
+            "study_group": 2, 
+            "birth_date": "1992-03-14", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BF_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 58000, 
+            "next_visit": null, 
+            "first_name": "BF_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-05-18", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BF", 
+            "study_group": 1, 
+            "birth_date": "1980-01-04", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BG_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 59000, 
+            "next_visit": null, 
+            "first_name": "BG_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BG", 
+            "study_group": 1, 
+            "birth_date": "1988-12-17", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BH_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 60000, 
+            "next_visit": null, 
+            "first_name": "BH_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-07", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BH", 
+            "study_group": 2, 
+            "birth_date": "1987-09-28", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BI_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 61000, 
+            "next_visit": null, 
+            "first_name": "BI_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-17", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BI", 
+            "study_group": 0, 
+            "birth_date": "1990-10-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BJ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 62000, 
+            "next_visit": null, 
+            "first_name": "BJ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-17", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BJ", 
+            "study_group": 1, 
+            "birth_date": "1980-07-04", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BK_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 63000, 
+            "next_visit": null, 
+            "first_name": "BK_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-04", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BK", 
+            "study_group": 1, 
+            "birth_date": "1990-07-20", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BL_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 64000, 
+            "next_visit": null, 
+            "first_name": "BL_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-23", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BL", 
+            "study_group": 2, 
+            "birth_date": "1977-09-10", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BM_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 65000, 
+            "next_visit": null, 
+            "first_name": "BM_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BM", 
+            "study_group": 2, 
+            "birth_date": "1982-09-02", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BN_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 66000, 
+            "next_visit": null, 
+            "first_name": "BN_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-27", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BN", 
+            "study_group": 0, 
+            "birth_date": "1980-02-16", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BO_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 67000, 
+            "next_visit": null, 
+            "first_name": "BO_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-07-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BO", 
+            "study_group": 1, 
+            "birth_date": "1976-11-27", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BP_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 68000, 
+            "next_visit": null, 
+            "first_name": "BP_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-23", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BP", 
+            "study_group": 2, 
+            "birth_date": "1974-01-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BQ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 69000, 
+            "next_visit": null, 
+            "first_name": "BQ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-10-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BQ", 
+            "study_group": 1, 
+            "birth_date": "1988-08-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BR_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 70000, 
+            "next_visit": null, 
+            "first_name": "BR_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-06-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BR", 
+            "study_group": 1, 
+            "birth_date": "1978-11-23", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BS_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 71000, 
+            "next_visit": null, 
+            "first_name": "BS_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BS", 
+            "study_group": 1, 
+            "birth_date": "1974-11-16", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BT_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 72000, 
+            "next_visit": null, 
+            "first_name": "BT_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-08", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BT", 
+            "study_group": 0, 
+            "birth_date": "1981-04-09", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BU_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 73000, 
+            "next_visit": null, 
+            "first_name": "BU_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-07", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BU", 
+            "study_group": 2, 
+            "birth_date": "1971-10-03", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BV_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 74000, 
+            "next_visit": null, 
+            "first_name": "BV_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-15", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BV", 
+            "study_group": 1, 
+            "birth_date": "1988-05-26", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BW_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 75000, 
+            "next_visit": null, 
+            "first_name": "BW_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-12-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BW", 
+            "study_group": 1, 
+            "birth_date": "1978-10-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BX_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 76000, 
+            "next_visit": null, 
+            "first_name": "BX_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BX", 
+            "study_group": 2, 
+            "birth_date": "1972-01-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "BY_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 77000, 
+            "next_visit": null, 
+            "first_name": "BY_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-10-15", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "BY", 
+            "study_group": 2, 
+            "birth_date": "1986-01-19", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "C1_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 78000, 
+            "next_visit": null, 
+            "first_name": "C1_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-01-13", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "C1", 
+            "study_group": 0, 
+            "birth_date": "1987-12-06", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CA_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 79000, 
+            "next_visit": null, 
+            "first_name": "CA_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-08", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CA", 
+            "study_group": 2, 
+            "birth_date": "1992-08-13", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CB_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 80000, 
+            "next_visit": null, 
+            "first_name": "CB_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-08-11", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CB", 
+            "study_group": 0, 
+            "birth_date": "1980-08-19", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CC_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 81000, 
+            "next_visit": null, 
+            "first_name": "CC_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CC", 
+            "study_group": 1, 
+            "birth_date": "1974-12-11", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CD_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 82000, 
+            "next_visit": null, 
+            "first_name": "CD_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CD", 
+            "study_group": 2, 
+            "birth_date": "1982-01-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CE_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 83000, 
+            "next_visit": null, 
+            "first_name": "CE_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-15", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CE", 
+            "study_group": 1, 
+            "birth_date": "1977-10-04", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CF_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 84000, 
+            "next_visit": null, 
+            "first_name": "CF_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 6, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-25", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CF", 
+            "study_group": 2, 
+            "birth_date": "1976-05-12", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CG_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 85000, 
+            "next_visit": null, 
+            "first_name": "CG_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-20", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CG", 
+            "study_group": 1, 
+            "birth_date": "1984-07-14", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CH_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 86000, 
+            "next_visit": null, 
+            "first_name": "CH_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-10-09", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CH", 
+            "study_group": 2, 
+            "birth_date": "1988-10-17", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CI_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 87000, 
+            "next_visit": null, 
+            "first_name": "CI_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-22", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CI", 
+            "study_group": 2, 
+            "birth_date": "1989-11-24", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CJ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 88000, 
+            "next_visit": null, 
+            "first_name": "CJ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-02-06", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CJ", 
+            "study_group": 0, 
+            "birth_date": "1974-07-13", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CK_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 89000, 
+            "next_visit": null, 
+            "first_name": "CK_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-26", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CK", 
+            "study_group": 1, 
+            "birth_date": "1971-04-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CL_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 90000, 
+            "next_visit": null, 
+            "first_name": "CL_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 4, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CL", 
+            "study_group": 1, 
+            "birth_date": "1973-11-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 91, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CM_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 91000, 
+            "next_visit": null, 
+            "first_name": "CM_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-11", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CM", 
+            "study_group": 0, 
+            "birth_date": "1986-11-20", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CN_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 92000, 
+            "next_visit": null, 
+            "first_name": "CN_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CN", 
+            "study_group": 2, 
+            "birth_date": "1990-04-03", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 93, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CO_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 93000, 
+            "next_visit": null, 
+            "first_name": "CO_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-17", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CO", 
+            "study_group": 1, 
+            "birth_date": "1978-12-23", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CP_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 94000, 
+            "next_visit": null, 
+            "first_name": "CP_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-27", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CP", 
+            "study_group": 0, 
+            "birth_date": "1988-05-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CQ_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 95000, 
+            "next_visit": null, 
+            "first_name": "CQ_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-03-21", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CQ", 
+            "study_group": 1, 
+            "birth_date": "1976-07-10", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CR_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 96000, 
+            "next_visit": null, 
+            "first_name": "CR_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 5, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-10-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CR", 
+            "study_group": 2, 
+            "birth_date": "1973-07-09", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CS_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 97000, 
+            "next_visit": null, 
+            "first_name": "CS_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-08-12", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CS", 
+            "study_group": 2, 
+            "birth_date": "1973-01-25", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 98, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CT_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 98000, 
+            "next_visit": null, 
+            "first_name": "CT_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 2, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-09-28", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CT", 
+            "study_group": 1, 
+            "birth_date": "1976-07-28", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CU_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 99000, 
+            "next_visit": null, 
+            "first_name": "CU_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 1, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-08-27", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CU", 
+            "study_group": 2, 
+            "birth_date": "1989-02-01", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "CV_last", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 100000, 
+            "next_visit": null, 
+            "first_name": "CV_first", 
+            "last_msg": null, 
+            "partner_name": " ", 
+            "send_day": 0, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-14", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "CV", 
+            "study_group": 0, 
+            "birth_date": "1975-09-07", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Perrier", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "sent_messages": [], 
+            "send_time": 13, 
+            "id": 10, 
+            "next_visit": "2013-02-10", 
+            "first_name": "Trevor", 
+            "last_msg": null, 
+            "partner_name": "None", 
+            "send_day": 3, 
+            "conditions": [], 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-04-18", 
+            "previous_pregnacies": 0, 
+            "years_of_education": 1, 
+            "nickname": "Siya", 
+            "study_group": 2, 
+            "birth_date": "1986-01-08", 
+            "pregnancy_status": "Pregnant"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.condition", 
+        "fields": {
+            "name": "new"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_logentry", 
+            "name": "Can add log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_logentry", 
+            "name": "Can change log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_logentry", 
+            "name": "Can delete log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_group", 
+            "name": "Can add group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_group", 
+            "name": "Can change group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_group", 
+            "name": "Can delete group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_permission", 
+            "name": "Can add permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_permission", 
+            "name": "Can change permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_permission", 
+            "name": "Can delete permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_user", 
+            "name": "Can add user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_user", 
+            "name": "Can change user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_user", 
+            "name": "Can delete user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_contenttype", 
+            "name": "Can add content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_contenttype", 
+            "name": "Can change content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_contenttype", 
+            "name": "Can delete content type", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_crontabschedule", 
+            "name": "Can add crontab", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_crontabschedule", 
+            "name": "Can change crontab", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_crontabschedule", 
+            "name": "Can delete crontab", 
+            "content_type": 22
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_intervalschedule", 
+            "name": "Can add interval", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_intervalschedule", 
+            "name": "Can change interval", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_intervalschedule", 
+            "name": "Can delete interval", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_periodictask", 
+            "name": "Can add periodic task", 
+            "content_type": 24
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_periodictask", 
+            "name": "Can change periodic task", 
+            "content_type": 24
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_periodictask", 
+            "name": "Can delete periodic task", 
+            "content_type": 24
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_periodictasks", 
+            "name": "Can add periodic tasks", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_periodictasks", 
+            "name": "Can change periodic tasks", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_periodictasks", 
+            "name": "Can delete periodic tasks", 
+            "content_type": 23
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_taskmeta", 
+            "name": "Can add task state", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_taskmeta", 
+            "name": "Can change task state", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_taskmeta", 
+            "name": "Can delete task state", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_tasksetmeta", 
+            "name": "Can add saved group result", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_tasksetmeta", 
+            "name": "Can change saved group result", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_tasksetmeta", 
+            "name": "Can delete saved group result", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_taskstate", 
+            "name": "Can add task", 
+            "content_type": 26
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_taskstate", 
+            "name": "Can change task", 
+            "content_type": 26
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_taskstate", 
+            "name": "Can delete task", 
+            "content_type": 26
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_workerstate", 
+            "name": "Can add worker", 
+            "content_type": 25
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_workerstate", 
+            "name": "Can change worker", 
+            "content_type": 25
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_workerstate", 
+            "name": "Can delete worker", 
+            "content_type": 25
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_httpsmsoutgoing", 
+            "name": "Can add httpsms outgoing", 
+            "content_type": 27
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_httpsmsoutgoing", 
+            "name": "Can change httpsms outgoing", 
+            "content_type": 27
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_httpsmsoutgoing", 
+            "name": "Can delete httpsms outgoing", 
+            "content_type": 27
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_automatedmessage", 
+            "name": "Can add automated message", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_automatedmessage", 
+            "name": "Can change automated message", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_automatedmessage", 
+            "name": "Can delete automated message", 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_client", 
+            "name": "Can add client", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_client", 
+            "name": "Can change client", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_client", 
+            "name": "Can delete client", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_condition", 
+            "name": "Can add condition", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_condition", 
+            "name": "Can change condition", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_condition", 
+            "name": "Can delete condition", 
+            "content_type": 13
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_interaction", 
+            "name": "Can add interaction", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_interaction", 
+            "name": "Can change interaction", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_interaction", 
+            "name": "Can delete interaction", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_location", 
+            "name": "Can add location", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_location", 
+            "name": "Can change location", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_location", 
+            "name": "Can delete location", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_message", 
+            "name": "Can add message", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_message", 
+            "name": "Can change message", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_message", 
+            "name": "Can delete message", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_note", 
+            "name": "Can add note", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_note", 
+            "name": "Can change note", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_note", 
+            "name": "Can delete note", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_nurse", 
+            "name": "Can add nurse", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_nurse", 
+            "name": "Can change nurse", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_nurse", 
+            "name": "Can delete nurse", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_phonecall", 
+            "name": "Can add phone call", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_phonecall", 
+            "name": "Can change phone call", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_phonecall", 
+            "name": "Can delete phone call", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_visit", 
+            "name": "Can add visit", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_visit", 
+            "name": "Can change visit", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_visit", 
+            "name": "Can delete visit", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_session", 
+            "name": "Can add session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_session", 
+            "name": "Can change session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_session", 
+            "name": "Can delete session", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_shujaaoutgoing", 
+            "name": "Can add shujaa outgoing", 
+            "content_type": 28
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_shujaaoutgoing", 
+            "name": "Can change shujaa outgoing", 
+            "content_type": 28
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_shujaaoutgoing", 
+            "name": "Can delete shujaa outgoing", 
+            "content_type": 28
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_site", 
+            "name": "Can add site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_site", 
+            "name": "Can change site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_site", 
+            "name": "Can delete site", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_smssyncoutgoing", 
+            "name": "Can add sms sync outgoing", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_smssyncoutgoing", 
+            "name": "Can change sms sync outgoing", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_smssyncoutgoing", 
+            "name": "Can delete sms sync outgoing", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "oscard", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2013-01-20T01:12:02.832Z", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "pbkdf2_sha256$10000$r2zsMITs7OV6$fgHAEeR7om67R5MVgehCr5pz1yQ79Dsd9gE1E72O2b8=", 
+            "email": "t@t.com", 
+            "date_joined": "2013-01-09T02:43:14.585Z"
+        }
+    }
+]
