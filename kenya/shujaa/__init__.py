@@ -2,14 +2,14 @@ from transports import BaseTransport
 import urllib, urllib2
 
 class Transport(BaseTransport):
-    """A transport that sends a message through the Shujaa API.
+	"""A transport that sends a message through the Shujaa API.
 
-    """
-    
-    gateway = {'url':'http://sms.shujaa.mobi/sendsms',
+	"""
+
+	gateway = {'url':'http://sms.shujaa.mobi/sendsms',
 				'values':{
 				'username':'bderenzi@cs.washington.edu',
-				'password':'washington312','
+				'password':'washington312',
 				'account':'live',
 				'source':'6873'}
 				}
@@ -26,10 +26,20 @@ class Transport(BaseTransport):
 		
 		#http request to getway to send sms
 		data = urllib.urlencode(values)
-		req = urllib2.Request(gateway, data)
+		req = urllib2.Request(cls.gateway['url'], data)
+		print "Shujaa Send: %s,%s"%(target,content)
+		
+		''' Don't Send Now '''
 		httpResponse = urllib2.urlopen(req)
+		
+		#Do not send right now
+		
 		
 		#do something with response 
 		response = httpResponse.read()
+		print response
+		
+		
+		
 		
         

@@ -3,6 +3,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import patients.views as views
 import smssync.urls
+import shujaa.urls
+import httpsms.urls
 
 from django.contrib import admin
 admin.autodiscover()
@@ -31,5 +33,7 @@ urlpatterns = patterns('',
         {'template_name': 'login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout_then_login'),
     url(r'^smssync/', include(smssync.urls)),
+    url(r'^shujaa/', include(shujaa.urls)),
+    url(r'^httpsms/', include(httpsms.urls)),
 )
 urlpatterns += staticfiles_urlpatterns()

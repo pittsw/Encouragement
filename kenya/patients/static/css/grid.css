@@ -21,9 +21,9 @@ body {
 /* Containers
 ----------------------------------------------------------------------------------------------------*/
 .container_16 {
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0px auto;
 	width: 962px; /* FOR FUTURE ENCOURAGEMENT IMPLEMENTERS: IMPORTANT! */
+	height:100%;
 }
 
 /* Grid >> Global

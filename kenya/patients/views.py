@@ -125,7 +125,8 @@ def add_client(request):
     form = None
     c = {}
     if request.method == "GET":
-        form = AddClientForm(initial={"years_of_education":"1"})
+        form = AddClientForm(initial={"birth_date":"1990-01-01","due_date":"2013-06-13","next_visit":"2013-01-22","conditions":"1",
+        "previous_pregnacies":"0","living_children":"0","years_of_education":"1","nickname":"nick"})
     elif request.method == "POST":
 		form = AddClientForm(request.POST)
 		if form.is_valid():
@@ -134,10 +135,25 @@ def add_client(request):
 			client.id = id
 			client.study_group = study_group()
 			client.save()
+			'''
+			Send initial message if any
+			'''
+			message = AutomatedMessage.objects.filter(send_base__exact="signup").filter(send_offset__exact=0) #get messages sent 0 days from signup
+			if message.count() > 0:
+				text = message[0].message
+				sender = "System"
+				nurse = None
+				message_client(client,nurse,sender,text) #send initial message to client
+			
 			return HttpResponse('')
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
-                              
+'''
+Select which of three groups the new client should be in
+2: Messaging that require two way communication
+1: Push messaging not requiring any responce
+0: Control group - sent no messages
+'''                              
 def study_group():
 	return random.randint(0,2)
 
@@ -183,7 +199,7 @@ def add_message(request, id_number):
             else:
                 sender = 'System'
             client = get_object_or_404(Client, id=id_number)
-            message_client(client, nurse, sender, text)
+            message_client(client, nurse, sender, text) # task.message_client
             return HttpResponse('')
     except Exception as e:
         print >> sys.stderr, e
