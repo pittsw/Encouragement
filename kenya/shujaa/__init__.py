@@ -32,9 +32,6 @@ class Transport(BaseTransport):
 		''' Don't Send Now '''
 		httpResponse = urllib2.urlopen(req)
 		
-		#Do not send right now
-		
-		
 		#do something with response 
 		response = httpResponse.read()
 		#print response
