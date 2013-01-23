@@ -35,9 +35,11 @@ def receive(request):
 				messageID = request.POST['messageID']
 				received = tasks.incoming_message(sender, message)
 				http = "%s sent \"%s\" on %s (%s)\nReceived: %s"%(sender,message,network,messageID,received)
-				print http
+				print >> sys.stderr, http
+				sys.stderr.flush()
 				return HttpResponse(http)
 			else:
+				print >> sys.stderr, "SHUJAA GET RECIEVE"
 				return HttpResponse("Please use post")
 	except Exception as e:
 		 print >> sys.stderr, "Exception: {e}".format(e=e)
