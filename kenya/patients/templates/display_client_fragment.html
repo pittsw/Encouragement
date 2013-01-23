@@ -15,13 +15,13 @@
 			<div class="phone-box tab-content" id="tabs-2">
 				<form id="phone-box" method="post" action="">
 				{% csrf_token %}
+					<div class="phone-content"><textarea id="call_notes" cols=46 rows=3 style="margin:3px 10px 10px 10px;" placeholder="Enter Call Notes" name="text" value=""></textarea>
+					</div>
 					<div class="wrapper">
-						<div class="completion_checkbox">Call Completed <input id="complete" type="checkbox" name="completed" value="Completed"/>
+						<div class="completion_checkbox">Client answered<input id="complete" type="checkbox" name="completed" value="Completed"/>
 						</div>
 						<div class="duration">Duration: <input type="text" id="duration" name="duration" placeholder="In minutes"/>
 						</div>
-					</div>
-					<div class="phone-content"><textarea id="call_notes" cols=46 rows=3 style="margin:3px 10px 10px 10px;" placeholder="Enter Call Notes" name="text" value=""></textarea>
 					</div>
 					<div style="text-align;right;padding-right:10px;">
 						<span id="save_call" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
