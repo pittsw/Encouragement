@@ -35,19 +35,7 @@
              } 
         });
         
-        // Register click handlers on all clients
-        var load_client_list_complete = function() {
-            $(".person").on("click", function() {
-               //change css on selected person
-               $(".person_selected").removeClass("person_selected");
-               $(".list #"+this.id).addClass("person_selected");
-                load_client(this);
-            });
-            people = $('.person');
-        }
-		load_client_list_complete();
-        
-         //Load Client View Into Main Content
+        //Load Client View Into Main Content
         var load_client = function(client_obj) {
 			var fragment_url = "/fragment/display_client/?";
 			if(client_obj){
@@ -202,10 +190,10 @@
 				data = data.slice(0,data.lastIndexOf("csrfmiddle")); //HACK: serialize was doubling the form!
 				xhr.send(data);
 				var response = xhr.responseText;
-				if (response.length == 0) {
-					window.location.href = "/";
+				if (/^\d+$/.test(response)) { // a single number is the new user id
+					window.location = "/?id="+response;
 				} else {
-					$("#main_content").html(response);
+					$("#main_content").html(response); 
 					load_add_client_complete();
 				}
 			});
@@ -251,26 +239,37 @@
                 });
             });
         }
+        
+        var getURLParameter = function(name) {
+			 return decodeURIComponent((RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+		}
+		
+		if(getURLParameter('id')) {
+			load_client({'id':getURLParameter('id')});
+		}
 
         // Set up the asynchronous search
-        var people = $('.person');
-        var processor = undefined;
+        //var people = $('.person');
+        //var processor = undefined;
         function filter() {
             if (processor) {
                 clearInterval(processor);
             }
             var busy = false, i = 0, step=10;
             var name = $.trim($('#searchtext').val()).toLowerCase();
-            processor = setInterval(function() {
+            var processor = setInterval(function() {
                 if (!busy) {
                     busy = true;
                     var divs = people.slice(i, i + step);
                     divs.each(function (num) {
-                        $(this).show();
+                        
                         var temp_name = $(this).find('.client_name').html().toLowerCase();
                         if (temp_name.indexOf(name) < 0) {
                             $(this).hide();
                         }
+                        else {
+							$(this).show();
+						}
                     });
                     i += step;
                     if (i >= people.length) {
@@ -280,6 +279,7 @@
                 }
             }, 1);
         }
+        
         $('#searchtext').on('keyup', function(e) {
             var code = (e.keyCode ? e.keyCode : e.which);
             if (code == 27) {
@@ -290,13 +290,26 @@
         });
         
         //Add Filter Actions
-        var load_client_list = function(e) {
+        var load_client_list = function() {
 			var url = "/fragment/list/?group=";
 			url+=$('#group_select').val()+"&sort="+$('#sort_select').val();
 			$('#patient_list').load(url,load_client_list_complete);
 		}
 		$('#group_select').on('change',load_client_list);
         $('#sort_select').on('change',load_client_list);
+        
+       // Register click handlers on all clients
+        var load_client_list_complete = function() {
+            $(".person").on("click", function() {
+               //change css on selected person
+               $(".person_selected").removeClass("person_selected");
+               $(".list #"+this.id).addClass("person_selected");
+                load_client(this);
+            });
+            people = $('.person');
+           filter();
+        }
+		load_client_list_complete();
         
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {

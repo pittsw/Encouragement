@@ -148,7 +148,7 @@ def add_client(request):
 				nurse = None
 				message_client(client,nurse,sender,text) #send initial message to client
 			
-			return HttpResponse('')
+			return HttpResponse(str(client.id))
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
 '''
