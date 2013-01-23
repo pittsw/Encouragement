@@ -1,0 +1,692 @@
+/* Full page styles */
+body {
+    font-family: sans-serif;
+    background-color: rgb(73,113,118);
+    border-style: solid;
+    border-color: rgb(73, 113, 118);
+    border-width: 2px;
+}
+
+input[type="text"] {
+	width:180px;
+}
+
+textarea {
+	resize: none;
+}
+
+.header-bar {
+    background-color: rgb(120, 177, 189);
+    color: #FFFFFF;
+    font-size: 18px;
+    padding-top: 3px;
+    font-family: Arial;
+    font-weight: bold;
+    height: 23px;
+    text-transform: uppercase;
+}
+
+.header-bar .title {
+    padding-left: 15px;
+}
+
+.header-bar .logout {
+    float: right;
+    margin-right: 0.5em;
+    padding-top: 0px;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.list_search {
+    background-color: rgb(217,233,236);
+    height: 32px;
+}
+
+#main_content {
+	border-left-style: solid;
+    border-top-style: solid;
+    border-width: 2px;
+    border-color: rgb(121, 121, 121);
+    height: 635px;
+    background-color: rgb(255,255,255);
+}
+
+.center_bar {
+    background-color: rgb(212, 200, 156);
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    height: 22px;
+    color: rgb(51, 51, 51);
+    padding-top:3px;
+}
+
+.center_bar .name_bar {
+    display: inline;
+}
+
+.center_bar .download {
+    display: inline;
+    padding: 2px 5px 0px 0px;
+    font-size: 12px;
+    float: right;
+}
+
+.errors {
+    color: red;
+}
+
+.collapseerrors ul {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    list-style-type: none;
+}
+
+.collapseerrors .errorlist li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    list-style-type: none;
+}
+
+.gray_button {
+    background-color: rgb(159, 157, 150);
+    color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
+	cursor: pointer;
+}
+
+.message_bar {
+	background-color: rgb(200, 200, 200);
+	font-weight: bold;
+    padding: 2px 7px 2px 7px;
+    margin: 0px 5px 0px 5px;
+}
+
+.blue_button {
+    background-color: rgb(91,141,147);
+    color: rgb(255, 255, 255);
+    padding: 2px 7px 2px 7px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+    margin-right: 5px;
+	cursor: pointer;
+}
+
+.cancel {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/cancel.png");
+    float: right;
+}
+
+
+
+/* End full page styles. */
+
+/* Search bar styles */
+.search_bar {
+    border-top-style: solid;
+    border-width: 2px;
+    border-color: rgb(121, 121, 121);
+    margin-right: -2px;
+    padding-top: 4px;
+}
+
+.search {
+	margin-left: 10px;
+}
+
+.search_bar .addbutton {
+    float: right;
+    width: 40px;
+    height: 24px;
+    background-image: url('/static/images/add_client.png');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.patient_bar {
+    background-color: rgb(200, 200, 200);
+    font-weight: bold;
+    padding: 5px 5px 0px 5px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.patient_bar select {
+	position:relative;
+	top:-4px;
+	font-size:10px;
+}
+/* End search bar styles */
+
+/* Styles for the client list. */
+#patient_list {
+    height: 580px;
+    background-color: rgb(217,233,236);
+    overflow: auto;
+}
+
+.person .name div{
+    display: inline;
+    float: left;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 20	px;
+}
+
+.two_way_patient {
+	    background-image: url("/static/images/patient-two_way-2.png");
+}
+
+.one_way_patient {
+	    background-image: url("/static/images/patient-one_way-1.png");
+}
+
+.control_patient {
+	    background-image: url("/static/images/patient-control-0.png");
+}
+
+.list .person {
+    padding: 5px;
+    border-bottom: 1px dashed grey;
+    color:rgb(1,1,1);
+}
+
+.list .person:hover {
+	background-color:rgb(120, 177, 189);
+	cursor:pointer;
+}
+
+.list .person_selected {
+	color: rgb(217,233,236);
+	background-color: rgb(91,141,147);
+}
+
+.list .person_selected:hover {
+	background-color: rgb(91,141,147);
+}
+
+.list .right {
+    float: right;
+    width: 40px;
+}
+
+.list .header {
+    width: 100%;
+}
+
+.list .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.list .client_id {
+    display: inline;
+    font-weight: bold;
+    font-size:10px;
+    position:relative;
+    top:-3px;
+}
+
+.list .pendingname {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size:16px;
+}
+
+.list .urgent {
+    display: inline;
+    float: right;
+    background-image: url("/static/images/urgent.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 30px;
+}
+
+.list .pending {
+    display: inline;
+    float: right;
+    background-image: url("/static/images/pending_message.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 30px;
+}
+/* End styles for the client list. */
+
+/* Styles for the add client pane */
+div.add_client {
+	overflow-y:auto;
+	height:600px;
+}
+
+#add_client_form>div {
+	margin-top:10px;
+}
+
+.form_label {
+	text-align:right;
+}
+
+.form_label span {
+	margin-right:10px;
+}
+
+.form_item {
+	
+}
+
+div.add_client .errorlist {
+	font-size:9pt;
+	font-style:italic;
+	margin:0px;
+}
+
+/* End styles for the add client pane */
+
+/* Styles for the client details pane. */
+.info {
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    padding-top: 3px;
+    overflow: auto;
+}
+
+.info .header {
+    background-color: rgb(208, 206, 196);
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 20px;
+    margin-right: 5px;
+    height: auto;
+    overflow: auto;
+    background-position: 5px center;
+    background-repeat: no-repeat;
+}
+
+.info_expanded {
+    background-image: url("/static/images/expanded.png");
+}
+
+.info_collapsed {
+    background-image: url("/static/images/collapsed.png");
+}
+
+.info table {
+    background-color: rgb(245, 242, 231);
+    margin-right: 5px;
+}
+
+.info tr {
+    padding: 10px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.info td {
+    vertical-align:middle;
+    border-bottom: 1px dashed grey;
+}
+
+.info .content {
+    width: 65%;
+    font-size: 14px;
+}
+
+.info .comments {
+	font-size: 14px;
+}
+
+.info .date {
+    width: 25%;
+    font-size: 12px;
+    font-style: italic;
+    color: rgb(102,102,102);
+}
+
+.info .title {
+    width: 40%;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 12px;
+}
+
+.info .data {
+    width: 60%;
+    padding: 0px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.info .delete {
+    width: 10%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.info #edit {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/gear.png");
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.info #save {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background-image: url("/static/images/plus.png");
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.info .add {
+    background-position: center;
+    width: 16px;
+    height: 16px;
+    background-image: url("/static/images/plus.png");
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.info .cancel {
+    float: right;
+}
+
+.info #notes_hide {
+    display: none;
+}
+
+.info #visit_hide {
+    display: none;
+}
+
+.msg_head {
+	margin-top: 10px;
+}
+/* End styles for client details pane. */
+
+
+/* Styles for the message page. */
+.messages {
+    background-color:rgb(255,255,255);
+    height: 600px;
+    padding-top: 3px;
+}
+
+.messages .send-to {
+    padding: 5px 0px 0px 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
+    margin: 5px 15px 5px 10px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px;
+    width: 60%;
+    clear: both;
+    color: rgb(0,0,0);
+}
+
+.messages .Client {
+    float: left;
+    margin-right: auto;
+    background-color: rgb(171,198,202);
+}
+
+.messages .System, .messages .Nurse, .messages .Phone {
+    float: right;
+    margin-left: auto;
+    text-align: right;
+}
+
+.messages .Phone {
+	background-color: rgb(198, 184, 190);
+}
+
+.messages .System {
+    background-color: rgb(214,214,214);
+}
+
+.messages .Nurse {
+    background-color: rgb(207,200,172);
+}
+
+.messages .message-list {
+	margin: 0px 5px 5px 5px;
+    height: 406px;
+    overflow: auto;
+}
+
+.messages #change {
+    margin-top: 55px;
+}
+
+.messages .Boxes {
+    height: 120px;
+    top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(255,255,255);
+}
+
+.messages .phone-box, .messages .message-box {
+	top: 50px; 
+    left: 0px; 
+    height: 130px;
+    background-color: rgb(255,255,255); 
+    overflow: hidden; 
+    border-style: solid;
+    width: 100%;
+    padding-top: 5px;
+    margin: -1px;
+    border-width: 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+.messages .message-box {
+    
+}
+
+.messages .phone-box {
+    
+}
+
+.messages .phone-box .wrapper {
+	padding-top: 5px;
+	height: 25px;
+}
+
+.messages .phone-box .completion_checkbox {
+	margin-left: 10px;
+	vertical-align: middle;
+	display: inline;
+}
+
+.messages .phone-box .duration {
+	display: inline;
+	float: right;
+	margin-right: 10px;
+}
+
+.messages .phone-box .phone-content {
+}
+
+#group-tabs .tab-content
+{
+	
+    display:inline-block;
+    width: 100%;
+}
+
+ul.tabs {
+    width:250px;
+    margin:0;
+    padding:0;
+}
+
+ul.tabs li {
+    display:block;
+    float:left;
+    padding:0 1px;
+}
+
+ul.tabs li a {
+    display:block;
+    float:left;
+    padding:5px;
+    font-size:0.8em;
+    background-color:#e0e0e0;
+    color:#666;
+    text-decoration:none;
+}
+
+a.tab {
+	margin-top: 5px;
+	border-radius: 10px 10px 0px 0px;
+	border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: rgb(121, 121, 121);
+}
+
+ul.tabs .selected {
+	background-color: rgb(255,255,255);
+	color:black;
+}
+
+.messages .envelopepic .tab {
+	width: 60px;
+	height: 20px;
+	background-image: url("/static/images/message.png");
+	background-repeat: no-repeat;
+	background-position: center;
+
+}
+
+.messages .phonepic .tab {
+	width: 60px;
+	height: 20px;
+	background-image: url("/static/images/call.png");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.messages .phonepic .selected {
+	background-image: url("/static/images/call_large.png");
+	width: 80px;
+	height: 23px;
+	margin-top:2px;
+}
+
+.messages .envelopepic .selected {
+    background-image: url("/static/images/message_large.png");
+    width: 80px;
+	height: 23px;
+	margin-top:2px;
+}
+
+.messages .message-view-select {
+	float: right;
+	position: relative;
+	margin: -2px;
+	vertical-align: middle;
+}
+
+.messages .download {
+    font-size: 12px;
+}
+
+.messages .header {
+    background-color: rgb(212,200,156);
+    text-align: center;
+    font-size: 20px;
+}
+
+.messages .content {
+    text-align: left;
+    font-size: 14px;
+}
+
+.messages .date {
+    font-size: 10px;
+    vertical-align: middle;
+    float: right;
+}
+
+.messages .top {
+    font-size:12px;
+    text-align: left;
+}
+
+.messages .Client .content {
+    font-size: 16px;
+}
+
+.messagetable {
+    font-size: 12px;
+    width: 395px;
+    border-width: 1px 0px 0px 1px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+    border-spacing: 0px;
+}
+
+.messagetable .light {
+	background-color: rgb(214,214,214);
+}
+
+.messagetable .dark {
+	background-color: rgb(169,169,169);
+}
+
+.messagetable th {
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+    background-color: rgb(214,214,214);
+}
+
+.messagetable td {
+    padding: 0px 2px;
+    border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: rgb(140,140,140);
+    margin: 0px;
+    
+}
+
+.messagetable .sender {
+	white-space: nowrap;
+	text-align: center;
+}
+
+.messagetable td .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
+/* End messages styles. */

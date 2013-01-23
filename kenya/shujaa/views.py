@@ -40,6 +40,7 @@ def receive(request):
 				return HttpResponse(http)
 				
 			else:
+				print >> sys.stderr, "SHUJAA GET RECIEVE"
 				return HttpResponse("Please use post")
 	except Exception as e:
 		 print >> sys.stderr, "Exception: {e}".format(e=e)
