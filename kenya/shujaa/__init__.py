@@ -27,17 +27,14 @@ class Transport(BaseTransport):
 		#http request to getway to send sms
 		data = urllib.urlencode(values)
 		req = urllib2.Request(cls.gateway['url'], data)
-		print "Shujaa Send: %s,%s"%(target,content)
+		#print "Shujaa Send: %s,%s"%(target,content)
 		
 		''' Don't Send Now '''
 		httpResponse = urllib2.urlopen(req)
 		
-		#Do not send right now
-		
-		
 		#do something with response 
 		response = httpResponse.read()
-		print response
+		#print response
 		
 		
 		
