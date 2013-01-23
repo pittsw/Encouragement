@@ -1,3 +1,5 @@
+import sys
+
 # Create your views here.
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
@@ -26,30 +28,19 @@ def sendSMS(request):
 		if form.is_valid():
 			new_request = HttpRequest()
 			new_request.method = 'POST'
-			if request.POST['transport'] == 'shujaa':
-				post = {
-					'callbackType':'incomingSms',
-					'destination':'6873',
-					'source':request.POST['sender_number'],
-					'message':request.POST['content'],
-					'messageID':SendForm.msgID(),
-					'network':'safaricom'
-					}
-				new_request.POST = post
-				return shujaa.receive(new_request)
-			else: #smssync
-				post = {
-					'from':request.POST['sender_number'],
-					'message':request.POST['content'],
-					'message_id':SendForm.msgID(),
-					'sent_to':'http',
-					'secret':'Standards',
-					'sent_timestamp':'now'
-					}
-				new_request.POST = post
-				return smssync(new_request)
-	else: 
-		form = SendForm()
+			post = {
+				'callbackType':'incomingSms',
+				'destination':'6873',
+				'source':request.POST['sender_number'],
+				'message':request.POST['content'],
+				'messageID':SendForm.msgID(),
+				'network':'safaricom'
+				}
+			new_request.POST = post
+			print >> sys.stderr, post
+			sys.stderr.flush()
+			return shujaa.receive(new_request)
+	form = SendForm()
 	return render(request,'send.html',{'form':form})
 	
 def sendSystem(request):

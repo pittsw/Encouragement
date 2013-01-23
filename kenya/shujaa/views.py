@@ -35,8 +35,10 @@ def receive(request):
 				messageID = request.POST['messageID']
 				received = tasks.incoming_message(sender, message)
 				http = "%s sent \"%s\" on %s (%s)\nReceived: %s"%(sender,message,network,messageID,received)
-				print http
+				print >> sys.stderr, http
+				sys.stderr.flush()
 				return HttpResponse(http)
+				
 			else:
 				return HttpResponse("Please use post")
 	except Exception as e:
