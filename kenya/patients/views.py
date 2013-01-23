@@ -1,5 +1,6 @@
 from csv import DictWriter
-import sys, random
+import sys, random, time
+from datetime import date, timedelta
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -125,8 +126,10 @@ def add_client(request):
     form = None
     c = {}
     if request.method == "GET":
-        form = AddClientForm(initial={"birth_date":"1990-01-01","due_date":"2013-06-13","next_visit":"2013-01-22","conditions":"1",
-        "previous_pregnacies":"0","living_children":"0","years_of_education":"1","nickname":"nick"})
+        next_month = (date.today() + timedelta(30)).strftime("%Y-%m-%d")
+        due_date = (date.today() + timedelta(180)).strftime("%Y-%m-%d")
+        form = AddClientForm(initial={"birth_date":"1990-01-01","due_date":due_date,"next_visit":next_month,"conditions":"1",
+        "previous_pregnacies":"1","living_children":"0","years_of_education":"1","phone_number":"254"})
     elif request.method == "POST":
 		form = AddClientForm(request.POST)
 		if form.is_valid():
