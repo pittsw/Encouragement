@@ -8,80 +8,84 @@
 <form id="add_client_form">
     {% csrf_token %}
 			
+			<span class="form_section">Participant Information</span>
 			<div>
-			<!-- ID -->
-			<div class="grid_6 form_row">
-				<div class="form_label">ID#:</div>
-				<div class="form_input">{{ form.id }} </div>
-				{% if form.id.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
-			</div>
+				<!-- ID -->
+				<div class="grid_6 form_row">
+					<div class="form_label">ID#:</div>
+					<div class="form_input">{{ form.id }} </div>
+					{% if form.id.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
+				</div>
+				
+					<!-- Birth Day -->
+				<div class="grid_6 form_column">
+					<div class="form_label">Birth Day <span class="form_info">yyyy-mm-dd</span></div>
+					<div class="form_input date">{{ form.birth_date }} </div>
+					{% if form.birth_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.birth_date.errors }}</span></span></div>{% endif %}
+				</div>
 			
-			<!-- Phone Number -->
-			<div class="grid_6 form_row">
-				<div class="form_label">Phone Number:</div>
-				<div class="form_input">{{ form.phone_number }} </div>
-				{% if form.phone_number.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
-			</div>
 			</div>
 			<div>
-			<!-- First Name -->
-			<div class="grid_6 form_row">
-				<div class="form_label">First Name:</div>
-				<div class="form_input">{{ form.first_name }} </div>
-				{% if form.first_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.first_name.errors }}</span></span></div>{% endif %}
-			</div>
-			
-			<!-- Last Name -->
-			<div class="grid_6 form_row">
-				<div class="form_label">Last Name:</div>
-				<div class="form_input">{{ form.last_name }} </div>
-				{% if form.last_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.last_name.errors }}</span></span></div>{% endif %}
-			</div>
+				<!-- First Name -->
+				<div class="grid_6 form_row">
+					<div class="form_label">First Name:</div>
+					<div class="form_input">{{ form.first_name }} </div>
+					{% if form.first_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.first_name.errors }}</span></span></div>{% endif %}
+				</div>
+				
+				<!-- Last Name -->
+				<div class="grid_6 form_row">
+					<div class="form_label">Last Name:</div>
+					<div class="form_input">{{ form.last_name }} </div>
+					{% if form.last_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.last_name.errors }}</span></span></div>{% endif %}
+				</div>
 			</div>
 			<div>
 			<!-- Nickname -->
-			<div class="grid_6 form_row">
-				<div class="form_label">Nickname:</div>
-				<div class="form_input">{{ form.nickname }} </div>
-				{% if form.nickname.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.nickname.errors }}</span></span></div>{% endif %}
-			</div>
+				<div class="grid_6 form_row">
+					<div class="form_label">Nickname:</div>
+					<div class="form_input">{{ form.nickname }} </div>
+					{% if form.nickname.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.nickname.errors }}</span></span></div>{% endif %}
+				</div>
 			
-			<!-- Birth Day -->
-			<div class="grid_6 form_column">
-				<div class="form_label">Birth Day <span class="form_info">yyyy-mm-dd</span></div>
-				<div class="form_input date">{{ form.birth_date }} </div>
-				{% if form.birth_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.birth_date.errors }}</span></span></div>{% endif %}
+				<!-- Education -->
+				<div class="grid_6 form_column">
+					<div class="form_label" >Years of Education</div>
+					<div class="form_input">{{ form.years_of_education }} </div>
+					{% if form.years_of_education.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.years_of_education.errors }}</span></span></div>{% endif %}
+				</div>
 			</div>
-			</div>
+
+			<span class="form_section">Medical Information</span>
 			<div>
 			<!-- Due Date -->
-			<div class="grid_6 form_column">
-				<div class="form_label">Due Date <span class="form_info">yyyy-mm-dd</span></div>
-				<div class="form_input date">{{ form.due_date }} </div>
-				{% if form.due_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.due_date.errors }}</span></span></div>{% endif %}
-			</div>
-			
-			<!-- Living Childern -->
-			<div class="grid_6 form_column">
-				<div class="form_label">Living Childern:</div>
-				<div class="form_input">{{ form.living_children }} </div>
-				{% if form.living_children.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.living_children.errors }}</span></span></div>{% endif %}
-			</div>
+				<div class="grid_6 form_column">
+					<div class="form_label">Due Date <span class="form_info">yyyy-mm-dd</span></div>
+					<div class="form_input date">{{ form.due_date }} </div>
+					{% if form.due_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.due_date.errors }}</span></span></div>{% endif %}
+				</div>
+				
+				<!-- Living Childern -->
+				<div class="grid_6 form_column">
+					<div class="form_label">Living Childern:</div>
+					<div class="form_input">{{ form.living_children }} </div>
+					{% if form.living_children.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.living_children.errors }}</span></span></div>{% endif %}
+				</div>
             </div>
 			<div>
 			<!-- Total Number of Pregnacies -->
-			<div class="grid_6 form_column">
-				<div class="form_label">Total number of pregnancies</div>
-				<div class="form_input">{{ form.previous_pregnacies }} </div>
-				{% if form.previous_pregnacies.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.previous_pregnacies.errors }}</span></span></div>{% endif %}
-			</div>
-			
-			<!-- Pregnancy Status -->
-			<div class="grid_6 form_column">
-				<div class="form_label">Pragnacy Status</div>
-				<div class="form_input">{{ form.pregnancy_status }} </div>
-				{% if form.pregnancy_status.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.pregnancy_status.errors }}</span></span></div>{% endif %}
-			</div>
+				<div class="grid_6 form_column">
+					<div class="form_label">Total number of pregnancies</div>
+					<div class="form_input">{{ form.previous_pregnacies }} </div>
+					{% if form.previous_pregnacies.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.previous_pregnacies.errors }}</span></span></div>{% endif %}
+				</div>
+				
+				<!-- Pregnancy Status -->
+				<div class="grid_6 form_column">
+					<div class="form_label">Pragnacy Status</div>
+					<div class="form_input">{{ form.pregnancy_status }} </div>
+					{% if form.pregnancy_status.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.pregnancy_status.errors }}</span></span></div>{% endif %}
+				</div>
 			</div>
 			<div>
 			<!-- Condition -->
@@ -102,12 +106,13 @@
 				
 			</div>
 			</div>
+			<span class="form_section">Contact Information</span>
 			<div>
-				<!-- Education -->
-				<div class="grid_6 form_column">
-					<div class="form_label" >Years of Education</div>
-					<div class="form_input">{{ form.years_of_education }} </div>
-					{% if form.years_of_education.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.years_of_education.errors }}</span></span></div>{% endif %}
+				<!-- Phone Number -->
+				<div class="grid_6 form_row">
+					<div class="form_label">Phone Number:</div>
+					<div class="form_input">{{ form.phone_number }} </div>
+					{% if form.phone_number.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
 				</div>
 				<!-- Next Visit -->
 				<div class="grid_6 form_column">

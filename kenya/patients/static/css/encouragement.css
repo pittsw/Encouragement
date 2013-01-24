@@ -278,8 +278,15 @@ div.add_client {
 }
 
 #add_client_form>div {
-	margin-top:10px;
+	margin:5px 0px;
 	display:inline-block;
+}
+
+#add_client_form .form_section {
+	border-bottom:2px solid black;
+	width:90%;
+	margin-left:20px;
+	font-weight:bold;
 }
 
 span.form_info {
