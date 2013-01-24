@@ -187,7 +187,6 @@
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
 				var data = $("#add_client_form").serialize()
-				data = data.slice(0,data.lastIndexOf("csrfmiddle")); //HACK: serialize was doubling the form!
 				xhr.send(data);
 				var response = xhr.responseText;
 				if (/^\d+$/.test(response)) { // a single number is the new user id
