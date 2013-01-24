@@ -7,20 +7,130 @@
 <div class="grid_12 add_client"><div>
 <form id="add_client_form">
     {% csrf_token %}
-        {% for field in form %}
-			<div class="grid_4 form_label">
-                   <span>{{ field.label_tag }}</span>
+			
+			<div>
+			<!-- ID -->
+			<div class="grid_6 form_row">
+				<div class="form_label">ID#:</div>
+				<div class="form_input">{{ form.id }} </div>
+				{% if form.id.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Phone Number -->
+			<div class="grid_6 form_row">
+				<div class="form_label">Phone Number:</div>
+				<div class="form_input">{{ form.phone_number }} </div>
+				{% if form.phone_number.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.phone_number.errors }}</span></span></div>{% endif %}
+			</div>
+			</div>
+			<div>
+			<!-- First Name -->
+			<div class="grid_6 form_row">
+				<div class="form_label">First Name:</div>
+				<div class="form_input">{{ form.first_name }} </div>
+				{% if form.first_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.first_name.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Last Name -->
+			<div class="grid_6 form_row">
+				<div class="form_label">Last Name:</div>
+				<div class="form_input">{{ form.last_name }} </div>
+				{% if form.last_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.last_name.errors }}</span></span></div>{% endif %}
+			</div>
+			</div>
+			<div>
+			<!-- Nickname -->
+			<div class="grid_6 form_row">
+				<div class="form_label">Nickname:</div>
+				<div class="form_input">{{ form.nickname }} </div>
+				{% if form.nickname.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.nickname.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Birth Day -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Birth Day <span class="form_info">yyyy-mm-dd</span></div>
+				<div class="form_input date">{{ form.birth_date }} </div>
+				{% if form.birth_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.birth_date.errors }}</span></span></div>{% endif %}
+			</div>
+			</div>
+			<div>
+			<!-- Due Date -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Due Date <span class="form_info">yyyy-mm-dd</span></div>
+				<div class="form_input date">{{ form.due_date }} </div>
+				{% if form.due_date.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.due_date.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Living Childern -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Living Childern:</div>
+				<div class="form_input">{{ form.living_children }} </div>
+				{% if form.living_children.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.living_children.errors }}</span></span></div>{% endif %}
+			</div>
             </div>
-            <div class="grid_4 suffix_3">
-				{% if field.field|klass == "DateField" %}
-					<div class="date">{{ field }}</div>
-				{% else %}
-					<div>{{ field }}</div>
-				{% endif %}
-            </div>
-            
-            {% if field.errors %} <div class="prefix_3 grid_4 suffix_4"><span class="errors"><span class="collapse">{{ field.errors }}</span></span></div>{% endif %}
-        {% endfor %}
+			<div>
+			<!-- Total Number of Pregnacies -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Total number of pregnancies</div>
+				<div class="form_input">{{ form.previous_pregnacies }} </div>
+				{% if form.previous_pregnacies.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.previous_pregnacies.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Pregnancy Status -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Pragnacy Status</div>
+				<div class="form_input">{{ form.pregnancy_status }} </div>
+				{% if form.pregnancy_status.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.pregnancy_status.errors }}</span></span></div>{% endif %}
+			</div>
+			</div>
+			<div>
+			<!-- Condition -->
+			<div class="grid_6 form_column">
+				<div class="form_label" >Condition</div>
+				<div class="form_input">{{ form.conditions }} </div>
+				{% if form.conditions.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.conditions.errors }}</span></span></div>{% endif %}
+			</div>
+			
+			<!-- Relationship -->
+			<div class="grid_6 form_column">
+				<div class="form_label">Relationship Status</div>
+				<div class="form_input">{{ form.relationship_status }} </div>
+				{% if form.relationship_status.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.relationship_status.errors }}</span></span></div>{% endif %}
+				<div class="form_label">Partner Name</div>
+				<div class="form_input">{{ form.partner_name }} </div>
+				{% if form.partner_name.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.partner_name.errors }}</span></span></div>{% endif %}
+				
+			</div>
+			</div>
+			<div>
+				<!-- Education -->
+				<div class="grid_6 form_column">
+					<div class="form_label" >Years of Education</div>
+					<div class="form_input">{{ form.years_of_education }} </div>
+					{% if form.years_of_education.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.years_of_education.errors }}</span></span></div>{% endif %}
+				</div>
+				<!-- Next Visit -->
+				<div class="grid_6 form_column">
+					<div class="form_label" >Next ANC Vist</div>
+					<div class="form_input">{{ form.next_visit }} </div>
+					{% if form.next_visit.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.next_visit.errors }}</span></span></div>{% endif %}
+				</div>
+			</div>
+			
+				<div>
+				<!-- Send Day -->
+				<div class="grid_6 form_column">
+					<div class="form_label" >Message Day Preference</div>
+					<div class="form_input">{{ form.send_day }} </div>
+					{% if form.send_day.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.send_day.errors }}</span></span></div>{% endif %}
+				</div>
+				<!-- Send Time -->
+				<div class="grid_6 form_column">
+					<div class="form_label" >Message Send Time</div>
+					<div class="form_input">{{ form.send_time }} </div>
+					{% if form.send_time.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.send_time.errors }}</span></span></div>{% endif %}
+				</div>
+			</div>
     <div class="grid_4 prefix_4" style="text-align:center;margin-bottom:5px;"><input type="button" value="Add" id="submit"/></div>
     <div class="errors">
         {{ form.non_field_errors }}

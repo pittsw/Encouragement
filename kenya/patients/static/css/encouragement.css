@@ -279,18 +279,33 @@ div.add_client {
 
 #add_client_form>div {
 	margin-top:10px;
+	display:inline-block;
 }
 
-.form_label {
+span.form_info {
+	font-style:italic;
+	font-size:10pt;
+}
+
+.form_column {
+}
+
+.form_column .form_label {
+	margin-left:25px;
+}
+
+.form_column .form_input {
+	margin-left:50px;
+}
+.form_row .form_label {
+	margin-right:5px;
+	display:inline-block;
+	width:120px;
 	text-align:right;
 }
 
-.form_label span {
-	margin-right:10px;
-}
-
-.form_item {
-	
+.form_row .form_input {
+	display:inline-block;
 }
 
 div.add_client .errorlist {

@@ -38,7 +38,6 @@ def receive(request):
 				print >> sys.stderr, http
 				sys.stderr.flush()
 				return HttpResponse(http)
-				
 			else:
 				print >> sys.stderr, "SHUJAA GET RECIEVE"
 				return HttpResponse("Please use post")

@@ -27,13 +27,10 @@ def get_object_or_default(klass, default, **kwargs):
 
 @login_required
 def index(request):
-    form = render_to_string("add_client.html", {"form": AddClientForm()},
-        context_instance=RequestContext(request))
     clients = Client.objects.all().order_by("-study_group")
     patients = render_to_string("list_fragment.html", {'clients': clients})
     nurse = get_object_or_default(Nurse, "Administrator", user=request.user)
     c = {
-        'form': form,
         'patient_list': patients,
         'nurse': nurse,
     }
