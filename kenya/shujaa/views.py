@@ -46,4 +46,4 @@ def receive(request):
 				return HttpResponse("Please use post")
 	except Exception as e:
 		print >> sys.stderr, "Exception: {e}".format(e=e)
-        	sys.stderr.flush()
+		sys.stderr.flush()
