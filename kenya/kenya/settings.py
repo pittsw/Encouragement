@@ -5,7 +5,7 @@ from datetime import timedelta
 URGENT = timedelta(days=14)
 
 # Necessary for SMSSync view.
-TRANSPORT = 'httpsms'
+TRANSPORT = 'shujaa'
 SMSSYNC_SECRET = 'Standards'
 
 # Default Settings For System.

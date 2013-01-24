@@ -26,13 +26,15 @@ def print_request(request):
 
 @csrf_exempt
 def receive(request):
+	print >> sys.stderr, "RECEIVING!!"
+	sys.stderr.flush()
 	try:
 		with transaction.commit_on_success():
 			if request.method == "POST":
 				sender = request.POST['source']
 				message = request.POST['message']
 				network = request.POST['network']
-				messageID = request.POST['messageID']
+				messageID = request.POST['messageId']
 				received = tasks.incoming_message(sender, message)
 				http = "%s sent \"%s\" on %s (%s)\nReceived: %s"%(sender,message,network,messageID,received)
 				print >> sys.stderr, http
@@ -41,7 +43,8 @@ def receive(request):
 				
 			else:
 				print >> sys.stderr, "SHUJAA GET RECIEVE"
+				sys.stderr.flush()
 				return HttpResponse("Please use post")
 	except Exception as e:
-		 print >> sys.stderr, "Exception: {e}".format(e=e)
-        sys.stderr.flush()
+		print >> sys.stderr, "Exception: {e}".format(e=e)
+        	sys.stderr.flush()

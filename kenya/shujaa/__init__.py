@@ -1,5 +1,5 @@
 from transports import BaseTransport
-import urllib, urllib2
+import urllib, urllib2,sys
 
 class Transport(BaseTransport):
 	"""A transport that sends a message through the Shujaa API.
@@ -28,13 +28,13 @@ class Transport(BaseTransport):
 		data = urllib.urlencode(values)
 		req = urllib2.Request(cls.gateway['url'], data)
 		#print "Shujaa Send: %s,%s"%(target,content)
-		
+		print >>sys.stderr,values
 		''' Don't Send Now '''
 		httpResponse = urllib2.urlopen(req)
 		
 		#do something with response 
 		response = httpResponse.read()
-		#print response
+		print >> sys.stderr, response
 		
 		
 		
