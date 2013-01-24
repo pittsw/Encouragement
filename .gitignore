@@ -1,3 +1,4 @@
 *.db
 *.pyc
 kenya/kenya/settings_local.py
+kenya/patients/static/css/css_local.css

@@ -711,4 +711,7 @@ ul.tabs .selected {
     white-space: nowrap;
     width: 250px;
 }
+
+@import url("css_local.css")
+
 /* End messages styles. */
