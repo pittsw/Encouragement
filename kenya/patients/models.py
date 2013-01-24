@@ -132,7 +132,7 @@ class Client(models.Model):
             raise ValidationError(errors)
 
     def __unicode__(self):
-        return self.first_name + ' ' + self.last_name
+        return "Phone Number: %s -- %s %s (#%s) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
 
     def last_message(self):
         message = Message.objects.filter(client_id=self, sent_by='Client')
