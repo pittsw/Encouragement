@@ -276,11 +276,13 @@ textarea {
 div.add_client {
 	overflow-y:auto;
 	height:600px;
+	position:realative;
 }
 
 #add_client_form>div {
 	margin:5px 0px;
 	display:inline-block;
+	width:100%;
 }
 
 #add_client_form .form_section {
@@ -288,6 +290,7 @@ div.add_client {
 	width:90%;
 	margin-left:20px;
 	font-weight:bold;
+	display:block;
 }
 
 span.form_info {
@@ -296,6 +299,8 @@ span.form_info {
 }
 
 .form_column {
+	display:inline-block;
+	width:49%;
 }
 
 .form_column .form_label {
