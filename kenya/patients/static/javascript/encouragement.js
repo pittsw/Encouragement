@@ -70,6 +70,8 @@
 			});
             
 			loadEditHandlers(client_obj);
+			var now = new Date();
+			$('#time').html(now.getHours()+":"+now.getMinutes()+":"+now.getSeconds());
         }
         
         var load_message_call_tabs = function () {
@@ -313,38 +315,37 @@
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {
 			setCalendars();
-            $('.info #edit').on("click", function(eventObject) {
-                $('.view_buttons').hide();
-                $('.edit_buttons').show();
+            $('.info #client_info_edit').on("click", function(eventObject) {
+                $('#client_info_edit').hide();
+                $('#client_info_hide').show();
                 $('#client_fragment').load("/edit/" + client_id + "/", function() {
                     setCalendars();
+                    // Save the client when they click save
+					$('#client_info_save').on("click", function(eventObject) {
+						var xhr = new XMLHttpRequest();
+						xhr.open("POST", "/edit/" + client_id + "/", false);
+						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+						xhr.send($('#edit_client').serialize());
+						var response = xhr.responseText;
+						if (response.length == 0) {
+							$('#client_fragment').load("/fragment/" + client_id + "/");
+							$('#client_info_edit').show();
+							$('#client_info_hide').hide();
+						} else {
+							$('#client_fragment').html(response);
+						}
+						return false;
+					});
                 });
                 return false;
             });
 
-            // Save the client when they click save
-            $('.info #save').on("click", function(eventObject) {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/edit/" + client_id + "/", false);
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                xhr.send($('#edit_client').serialize());
-                var response = xhr.responseText;
-                if (response.length == 0) {
-                    $('#client_fragment').load("/fragment/" + client_id + "/");
-                    $('.edit_buttons').hide();
-                    $('.view_buttons').show();
-                } else {
-                    $('#client_fragment').html(response);
-                }
-                return false;
-            });
-
             // Return when they click cancel
-            $('.info #cancel').on("click", function(eventObject) {
+            $('.info #client_info_hide').on("click", function(eventObject) {
                 $('#client_fragment').load('/fragment/' + client_id + '/');
-                $('.edit_buttons').hide();
-                $('.view_buttons').show();
+                $('#client_info_edit').show();
+				$('#client_info_hide').hide();
                 return false;
             });
 
@@ -456,5 +457,11 @@
                     $(obj).addClass('info_expanded').removeClass('info_collapsed');
                 }
             }
+        
+        // Hook into refresh button
+        $("#refresh_button").on('click',function(e) {
+			if(client_id) load_client({'id':client_id,'name':client_name});
+			
+		});
     });
 })(jQuery);

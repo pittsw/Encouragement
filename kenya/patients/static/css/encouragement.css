@@ -12,6 +12,7 @@ input[type="text"] {
 	width:180px;
 }
 
+
 textarea {
 	resize: none;
 }
@@ -38,6 +39,11 @@ textarea {
     font-size: 12px;
     font-weight: normal;
     text-transform: capitalize;
+}
+
+.header-bar button {
+	position:relative;
+	top:-2px;
 }
 
 .list_search {
@@ -298,6 +304,10 @@ span.form_info {
 	font-size:10pt;
 }
 
+fieldset {
+	margin: 15px;
+}
+
 .form_column {
 	display:inline-block;
 	width:49%;
@@ -411,21 +421,11 @@ div.add_client .errorlist {
     font-size: 20px;
 }
 
-.info #edit {
+.info .edit {
     background-position: center;
     width: 16px;
     height: 16px;
     background-image: url("/static/images/gear.png");
-    background-repeat: no-repeat;
-    float: right;
-}
-
-.info #save {
-    background-position: center;
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    background-image: url("/static/images/plus.png");
     background-repeat: no-repeat;
     float: right;
 }
@@ -441,6 +441,10 @@ div.add_client .errorlist {
 
 .info .cancel {
     float: right;
+}
+
+.info #client_info_hide {
+	display: none;
 }
 
 .info #notes_hide {

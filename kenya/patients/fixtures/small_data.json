@@ -91,45 +91,65 @@
         }
 
     },
-    {
+
+     {
+
         "pk": 1, 
+
         "model": "patients.automatedmessage", 
+
         "fields": {
+
             "priority": 0, 
-            "message": "Welcome %(nickname)s, you have been signed up for the CLINIC NAME study. Please reply with your user code to verify this phone #. ", 
+
+            "message": "Welcome $(nickname)s, you have been signed up for the CLINIC NAME study. Please reply with your user code to verify this phone #. ", 
+
             "send_base": "signup", 
+
             "condition": 1, 
+
             "send_offset": 0
+
         }
+
     },
+
+
 
     {
         "pk": 1, 
         "model": "patients.client", 
         "fields": {
-            "last_name": "A_last", 
+            "last_name": "Prrier", 
             "relationship_status": "Married", 
             "living_children": 0, 
             "urgent": false, 
             "sent_messages": [], 
             "send_time": 13, 
-            "id": 1000, 
-            "next_visit": null, 
-            "first_name": "A_first", 
+            "id": 2, 
+            "next_visit": "2013-03-15", 
+            "first_name": "Trevor", 
             "last_msg": null, 
-            "partner_name": " ", 
-            "send_day": 6, 
-            "conditions": [], 
+            "sec_contact_name": "", 
+            "send_day": 3, 
+            "pri_contact_name": "LKjd", 
+            "sec_contact_number": 254, 
+            "pri_contact_number": 254, 
             "pending": 0, 
-            "phone_number": "", 
-            "due_date": "2013-05-22", 
-            "previous_pregnacies": 0, 
+            "phone_number": "254", 
+            "due_date": "2013-07-10", 
+            "previous_pregnacies": 1, 
             "years_of_education": 1, 
-            "nickname": "A", 
+            "nickname": "Siay", 
+            "partner_first_name": "", 
+            "signup_date": "2013-02-01", 
+            "language": "English", 
             "study_group": 1, 
-            "birth_date": "1985-07-14", 
-            "pregnancy_status": "Pregnant",
-            "signup_date":"2013-05-22"
+            "conditions": [], 
+            "partner_last_name": "", 
+            "birth_date": "1990-07-03", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
         }
     }
 ]

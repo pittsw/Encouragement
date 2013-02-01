@@ -1,7 +1,8 @@
 {%  if client %}
 <div class="grid_12 center_bar">
 	<div class="name_bar">{{client}}</div>
-	<div class="download"><a href="/clientcsv/{{client.id}}/">Download</a></div>
+	<div id="time" class="download"></div>
+	<!--<div class="download"><a href="/clientcsv/{{client.id}}/">Download</a></div>-->
 </div>
 
 
@@ -24,7 +25,7 @@
 						</div>
 					</div>
 					<div style="text-align;right;padding-right:10px;">
-						<span id="save_call" style="float:right;margin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
+						<span id="save_call" style="float:right;ma.rgin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
 						<span id="clear_call" style="float:right;font-size:12px;" class="gray_button">Clear</span>
 					</div>
 				</form>
@@ -32,7 +33,7 @@
 			<div class="message-box tab-content" id="tabs-1">
 				<form method="post" action="">
 				{% csrf_token %}
-					<div class="send-to">To: {{client}} (#{{client.id}})</div>
+					<div class="send-to">To: {{client.nickname}} (#{{client.id}})</div>
 					<textarea id="message-box" cols=46 rows=3 style="margin:10px;" name="text" value="" placeholder="Send message"></textarea>
 					<div style="text-align:right; padding-right:10px;">
 						<span id="chars-left" style="font-style:italic;" >0/144 characters, 0 messages</span>
@@ -59,13 +60,10 @@
 
 <div class="grid_5 info omega">
 	<div class="client-profile">
-			<div class="header msg_head info_expanded" id="profile">
+			<div class="header" id="profile">
 			<span>Patient Information</span>
-			<span id="edit" class="view_buttons">&nbsp;</span>
-			<span class="edit_buttons" style="display:none;">
-				<span id="cancel" class="cancel">&nbsp;</span>
-				<span id="save">&nbsp;</span>
-			</span>
+			<span id="client_info_edit" class="edit">&nbsp;</span>
+			<span id="client_info_hide" class="cancel">&nbsp;</span>
 		</div>
 		<div id="client_fragment" class="msg_body">
 			{{client_fragment}}

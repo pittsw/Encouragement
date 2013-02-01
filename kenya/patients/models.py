@@ -15,22 +15,22 @@ import pytz
 #add network
 class Client(models.Model):
 
-    class Meta:
-        ordering = ['-urgent', '-pending', '-last_msg']
-        
-    STATUS_CHOICES = (
-        ('Pregnant', 'Pregnant'),
-        ('Post-Partum', 'Post-Partum'),
-        ('Failed Pregnancy', 'Failed Pregnancy'),
-    )
-    
-    RELATIONSHIP_CHOICES = (
+	class Meta:
+		ordering = ['-urgent', '-pending', '-last_msg']
+		
+	STATUS_CHOICES = (
+		('Pregnant', 'Pregnant'),
+		('Post-Partum', 'Post-Partum'),
+		('Failed Pregnancy', 'Failed Pregnancy'),
+	)
+
+	RELATIONSHIP_CHOICES = (
 		('Single','Single'),
 		('Parner','Parner'),
 		('Married','Married'),
     )
     
-    DAY_CHOICES = (
+	DAY_CHOICES = (
 		(1,'Monday'),
 		(2,'Tuesday'),
 		(3,'Wednesday'),
@@ -40,124 +40,152 @@ class Client(models.Model):
 		(0,'Sunday'),
 	)
 	
-    TIME_CHOICES = (
+	TIME_CHOICES = (
 		(8,"Morning"),
 		(13,"Afternoon"),
 		(19,"Evening"),
 	)
 	
-    NETWORK_CHOICES = (
+	NETWORK_CHOICES = (
 		("safaricom","Safaricom"),
 		("airtelkenya","Airtel"),
 	)
-    
-    primary_key = models.AutoField(primary_key=True)
-    
-    id = models.IntegerField(unique=True)
+	
+	STUDY_GROUP_CHOICES = (
+		(1,"Two Way"),
+		(2,"One Way"),
+		(3,"Control"),
+	)
+	
+	LANGUAGE_CHOICES = (
+		("English","English"),
+		("Kiswahili","Kiswahili"),
+	)
 
-    first_name = models.CharField(max_length=50)
+	primary_key = models.AutoField(primary_key=True)
 
-    last_name = models.CharField(max_length=50)
-    
-    nickname = models.CharField(max_length=50)
+	id = models.PositiveIntegerField(unique=True)
 
-    birth_date = models.DateField()
+	first_name = models.CharField(max_length=50)
 
-    relationship_status = models.CharField(max_length=25, choices=RELATIONSHIP_CHOICES, default="Married")
-    
-    partner_name = models.CharField(max_length=50, blank=True)    
+	last_name = models.CharField(max_length=50)
 
-    pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
+	nickname = models.CharField(max_length=50)
 
-    due_date = models.DateField()
+	birth_date = models.DateField()
 
-    years_of_education = models.IntegerField()
-    
-    living_children = models.IntegerField()
-    
-    previous_pregnacies = models.IntegerField()
+	relationship_status = models.CharField(max_length=25, choices=RELATIONSHIP_CHOICES, default="Married")
 
-    conditions = models.ManyToManyField('Condition')
-    
-    next_visit = models.DateField(blank=True, null=True)
-    
-    #Send Message Attributes
-    phone_number = models.CharField(max_length=50, blank=True,)
-    
-    phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom")
-    
-    send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
-    
-    send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
-    
-    #Attributes to be edited by system only
-    urgent = models.BooleanField(editable=False, default=False)
+	partner_first_name = models.CharField(max_length=50, blank=True)
 
-    pending = models.IntegerField(editable=False, default=0)
+	partner_last_name = models.CharField(max_length=50, blank=True)
 
-    last_msg = models.DateField(blank=True, null=True, editable=False)
+	pri_contact_name = models.CharField(max_length=50)
+	 
+	pri_contact_number = models.IntegerField()
+	 
+	sec_contact_name = models.CharField(max_length=50, blank=True)
+	 
+	sec_contact_number = models.IntegerField(blank=True)
 
-    sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
-    
-    study_group = models.IntegerField(editable=False)
-    
-    signup_date = models.DateField(editable=False, auto_now_add=True)
+	pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
 
-    def clean(self):
-        if None in [self.birth_date, self.due_date, self.years_of_education]:
-            return
-        low_age = 10
-        high_age = 100
-        one_year = timedelta(days=365)
-        today = date.today()
-        errors = []
-        if self.pregnancy_status == 'Pregnant' and self.due_date < today:
-            errors.append('Client is pregnant but expected delivery '
-                'date is in the past')
-        if self.pregnancy_status == 'Post-Partum' and self.due_date > today:
-            errors.append('Client has given birth by date of birth of '
-                'the child is in the future.')
-        if today.year - low_age < self.birth_date.year:
-            errors.append('Client is under {low_age} years old'.format(
-                low_age=low_age))
-        if today.year - high_age > self.birth_date.year:
-            errors.append('Client is over {high_age} years old'.format(
-                high_age=high_age))
-        if (self.due_date - today) > one_year:
-            errors.append('Expected due date is over a year away')
-        if (today.year - self.birth_date.year) <= self.years_of_education:
-            errors.append("Client has been in school longer than she's been "
-                "alive")
-        if errors:
-            raise ValidationError(errors)
+	due_date = models.DateField()
 
-    def __unicode__(self):
-        return "Phone Number: %s -- %s %s (#%s) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
+	years_of_education = models.IntegerField()
 
-    def last_message(self):
-        message = Message.objects.filter(client_id=self, sent_by='Client')
-        if message.count() < 1:
-            return "No messages yet"
-        else:
-            return message[0]
+	living_children = models.IntegerField()
 
-    def generate_key(self):
-        key_length = 5.0
-        chars = "ABCDEFGHIJKLMNOP"
-        string = (sha(str(self.id) + self.first_name + self.last_name)
-            .hexdigest())
-        step = int(math.ceil(len(string) / key_length))
-        return ''.join([chars[int(x, 16)] for x in string[::step]])
+	previous_pregnacies = models.IntegerField()
 
-    def update(self):
-        messages = Message.objects.filter(client_id=self,
-                                          sent_by='Client')
-        if len(messages) == 0:
-            return
+	conditions = models.ManyToManyField('Condition', blank=True)
+	
+	language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default="English")
 
-        self.last_msg = messages[0].date
-        self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
-        self.save()
+	next_visit = models.DateField(blank=True, null=True)
+
+	study_group = models.IntegerField(max_length=1, choices=STUDY_GROUP_CHOICES)
+
+	#Send Message Attributes
+	phone_number = models.CharField(max_length=50, blank=True, unique=True)
+
+	phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom")
+
+	send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
+
+	send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
+
+	#Attributes to be edited by system only
+	urgent = models.BooleanField(editable=False, default=False)
+
+	pending = models.IntegerField(editable=False, default=0)
+
+	last_msg = models.DateField(blank=True, null=True, editable=False)
+
+	sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
+
+	signup_date = models.DateField(editable=False, auto_now_add=True)
+
+	def clean(self):
+		if None in [self.birth_date, self.due_date, self.years_of_education]:
+			return
+		low_age = 10
+		high_age = 100
+		one_year = timedelta(days=365)
+		today = date.today()
+		errors = []
+		if self.id > 99999:
+			errors.append('Study ID must be less than 1000')
+		if self.pregnancy_status == 'Pregnant' and self.due_date < today:
+			errors.append('Client is pregnant but expected delivery '
+				'date is in the past')
+		if self.pregnancy_status == 'Post-Partum' and self.due_date > today:
+			errors.append('Client has given birth by date of birth of '
+				'the child is in the future.')
+		if today.year - low_age < self.birth_date.year:
+			errors.append('Client is under {low_age} years old'.format(
+				low_age=low_age))
+		if today.year - high_age > self.birth_date.year:
+			errors.append('Client is over {high_age} years old'.format(
+				high_age=high_age))
+		if (self.due_date - today) > one_year:
+			errors.append('Expected due date is over a year away')
+		if (today.year - self.birth_date.year) <= self.years_of_education:
+			errors.append("Client has been in school longer than she's been "
+				"alive")
+		if errors:
+			raise ValidationError(errors)
+
+	def __unicode__(self):
+		return "Phone Number: %s -- %s %s (#%s) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
+		
+	def __str__(self):
+		return "%s %s"%(self.first_name,self.last_name)
+
+	def last_message(self):
+		message = Message.objects.filter(client_id=self, sent_by='Client')
+		if message.count() < 1:
+			return "No messages yet"
+		else:
+			return message[0]
+
+	def generate_key(self):
+		key_length = 5.0
+		chars = "ABCDEFGHIJKLMNOP"
+		string = (sha(str(self.id) + self.first_name + self.last_name)
+			.hexdigest())
+		step = int(math.ceil(len(string) / key_length))
+		return ''.join([chars[int(x, 16)] for x in string[::step]])
+
+	def update(self):
+		messages = Message.objects.filter(client_id=self,
+										  sent_by='Client')
+		if len(messages) == 0:
+			return
+
+		self.last_msg = messages[0].date
+		self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
+		self.save()
 
 
 class Nurse(models.Model):

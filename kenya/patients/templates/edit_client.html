@@ -6,23 +6,16 @@
             <td class="data">{{form.instance.id}}</td>
         </tr>
         <tr>
-            <td class="title">First Name:</td>
+            <td class="title">Name:</td>
             <td class="data">
-                <div>{{form.first_name}}</div>
-                <div class="collapseerrors">{{form.first_name.errors}}</div>
+                <div>{{form.instance.first_name}} {{form.instance.last_name}}</div>
             </td>
-        </tr>
-        <tr>
-            <td class="title">Last Name:</td>
-            <td class="data">
-                <div>{{form.last_name}}</div>
-                <div class="collapseerrors">{{form.last_name.errors}}</div></td>
         </tr>
         <tr>
             <td class="title">Nickname:</td>
             <td class="data">
                 <div>{{form.nickname}}</div>
-                <div class="collapseerrors">{{form.last_name.errors}}</div></td>
+                <div class="collapseerrors">{{form.nickname.errors}}</div></td>
         </tr>
         <tr>
             <td class="title">Birthday:</td>
@@ -60,13 +53,6 @@
                 <div class="collapseerrors">{{form.conditions.errors}}</div>
             </td>
         </tr>
-        <tr>
-            <td class="title">Education:</td>
-            <td class="data">
-                <div>{{form.years_of_education}}</div>
-                <div class="collapseerrors">{{form.years_of_education.errors}}</div>
-            </td>
-        </tr>
          <tr>
             <td class="title">Next Visit:</td>
             <td class="data">
@@ -80,4 +66,8 @@
             </tr>
         {% endif %}
     </form>
+    <tr>
+    <td colspan=2 align=center><span id="client_info_save" class="gray_button">Save</span></td>
+    </tr>
 </table>
+

@@ -66,9 +66,9 @@ def client(request):
 			client.save()
 			messages = Interaction.objects.filter(client_id=client)
 			if isList is None:
-				message_fragment = render_to_string("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+				message_fragment = render_to_string("message_frag.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 			else:
-				message_fragment = render_to_string("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+				message_fragment = render_to_string("message_listmode.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 				history = Visit.objects.filter(client_id=client),
 				print history
 			return render_to_response("display_client_fragment.html",
@@ -123,17 +123,18 @@ def add_client(request):
     form = None
     c = {}
     if request.method == "GET":
-        next_month = (date.today() + timedelta(30)).strftime("%Y-%m-%d")
-        due_date = (date.today() + timedelta(180)).strftime("%Y-%m-%d")
-        form = AddClientForm(initial={"birth_date":"1990-01-01","due_date":due_date,"next_visit":next_month,"conditions":"1",
-        "previous_pregnacies":"1","living_children":"0","years_of_education":"1","phone_number":"254"})
+        next_month = (date.today() + timedelta(30)).strftime("%Y-%m-")
+        due_date = (date.today() + timedelta(180)).strftime("%Y-%m-")
+        form = AddClientForm(initial={"birth_date":"1990-","due_date":due_date,"next_visit":next_month,"conditions":"1",
+        "previous_pregnacies":"1","living_children":"0","years_of_education":"1","phone_number":"254","pri_contact_number":"254",
+        "sec_contact_number":"254",})
     elif request.method == "POST":
 		form = AddClientForm(request.POST)
 		if form.is_valid():
 			id = form.cleaned_data['id']
 			client = form.save(commit=False)
 			client.id = id
-			client.study_group = study_group()
+			#client.study_group = study_group()
 			client.save()
 			'''
 			Send initial message if any
@@ -166,8 +167,8 @@ def list_fragment(request):
     clients = Client.objects.all()
     sort = request.GET.get("sort","-study_group")
     clients = clients.order_by(sort)
-    group = request.GET.get("group",3)
-    if int(group) != 3:
+    group = request.GET.get("group",4)
+    if int(group) != 4:
 		clients = clients.filter(study_group__exact=int(group))
     return render_to_response("list_fragment.html", {'clients': clients},
                               context_instance=RequestContext(request))
@@ -180,6 +181,9 @@ def edit_client(request, id):
 
     if request.method == "POST":
         form = ClientForm(request.POST, instance=client)
+        for i in form:
+			if i.errors:
+				print i,i.errors
         if form.is_valid():
             form.save()
             return HttpResponse('')
