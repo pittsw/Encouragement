@@ -82,11 +82,11 @@ class Client(models.Model):
 
 	pri_contact_name = models.CharField(max_length=50)
 	 
-	pri_contact_number = models.IntegerField()
+	pri_contact_number = models.CharField(max_length=50)
 	 
 	sec_contact_name = models.CharField(max_length=50, blank=True)
 	 
-	sec_contact_number = models.IntegerField(blank=True)
+	sec_contact_number = models.CharField(max_length=50, blank=True)
 
 	pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
 
