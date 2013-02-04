@@ -33,7 +33,7 @@ def sendSMS(request):
 				'destination':'6873',
 				'source':request.POST['sender_number'],
 				'message':request.POST['content'],
-				'messageID':SendForm.msgID(),
+				'messageId':SendForm.msgID(),
 				'network':'safaricom'
 				}
 			new_request.POST = post

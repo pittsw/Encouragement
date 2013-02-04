@@ -7,8 +7,8 @@ class Transport(BaseTransport):
     """
 
     @classmethod
-    def send(cls, target, content):
+    def send(cls, client, content):
         """Sends a message through the SMSSync protocol.
 
         """
-        SMSSyncOutgoing(target=target, content=content).save()
+        SMSSyncOutgoing(target=client.phone_number, content=content).save()

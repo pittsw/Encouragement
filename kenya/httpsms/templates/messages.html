@@ -26,13 +26,15 @@
             <h1>Received Messages</h1>
             <table>
 				<tr>
-				<th></th><th>To</th><th>Message</th>
+				<th></th><th>To</th><th>Message</th><th>Network</th>
 				</tr>
                 {% for message in messages %}
                 <tr>
 					<th>{{ message.id }}</th>
 					<td>{{ message.target }}</td>
 					<td>{{ message.content }}</td>
+					<td>{{ message.network }}</td>
+                </tr>
                 </tr>
                 {% endfor %}
             </table>

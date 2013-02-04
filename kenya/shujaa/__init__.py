@@ -15,20 +15,19 @@ class Transport(BaseTransport):
 				}
 
 	@classmethod
-	def send(cls, target, content):
+	def send(cls, client, content):
 		"""Sends a message through the Shujaa protocol.
 		"""
 		#copy gateway values and add in phone number, message, and network
 		values = cls.gateway['values'].copy()
-		values['destination'] = target
+		values['destination'] = client.phone_number
 		values['message'] = content
-		values['network'] = 'safaricom' #change this to get netowrk from target
+		values['network'] = client.phone_network
 		
 		#http request to getway to send sms
 		data = urllib.urlencode(values)
 		req = urllib2.Request(cls.gateway['url'], data)
-		#print "Shujaa Send: %s,%s"%(target,content)
-		print >>sys.stderr,values
+		#print >>sys.stderr, "Shujaa Send: %s %s,%s"%(client.phone_network,client.phone_number,content)
 		''' Don't Send Now '''
 		httpResponse = urllib2.urlopen(req)
 		

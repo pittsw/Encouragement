@@ -20,7 +20,6 @@ def update_all():
 @task
 def update_client(client):
     """A wrapper to let us update a client asynchronously.
-
     """
     client.update()
 
@@ -109,7 +108,7 @@ def message_client(client, nurse, sender, content, transport=None,
         sent_by=sender,
         content=content,
     ).save()
-    transport.send(client.phone_number, content, **transport_kwargs)
+    transport.send(client, content, **transport_kwargs)
 
 
 def incoming_message(phone_number, message):
