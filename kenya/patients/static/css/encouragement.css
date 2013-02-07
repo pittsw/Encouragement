@@ -193,15 +193,15 @@ textarea {
     height: 20px;
 }
 
-.two_way_patient div{
+.two_way_patient>div{
 	    background-image: url("/static/images/patient-two_way-2.png");
 }
 
-.one_way_patient div{
+.one_way_patient>div{
 	    background-image: url("/static/images/patient-one_way-1.png");
 }
 
-.control_patient div{
+.control_patient>div{
 	    background-image: url("/static/images/patient-control-0.png");
 }
 
@@ -209,6 +209,7 @@ textarea {
     padding: 5px;
     border-bottom: 1px dashed grey;
     color:rgb(1,1,1);
+    position:relative;
 }
 
 .list .person:hover {
@@ -226,8 +227,11 @@ textarea {
 }
 
 .list .right {
-    float: right;
+	position:absolute;
+    right:0px;
+    top:0px;
     width: 40px;
+    height:100%;
 }
 
 .list .header {
@@ -249,7 +253,7 @@ textarea {
     top:-3px;
 }
 
-.list .pendingname {
+.list .pendingnam {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -258,23 +262,25 @@ textarea {
 }
 
 .list .urgent {
-    display: inline;
-    float: right;
+    display: inline-block;
+    position:absolute;
+	 bottom:0px;
     background-image: url("/static/images/urgent.png");
     background-position: center;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 30px;
+    width: 30px;
+    height: 25px;
 }
 
 .list .pending {
-    display: inline;
-    float: right;
+    display: inline-block;
+    position:absolute;
+    top:0px;
     background-image: url("/static/images/pending_message.png");
     background-position: center;
     background-repeat: no-repeat;
-    width: 40px;
-    height: 30px;
+    width: 35px;
+    height: 25px;
 }
 /* End styles for the client list. */
 
