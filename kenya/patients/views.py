@@ -69,8 +69,6 @@ def client(request):
 				message_fragment = render_to_string("message_frag.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 			else:
 				message_fragment = render_to_string("message_listmode.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
-				history = Visit.objects.filter(client_id=client),
-				print history
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,
@@ -78,7 +76,7 @@ def client(request):
 				"history": Visit.objects.filter(client_id=client),
 				"client_fragment": render_to_string("client_fragment.html", {"client":client}, context_instance=RequestContext(request)),
 				"message_fragment":message_fragment,
-				"visit_form": render_to_string("visit_form.html", {"form": VisitForm()}, context_instance=RequestContext(request)),
+				"visit_form": render_to_string("visit_form.html", {"form": VisitForm(),'client':client}, context_instance=RequestContext(request)),
 				}, context_instance=RequestContext(request) )
 	
 	return render_to_response("display_client_fragment.html")
@@ -111,7 +109,7 @@ def add_visit(request, id):
             Visit(client_id=client, comments=comments, date=date).save()
             form = VisitForm()
             return HttpResponse('')
-    return render_to_response('visit_form.html', {'form': form})
+    return render_to_response('visit_form.html', {'form': form,'client':client})
 
 def delete_visit(request, pk):
     visit = get_object_or_404(Visit, pk=pk)
@@ -225,6 +223,12 @@ def add_call(request, id_number):
             duration=duration,
         ).save()
     return HttpResponse('')
+    
+def delivery(request, id):
+	client = get_object_or_404(Client, id=id)
+	client.pregnancy_status = "Post-Partum"
+	client.save()
+	return HttpResponse('')
 
 def csv_helper(**filter_kwargs):
     field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',

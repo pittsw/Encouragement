@@ -188,8 +188,7 @@
 				xhr.open("POST", "/add/", false);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-				var data = $("#add_client_form").serialize()
-				xhr.send(data);
+				xhr.send($("#add_client_form").serialize());
 				var response = xhr.responseText;
 				if (/^\d+$/.test(response)) { // a single number is the new user id
 					window.location = "/?id="+response;
@@ -447,6 +446,21 @@
                     });
                 });
             });
+            
+            // Hook into delievey seting
+            $('.info #delivery').on('click',function (e) {
+				  var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState != 4) {
+                        return;
+                    }
+                    load_client(link);
+                }
+                xhr.open("POST", "/delivery/" + client_id + "/", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
+                xhr.send();
+			});
         };
         
         var toggle_msg = function(obj) {

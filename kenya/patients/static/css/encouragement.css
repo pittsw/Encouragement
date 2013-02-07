@@ -455,6 +455,18 @@ div.add_client .errorlist {
     display: none;
 }
 
+.info #add_visit {
+	display:inline-block;
+	margin:0px 10px;
+	float:left;
+}
+
+.info #delivery {
+	display:inline-block;
+	margin:0px 10px;
+	float:right;
+}
+
 .msg_head {
 	margin-top: 10px;
 }
