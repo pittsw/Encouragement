@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'patients',
     'httpsms',
+    'transport_email',
     'smssync',
     'djcelery',
 )

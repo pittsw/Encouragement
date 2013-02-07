@@ -35,7 +35,17 @@ class Transport(BaseTransport):
 		response = httpResponse.read()
 		print >> sys.stderr, response
 		
-		
+	@classmethod
+	def send_batch(cls, lst):
+		"""Sends all of the messages in lst.
+
+		Arguments:
+			lst - a list of (target, content) tuples like those that could be
+				sent with send()
+
+		"""
+		for target, content in lst:
+			cls.send(target, content)
 		
 		
         

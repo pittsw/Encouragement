@@ -13,11 +13,7 @@
     </tr>
     <tr>
         <td class="title">Phone Number:</td>
-        {% if client.phone_number %}
-            <td class="data">{{client.phone_number}}</td>
-        {% else %}
-            <td class="data">Please have client send registration key</td>
-        {% endif %}
+        <td class="data">{{client.phone_number}}</td>
     </tr>
     <tr>
         <td class="title">Pregnancy Status:</td>
@@ -27,8 +23,11 @@
         <td class="title">Expected Due Date:</td>
         <td class="data">{{client.due_date}}</td>
     </tr>
-    <tr>
-        <td class="title">Registration Key:</td>
-        <td class="data">{{client.generate_key}}</td>
-    </tr>
+   
+	{% if not client.validated %}
+	 <tr>
+		<td class="title">Registration Key:</td>
+		<td class="data">{{client.generate_key}} <span style="font-size:10pt"><i>Not Validated</i></span></td>
+	</tr>
+	{% endif %}
 </table>

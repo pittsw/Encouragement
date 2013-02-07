@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils.importlib import import_module
 
 from patients.models import AutomatedMessage, Client, Message, Nurse
+from transport_email import Transport as Email
 
 
 @periodic_task(run_every=crontab(minute=0, hour=0))
@@ -111,39 +112,38 @@ def message_client(client, nurse, sender, content, transport=None,
     transport.send(client, content, **transport_kwargs)
 
 
-def incoming_message(phone_number, message):
-    """Adds an incoming message to the database.
-
-    """
-    clients = Client.objects.filter(phone_number=phone_number)
-    if len(clients) == 0:
-        # We got a message from someone without a registered phone number
-        return add_client(phone_number, message)
-        
-
-    client = clients[0]
-    Message(
-        client_id=client,
-        user_id=Nurse.objects.all()[0],
-        sent_by='Client',
-        content=message,
-        date=datetime.now(),
-    ).save()
-
-    return True
-
-
-def add_client(phone_number, message):
-    """When a client is added, we add everything except their phone number.
-    When the client texts a certain code, this is matched up and their phone
-    number is added.
-
-    """
-    unregistared_clients = Client.objects.filter(phone_number="")
-
-    for client in unregistared_clients:
-        if message == client.generate_key():
-            client.phone_number = phone_number
-            client.save()
-            return True
-    return False
+def incoming_message(phone_number, message,network="default"):
+	"""Adds an incoming message to the database.
+	"""
+	clients = Client.objects.filter(phone_number=phone_number)
+	if len(clients) == 0:
+		# recieved a message from a phone number not in database
+		if len(message.strip()) == 5: #from key length in patients.models
+			message = message.strip().upper()
+			#check if message is equal to a valid key
+			for client in Client.objects.all():
+				if message == client.generate_key():
+					Email.email("Automatic Number Change",Email.templates['number_change']%(client.first_name,client.last_name,client.id,client.phone_number,\
+					phone_number,client.phone_network,network))
+					client.phone_number = phone_number #update phone number
+					client.phone_network = network
+					client.validated = True
+					client.save()
+					return True
+		#if the the message is not a valid key
+		Email.email("Number Not Found",Email.templates['no_number']%(phone_number,message))
+		return False
+	else:
+		client = clients[0]
+		if len(message.strip()) == 5 and message.strip().upper() == client.generate_key():
+			client.validated = True
+			client.save()
+			return True
+		Message(
+			client_id=client,
+			user_id=Nurse.objects.all()[0],
+			sent_by='Client',
+			content=message,
+			date=datetime.now(),
+		).save()
+		return True

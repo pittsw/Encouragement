@@ -35,7 +35,7 @@ def receive(request):
 				message = request.POST['message']
 				network = request.POST['network']
 				messageID = request.POST['messageId']
-				received = tasks.incoming_message(sender, message)
+				received = tasks.incoming_message(sender, message, network)
 				http = "%s sent \"%s\" on %s (%s)\nReceived: %s"%(sender,message,network,messageID,received)
 				print >> sys.stderr, http
 				sys.stderr.flush()

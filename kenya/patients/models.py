@@ -22,6 +22,7 @@ class Client(models.Model):
 		('Pregnant', 'Pregnant'),
 		('Post-Partum', 'Post-Partum'),
 		('Failed Pregnancy', 'Failed Pregnancy'),
+		('Stopped', 'Left Study'),
 	)
 
 	RELATIONSHIP_CHOICES = (
@@ -123,6 +124,8 @@ class Client(models.Model):
 	last_msg = models.DateField(blank=True, null=True, editable=False)
 
 	sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
+	
+	validated = models.BooleanField(editable=False,default=False)
 
 	signup_date = models.DateField(editable=False, auto_now_add=True)
 
