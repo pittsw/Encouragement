@@ -1,11 +1,7 @@
 	{% for x in clients %}
     <div class="person" id="{{x.id}}">
        
-        <div class="name 
-        {% if x.study_group = 2 %} two_way_patient
-        {% else %}{% if x.study_group = 1 %} one_way_patient
-        {% else %}{% if x.study_group = 0 %} control_patient
-         {% endif %}{% endif %}{% endif %}"><div></div>
+        <div class="name {{x.study_group}}"><div></div>
             <span class="client_id">(#{{x.id}}):</span> <span class="client_name">{{x.last_name}}, {{x.first_name}}</span>
         </div>
         <div class="left">
@@ -17,6 +13,7 @@
             {% endif %}
         </div>
         <div class="right">
+			<span>{{ x.next_visit|date:"M dS" }}</span>
             {% if x.urgent %}
                 <div class="urgent"></div>
             {% endif %}

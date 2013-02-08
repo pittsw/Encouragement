@@ -100,7 +100,7 @@ def add_visit(request, id):
     form = None
     client = get_object_or_404(Client, id=id);
     if request.method == "GET":
-        form = VisitForm()
+        form = VisitForm(initial={"next_visit":client.next_visit})
     elif request.method == "POST":
         form = VisitForm(request.POST)
         if form.is_valid():
@@ -163,7 +163,7 @@ def client_fragment(request, id):
 
 def list_fragment(request):
     clients = Client.objects.all()
-    sort = request.GET.get("sort","-study_group")
+    sort = request.GET.get("sort","study_group")
     clients = clients.order_by(sort)
     group = request.GET.get("group",4)
     if int(group) != 4:

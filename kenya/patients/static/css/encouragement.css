@@ -193,15 +193,15 @@ textarea {
     height: 20px;
 }
 
-.two_way_patient>div{
+.person .two-way>div{
 	    background-image: url("/static/images/patient-two_way-2.png");
 }
 
-.one_way_patient>div{
+.person .one-way>div{
 	    background-image: url("/static/images/patient-one_way-1.png");
 }
 
-.control_patient>div{
+.person .control>div{
 	    background-image: url("/static/images/patient-control-0.png");
 }
 
@@ -230,8 +230,13 @@ textarea {
 	position:absolute;
     right:0px;
     top:0px;
-    width: 40px;
+    width: 50px;
     height:100%;
+}
+
+.list .right span {
+	font-size:8pt;
+	font-style:italic;
 }
 
 .list .header {

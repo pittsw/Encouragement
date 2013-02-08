@@ -1,4 +1,4 @@
-from patients.models import AutomatedMessage, Condition, Nurse, Note, Client, Message, PhoneCall, Visit
+from patients.models import AutomatedMessage, Condition, Nurse, Note, Client, Message, PhoneCall, Visit, Email
 from django.contrib import admin
 
 admin.site.register(Nurse)
@@ -9,3 +9,4 @@ admin.site.register(Condition)
 admin.site.register(Note)
 admin.site.register(PhoneCall)
 admin.site.register(Visit)
+admin.site.register(Email)

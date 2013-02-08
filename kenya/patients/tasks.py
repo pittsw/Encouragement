@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-import sys
+import sys,re
 
 from celery.schedules import crontab
 from celery.task import group, periodic_task, task
@@ -121,22 +121,30 @@ def incoming_message(phone_number, message,network="default"):
 		if len(message.strip()) == 5: #from key length in patients.models
 			message = message.strip().upper()
 			#check if message is equal to a valid key
-			for client in Client.objects.all():
+			for client in Client.objects.filter():
 				if message == client.generate_key():
-					Email.email("Automatic Number Change",Email.templates['number_change']%(client.first_name,client.last_name,client.id,client.phone_number,\
-					phone_number,client.phone_network,network))
-					client.phone_number = phone_number #update phone number
-					client.phone_network = network
+					if client.validated: #new number for already valid client
+						Email.template_email('valid_repeat',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
+						return False
+					Email.template_email('number_change',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
+					#update phone number and network
+					client.phone_number = phone_number 
+					client.phone_network = network 
 					client.validated = True
 					client.save()
 					return True
 		#if the the message is not a valid key
-		Email.email("Number Not Found",Email.templates['no_number']%(phone_number,message))
+		Email.template_email('number_not_found',**{'phone_number':phone_number,'message':message})
 		return False
 	else:
 		client = clients[0]
 		if len(message.strip()) == 5 and message.strip().upper() == client.generate_key():
 			client.validated = True
+			client.save()
+			return True
+		if re.match("^[S7]\s*[T8]\s*[O6]\s*[P7]$",message.strip().upper()):
+			Email.template_email('dropped',**{'client':client})
+			client.pregnancy_status = "Stopped"
 			client.save()
 			return True
 		Message(

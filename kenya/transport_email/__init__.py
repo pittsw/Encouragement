@@ -2,18 +2,15 @@ from django.conf import settings
 from transports import BaseTransport
 
 #Email Imports
-import smtplib
+import smtplib,sys
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+
+from patients.models import Email as EmailTemplates
 
 
 class Transport(BaseTransport):
 	
-	templates = {
-		'number_change':'%s %s (%s) sent vaid key on %s old number %s\nNetwork:%s -> %s',
-		'no_number':'%s not in database\n\nMessage\n\n%s',
-	}
-
 	@classmethod
 	def send(cls, client, content):
 		#print "Sending SMS As Email"
@@ -30,6 +27,14 @@ class Transport(BaseTransport):
 		"""
 		for target, content in lst:
 			cls.send(target, content)
+			
+	@classmethod
+	def template_email(cls,key,**keys):
+		try:
+			template = EmailTemplates.objects.get(key=key)
+			cls.email(template.subject.format(**keys),template.content.format(**keys))
+		except Exception as e:
+			print >> sys.stderr, "Email Template Not Found"
 	
 	@classmethod
 	def email(cls,subject,content):
@@ -43,6 +48,6 @@ class Transport(BaseTransport):
 		mailServer.ehlo();mailServer.starttls();mailServer.ehlo()
 		
 		mailServer.login(settings.EMAIL['From'],settings.EMAIL['Password'])
-		mailServer.sendmail(settings.EMAIL['From'],settings.EMAIL['To'],msg.as_string())
+		mailServer.sendmail(settings.EMAIL['From'],settings.EMAIL['To'].split(','),msg.as_string())
 		
 		mailServer.close()

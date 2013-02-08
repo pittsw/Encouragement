@@ -12,7 +12,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 
-#add network
 class Client(models.Model):
 
 	class Meta:
@@ -53,9 +52,9 @@ class Client(models.Model):
 	)
 	
 	STUDY_GROUP_CHOICES = (
-		(1,"Two Way"),
-		(2,"One Way"),
-		(3,"Control"),
+		("two-way","Two Way"),
+		("one-way","One Way"),
+		("control","Control"),
 	)
 	
 	LANGUAGE_CHOICES = (
@@ -105,7 +104,7 @@ class Client(models.Model):
 
 	next_visit = models.DateField(blank=True, null=True)
 
-	study_group = models.IntegerField(max_length=1, choices=STUDY_GROUP_CHOICES)
+	study_group = models.CharField(max_length=20, choices=STUDY_GROUP_CHOICES)
 
 	#Send Message Attributes
 	phone_number = models.CharField(max_length=50, blank=True, unique=True)
@@ -255,7 +254,9 @@ class AutomatedMessage(models.Model):
     
     SEND_BASE_CHOICES = ( ('signup','Sign Up'),
     				('edd','Delivery Date'),
-    				('anytime','Anytime'),)
+    				('anytime','Anytime'),
+    				('named','Named'),
+    				)
     
 
     class Meta:
@@ -265,11 +266,15 @@ class AutomatedMessage(models.Model):
 
     priority = models.IntegerField(default=0)
 
-    message = models.CharField(max_length=200)
+    message = models.TextField(max_length=200)
 
     send_base = models.CharField(max_length=10, choices=SEND_BASE_CHOICES, default="edd")
     
     send_offset = models.IntegerField(default=0)
+    
+    name = models.CharField(max_length=25, blank=True)
+    
+
 
 
     def __unicode__(self):
@@ -281,6 +286,17 @@ class AutomatedMessage(models.Model):
             send_offset=self.send_offset,
         )
 
+
+class Email(models.Model):
+	
+	subject = models.CharField(max_length=100)
+	
+	content = models.TextField(max_length=600)
+	
+	key = models.CharField(max_length=100)
+	
+	def __unicode__(self):
+		return "%s | %s"%(self.key,self.subject)
 
 class Note(models.Model):
     class Meta:
