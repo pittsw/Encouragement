@@ -510,6 +510,15 @@ div.add_client .errorlist {
     float: left;
     margin-right: auto;
     background-color: rgb(171,198,202);
+    position:relative;
+}
+
+.messages .Client .prompted {
+	position:absolute;
+	bottom:5px;
+	right:5px;
+	font-size:9pt;
+	font-style:italic;
 }
 
 .messages .System, .messages .Nurse, .messages .Phone {

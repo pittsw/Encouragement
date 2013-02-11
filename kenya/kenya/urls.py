@@ -10,15 +10,14 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-   # url(r'^detail/(?P<id_number>\d+)/', views.detail),
     url(r'^message/(?P<id_number>\d+)/', views.add_message),
+     url(r'^message/prompted/(?P<id_number>\d+)/',views.message_prompted),
     url(r'^add_call/(?P<id_number>\d+)/', views.add_call),
     url(r'^add/', views.add_client),
     url(r'^edit/(?P<id>\d+)/', views.edit_client),
     url(r'^fragment/display_client/$', views.client), #Load Main Client Info and Messages
     url(r'^fragment/list/$', views.list_fragment), #Left list of clients
     url(r'^fragment/message/(?P<id>\d+)/', views.message_fragment), #Center Messages Default
-    url(r'^fragment/message_list/(?P<id>\d+)/', views.message_list_frag), #Center Messages Compact
     url(r'^fragment/(?P<id>\d+)/', views.client_fragment), #Right Top client info
     url(r'^note/(?P<id>\d+)/', views.add_note),
     url(r'^delete_note/(?P<pk>\d+)/', views.delete_note),

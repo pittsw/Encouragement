@@ -47,15 +47,11 @@ def message_fragment(request, id):
     client = Client.objects.get(id=id)
     client.pending = 0
     client.save()
+    message_template = "message_frag.html"
+    if request.GET.get('mode','conversation') == 'list':
+		message_template = "message_listmode.html"
     messages = Interaction.objects.filter(client_id=client)
-    return render_to_response("message_frag.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
-
-def message_list_frag(request, id):
-    client = Client.objects.get(id=id)
-    client.pending = 0
-    client.save()
-    messages = Interaction.objects.filter(client_id=client)
-    return render_to_response("message_listmode.html", {"client": client, "messages":messages}, context_instance=RequestContext(request))
+    return render_to_response(message_template, {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 
 def client(request):
 	if request.method == "GET":
@@ -65,17 +61,12 @@ def client(request):
 			client.pending = 0
 			client.save()
 			messages = Interaction.objects.filter(client_id=client)
-			if isList is None:
-				message_fragment = render_to_string("message_frag.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
-			else:
-				message_fragment = render_to_string("message_listmode.html", {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,
 				"notes": Note.objects.filter(client_id=client),
 				"history": Visit.objects.filter(client_id=client),
 				"client_fragment": render_to_string("client_fragment.html", {"client":client}, context_instance=RequestContext(request)),
-				"message_fragment":message_fragment,
 				"visit_form": render_to_string("visit_form.html", {"form": VisitForm(initial={"next_visit":client.next_visit,'date':date.today()}),'client':client}, context_instance=RequestContext(request)),
 				}, context_instance=RequestContext(request) )
 	
@@ -225,6 +216,12 @@ def add_call(request, id_number):
         ).save()
     return HttpResponse('')
     
+def message_prompted(request,id_number):
+	message = get_object_or_404(Message,id=id_number)
+	message.prompted = True if request.GET.get('prompted',"true").lower() == "true" else False 
+	message.save()
+	return HttpResponse('')
+
 def delivery(request, id):
 	client = get_object_or_404(Client, id=id)
 	client.pregnancy_status = "Post-Partum"

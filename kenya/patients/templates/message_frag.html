@@ -10,7 +10,9 @@
 	<div class="{{x.message.sent_by}}">
 		{% if x.message.sent_by == "Client" %}
 		<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
-		<input type="checkbox"/>
+		<div class="prompted"  {% if x.message.prompted %} style="font-weight:bold" {% endif %}>Prompted: 
+			<input {% if x.message.prompted %} checked {% endif %} rel="{{x.id}}" type="checkbox"/>
+		</div>
 		{% else %}
 		<div class="top">{% if x.user_id %}{{x.user_id}}{% else %}System{% endif %}:<span class="date">{{x.date}}</span></div>
 		{% endif %}

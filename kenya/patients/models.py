@@ -230,6 +230,8 @@ class Message(Interaction):
     )
     
     sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
+    
+    prompted = models.BooleanField(default=True)
 
 class Condition(models.Model):
     """Used to determine which automated messages a patient gets

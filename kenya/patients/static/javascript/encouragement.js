@@ -43,13 +43,12 @@
 				}
 				fragment_url += "list=1";
 			}
-			$('#main_content').load(fragment_url,function() {load_client_complete(client_obj)})
+			$('#main_content').load(fragment_url,function() {load_client_complete(client_obj)});
 		}
 		
 		var load_client_complete = function(client_obj) {
 			
 			load_message_call_tabs();
-			
 			if(client_obj) {
 				client_id = client_obj.id;
 				client_name = $(client_obj).find('.name').html();
@@ -57,18 +56,24 @@
 			
 			 // Change message displays when the user selects the pulldown
 			$('.message_bar .download').html('<a href="/msgcsv/' + client_id + '/">Download</a>');
-			$("#select_msg").on("change", function(e) {
-				if($("#select_msg").val() == "list") {
-					$(".message-list").load("/fragment/message_list/" + client_obj.id + "/");
-				} else {
-					$(".message-list").load("/fragment/message/" + client_obj.id + "/");
-				}
-			});
-            
+			$("#select_msg").on("change", load_message_fragment);
+            load_message_fragment();
 			loadEditHandlers(client_obj);
 			var now = new Date();
 			$('#time').html(now.getHours()+":"+now.getMinutes()+":"+now.getSeconds());
         }
+        
+        var load_message_fragment = function () {
+			$(".message-list").load("/fragment/message/" + client_id + "/?mode="+$("#select_msg").val(), function (e) {
+				if ($("#select_msg").val() == "conversation") {
+					$(".message-list .Client input[type='checkbox']").click(function () {
+						var checked = $(this).is(':checked');
+						 $.post("/message/prompted/"+$(this).attr('rel')+"/?prompted="+checked);
+						$(this).parent().css('font-weight',(checked)?'bold':'normal');
+					});
+				}
+			});
+		}
         
         var load_message_call_tabs = function () {
 			 // Swap the boxes in add call when the call completed button is changed
@@ -116,11 +121,7 @@
 					if (xhr.readyState != 4) {
 						return;
 					}
-					if($("#select_msg").val() == "list") {
-						$(".message-list").load("/fragment/message_list/" + client_id + "/");
-					} else {
-						$(".message-list").load("/fragment/message/" + client_id + "/");
-					}
+					load_message_fragment();
 					$(".messages #message-box").val("").keyup();
 					$("#send_message").css("background-color", "rgb(91,141,147)");
 				}
@@ -147,11 +148,7 @@
 					if (xhr.readyState != 4) {
 						return;
 					}
-					if($("#select_msg").val() == "list") {
-						$(".message-list").load("/fragment/message_list/" + client_id + "/");
-					} else {
-						$(".message-list").load("/fragment/message/" + client_id + "/");
-					}
+					load_message_fragment();
 					$('#call_notes').val("");
 					$('#duration').val('');
 					$('#complete').attr('checked', false);
