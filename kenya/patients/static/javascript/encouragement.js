@@ -1,15 +1,11 @@
 (function($) {
     $(document).ready(function() {
-
         // The id of the currently selected client
         var client_id = undefined;
-
         // The name of the currently selected client
         var client_name = undefined;
-
         // The load timer that automatically refreshed the page
         var load_timer = undefined;
-
         // Set up AJAX to allow posts
         $.ajaxSetup({ 
              beforeSend: function(xhr, settings) {
@@ -107,17 +103,11 @@
 				}
 				$('#chars-left').text(str);
 			});
-            
-            // Send a message when the nurse clicks send
-        
-			$('.messages #send_message').on("mouseleave", function() {
-				$("#send_message").css("background-color", "rgb(91,141,147)");
-			});
-			
+          
 			$('.messages #send_message').on("mousedown", function() {
 				$("#send_message").css("background-color", "rgb(217, 233, 236)");
 				}).on('mouseup', function() {
-				$("#send_message").css("background-color", "rgb(91,141,147)");
+				
 				if (client_id === undefined || $(".messages #message-box").val() == "") {
 					return;
 				}
@@ -132,6 +122,7 @@
 						$(".message-list").load("/fragment/message/" + client_id + "/");
 					}
 					$(".messages #message-box").val("").keyup();
+					$("#send_message").css("background-color", "rgb(91,141,147)");
 				}
 				xhr.open("POST", "/message/" + client_id + "/", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -184,18 +175,14 @@
 			//randomize day
 			$("#id_message_day").val(Math.floor(Math.random()*7));
 			$("#add_client_form #submit").on("click", function () {
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "/add/", false);
-				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-				xhr.send($("#add_client_form").serialize());
-				var response = xhr.responseText;
-				if (/^\d+$/.test(response)) { // a single number is the new user id
+				$.post('/add/',$("#add_client_form").serialize(),function (response) {
+					if (/^\d+$/.test(response)) { // a single number is the new user id
 					window.location = "/?id="+response;
-				} else {
-					$("#main_content").html(response); 
-					load_add_client_complete();
-				}
+					} else {
+						$("#main_content").html(response); 
+						load_add_client_complete();
+					}
+				},'text');
 			});
 		}
 		
@@ -249,26 +236,26 @@
 		}
 
         // Set up the asynchronous search
-        //var people = $('.person');
-        //var processor = undefined;
+        var processor = null;
         function filter() {
             if (processor) {
                 clearInterval(processor);
             }
             var busy = false, i = 0, step=10;
             var name = $.trim($('#searchtext').val()).toLowerCase();
-            var processor = setInterval(function() {
+            processor = setInterval(function() {
                 if (!busy) {
                     busy = true;
                     var divs = people.slice(i, i + step);
                     divs.each(function (num) {
                         
                         var temp_name = $(this).find('.client_name').html().toLowerCase();
-                        if (temp_name.indexOf(name) < 0) {
-                            $(this).hide();
+                        var temp_id = $(this).find('.client_id').html();
+                        if (  temp_id.indexOf(name) >= 0 || temp_name.indexOf(name) >= 0) {
+                            $(this).show();
                         }
                         else {
-							$(this).show();
+							$(this).hide();
 						}
                     });
                     i += step;
@@ -317,24 +304,20 @@
             $('.info #client_info_edit').on("click", function(eventObject) {
                 $('#client_info_edit').hide();
                 $('#client_info_hide').show();
-                $('#client_fragment').load("/edit/" + client_id + "/", function() {
+                $('#client_fragment').load("/edit/" + client_id + "/", function client_edit_callback() {
                     setCalendars();
                     // Save the client when they click save
-					$('#client_info_save').on("click", function(eventObject) {
-						var xhr = new XMLHttpRequest();
-						xhr.open("POST", "/edit/" + client_id + "/", false);
-						xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-						xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-						xhr.send($('#edit_client').serialize());
-						var response = xhr.responseText;
-						if (response.length == 0) {
-							$('#client_fragment').load("/fragment/" + client_id + "/");
-							$('#client_info_edit').show();
-							$('#client_info_hide').hide();
-						} else {
-							$('#client_fragment').html(response);
-						}
-						return false;
+                    $('#client_info_save').on('click', function(e) {
+						$.post("/edit/"+client_id+"/",$('#edit_client').serialize(), function(data) {
+							if (data.length == 0) {
+								$('#client_fragment').load("/fragment/" + client_id + "/");
+								$('#client_info_edit').show();
+								$('#client_info_hide').hide();
+							} else { // there was an error
+								$('#client_fragment').html(data);
+								client_edit_callback();
+							}
+						},'text');
 					});
                 });
                 return false;
@@ -389,17 +372,9 @@
 
             // Hook in note saving
             $('.info .add_note').on("click", function(eventObject) {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState != 4) {
-                        return;
-                    }
-                    load_client(link);
-                }
-                xhr.open("POST", "/note/" + client_id + "/", true);
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                xhr.send($('#add_note_form').serialize());
+				$.post("/note/"+client_id+"/",$('#add_note_form').serialize(),function() {
+					load_client(link);
+				});
             });
 
             // Hook in visit adding
@@ -424,17 +399,9 @@
 
             // Hook in visit saving
             $('.info #add_visit').on("click", function(eventObject) {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState != 4) {
-                        return;
-                    }
-                    load_client(link);
-                }
-                xhr.open("POST", "/visit/" + client_id + "/", true);
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                xhr.send($('#add_visit_form').serialize());
+				$.post("/visit/"+client_id+"/",$('#add_visit_form').serialize(),function() {
+					load_client(link);
+				});
             });
 
             // Hook in visit deleting
@@ -449,17 +416,9 @@
             
             // Hook into delievey seting
             $('.info #delivery').on('click',function (e) {
-				  var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState != 4) {
-                        return;
-                    }
-                    load_client(link);
-                }
-                xhr.open("POST", "/delivery/" + client_id + "/", true);
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-                xhr.send();
+				 $.post("/delivery/"+client_id+"/",{},function() {
+					load_client(link); 
+				 });
 			});
         };
         

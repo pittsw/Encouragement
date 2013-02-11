@@ -76,7 +76,7 @@ def client(request):
 				"history": Visit.objects.filter(client_id=client),
 				"client_fragment": render_to_string("client_fragment.html", {"client":client}, context_instance=RequestContext(request)),
 				"message_fragment":message_fragment,
-				"visit_form": render_to_string("visit_form.html", {"form": VisitForm(),'client':client}, context_instance=RequestContext(request)),
+				"visit_form": render_to_string("visit_form.html", {"form": VisitForm(initial={"next_visit":client.next_visit,'date':date.today()}),'client':client}, context_instance=RequestContext(request)),
 				}, context_instance=RequestContext(request) )
 	
 	return render_to_response("display_client_fragment.html")
@@ -107,7 +107,8 @@ def add_visit(request, id):
             comments = form.cleaned_data['comments']
             date = form.cleaned_data['date']
             Visit(client_id=client, comments=comments, date=date).save()
-            form = VisitForm()
+            client.next_visit = form.cleaned_data['next_visit']
+            client.save()
             return HttpResponse('')
     return render_to_response('visit_form.html', {'form': form,'client':client})
 
