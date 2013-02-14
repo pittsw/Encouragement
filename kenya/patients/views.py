@@ -204,6 +204,8 @@ def add_call(request, id_number):
         client = get_object_or_404(Client, id=id_number)
         content = request.POST['text']
         duration = request.POST['duration']
+        reason = request.POST.get('reason','other')
+        print reason
         try:
             duration = int(duration)
         except ValueError:
@@ -213,6 +215,7 @@ def add_call(request, id_number):
             client_id=client,
             content=content,
             duration=duration,
+            reason=reason,
         ).save()
     return HttpResponse('')
     

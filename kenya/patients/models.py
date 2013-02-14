@@ -329,7 +329,16 @@ class Visit(models.Model):
         return self.comments
         
 class PhoneCall(Interaction):
-    duration = models.IntegerField(default=0)
+
+	REASON_CHOICES = ( 
+						("visit","Missed ANC Visit"),
+						("sms","No SMS Response"),
+						("other","other"),
+					)
+
+	duration = models.IntegerField(default=0)
+	
+	reason = models.CharField(max_length=10, choices=REASON_CHOICES, default="other")
 
 
 @receiver(post_save, sender=Message, dispatch_uid="pending_update")

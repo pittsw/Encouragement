@@ -24,7 +24,12 @@
 						<div class="duration">Duration: <input type="text" id="duration" name="duration" placeholder="In minutes"/>
 						</div>
 					</div>
-					<div style="text-align;right;padding-right:10px;">
+					<div style="text-align;right;padding:0px 10px;">
+						Call Reason: <select id="reason" name="reason">
+							<option value="other">...</option>
+							<option value="visit">Mist ANC Visit</option>
+							<option value="sms">No SMS Response</option>
+						</select>
 						<span id="save_call" style="float:right;ma.rgin:0px 10px 5px 5px;font-size:16px;" class="blue_button">Save</span>
 						<span id="clear_call" style="float:right;font-size:12px;" class="gray_button">Clear</span>
 					</div>
