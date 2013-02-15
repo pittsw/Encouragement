@@ -412,10 +412,20 @@
             });
             
             // Hook into delievey seting
+            
+            /*
             $('.info #delivery').on('click',function (e) {
 				 $.post("/delivery/"+client_id+"/",{},function() {
 					load_client(link); 
 				 });
+			});
+			*/
+			$('.info #end-pregnacy').dialog({
+				autoOpen: false,
+				model: true
+			});	
+			$('.info #delivery').click(function () {
+				$("#end-pregnacy").dialog("open");
 			});
         };
         

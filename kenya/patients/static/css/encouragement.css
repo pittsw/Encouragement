@@ -528,6 +528,10 @@ div.add_client .errorlist {
 }
 
 .messages .Phone {
+	background-color:#978f99;
+}
+
+.messages .missed {
 	background-color: rgb(198, 184, 190);
 }
 

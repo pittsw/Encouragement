@@ -2,8 +2,10 @@
 
 {% for x in messages %}
 	{% if x.hasphoneattr %}
-	<div class="Phone">
-		<div class="top">You called:<span class="date">{{x.date}}<br/><span style="float:right">{{x.phonecall.reason }}</span></span></div>
+	<div class="Phone {% if x.phonecall.duration == 0 %}missed{% endif %}">
+		<div class="top">
+			{% if x.phonecall.duration != 0 %}You called:{% else %}Missed Call{% endif %}
+		<span class="date">{{x.date}}<br/><span style="float:right">{{x.phonecall.reason }}</span></span></div>
 		<div class="content">{{x.content}}</div>
 	</div>
 	{% else %}

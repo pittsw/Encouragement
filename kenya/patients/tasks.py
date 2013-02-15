@@ -9,6 +9,13 @@ from django.utils.importlib import import_module
 from patients.models import AutomatedMessage, Client, Message, Nurse
 from transport_email import Transport as Email
 
+'''
+@periodic_task(run_every=crontab())
+def example_task():
+	for client in Client.objects.all():
+		message_client(client,None,"System","Hello Automated")
+'''
+
 
 @periodic_task(run_every=crontab(minute=0, hour=0))
 def update_all():
