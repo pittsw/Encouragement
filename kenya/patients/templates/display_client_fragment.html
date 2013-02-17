@@ -1,3 +1,5 @@
+{% load patient_tags %}
+
 {%  if client %}
 <div class="grid_12 center_bar">
 	<div class="name_bar">{{client}}</div>
@@ -69,9 +71,48 @@
 			<span>Patient Information</span>
 			<span id="client_info_edit" class="edit">&nbsp;</span>
 			<span id="client_info_hide" class="cancel">&nbsp;</span>
+			<span id="client_info_more" class="more_info">&nbsp;</span>
 		</div>
 		<div id="client_fragment" class="msg_body">
 			{{client_fragment}}
+		</div>
+		
+		<div id="client_info_dialog" title="Client Information: {{client.first_name}} {{client.last_name}} (#{{client.id}})">
+			<table>
+				<tr>
+					<th>Study Group</th>
+					<td>{{client.study_group|capfirst}}</td>
+					</td>
+					<th>Prefed Language</th>
+					<td>{{client.language}}</td>
+					<th>Phone Number</th>
+					<td>{{client.phone_number}}</td>
+				</tr>
+				<tr>
+					<th>Message Day</th>
+					<td>{{client.send_day|dictlookup:'{"0":"Sunday","1":"Monday","2":"Tuesday","3":"Wednesday","4":"Thursday","5":"Friday","6":"Saturday"}'}}</td>
+					<th>Message Time </th>
+					<td>{{client.send_time}}:00</td>
+					<th>Network</th>
+					<td>{{client.phone_network}}</td>
+				</tr>
+				<tr>
+					<th>Primary Contact</th>
+					<td>{{client.pri_contact_name}}</td>
+					<th>Secondary Contact</th>
+					<td>{{client.sec_contact_name}}</td>
+					<th>Relationship Status</th>
+					<td>{{client.relationship_status}}</td>
+				</tr>
+				<tr>
+					<th>Primary Contact #</th>
+					<td>{{client.pri_contact_number}}</td>
+					<th>Secondary Contact #</th>
+					<td>{{client.sec_contact_number}}</td>
+					<th>Partner Name</th>
+					<td>{{client.partner_first_name}} {{client.partner_last_name}}</td>
+				</tr>
+			</table>
 		</div>
 
 		<div class="header msg_head info_expanded">
@@ -98,7 +139,6 @@
 			</table>
 		</div>
 
-
 		<div class="header msg_head info_expanded">
 			<span>Clinic Visit History</span>
 			<span id="visit_add" class="add"></span>
@@ -117,6 +157,13 @@
 				</tr>
 				{% endfor %}
 			</table>
+			
+			<div id="end-pregnacy" title="End Pregnacy">
+				<table>
+					{{end_pregnacy_form.as_table}}
+				</table>
+			</div>
+			
 		</div>
 	</div>
 </div>

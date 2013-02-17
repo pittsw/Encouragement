@@ -1,6 +1,6 @@
 from django.forms import IntegerField, CharField, DateField, Form, ModelForm, ChoiceField
 from django.forms.widgets import CheckboxSelectMultiple
-from patients.models import Client, Message, Visit
+from patients.models import Client, Message, Visit, PregnaceyEvent
 import random
 
 class AddClientForm(ModelForm):
@@ -32,6 +32,10 @@ class MessageForm(ModelForm):
 	class Meta:
 		model = Message
 
+class EndPregnacyForm(ModelForm):
+	class Meta:
+		model = PregnaceyEvent
+		fields = ('date','location','outcome')
 
 class VisitForm(Form):
 	date = DateField()

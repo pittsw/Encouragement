@@ -433,21 +433,25 @@ div.add_client .errorlist {
 }
 
 .info .edit {
-    background-position: center;
-    width: 16px;
-    height: 16px;
     background-image: url("/static/images/gear.png");
-    background-repeat: no-repeat;
-    float: right;
 }
 
 .info .add {
-    background-position: center;
+    background-image: url("/static/images/plus.png");
+}
+
+.info .more_info {
+    background-image: url("/static/images/info.png");
+    padding-right:10px;
+}
+
+.info .add, .info .more_info, .info .edit {
+	background-position: center;
     width: 16px;
     height: 16px;
-    background-image: url("/static/images/plus.png");
-    background-repeat: no-repeat;
-    float: right;
+    cursor:pointer;
+    float:right;
+    background-repeat:no-repeat;
 }
 
 .info .cancel {
@@ -476,6 +480,17 @@ div.add_client .errorlist {
 	display:inline-block;
 	margin:0px 10px;
 	float:right;
+}
+
+#client_info_dialog table{
+	border:1px solid black;
+	border-collapse:collapse;
+}
+
+#client_info_dialog td, #client_info_dialog th {
+	border:1px dashed black;
+	padding:5px;
+	font-size:9pt;
 }
 
 .msg_head {

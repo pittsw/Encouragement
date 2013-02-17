@@ -189,6 +189,29 @@ class Client(models.Model):
 		self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
 		self.save()
 
+class PregnaceyEvent(models.Model):
+	
+	OUTCOME_CHOICES = (
+		('live_birth','Live Birth'),
+		('miscarriage','Miscarriage'),
+		('caesarean_delivery','Caesarean Delivery'),
+	)
+	
+	LOCATION_CHOICES = (
+		('home','Home'),
+		('clinic','Clinc'),
+		('hosptital','Hospital'),
+	)
+	
+	id = models.IntegerField(primary_key=True)
+	
+	client = models.ForeignKey(Client)
+	
+	date = models.DateTimeField()
+	
+	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES)
+	
+	location = models.CharField(max_length=20, choices=LOCATION_CHOICES)
 
 class Nurse(models.Model):
 

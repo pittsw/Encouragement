@@ -11,7 +11,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils import simplejson
 
-from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm
+from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm, EndPregnacyForm
 from patients.models import *
 from patients.tasks import message_client
 
@@ -61,15 +61,18 @@ def client(request):
 			client.pending = 0
 			client.save()
 			messages = Interaction.objects.filter(client_id=client)
+			print EndPregnacyForm().as_table()
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,
 				"notes": Note.objects.filter(client_id=client),
 				"history": Visit.objects.filter(client_id=client),
 				"client_fragment": render_to_string("client_fragment.html", {"client":client}, context_instance=RequestContext(request)),
-				"visit_form": render_to_string("visit_form.html", {"form": VisitForm(initial={"next_visit":client.next_visit,'date':date.today()}),'client':client}, context_instance=RequestContext(request)),
+				"visit_form": render_to_string("visit_form.html", 
+					{"form": VisitForm(initial={"next_visit":client.next_visit,'date':date.today()}),'client':client}, 
+					context_instance=RequestContext(request)),
+				"end_pregnacy_form":EndPregnacyForm(),
 				}, context_instance=RequestContext(request) )
-	
 	return render_to_response("display_client_fragment.html")
 
 def add_note(request, id):

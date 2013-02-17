@@ -170,7 +170,7 @@
 		var load_add_client_complete = function() {
 			setCalendars();
 			//randomize day
-			$("#id_message_day").val(Math.floor(Math.random()*7));
+			$("#id_send_day").val(Math.floor(Math.random()*7));
 			$("#add_client_form #submit").on("click", function () {
 				$.post('/add/',$("#add_client_form").serialize(),function (response) {
 					if (/^\d+$/.test(response)) { // a single number is the new user id
@@ -327,6 +327,26 @@
 				$('#client_info_hide').hide();
                 return false;
             });
+            
+            //info dialog
+            if($('.ui-dialog #client_info_dialog').parent().attr('role')=='dialog') {
+				console.log('re-load');
+				$('.ui-dialog #client_info_dialog').parent().remove();
+				$('body>#client_info_dialog').remove();
+				
+			}
+			
+            $('.info #client_info_dialog').dialog({
+				autoOpen: false,
+				model: false,
+				minWidth:600,
+				appendTo:"#client_fragment",
+				position: {my: "right top", at: "left top", of:$(".client-profile")}
+			});	
+			$('.info #client_info_more').click(function () {
+				$("#client_info_dialog").dialog("open");
+			});
+			
 
             //toggle the componenet with class msg_body
             $(".info .msg_head").on('click', function() {
@@ -420,9 +440,17 @@
 				 });
 			});
 			*/
+			if($('.ui-dialog #end-pregnacy').parent().attr('role')=='dialog') {
+				console.log('re-load');
+				$('.ui-dialog #end-pregnacy').parent().remove();
+				$('body>#end-pregnacy').remove();
+				
+			}
+			
 			$('.info #end-pregnacy').dialog({
 				autoOpen: false,
-				model: true
+				model: true,
+				appendTo:"#visit_form_container"
 			});	
 			$('.info #delivery').click(function () {
 				$("#end-pregnacy").dialog("open");
