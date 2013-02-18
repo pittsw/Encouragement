@@ -160,9 +160,9 @@ def list_fragment(request):
     clients = Client.objects.all()
     sort = request.GET.get("sort","study_group")
     clients = clients.order_by(sort)
-    group = request.GET.get("group",4)
-    if int(group) != 4:
-		clients = clients.filter(study_group__exact=int(group))
+    group = request.GET.get("group",'all')
+    if group != 'all':
+		clients = clients.filter(study_group__exact=group)
     return render_to_response("list_fragment.html", {'clients': clients},
                               context_instance=RequestContext(request))
 

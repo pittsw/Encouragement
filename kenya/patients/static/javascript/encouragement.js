@@ -340,7 +340,6 @@
 				autoOpen: false,
 				model: false,
 				minWidth:600,
-				appendTo:"#client_fragment",
 				position: {my: "right top", at: "left top", of:$(".client-profile")}
 			});	
 			$('.info #client_info_more').click(function () {
