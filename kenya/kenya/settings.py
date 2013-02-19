@@ -152,6 +152,7 @@ INSTALLED_APPS = (
     'httpsms',
     'transport_email',
     'smssync',
+    'backend',
     'djcelery',
 )
 

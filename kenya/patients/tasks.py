@@ -6,7 +6,8 @@ from celery.task import group, periodic_task, task
 from django.conf import settings
 from django.utils.importlib import import_module
 
-from patients.models import AutomatedMessage, Client, Message, Nurse
+from patients.models import Client, Message, Nurse
+from backend.models import AutomatedMessage
 from transport_email import Transport as Email
 
 '''

@@ -6,7 +6,7 @@ import smtplib,sys
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
-from patients.models import Email as EmailTemplates
+from backend.models import Email as EmailTemplates
 
 
 class Transport(BaseTransport):

@@ -68,30 +68,44 @@
 				if ($("#select_msg").val() == "conversation") {
 					$(".message-list .Client input[type='checkbox']").click(function () {
 						var checked = $(this).is(':checked');
-						 $.post("/message/prompted/"+$(this).attr('rel')+"/?prompted="+checked);
+						 $.post("/message/prompted/"+$(this).attr('rel')+"/?prompted="+checked); //send post for message promted
 						$(this).parent().css('font-weight',(checked)?'bold':'normal');
 					});
 				}
 			});
 		}
+		
+		var toggle_duration_box = function(toggle) {
+			var box = $('#duration_box');
+			var input = $('#duration');
+			if (!toggle) {
+				toggle = (box.css('display')=='none')?'show':'hide';
+			}
+			if(toggle=='show' || toggle==true) {
+				box.css('display','inline');
+				input.val('1');
+			}
+			else {
+				box.hide();
+				input.val('');
+			}
+		}
         
         var load_message_call_tabs = function () {
 			 // Swap the boxes in add call when the call completed button is changed
 			$('#complete').on('change', function(e) {
-				if (this.checked) {
-					$('.duration').show();
-				} else {
-					$('#duration').val('');
-					$('.duration').hide();			
-				}
+				toggle_duration_box(this.checked);
 			});
-			$('.duration').hide();
+			//Swap the boxes in add call when client calls
+			$('input[name="initiated"]').change(function(e){
+				toggle_duration_box($($('input[name="initiated"]')[1]).checked);
+			});
+			toggle_duration_box('hide');
 
 			$('#clear_call').on('click', function(e) {
 				$('#call_notes').val("");
-				$('#duration').val('');
 				$('#complete').attr('checked', false);
-				$('.duration').hide();
+				toggle_duration_box('hide');
 			});
 			
 			// Sets up the characters left view.
@@ -109,57 +123,41 @@
 				$('#chars-left').text(str);
 			});
           
+			// Send a message when nurse clicks send
 			$('.messages #send_message').on("mousedown", function() {
 				$("#send_message").css("background-color", "rgb(217, 233, 236)");
-				}).on('mouseup', function() {
-				
+			}).on('mouseup', function() {
 				if (client_id === undefined || $(".messages #message-box").val() == "") {
+					$("#send_message").css("background-color", "rgb(91,141,147)");
 					return;
 				}
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState != 4) {
-						return;
-					}
+				$.post("/message/" + client_id + "/",$('#message-box').serialize(),function() {
 					load_message_fragment();
 					$(".messages #message-box").val("").keyup();
 					$("#send_message").css("background-color", "rgb(91,141,147)");
-				}
-				xhr.open("POST", "/message/" + client_id + "/", true);
-				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-				xhr.send($('#message-box').serialize());
+				});
 			});
 
 			// Save a call when the nurse clicks save
-			 $('.messages #save_call').on("mouseleave", function() {
-				$("#save_call").css("background-color", "rgb(91,141,147)");
-			});
-			
 			$('.messages #save_call').on("mousedown", function() {
 				$("#save_call").css("background-color", "rgb(217, 233, 236)");
-				}).on('mouseup', function() {
-				$("#save_call").css("background-color", "rgb(91,141,147)");
+			}).on('mouseup', function() {
 				if (client_id == undefined) {
+					$("#save_call").css("background-color", "rgb(91,141,147)");
 					return;
 				}
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState != 4) {
-						return;
-					}
+				if(!$('#complete').checked) {
+					$('#duration').val('');
+				}
+				$.post("/add_call/" + client_id + "/",$('#phone-box').serialize(),function() {
 					load_message_fragment();
+					$("#save_call").css("background-color", "rgb(91,141,147)");
 					$('#call_notes').val("");
 					$('#duration').val('');
 					$('#complete').attr('checked', false);
-					$('.duration').hide();
-				}
-				xhr.open("POST", "/add_call/" + client_id + "/", true);
-				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhr.setRequestHeader("X-CSRFToken", $('input[name="csrfmiddlewaretoken"]').val());
-				xhr.send($('#phone-box').serialize());
+					$('#duration_box').hide();
+				});
 			});
-			
 			create_tabs($('.messages #tabs'));
 		}
         
@@ -214,12 +212,12 @@
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: "yy-mm-dd",
-                    maxDate: "+2y",
-                    minDate: "-100y",
+                    maxDate: "+1y",
+                    minDate: "-50y",
                     selectOtherMonths: true,
                     showOtherMonths: true,
                     showOn: "button",
-                    yearRange: "-100:+2"
+                    yearRange: "-50:+1"
                 });
             });
         }
@@ -297,6 +295,8 @@
         
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {
+			//set date class on end pregnacy form (easy here then in django code)
+			$("#end_pregnacy_form #id_end-date").parent().addClass("date");
 			setCalendars();
             $('.info #client_info_edit').on("click", function(eventObject) {
                 $('#client_info_edit').hide();
@@ -330,7 +330,6 @@
             
             //info dialog
             if($('.ui-dialog #client_info_dialog').parent().attr('role')=='dialog') {
-				console.log('re-load');
 				$('.ui-dialog #client_info_dialog').parent().remove();
 				$('body>#client_info_dialog').remove();
 				
@@ -338,9 +337,10 @@
 			
             $('.info #client_info_dialog').dialog({
 				autoOpen: false,
-				model: false,
+				model: true,
 				minWidth:600,
-				position: {my: "right top", at: "left top", of:$(".client-profile")}
+				position: {my: "right top", at: "left top", of:$(".client-profile")},
+				resizable:false,
 			});	
 			$('.info #client_info_more').click(function () {
 				$("#client_info_dialog").dialog("open");
@@ -430,17 +430,8 @@
                 });
             });
             
-            // Hook into delievey seting
-            
-            /*
-            $('.info #delivery').on('click',function (e) {
-				 $.post("/delivery/"+client_id+"/",{},function() {
-					load_client(link); 
-				 });
-			});
-			*/
+            // remove previous dialogs
 			if($('.ui-dialog #end-pregnacy').parent().attr('role')=='dialog') {
-				console.log('re-load');
 				$('.ui-dialog #end-pregnacy').parent().remove();
 				$('body>#end-pregnacy').remove();
 				
@@ -449,8 +440,23 @@
 			$('.info #end-pregnacy').dialog({
 				autoOpen: false,
 				model: true,
-				appendTo:"#visit_form_container"
-			});	
+				buttons: {
+					'Ok': function () {
+						$.post("/pregnacy/"+client_id+"/",$('#end_pregnacy_form').serialize(),function(response) {
+							if(response == "") {
+								refresh();
+							}
+							else {
+								$('#end_pregnacy_form').html(response);
+								//set date class on end pregnacy form (easy here then in django code)
+								$("#end_pregnacy_form #id_end-date").parent().addClass("date");
+								setCalendars();
+							}
+						});
+						console.log($('#end_pregnacy_form').serialize())}
+				},
+				resizable: false,
+			});
 			$('.info #delivery').click(function () {
 				$("#end-pregnacy").dialog("open");
 			});
@@ -463,12 +469,16 @@
                 } else {
                     $(obj).addClass('info_expanded').removeClass('info_collapsed');
                 }
-            }
+            };
         
         // Hook into refresh button
         $("#refresh_button").on('click',function(e) {
 			if(client_id) load_client({'id':client_id,'name':client_name});
-			
+			refresh();
 		});
+		
+		var refresh = function () {
+			if(client_id) load_client({'id':client_id,'name':client_name});
+		};
     });
 })(jQuery);

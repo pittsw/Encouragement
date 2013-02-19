@@ -22,7 +22,7 @@
         </div>
         <tr><td colspan="2">
 			<span id="add_visit" class="gray_button">Add</span>
-			{% if client.pregnancy_status != "Post-Partum" %}
+			{% if client.pregnancy_status == "Pregnant" %}
 			<span id="delivery" class="gray_button">Pregnacy Over</span>
 			{% endif %}
 			</td></tr>

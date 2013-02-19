@@ -12,6 +12,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 
+from backend.models import Email, AutomatedMessage, Condition
+
 class Client(models.Model):
 
 	class Meta:
@@ -20,7 +22,6 @@ class Client(models.Model):
 	STATUS_CHOICES = (
 		('Pregnant', 'Pregnant'),
 		('Post-Partum', 'Post-Partum'),
-		('Failed Pregnancy', 'Failed Pregnancy'),
 		('Stopped', 'Left Study'),
 	)
 
@@ -98,7 +99,7 @@ class Client(models.Model):
 
 	previous_pregnacies = models.IntegerField()
 
-	conditions = models.ManyToManyField('Condition', blank=True)
+	conditions = models.ManyToManyField(Condition, blank=True)
 	
 	language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default="English")
 
@@ -122,7 +123,7 @@ class Client(models.Model):
 
 	last_msg = models.DateField(blank=True, null=True, editable=False)
 
-	sent_messages = models.ManyToManyField('AutomatedMessage', blank=True, editable=False)
+	sent_messages = models.ManyToManyField(AutomatedMessage, blank=True, editable=False)
 	
 	validated = models.BooleanField(editable=False,default=False)
 
@@ -158,8 +159,11 @@ class Client(models.Model):
 		if errors:
 			raise ValidationError(errors)
 
-	def __unicode__(self):
+	def details(self):
 		return "Phone Number: %s -- %s %s (#%s) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
+		
+	def __unicode__(self):
+		return  "(#%s) %s %s"%(self.id,self.first_name,self.last_name)
 		
 	def __str__(self):
 		return "%s %s"%(self.first_name,self.last_name)
@@ -194,7 +198,6 @@ class PregnaceyEvent(models.Model):
 	OUTCOME_CHOICES = (
 		('live_birth','Live Birth'),
 		('miscarriage','Miscarriage'),
-		('caesarean_delivery','Caesarean Delivery'),
 	)
 	
 	LOCATION_CHOICES = (
@@ -207,12 +210,15 @@ class PregnaceyEvent(models.Model):
 	
 	client = models.ForeignKey(Client)
 	
-	date = models.DateTimeField()
+	date = models.DateField()
 	
 	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES)
 	
 	location = models.CharField(max_length=20, choices=LOCATION_CHOICES)
-
+	
+	def __unicode__(self):
+		return "%s (%s) %s"%(self.client,self.date,self.outcome)
+		
 class Nurse(models.Model):
 
 	id = models.IntegerField(primary_key=True)
@@ -256,72 +262,6 @@ class Message(Interaction):
     
     prompted = models.BooleanField(default=True)
 
-class Condition(models.Model):
-    """Used to determine which automated messages a patient gets
-    """
-    name = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return self.name
-
-
-class AutomatedMessage(models.Model):
-    """These are the individual automated messages that are sent out
-    twice a week.
-
-    Fields:
-        condition: which condition this AutomatedMessage is a part of
-        priority: the priority of this message -- the higher the more important and sent first
-        message: the contents of the message
-		send_base: The place to start counting sending from (signup, estimated delivery, anytime)
-		send_offset: The offset number from send_base to send.  For anytime messages this is the sequance number.
-    """
-    
-    SEND_BASE_CHOICES = ( ('signup','Sign Up'),
-    				('edd','Delivery Date'),
-    				('anytime','Anytime'),
-    				('named','Named'),
-    				)
-    
-
-    class Meta:
-        ordering = ['-priority']
-
-    condition = models.ForeignKey(Condition)
-
-    priority = models.IntegerField(default=0)
-
-    message = models.TextField(max_length=200)
-
-    send_base = models.CharField(max_length=10, choices=SEND_BASE_CHOICES, default="edd")
-    
-    send_offset = models.IntegerField(default=0)
-    
-    name = models.CharField(max_length=25, blank=True)
-    
-
-
-
-    def __unicode__(self):
-        return '{con} ({pri}): "{msg}", send {send_offset} from {send_base}'.format(
-            con=self.condition,
-            pri=self.priority,
-            msg=self.message,
-            send_base=self.send_base,
-            send_offset=self.send_offset,
-        )
-
-
-class Email(models.Model):
-	
-	subject = models.CharField(max_length=100)
-	
-	content = models.TextField(max_length=600)
-	
-	key = models.CharField(max_length=100)
-	
-	def __unicode__(self):
-		return "%s | %s"%(self.key,self.subject)
 
 class Note(models.Model):
     class Meta:
@@ -354,14 +294,21 @@ class Visit(models.Model):
 class PhoneCall(Interaction):
 
 	REASON_CHOICES = ( 
-						("visit","Missed ANC Visit"),
-						("sms","No SMS Response"),
-						("other","other"),
-					)
+		("visit","Missed ANC Visit"),
+		("sms","No SMS Response"),
+		("other","other"),
+	)
+
+	CALLER_CHOICES = (
+		('nurse','Nurse'),
+		('client','Client'),
+	)
 
 	duration = models.IntegerField(default=0)
 	
 	reason = models.CharField(max_length=10, choices=REASON_CHOICES, default="other")
+	
+	caller = models.CharField(max_length=10, choices=CALLER_CHOICES, default="nurse")
 
 
 @receiver(post_save, sender=Message, dispatch_uid="pending_update")

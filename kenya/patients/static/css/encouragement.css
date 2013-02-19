@@ -521,6 +521,12 @@ div.add_client .errorlist {
     color: rgb(0,0,0);
 }
 
+.messages .System, .messages .Nurse, .messages .Phone {
+    float: right;
+    margin-left: auto;
+    text-align: right;
+}
+
 .messages .Client {
     float: left;
     margin-right: auto;
@@ -536,10 +542,13 @@ div.add_client .errorlist {
 	font-style:italic;
 }
 
-.messages .System, .messages .Nurse, .messages .Phone {
-    float: right;
-    margin-left: auto;
-    text-align: right;
+
+.messages .System {
+    background-color: rgb(214,214,214);
+}
+
+.messages .Nurse {
+    background-color: rgb(207,200,172);
 }
 
 .messages .Phone {
@@ -550,13 +559,6 @@ div.add_client .errorlist {
 	background-color: rgb(198, 184, 190);
 }
 
-.messages .System {
-    background-color: rgb(214,214,214);
-}
-
-.messages .Nurse {
-    background-color: rgb(207,200,172);
-}
 
 .messages .message-list {
 	margin: 0px 5px 5px 5px;
@@ -594,13 +596,8 @@ div.add_client .errorlist {
     
 }
 
-.messages .phone-box {
-    
-}
-
-.messages .phone-box .wrapper {
-	padding-top: 5px;
-	height: 25px;
+.messages .phone-box .wrapper{
+    height:25px;
 }
 
 .messages .phone-box .completion_checkbox {
@@ -609,10 +606,23 @@ div.add_client .errorlist {
 	display: inline;
 }
 
-.messages .phone-box .duration {
+.messages .phone-box div.input {
 	display: inline;
-	float: right;
 	margin-right: 10px;
+}
+
+.messages .phone-box input#duration{
+	width:20px;
+}
+
+.messages .phone-box #initiated_box, .messages .phone-box #duration_box  {
+	font-size:10pt;
+	font-style:italic;
+}
+
+.messages .phone-box #initiated_box span {
+	font-size:12pt;
+	font-style:normal;
 }
 
 .messages .phone-box .phone-content {

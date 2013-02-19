@@ -13,6 +13,7 @@ from django.utils import simplejson
 
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm, EndPregnacyForm
 from patients.models import *
+from backend.models import *
 from patients.tasks import message_client
 
 def get_object_or_default(klass, default, **kwargs):
@@ -58,10 +59,9 @@ def client(request):
 		if "id" in request.GET:
 			client = Client.objects.get(id=request.GET["id"])
 			isList = request.GET.get('list')
+			print isList
 			client.pending = 0
 			client.save()
-			messages = Interaction.objects.filter(client_id=client)
-			print EndPregnacyForm().as_table()
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,
@@ -71,7 +71,7 @@ def client(request):
 				"visit_form": render_to_string("visit_form.html", 
 					{"form": VisitForm(initial={"next_visit":client.next_visit,'date':date.today()}),'client':client}, 
 					context_instance=RequestContext(request)),
-				"end_pregnacy_form":EndPregnacyForm(),
+				"end_pregnacy_form":EndPregnacyForm(prefix="end",initial={'date':date.today(),'outcome':'live_birth','location':'clinic'}),
 				}, context_instance=RequestContext(request) )
 	return render_to_response("display_client_fragment.html")
 
@@ -127,11 +127,9 @@ def add_client(request):
 			id = form.cleaned_data['id']
 			client = form.save(commit=False)
 			client.id = id
-			#client.study_group = study_group()
 			client.save()
-			'''
-			Send initial message if any
-			'''
+
+			#Send initial message if any
 			message = AutomatedMessage.objects.filter(send_base__exact="signup").filter(send_offset__exact=0) #get messages sent 0 days from signup
 			if message.count() > 0:
 				text = message[0].message
@@ -142,14 +140,6 @@ def add_client(request):
 			return HttpResponse(str(client.id))
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
-'''
-Select which of three groups the new client should be in
-2: Messaging that require two way communication
-1: Push messaging not requiring any responce
-0: Control group - sent no messages
-'''                              
-def study_group():
-	return random.randint(0,2)
 
 def client_fragment(request, id):
     client = get_object_or_404(Client, id=id)
@@ -174,9 +164,6 @@ def edit_client(request, id):
 
     if request.method == "POST":
         form = ClientForm(request.POST, instance=client)
-        for i in form:
-			if i.errors:
-				print i,i.errors
         if form.is_valid():
             form.save()
             return HttpResponse('')
@@ -208,17 +195,19 @@ def add_call(request, id_number):
         content = request.POST['text']
         duration = request.POST['duration']
         reason = request.POST.get('reason','other')
-        print reason
+        initiated = request.POST['initiated']
         try:
             duration = int(duration)
         except ValueError:
             duration = 0
+        print initiated
         PhoneCall(
             user_id=nurse,
             client_id=client,
             content=content,
             duration=duration,
             reason=reason,
+            caller=initiated,
         ).save()
     return HttpResponse('')
     
@@ -228,11 +217,27 @@ def message_prompted(request,id_number):
 	message.save()
 	return HttpResponse('')
 
-def delivery(request, id):
-	client = get_object_or_404(Client, id=id)
-	client.pregnancy_status = "Post-Partum"
-	client.save()
-	return HttpResponse('')
+def pregnacy(request, id):
+	form = EndPregnacyForm(prefix="end",initial={'date':date.today()})
+	if request.method == "POST":
+		client = get_object_or_404(Client, id=id)
+		form = EndPregnacyForm(request.POST,prefix="end")
+		if form.is_valid():
+			print "Vaild: %s, %s, %s"%(form.cleaned_data['date'],form.cleaned_data['location'],form.cleaned_data['outcome'])
+			pregnacy_event = form.save(commit=False)
+			pregnacy_event.client = client
+			pregnacy_event.save()
+			#update client pregnacy_status
+			print pregnacy_event.outcome
+			if pregnacy_event.outcome == "live_birth":
+				print "Live"
+				client.pregnancy_status = "Post-Partum"
+			elif pregnacy_event.outcome == "miscarriage":
+				client.pregnancy_status = "Stopped"
+			client.save()
+			return HttpResponse('')
+	return HttpResponse(form.as_table())
+		
 
 def csv_helper(**filter_kwargs):
     field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',
