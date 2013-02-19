@@ -147,14 +147,13 @@ def client_fragment(request, id):
                               context_instance=RequestContext(request))
 
 def list_fragment(request):
-    clients = Client.objects.all()
-    sort = request.GET.get("sort","study_group")
-    clients = clients.order_by(sort)
-    group = request.GET.get("group",'all')
-    if group != 'all':
-		clients = clients.filter(study_group__exact=group)
-    return render_to_response("list_fragment.html", {'clients': clients},
-                              context_instance=RequestContext(request))
+	clients = Client.objects.all()
+	sort = request.GET.get("sort","study_group")
+	clients = clients.order_by(sort)
+	group,status = request.GET.get("group",',').split(',')
+	clients = clients.filter(study_group__contains=group).filter(pregnancy_status__contains=status)
+	return render_to_response("list_fragment.html", {'clients': clients},
+							  context_instance=RequestContext(request))
 
 def edit_client(request, id):
     client = get_object_or_404(Client, id=id)

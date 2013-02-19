@@ -167,12 +167,11 @@ textarea {
     font-weight: bold;
     padding: 5px 5px 0px 5px;
     height: 20px;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .patient_bar select {
 	position:relative;
-	top:-4px;
 	font-size:10px;
 }
 /* End search bar styles */
@@ -513,25 +512,23 @@ div.add_client .errorlist {
 }
 
 .messages .Client, .messages .Nurse, .messages .System, .messages .Phone {
-    margin: 5px 15px 5px 10px;
+    margin: 5px 10px 5px 10px;
     padding: 10px 10px 10px 10px;
     border-radius: 5px;
     width: 60%;
     clear: both;
     color: rgb(0,0,0);
+    position:relative;
 }
 
-.messages .System, .messages .Nurse, .messages .Phone {
+.messages .System, .messages .Nurse {
     float: right;
     margin-left: auto;
     text-align: right;
 }
 
 .messages .Client {
-    float: left;
-    margin-right: auto;
     background-color: rgb(171,198,202);
-    position:relative;
 }
 
 .messages .Client .prompted {
@@ -559,15 +556,38 @@ div.add_client .errorlist {
 	background-color: rgb(198, 184, 190);
 }
 
-
-.messages .message-list {
-	margin: 0px 5px 5px 5px;
-    height: 406px;
-    overflow: auto;
-}
-
 .messages #change {
     margin-top: 55px;
+}
+
+.messages .message-list {
+	margin: 0px 5px 0px 5px;
+    height: 406px;
+    overflow-y: scroll;
+}
+
+.message-list span.icon {
+	display:inline-block;
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	top:-8px;
+	left:-8px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:20px 20px;
+}
+
+.message-list span.sms-icon {
+	background-image: url("/static/images/message.png");
+}
+
+.message-list span.phone-icon {
+	background-image: url("/static/images/call.png");
+}
+
+.message-list span.phone-missed {
+	background-image: url("/static/images/call-missed.png");
 }
 
 .messages .Boxes {

@@ -3,15 +3,15 @@
 {% for x in messages %}
 	{% if x.hasphoneattr %}
 	<div class="Phone {% if x.phonecall.duration == 0 %}missed{% endif %} {{x.phonecall.caller|capfirst}}">
+		<span class="icon phone-{% if x.phonecall.duration == 0 %}missed{% else %}icon{% endif%}"></span>
 		<div class="top">
 			{% if x.phonecall.duration == 0 %}Missed Call {% else %}
 			{% if x.phonecall.caller == 'nurse' %}You called: {% else %}
 			{% if x.phonecall.caller == 'client' %}Called You:{% endif %}{% endif %}{% endif %}
 		<span class="date">{{x.date}}<br/><span style="float:right">{{x.phonecall.reason }}</span></span></div>
-		<div class="content">{{x.content}}</div>
-	</div>
 	{% else %}
 	<div class="{{x.message.sent_by}}">
+		<span class="icon sms-icon"></span>
 		{% if x.message.sent_by == "Client" %}
 		<div class="top">{{client}}:<span class="date">{{x.date}}</span></div>
 		<div class="prompted"  {% if x.message.prompted %} style="font-weight:bold" {% endif %}>Prompted: 
@@ -20,8 +20,8 @@
 		{% else %}
 		<div class="top">{% if x.user_id %}{{x.user_id}}{% else %}System{% endif %}:<span class="date">{{x.date}}</span></div>
 		{% endif %}
+	{% endif %}
 		<div class="content">{{x.content}}</div>
 	</div>
-	{% endif %}
 {% endfor %}
 
