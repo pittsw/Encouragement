@@ -531,6 +531,10 @@ div.add_client .errorlist {
     background-color: rgb(171,198,202);
 }
 
+.messages .Client .icon{
+    border-color: rgb(171,198,202);
+}
+
 .messages .Client .prompted {
 	position:absolute;
 	bottom:5px;
@@ -544,16 +548,32 @@ div.add_client .errorlist {
     background-color: rgb(214,214,214);
 }
 
+.messages .System .icon {
+    border-color: rgb(214,214,214);
+}
+
 .messages .Nurse {
     background-color: rgb(207,200,172);
+}
+
+.messages .Nurse .icon {
+    border-color: rgb(207,200,172);
 }
 
 .messages .Phone {
 	background-color:#978f99;
 }
 
+.messages .Phone .icon {
+	border-color:#978f99;
+}
+
 .messages .missed {
 	background-color: rgb(198, 184, 190);
+}
+
+.messages .missed .icon {
+	border-color: rgb(198, 184, 190);
 }
 
 .messages #change {
@@ -566,16 +586,24 @@ div.add_client .errorlist {
     overflow-y: scroll;
 }
 
+.message-list .top {
+	margin-left:15px;
+}
+
 .message-list span.icon {
 	display:inline-block;
 	width: 20px;
 	height: 20px;
 	position:absolute;
-	top:-8px;
-	left:-8px;
+	top:-5px;
+	left:-5px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size:20px 20px;
+	border:2px solid;
+	border-radius:10px;
+	background-color:white;
+	padding:2px;
 }
 
 .message-list span.sms-icon {

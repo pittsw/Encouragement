@@ -14,11 +14,12 @@ DEFAULT_NURSE_NAME = "your friend"
 # These settings must be set to use Celery
 import djcelery
 djcelery.setup_loader()
-BROKER_HOST = "localhost"
-BROKER_PORT = 5672
-BROKER_USER = "guest"
-BROKER_PASSWORD = "guest"
-BROKER_VHOST = "/"
+BROKER_URL = "amqp://guest:guest@localhost:5672/"
+#BROKER_PORT = 5672
+#BROKER_USER = "guest"
+#BROKER_PASSWORD = "guest"
+#BROKER_VHOST = "/"
+CELERY_IMPORTS = ('patients.tasks')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

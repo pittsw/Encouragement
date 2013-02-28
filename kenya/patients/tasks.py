@@ -10,12 +10,10 @@ from patients.models import Client, Message, Nurse
 from backend.models import AutomatedMessage
 from transport_email import Transport as Email
 
-'''
+
 @periodic_task(run_every=crontab())
 def example_task():
-	for client in Client.objects.all():
-		message_client(client,None,"System","Hello Automated")
-'''
+	print  "Automated Task"
 
 
 @periodic_task(run_every=crontab(minute=0, hour=0))
