@@ -1,0 +1,41 @@
+
+<form id="visit_history_form">
+	  {% csrf_token %}
+
+{% if missed %}     
+<h2>Missed Visits</h2>
+<ul class="visit_history">
+	{% for client in missed %}
+	<li><span class="date">{{ client.next_visit }}</span>
+	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
+	<input name="ck_{{client.id}}" type="checkbox"/>
+	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% if today %}   
+<h2>Vist's Today</h2>
+<ul class="visit_history">
+	{% for client in today %}
+	<li><span class="date">{{ client.next_visit }}</span>
+	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
+	<input name="ck_{{client.id}}" type="checkbox"/>
+	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% if future %}  
+<h2>Next Two Days</h2>
+<ul class="visit_history">
+	{% for client in future %}
+	<li><span class="date">{{ client.next_visit }}</span>
+	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
+	<input name="ck_{{client.id}}" type="checkbox"/>
+	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+</form>

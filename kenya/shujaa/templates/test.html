@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		
+	</head>
+	
+	<body>
+		<h2>Send Shujaa Test Message</h2>
+		
+		<form action="/shujaa/testmessage/" method="post">{% csrf_token %}
+			
+			{{ form.as_p }}
+			
+			<input type="submit" value="Send" name="submit"/>
+		
+		</form>
+	
+	</body>
+	
+</html>
