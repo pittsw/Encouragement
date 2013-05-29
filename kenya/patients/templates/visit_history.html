@@ -1,5 +1,5 @@
 
-<form id="visit_history_form">
+<form id="visit_history_form" method="post" action="/visit_history/">
 	  {% csrf_token %}
 
 {% if missed %}     
@@ -7,21 +7,21 @@
 <ul class="visit_history">
 	{% for client in missed %}
 	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
-	<input name="ck_{{client.id}}" type="checkbox"/>
-	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
+	<input name="ck_missed_{{client.id}}" type="checkbox"/>
+	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
 	{% endfor %}
 </ul>
 {% endif %}
 {% if today %}   
-<h2>Vist's Today</h2>
+<h2>Today's Visits</h2>
 <ul class="visit_history">
 	{% for client in today %}
 	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
-	<input name="ck_{{client.id}}" type="checkbox"/>
-	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
+	<input name="ck_today_{{client.id}}" type="checkbox"/>
+	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
 	{% endfor %}
 </ul>
@@ -31,11 +31,15 @@
 <ul class="visit_history">
 	{% for client in future %}
 	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }}{{ client.first_name }}</span>
-	<input name="ck_{{client.id}}" type="checkbox"/>
-	<span class="next_visit">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
+	<input name="ck_future_{{client.id}}" type="checkbox"/>
+	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
 	{% endfor %}
 </ul>
 {% endif %}
+<div style="text-align:center;margin-bottom:5px;"><input type="button" value="Submit" id="submit"/></div>
+    <div class="errors">
+        {{ form.errors.as_ul }}
+    </div>
 </form>

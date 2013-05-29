@@ -105,12 +105,40 @@ def add_visit(request, id):
             client.save()
             return HttpResponse('')
     return render_to_response('visit_form.html', {'form': form,'client':client})
+    
+def visit_history(request):
+	missed = Client.objects.filter(next_visit__lt=date.today())
+	today = Client.objects.filter(next_visit=date.today())
+	future = Client.objects.filter(next_visit__gt=date.today(),next_visit__lte=date.today()+timedelta(days=2))
+	if request.method == "GET":
+		return render_to_response('visit_history.html',{'missed':missed,'today':today,'future':future},RequestContext(request))
+	#Process Post POST
+	updates = {}
+	messages = {'missed':'Patient arrived late','today':'Normal Visit','future':'Patient arrived early'}
+	#get clients to update from checkboxs
+	for name,value in request.POST.iteritems():
+		try:
+			box,when,client_id = name.split('_')
+			if(box=='ck' and value=='on'):
+				try:
+					updates[when].append(client_id)
+				except KeyError, e:
+					updates[when] = [client_id]
+		except ValueError:
+			pass
+	out = ""
+	for when,client_ids in updates.iteritems():
+		for client_id in client_ids:
+			new_date = request.POST['date_%s'%(client_id)]
+			out += '(%s) %s:%s<br/>\n'%(client_id,new_date,messages[when])
+	return HttpResponse(out)
 
 def delete_visit(request, pk):
-    visit = get_object_or_404(Visit, pk=pk)
     if request.method == "POST":
-        visit.delete()
-        return HttpResponse('')
+		visit = get_object_or_404(Visit, pk=pk)
+		visit.delete()
+		return HttpResponse('')
+	
 
 def add_client(request):
     form = None

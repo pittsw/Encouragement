@@ -154,6 +154,7 @@ INSTALLED_APPS = (
     'transport_email',
     'smssync',
     'backend',
+    'shujaa',
     'djcelery',
 )
 

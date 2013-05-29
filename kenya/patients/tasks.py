@@ -7,15 +7,24 @@ from django.conf import settings
 from django.utils.importlib import import_module
 
 from patients.models import Client, Message, Nurse
-from backend.models import AutomatedMessage
+from backend.models import AutomatedMessage, AutoTask
 from transport_email import Transport as Email
 
-
 @periodic_task(run_every=crontab())
-def example_task():
-	print  "Automated Task"
+def example_task_1():
+	log("Example Task 1")
+	
+@periodic_task(run_every=crontab(minute='*/5'))
+def example_task_2():
+	log("Example Task 2")
+	
+@task
+def log(func):
+	l = AutoTask(function=func)
+	l.save()
 
 
+'''
 @periodic_task(run_every=crontab(minute=0, hour=0))
 def update_all():
     """Updates all clients to see if they are urgent.
@@ -82,7 +91,7 @@ def scheduled_message(client):
     ).save()
 
     return (client.phone_number, content)
-
+'''
 
 def message_client(client, nurse, sender, content, transport=None,
                    transport_kwargs={}):
@@ -158,6 +167,6 @@ def incoming_message(phone_number, message,network="default"):
 			user_id=Nurse.objects.all()[0],
 			sent_by='Client',
 			content=message,
-			date=datetime.now(),
 		).save()
+		client.last_msg = date.today()
 		return True

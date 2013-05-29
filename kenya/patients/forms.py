@@ -39,6 +39,6 @@ class EndPregnacyForm(ModelForm):
 
 class VisitForm(Form):
 	date = DateField()
-	comments = CharField(max_length=100)
+	comments = CharField(max_length=100,initial="Planned Visit.")
 	next_visit = DateField()
     

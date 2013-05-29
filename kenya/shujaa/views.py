@@ -7,8 +7,11 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
+from django.shortcuts import get_object_or_404, render
+from django.template import RequestContext
 
 from patients import tasks 
+from shujaa.forms import TestMessage
 
 @csrf_exempt
 def print_request(request):
@@ -45,3 +48,11 @@ def receive(request):
 	except Exception as e:
 		print >> sys.stderr, e
 		sys.stderr.flush()
+
+def testmessage(request):
+	if request.method == 'POST': #submit
+		form = TestMessage(request.POST) #bind new TestMessage form to post data
+		return HttpResponse("Form Sent")
+	else:
+		form = TestMessage() #unbound form
+		return render(request,"test.html", {'form':form})

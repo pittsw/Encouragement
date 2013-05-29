@@ -61,8 +61,11 @@
 			loadEditHandlers(client_obj);
 			var now = new Date();
 			$('#time').html(now.getHours()+":"+now.getMinutes()+":"+now.getSeconds());
+			$(client_obj).find('.pending').remove();
+			$(client_obj).find('.pending_msg').remove();
         }
         
+        //Get the list of messages for current client
         var load_message_fragment = function () {
 			$(".message-list").load("/fragment/message/" + client_id + "/?mode="+$("#select_msg").val(), function (e) {
 				if ($("#select_msg").val() == "conversation") {
@@ -161,6 +164,7 @@
 			create_tabs($('.messages #tabs'));
 		}
         
+        //Load the add client page into main frame.
         var load_add_client = function() {
 			$('#main_content').load("/add", function() {load_add_client_complete()});
 		}
@@ -169,7 +173,7 @@
 			setCalendars();
 			//randomize day
 			$("#id_send_day").val(Math.floor(Math.random()*7));
-			$("#add_client_form #submit").on("click", function () {
+			$("#add_client_form #submit").click(function () {
 				$.post('/add/',$("#add_client_form").serialize(),function (response) {
 					if (/^\d+$/.test(response)) { // a single number is the new user id
 					window.location = "/?id="+response;
@@ -181,11 +185,37 @@
 			});
 		}
 		
-        $("#add").on("click", function() {
-            load_add_client();
-        });
+        $("#add").on("click", function() {load_add_client();});
+        //End add client setup
         
-           // Switch tabs
+        //Load Visit History page into main frame
+        var load_visit_history = function () {
+			$('#main_content').load("/visit_history/", function() {load_visit_history_complete()});
+		}
+		
+		var load_visit_history_complete = function () {
+			setCalendars();
+			//set up checkbox toggle
+			$('#visit_history_form input[type="checkbox"]').change(function(evt) {
+				var chk = $(this)
+				if (chk.attr("checked")) {
+					chk.next().show();			
+				}else {
+					chk.next().hide();
+				}	
+			});
+			//set up form post
+			$('#visit_history_form #submit').click(function() {
+				$.post('/visit_history/',$('#visit_history_form').serialize(),function(response) {
+					$('#main_content').html(response);
+				},'text');
+			});
+		}
+		
+		$('#visit_history_button').click(function() {load_visit_history();});
+        //End Visit History
+        
+        // Switch tabs
         var switch_tabs = function(obj) {
             var tabs = $(obj.parents()[2])
             tabs.children('.tab-content').hide();

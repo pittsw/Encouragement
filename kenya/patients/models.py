@@ -140,10 +140,10 @@ class Client(models.Model):
 		if self.id > 99999:
 			errors.append('Study ID must be less than 1000')
 		if self.pregnancy_status == 'Pregnant' and self.due_date < today:
-			errors.append('Client is pregnant but expected delivery '
+			errors.append('Client is pregnant but expected delivery ',
 				'date is in the past')
 		if self.pregnancy_status == 'Post-Partum' and self.due_date > today:
-			errors.append('Client has given birth by date of birth of '
+			errors.append('Client has given birth by date of birth of ',
 				'the child is in the future.')
 		if today.year - low_age < self.birth_date.year:
 			errors.append('Client is under {low_age} years old'.format(

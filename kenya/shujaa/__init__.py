@@ -11,8 +11,9 @@ class Transport(BaseTransport):
 				'username':'bderenzi@cs.washington.edu',
 				'password':'washington312',
 				'account':'live',
-				'source':'6873'}
+				'source':{'safaricom':20687,'airtelkenya':6873}
 				}
+			}
 
 	@classmethod
 	def send(cls, client, content):
@@ -23,6 +24,7 @@ class Transport(BaseTransport):
 		values['destination'] = client.phone_number
 		values['message'] = content
 		values['network'] = client.phone_network
+		values['source'] = cls.gateway['source'][client.phone_network]
 		
 		#http request to getway to send sms
 		data = urllib.urlencode(values)

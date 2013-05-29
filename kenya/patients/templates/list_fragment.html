@@ -5,11 +5,11 @@
             <span class="client_id">(#{{x.id}}):</span> <span class="client_name">{{x.last_name}}, {{x.first_name}}</span>
         </div>
         <div class="left">
-            {% if x.pending > 0 %}
-                <div>{{x.pending}} unread messages.</div>
-            {% endif %}
             {% if x.urgent %}
-                <div>No reply since {{x.last_msg}}.</div>
+                <div class="urgent_msg">No reply since {{x.last_msg}}.</div>
+            {% endif %}
+            {% if x.pending > 0 %}
+                <div class="pending_msg">{{x.pending}} unread messages.</div>
             {% endif %}
         </div>
         <div class="right">
