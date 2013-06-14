@@ -12,6 +12,7 @@ from django.template import RequestContext
 
 from patients import tasks 
 from shujaa.forms import TestMessage
+from shujaa import Transport 
 
 @csrf_exempt
 def print_request(request):
@@ -52,7 +53,11 @@ def receive(request):
 def testmessage(request):
 	if request.method == 'POST': #submit
 		form = TestMessage(request.POST) #bind new TestMessage form to post data
-		return HttpResponse("Form Sent")
+		if form.is_valid():
+			to = request.POST['to']
+			message = request.POST['message']
+			Transport.send_shujaa(to,message,"safaricom")
+			return HttpResponse("To: %s <br/> Message: %s"%(to,message))
 	else:
 		form = TestMessage() #unbound form
-		return render(request,"test.html", {'form':form})
+	return render(request,"test.html", {'form':form})

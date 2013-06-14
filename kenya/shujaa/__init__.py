@@ -20,22 +20,31 @@ class Transport(BaseTransport):
 		"""Sends a message through the Shujaa protocol.
 		"""
 		#copy gateway values and add in phone number, message, and network
+		cls.send_shujaa(client.phone_number,content,client.phone_network)
+		
+	@classmethod
+	def send_shujaa(cls,destination,content,network):
+		
+		#get default values
 		values = cls.gateway['values'].copy()
-		values['destination'] = client.phone_number
+		
+		values['destination'] = destination
 		values['message'] = content
-		values['network'] = client.phone_network
-		values['source'] = cls.gateway['source'][client.phone_network]
+		values['network'] = network
+		values['source'] = cls.gateway['values']['source'][network]
 		
 		#http request to getway to send sms
 		data = urllib.urlencode(values)
+		
 		req = urllib2.Request(cls.gateway['url'], data)
-		#print >>sys.stderr, "Shujaa Send: %s %s,%s"%(client.phone_network,client.phone_number,content)
-		''' Don't Send Now '''
+		#print >>sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
+		
+		#Send http request
 		httpResponse = urllib2.urlopen(req)
 		
 		#do something with response 
-		response = httpResponse.read()
-		print >> sys.stderr, response
+		#response = httpResponse.read()
+		#print >> sys.stderr, response
 		
 	@classmethod
 	def send_batch(cls, lst):

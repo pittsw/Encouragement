@@ -20,9 +20,10 @@ class AutomatedMessage(models.Model):
     """
     
     SEND_BASE_CHOICES = ( ('signup','Sign Up'),
-    				('edd','Delivery Date'),
+    				('edd','Estimated Delivery Date'),
     				('anytime','Anytime'),
     				('named','Named'),
+    				('dd','Delivery Date'),
     				)
     
 

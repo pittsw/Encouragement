@@ -133,7 +133,7 @@ def incoming_message(phone_number, message,network="default"):
 	clients = Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
 		# recieved a message from a phone number not in database
-		if len(message.strip()) == 5: #from key length in patients.models
+		if len(message.strip()) == 5: #compare to key length in patients.models
 			message = message.strip().upper()
 			#check if message is equal to a valid key
 			for client in Client.objects.filter():

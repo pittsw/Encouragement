@@ -137,7 +137,7 @@ class Client(models.Model):
 		one_year = timedelta(days=365)
 		today = date.today()
 		errors = []
-		if self.id > 99999:
+		if self.id > 1000:
 			errors.append('Study ID must be less than 1000')
 		if self.pregnancy_status == 'Pregnant' and self.due_date < today:
 			errors.append('Client is pregnant but expected delivery ',
