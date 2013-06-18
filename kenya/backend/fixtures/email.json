@@ -1,16 +1,16 @@
 [
     {
         "pk": 1, 
-        "model": "patients.email", 
+        "model": "backend.email", 
         "fields": {
-            "content": "{client.id} sent vaid key on {phone_number}\r\nOld number:{client.phone_number} changed to {phone_number}\r\nNetwork: {client.phone_network} -> {network}", 
+            "content": "{client.id} sent vaild key on {phone_number}\r\nOld number:{client.phone_number} changed to {phone_number}\r\nNetwork: {client.phone_network} -> {network}", 
             "key": "number_change", 
             "subject": "Automatic Number Change"
         }
     }, 
     {
         "pk": 2, 
-        "model": "patients.email", 
+        "model": "backend.email", 
         "fields": {
             "content": "{phone_number} not in database\r\n\r\nSent\r\n----------------\r\n{message}", 
             "key": "number_not_found", 
@@ -19,7 +19,7 @@
     }, 
     {
         "pk": 3, 
-        "model": "patients.email", 
+        "model": "backend.email", 
         "fields": {
             "content": "Patient #{client.id} dropped they study", 
             "key": "dropped", 
@@ -28,7 +28,7 @@
     }, 
     {
         "pk": 4, 
-        "model": "patients.email", 
+        "model": "backend.email", 
         "fields": {
             "content": "Patient #{client.id} sent valid code {message} on {phone_number}.\r\n\r\nThis patient had already validated on {client.phone_number}.\r\n\r\nPhone number NOT updated.", 
             "key": "valid_repeat", 

@@ -6,7 +6,7 @@ class Transport(BaseTransport):
 
 	"""
 
-	gateway = {'url':'http://sms.shujaa.mobi/sendsms',
+	gateway = {'url':'http://sms2.shujaa.mobi/sendsms',
 				'values':{
 				'username':'bderenzi@cs.washington.edu',
 				'password':'washington312',

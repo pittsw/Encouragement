@@ -127,10 +127,15 @@ def visit_history(request):
 		except ValueError:
 			pass
 	out = ""
+	#Todo: Error Checking
 	for when,client_ids in updates.iteritems():
 		for client_id in client_ids:
 			new_date = request.POST['date_%s'%(client_id)]
 			out += '(%s) %s:%s<br/>\n'%(client_id,new_date,messages[when])
+			#Make this actually change the client
+			tmp_client = Client.objects.get(id=client_id)
+			tmp_client.next_visit = new_date
+			tmp_client.save()
 	return HttpResponse(out)
 
 def delete_visit(request, pk):

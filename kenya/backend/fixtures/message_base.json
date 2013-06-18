@@ -1,0 +1,58 @@
+[
+  {
+    "pk": 1, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "signup", 
+      "display": "Sign Up"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "edd", 
+      "display": "Estimated Date of Delivery"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "visit", 
+      "display": "Next Visit"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "dd", 
+      "display": "Delivery Date"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "upcoming_anc", 
+      "display": "Upcoming ANC"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "missed_visit", 
+      "display": "Missed Visit"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "backend.messagebase", 
+    "fields": {
+      "name": "upcoming_pnc", 
+      "display": "Upcoming PNC"
+    }
+  }
+]

@@ -8,3 +8,4 @@ kenya/celerybeat-schedule
 kenya/celery
 kenya/celeryd.pid
 kenya/python
+kenya/ignore

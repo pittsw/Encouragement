@@ -250,7 +250,6 @@ class Interaction(models.Model):
     def getClassName(self):
         return self.__class__.__name__
 
-#add shuja id
 class Message(Interaction):
     SENDER_CHOICES = (
         ('Client', 'Client'),
