@@ -203,11 +203,11 @@ textarea {
     height: 20px;
 }
 
-.person .two-way>div{
+.person .two_way>div{
 	    background-image: url("/static/images/patient-two_way-2.png");
 }
 
-.person .one-way>div{
+.person .one_way>div{
 	    background-image: url("/static/images/patient-one_way-1.png");
 }
 

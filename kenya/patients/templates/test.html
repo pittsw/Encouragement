@@ -1,0 +1,39 @@
+<html>
+	
+<body>
+	
+	<form action="test" method="post">
+		{% csrf_token %}
+		<input type="date" name="date" value="{{ date }}"/>
+		<select name="hour">
+			<option value="8">8</option>
+			<option value="13">13</option>
+			<option value="19">19</option>
+		</select>
+		<input type="submit"/>
+	</form>
+	
+	<h3>Pregnant</h3>
+	<ul>
+	{% for m in pregnant %}
+		<li>{{ m|safe}}</li>
+	{% endfor %}
+	</ul>
+	
+	<h3>Post</h3>
+	<ul>
+	{% for m in post %}
+		<li>{{ m|safe}}</li>
+	{% endfor %}
+	</ul>
+	
+	<h3>Visit</h3>
+	<ul>
+	{% for m in visit %}
+		<li>{{ m|safe}}</li>
+	{% endfor %}
+	</ul>
+	
+</body>
+	
+</html>

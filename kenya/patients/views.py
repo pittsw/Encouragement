@@ -14,7 +14,7 @@ from django.utils import simplejson
 from patients.forms import AddClientForm, ClientForm, MessageForm, VisitForm, EndPregnacyForm
 from patients.models import *
 from backend.models import *
-from patients.tasks import message_client
+import patients.tasks as tasks
 
 def get_object_or_default(klass, default, **kwargs):
     """Performs a get query, but instead of throwing an exception returns
@@ -151,7 +151,7 @@ def add_client(request):
     if request.method == "GET":
         next_month = (date.today() + timedelta(30)).strftime("%Y-%m-")
         due_date = (date.today() + timedelta(180)).strftime("%Y-%m-")
-        form = AddClientForm(initial={"birth_date":"1990-","due_date":due_date,"next_visit":next_month,"conditions":"1",
+        form = AddClientForm(initial={"birth_date":"1990-","due_date":due_date,"next_visit":next_month,"condition":"1",
         "previous_pregnacies":"1","living_children":"0","years_of_education":"1","phone_number":"254","pri_contact_number":"254",
         "sec_contact_number":"254",})
     elif request.method == "POST":
@@ -163,12 +163,13 @@ def add_client(request):
 			client.save()
 
 			#Send initial message if any
-			message = AutomatedMessage.objects.filter(send_base__exact="signup").filter(send_offset__exact=0) #get messages sent 0 days from signup
+			#Todo: Filter based on language, condition, study group 
+			message = AutomatedMessage.objects.filter(send_base__name__exact="signup").filter(send_offset__exact=0) #get messages sent 0 days from signup
 			if message.count() > 0:
 				text = message[0].message
 				sender = "System"
 				nurse = None
-				message_client(client,nurse,sender,text) #send initial message to client
+				tasks.message_client(client,nurse,sender,text) #send initial message to client
 			
 			return HttpResponse(str(client.id))
     return render_to_response("add_client.html", {'form': form},
@@ -184,7 +185,10 @@ def list_fragment(request):
 	sort = request.GET.get("sort","study_group")
 	clients = clients.order_by(sort)
 	group,status = request.GET.get("group",',').split(',')
-	clients = clients.filter(study_group__contains=group).filter(pregnancy_status__contains=status)
+	group = get_object_or_default(StudyGroup,None,name=group) if group else None
+	if group:
+		clients = clients.filter(study_group=group)
+	clients = clients.filter(pregnancy_status__contains=status)
 	return render_to_response("list_fragment.html", {'clients': clients},
 							  context_instance=RequestContext(request))
 
@@ -215,7 +219,7 @@ def add_message(request, id_number):
             else:
                 sender = 'System'
             client = get_object_or_404(Client, id=id_number)
-            message_client(client, nurse, sender, text) # task.message_client
+            tasks.message_client(client, nurse, sender, text) # task.message_client
             return HttpResponse('')
     except Exception as e:
         print >> sys.stderr, e
@@ -269,8 +273,21 @@ def pregnacy(request, id):
 			client.save()
 			return HttpResponse('')
 	return HttpResponse(form.as_table())
-		
 
+def test(request):
+	pregnant,post,visit = [],[],[]
+	day = datetime.now()
+	if request.method == "POST":
+		if request.POST['date']:
+			day = datetime.strptime(request.POST['date'],"%Y-%m-%d")
+			day += timedelta(hours=int(request.POST['hour']))
+			pregnant,post,visit = tasks.send_all_scheduled(day)
+		else:
+			pregnant,post,visit = tasks.send_all_scheduled()
+	return render_to_response("test.html", {'pregnant':pregnant,'post':post,'visit':visit,
+	'date':day.strftime("%Y-%m-%d")}, context_instance=RequestContext(request))
+	
+	
 def csv_helper(**filter_kwargs):
     field_list = ['id', 'last_name', 'first_name', 'phone_number', 'birth_date',
          'pregnancy_status', 'due_date', 'years_of_education']

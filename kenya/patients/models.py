@@ -12,7 +12,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 
-from backend.models import Email, AutomatedMessage, Condition
+import backend.models as backend
 
 class Client(models.Model):
 
@@ -23,6 +23,7 @@ class Client(models.Model):
 		('Pregnant', 'Pregnant'),
 		('Post-Partum', 'Post-Partum'),
 		('Stopped', 'Left Study'),
+		('Finished', 'Finished Study'),
 	)
 
 	RELATIONSHIP_CHOICES = (
@@ -32,13 +33,13 @@ class Client(models.Model):
     )
     
 	DAY_CHOICES = (
-		(1,'Monday'),
-		(2,'Tuesday'),
-		(3,'Wednesday'),
-		(4,'Thursday'),
-		(5,'Friday'),
-		(6,'Saturday'),
-		(0,'Sunday'),
+		(0,'Monday'),
+		(1,'Tuesday'),
+		(2,'Wednesday'),
+		(3,'Thursday'),
+		(4,'Friday'),
+		(5,'Saturday'),
+		(6,'Sunday'),
 	)
 	
 	TIME_CHOICES = (
@@ -52,17 +53,6 @@ class Client(models.Model):
 		("airtelkenya","Airtel"),
 	)
 	
-	STUDY_GROUP_CHOICES = (
-		("two-way","Two Way"),
-		("one-way","One Way"),
-		("control","Control"),
-	)
-	
-	LANGUAGE_CHOICES = (
-		("English","English"),
-		("Kiswahili","Kiswahili"),
-	)
-
 	primary_key = models.AutoField(primary_key=True)
 
 	id = models.PositiveIntegerField(unique=True)
@@ -99,18 +89,18 @@ class Client(models.Model):
 
 	previous_pregnacies = models.IntegerField()
 
-	conditions = models.ManyToManyField(Condition, blank=True)
+	condition = models.ForeignKey(backend.Condition)
 	
-	language = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, default="English")
+	language = models.ForeignKey(backend.LanguageGroup)
 
 	next_visit = models.DateField(blank=True, null=True)
 
-	study_group = models.CharField(max_length=20, choices=STUDY_GROUP_CHOICES)
+	study_group = models.ForeignKey(backend.StudyGroup)
 
 	#Send Message Attributes
 	phone_number = models.CharField(max_length=50, blank=True, unique=True)
 
-	phone_network = models.CharField(max_length=500, choices=NETWORK_CHOICES,default="safaricom")
+	phone_network = models.CharField(max_length=50, choices=NETWORK_CHOICES,default="safaricom")
 
 	send_day = models.IntegerField(choices=DAY_CHOICES, default=3)
 
@@ -122,8 +112,6 @@ class Client(models.Model):
 	pending = models.IntegerField(editable=False, default=0)
 
 	last_msg = models.DateField(blank=True, null=True, editable=False)
-
-	sent_messages = models.ManyToManyField(AutomatedMessage, blank=True, editable=False)
 	
 	validated = models.BooleanField(editable=False,default=False)
 
@@ -230,37 +218,58 @@ class Nurse(models.Model):
 		# consider making this first AND last names.
 
 class Interaction(models.Model):
-    class Meta:
-        ordering = ['-date']
-        
-    date = models.DateTimeField(auto_now_add=True)
-    
-    user_id = models.ForeignKey(Nurse, blank=True, null=True)
-    
-    client_id = models.ForeignKey(Client)
-    
-    content = models.CharField(max_length=1000)
-    
-    def hasphoneattr(self):
-        return hasattr(self, 'phonecall')
-    
-    def __unicode__(self):
-        return self.content
-        
-    def getClassName(self):
-        return self.__class__.__name__
+	class Meta:
+		ordering = ['-date']
+		
+	date = models.DateTimeField(auto_now_add=True)
+
+	user_id = models.ForeignKey(Nurse, blank=True, null=True)
+
+	client_id = models.ForeignKey(Client)
+
+	content = models.CharField(max_length=1000)
+
+	def hasphoneattr(self):
+		return hasattr(self, 'phonecall')
+
+	def __unicode__(self):
+		return self.content
+		
+	def getClassName(self):
+		return self.__class__.__name__
 
 class Message(Interaction):
-    SENDER_CHOICES = (
-        ('Client', 'Client'),
-        ('Nurse', 'Nurse'),
-        ('System', 'System'),
-    )
-    
-    sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
-    
-    prompted = models.BooleanField(default=True)
+	SENDER_CHOICES = (
+		('Client', 'Client'),
+		('Nurse', 'Nurse'),
+		('System', 'System'),
+	)
 
+	sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
+
+	prompted = models.BooleanField(default=True)
+	
+	#link to an automated_message if this was sent by system
+	automated_message = models.ForeignKey(backend.AutomatedMessage,blank=True,null=True,related_name="automated_message")
+
+class PhoneCall(Interaction):
+
+	REASON_CHOICES = ( 
+		("visit","Missed ANC Visit"),
+		("sms","No SMS Response"),
+		("other","other"),
+	)
+
+	CALLER_CHOICES = (
+		('nurse','Nurse'),
+		('client','Client'),
+	)
+
+	duration = models.IntegerField(default=0)
+	
+	reason = models.CharField(max_length=10, choices=REASON_CHOICES, default="other")
+	
+	caller = models.CharField(max_length=10, choices=CALLER_CHOICES, default="nurse")
 
 class Note(models.Model):
     class Meta:
@@ -289,26 +298,6 @@ class Visit(models.Model):
     
     def __unicode__(self):
         return self.comments
-        
-class PhoneCall(Interaction):
-
-	REASON_CHOICES = ( 
-		("visit","Missed ANC Visit"),
-		("sms","No SMS Response"),
-		("other","other"),
-	)
-
-	CALLER_CHOICES = (
-		('nurse','Nurse'),
-		('client','Client'),
-	)
-
-	duration = models.IntegerField(default=0)
-	
-	reason = models.CharField(max_length=10, choices=REASON_CHOICES, default="other")
-	
-	caller = models.CharField(max_length=10, choices=CALLER_CHOICES, default="nurse")
-
 
 @receiver(post_save, sender=Message, dispatch_uid="pending_update")
 def increment_pending(sender, **kwargs):

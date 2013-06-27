@@ -1,5 +1,6 @@
 from django import forms
-from patients.models  import Client, AutomatedMessage
+from patients.models  import Client
+from backend.models import AutomatedMessage
 import time,md5
 
 class SendForm(forms.Form):

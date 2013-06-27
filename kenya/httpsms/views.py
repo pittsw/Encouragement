@@ -9,7 +9,8 @@ from django.conf import settings
 from httpsms.forms import SendForm, SystemForm
 from smssync.views import smssync
 from httpsms.models import HTTPSMSOutgoing
-from patients.models import Client, AutomatedMessage, Message, Nurse
+from patients.models import Client, Message, Nurse
+from backend.models import AutomatedMessage
 import shujaa.views as shujaa
 
 

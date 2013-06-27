@@ -49,7 +49,7 @@ class AutomatedMessage(models.Model):
 	note = models.CharField(max_length=250)
 		
 	def __unicode__(self):
-		return 'Groups:{groups} send {send_offset} from {send_base}"{msg}"'.format(
+		return 'Groups: ({groups}) {send_offset} from {send_base}<br/>\n <b>"{msg}"</b>'.format(
 			groups=','.join([str(g) for g in self.groups.all()]),
 			pri=self.priority,
 			msg=self.message,
