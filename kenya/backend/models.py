@@ -101,6 +101,7 @@ class AutoTask(models.Model):
 	
 	timestamp = models.DateTimeField(auto_now=True)
 	function = models.CharField(max_length=20)
+	data = models.CharField(max_length=1000, blank=True)
 	
 	def __unicode__(self):
 		return "'%s':\t%s"%(self.function, self.timestamp.strftime('%Y-%m-%d %H:%M:%S'))

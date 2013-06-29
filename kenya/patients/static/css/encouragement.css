@@ -261,11 +261,12 @@ textarea {
     width: 100%;
 }
 
-.list .name {
+.list .client_name {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 12px;
+    width:150px;
 }
 
 .list .client_id {

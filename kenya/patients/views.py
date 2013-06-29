@@ -281,7 +281,7 @@ def test(request):
 		if request.POST['date']:
 			day = datetime.strptime(request.POST['date'],"%Y-%m-%d")
 			day += timedelta(hours=int(request.POST['hour']))
-			pregnant,post,visit = tasks.send_all_scheduled(day)
+			pregnant,post,visit = tasks.get_all_scheduled(day)
 		else:
 			pregnant,post,visit = tasks.send_all_scheduled()
 	return render_to_response("test.html", {'pregnant':pregnant,'post':post,'visit':visit,

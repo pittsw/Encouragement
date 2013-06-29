@@ -181,7 +181,7 @@ class Client(models.Model):
 		self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
 		self.save()
 
-class PregnaceyEvent(models.Model):
+class PregnancyEvent(models.Model):
 	
 	OUTCOME_CHOICES = (
 		('live_birth','Live Birth'),
@@ -194,15 +194,13 @@ class PregnaceyEvent(models.Model):
 		('hosptital','Hospital'),
 	)
 	
-	id = models.IntegerField(primary_key=True)
-	
 	client = models.ForeignKey(Client)
 	
 	date = models.DateField()
 	
-	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES)
+	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES,default="live_birth")
 	
-	location = models.CharField(max_length=20, choices=LOCATION_CHOICES)
+	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
 	
 	def __unicode__(self):
 		return "%s (%s) %s"%(self.client,self.date,self.outcome)

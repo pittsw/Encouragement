@@ -6,21 +6,30 @@ from celery.task import group, periodic_task, task
 from django.conf import settings
 from django.utils.importlib import import_module
 
-from patients.models import Client, Message, Nurse
+import patients.models as patients #import Client, Message, Nurse
 import backend.models as backend
 from transport_email import Transport as Email
 
 @periodic_task(run_every=crontab())
-def example_task_1():
-	log("Example Task 1")
-	
-@periodic_task(run_every=crontab(minute='*/5'))
-def example_task_2():
-	log("Example Task 2")
-	
+def scheduled_tasks():
+	last = backend.AutoTask.objects.filter(function="scheduled_tasks").order_by('-pk')
+	(date,hour) = last[0].data.split("|") if last else ("2013-07-01","19")
+	if hour=="8":
+		hour="13"
+	elif hour=="13":
+		hour="19"
+	else:
+		hour="8"
+		date=datetime.strptime(date,"%Y-%m-%d")+timedelta(1)
+		date = date.strftime("%Y-%m-%d")
+	now = datetime.strptime(date,"%Y-%m-%d")+timedelta(hours=int(hour))
+	pregnant,post,visit = get_all_scheduled(now)
+	print "%s (%s,%s,%s)"%(now,len(pregnant),len(post),len(visit))
+	log("scheduled_tasks","|".join((date,hour)))
+
 @task
-def log(func):
-	l = AutoTask(function=func)
+def log(func,data=""):
+	l = backend.AutoTask(function=func,data=data)
 	l.save()
 
 
@@ -98,23 +107,27 @@ def scheduled_message(client):
     return (client.phone_number, content)
 '''
 
-def send_all_scheduled(now=datetime.now()):
+def get_all_scheduled(now=datetime.now()):
 	
 	pregnant,post,visit = [],[],[]
 	for language in backend.LanguageGroup.objects.all():
 		#filter based on language 
 		m_language = backend.AutomatedMessage.objects.filter(groups=language)
 		#exlude control subjects
-		c_language = Client.objects.filter(language=language).exclude(study_group__name="control")
+		c_language = patients.Client.objects.filter(language=language).exclude(study_group__name="control")
 		
-		#get clients for visit with in two days, only filter on language
+		#get clients for this time
+		c_language = c_language.filter(send_time__range=(now.hour-1,now.hour+1))
+		
+		#get clients for visit with in two days, only filtered on language and time
 		for (client,message) in get_visit_messages(
 			c_language.filter(next_visit=now.date()+timedelta(2)),
 			m_language.filter(groups__name='visit',send_base__name="upcoming_anc"),now):
-			visit.append(message)
-			
-		#get clients for this time
-		c_language = c_language.filter(send_day=now.weekday(),send_time__range=(now.hour-1,now.hour+1))
+			patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
+			visit.append((client,message))
+		
+		#get clients for this day
+		c_language = c_language.filter(send_day=now.weekday())
 		
 		for group in backend.StudyGroup.objects.exclude(name="control"):
 			m_group = m_language.filter(groups=group)
@@ -124,81 +137,79 @@ def send_all_scheduled(now=datetime.now()):
 				#filter based on conditions 
 				m_condition = m_group.filter(groups=condition)
 				c_condition = c_group.filter(condition=condition)
+				
 				#process messages for before delivery
-				for (client,message) in get_scheduled_messages(
-					c_condition.filter(pregnancy_status="Pregnant"),
-					m_condition.filter(send_base__name="edd"),now):
-						pregnant.append("%s %s"%(client,message))
+				for client in c_condition.filter(pregnancy_status="Pregnant"):
+					week = (now.date() - client.due_date).days/7
+					messages = m_condition.filter(send_base__name="edd",send_offset=week)
+					for message in messages:
+						patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
+						pregnant.append((client,message))
 						
 				#process messages for after delivery
-				for (client,message) in get_scheduled_messages(
-					c_condition.filter(pregnancy_status="Post-Partum"),
-					m_condition.filter(send_base__name="dd"),now):
-						post.append(message.message)
+				for client in c_condition.filter(pregnancy_status="Post-Partum"):
+					try:
+						delivery = patients.PregnancyEvent.objects.get(client=client)
+						week = (now.date() - delivery.date).days/7
+						messages = m_condition.filter(send_base__name="dd",send_offset=week)
+						for message in messages:
+							patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
+							post.append((client,message))
+					except Exception, e:
+						continue #no delivery event for client
 	return (pregnant,post,visit)
 	
-					
-def get_scheduled_messages(clients,messages,now):
-	"""Iterator of the next scheduled message for clients given the message set"""
-	for client in clients:
-		week = (now.date() - client.due_date).days/7
-		message = ""
-		message = messages.filter(send_offset=week)
-		for m in message:
-			yield (client,m)
-					
 def get_visit_messages(clients,messages_query,now):
 	for client in clients:
-		client_messages = messages_query.exclude(pk__in=Message.objects.filter(client_id=client,automated_message__groups__name="visit"))
+		client_messages = messages_query.exclude(pk__in=patients.Message.objects.filter(client_id=client,automated_message__groups__name="visit"))
 		if len(client_messages) == 0:
 			client_messages = [random.choice(list(client_messages))]
 		message = client_messages[0]
 		yield (client,message)
 
-def message_client(client, nurse, sender, content, transport=None,
-                   transport_kwargs={}):
-    """Sends the given message to the client.
+def message_client(client, nurse, sender, content, transport=None,transport_kwargs={}):
+	"""Sends the given message to the client.
 
-    Arguments:
-    client - a patients.models.Client object, representing the client
-             to send to
-    nurse - a patients.models.Nurse object, representing the nurse
-            who sent the message (or the special Nurse object
-            'System')
-    sender - 'Nurse' or 'System'
-    content - the message to send (a string)
-    transport - an object/class/whatever that has can be called with
-                transport.send
-    transport_kwargs - a dict containing any arguments the transport
-                       might need
+	Arguments:
+	client - a patients.models.Client object, representing the client
+			 to send to
+	nurse - a patients.models.Nurse object, representing the nurse
+			who sent the message (or the special Nurse object
+			'System')
+	sender - 'Nurse' or 'System'
+	content - the message to send (a string)
+	transport - an object/class/whatever that has can be called with
+				transport.send
+	transport_kwargs - a dict containing any arguments the transport
+					   might need
 
-    """
-    if transport is None:
-        transport = import_module(settings.TRANSPORT).Transport
+	"""
+	if transport is None:
+		transport = import_module(settings.TRANSPORT).Transport
 	
 	#replace message variables 
 	nurse_name = nurse.user.first_name if nurse else settings.DEFAULT_NURSE_NAME
 	content = content%{'name':client.nickname,'first_name':client.first_name,'last_name':client.last_name,'next_visit':client.next_visit,'nurse':nurse_name}
-	
-    Message(
-        client_id=client,
-        user_id=nurse,
-        sent_by=sender,
-        content=content,
-    ).save()
-    transport.send(client, content, **transport_kwargs)
+
+	patients.Message(
+		client_id=client,
+		user_id=nurse,
+		sent_by=sender,
+		content=content,
+	).save()
+	transport.send(client, content, **transport_kwargs)
 
 
 def incoming_message(phone_number, message,network="default"):
 	"""Adds an incoming message to the database.
 	"""
-	clients = Client.objects.filter(phone_number=phone_number)
+	clients = patients.Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
 		# recieved a message from a phone number not in database
 		if len(message.strip()) == 5: #compare to key length in patients.models
 			message = message.strip().upper()
 			#check if message is equal to a valid key
-			for client in Client.objects.filter():
+			for client in patients.Client.objects.filter():
 				if message == client.generate_key():
 					if client.validated: #new number for already valid client
 						Email.template_email('valid_repeat',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
@@ -224,9 +235,9 @@ def incoming_message(phone_number, message,network="default"):
 			client.pregnancy_status = "Stopped"
 			client.save()
 			return True
-		Message(
+		patients.Message(
 			client_id=client,
-			user_id=Nurse.objects.all()[0],
+			user_id=patients.Nurse.objects.all()[0],
 			sent_by='Client',
 			content=message,
 		).save()
