@@ -1,5 +1,4 @@
-from datetime import date, datetime, timedelta
-import sys,re,random
+import sys,re,random, datetime
 
 from celery.schedules import crontab
 from celery.task import group, periodic_task, task
@@ -107,65 +106,73 @@ def scheduled_message(client):
     return (client.phone_number, content)
 '''
 
-def get_all_scheduled(now=datetime.now()):
+
+def get_clients_to_message(clients=patients.Client.objects.all(),now=datetime.datetime.now()):
+	"""
+	Return all clients that should be messaged now
+	"""
 	
-	pregnant,post,visit = [],[],[]
-	for language in backend.LanguageGroup.objects.all():
-		#filter based on language 
-		m_language = backend.AutomatedMessage.objects.filter(groups=language)
-		#exlude control subjects
-		c_language = patients.Client.objects.filter(language=language).exclude(study_group__name="control")
-		
-		#get clients for this time
-		c_language = c_language.filter(send_time__range=(now.hour-1,now.hour+1))
-		
-		#get clients for visit with in two days, only filtered on language and time
-		for (client,message) in get_visit_messages(
-			c_language.filter(next_visit=now.date()+timedelta(2)),
-			m_language.filter(groups__name='visit',send_base__name="upcoming_anc"),now):
-			patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
-			visit.append((client,message))
-		
-		#get clients for this day
-		c_language = c_language.filter(send_day=now.weekday())
-		
-		for group in backend.StudyGroup.objects.exclude(name="control"):
-			m_group = m_language.filter(groups=group)
-			c_group = c_language.filter(study_group=group)
-			
-			for condition in backend.Condition.objects.all(): 
-				#filter based on conditions 
-				m_condition = m_group.filter(groups=condition)
-				c_condition = c_group.filter(condition=condition)
-				
-				#process messages for before delivery
-				for client in c_condition.filter(pregnancy_status="Pregnant"):
-					week = (now.date() - client.due_date).days/7
-					messages = m_condition.filter(send_base__name="edd",send_offset=week)
-					for message in messages:
-						patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
-						pregnant.append((client,message))
-						
-				#process messages for after delivery
-				for client in c_condition.filter(pregnancy_status="Post-Partum"):
-					try:
-						delivery = patients.PregnancyEvent.objects.get(client=client)
-						week = (now.date() - delivery.date).days/7
-						messages = m_condition.filter(send_base__name="dd",send_offset=week)
-						for message in messages:
-							patients.Message(client_id=client,user_id=None,sent_by="System",content=message.message).save()
-							post.append((client,message))
-					except Exception, e:
-						continue #no delivery event for client
-	return (pregnant,post,visit)
+	#get clients for current time
+	#minus those in the control group 
+	#minus those who have finished or stopped
+	clients = clients.filter(send_time__range=(now.hour-1,now.hour+1))\
+	.filter(send_day=now.weekday())\
+	.exclude(study_group__name="control")\
+	.exclude(pregnancy_status="Stopped").exclude(pregnancy_status="Finished")
 	
-def get_visit_messages(clients,messages_query,now):
-	for client in clients:
-		client_messages = messages_query.exclude(pk__in=patients.Message.objects.filter(client_id=client,automated_message__groups__name="visit"))
-		if len(client_messages) == 0:
-			client_messages = [random.choice(list(client_messages))]
-		message = client_messages[0]
-		yield (client,message)
+	return clients
+	
+def get_message(client,now=datetime.datetime.now()):
+	"""
+	Return (if any) the correct message to send the client at this time.
+	"""
+	
+	base_lookup = {b.name:b for b in backend.MessageBase.objects.all()}
+	normal = backend.Condition.objects.get(name="normal")
+	
+	condition = client.condition
+	language = client.language
+	study_group = client.study_group
+	
+	if client.pregnancy_status == "Pregnant":
+		base = base_lookup['edd']
+		offset = 40 - (client.due_date-now.date()).days/7
+	elif client.pregnancy_status == "Post-Partum" and client.pregnancy_event.outcome != "miscarriage":
+		base = base_lookup['dd']
+		delivery_date = client.pregnancy_event.date
+		offset = 40 - (now.date() - delivery_date).days/7
+	
+	print >> sys.stderr, client,condition,language,study_group,base,offset
+		
+	message = backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
+	.filter(groups__in=[condition]).filter(groups__in=[language]).filter(groups__in=[study_group])
+	
+	print len(message)
+	if len(message)==0: 
+		#no message was found get message for normal conditon
+		message = backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
+	.filter(groups__in=[normal]).filter(groups__in=[language]).filter(groups__in=[study_group])
+	
+	messages_to_send = []
+	for m in message:
+		print >> sys.stderr, m
+		messages_to_send.append((client,m.message))
+		
+	return messages_to_send
+	
+def get_upcomming_visit_clients(now=datetime.datetime.now()):
+	pass
+	
+def get_upcomming_visit_message(client):
+	pass
+	
+def get_missed_visit_client(now=datetime.datetime.now()):
+	pass
+	
+def get_missed_visit_message(client):
+	pass
+
+
 
 def message_client(client, nurse, sender, content, transport=None,transport_kwargs={}):
 	"""Sends the given message to the client.

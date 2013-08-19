@@ -1,4 +1,3 @@
-[
     {
         "pk": 1, 
         "model": "backend.email", 
@@ -35,4 +34,3 @@
             "subject": "Patient Validation Repeat"
         }
     }
-]

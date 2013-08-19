@@ -14,6 +14,28 @@ import pytz
 
 import backend.models as backend
 
+class PregnancyEvent(models.Model):
+	
+	OUTCOME_CHOICES = (
+		('live_birth','Live Birth'),
+		('miscarriage','Miscarriage'),
+	)
+	
+	LOCATION_CHOICES = (
+		('home','Home'),
+		('clinic','Clinc'),
+		('hosptital','Hospital'),
+	)
+	
+	date = models.DateField()
+	
+	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES,default="live_birth")
+	
+	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
+	
+	def __unicode__(self):
+		return "%s (%s) %s"%(self.client,self.date,self.outcome)
+
 class Client(models.Model):
 
 	class Meta:
@@ -80,6 +102,8 @@ class Client(models.Model):
 	sec_contact_number = models.CharField(max_length=50, blank=True)
 
 	pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
+	
+	pregnancy_event = models.OneToOneField(PregnancyEvent,null=True,blank=True)
 
 	due_date = models.DateField()
 
@@ -180,30 +204,6 @@ class Client(models.Model):
 		self.last_msg = messages[0].date
 		self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
 		self.save()
-
-class PregnancyEvent(models.Model):
-	
-	OUTCOME_CHOICES = (
-		('live_birth','Live Birth'),
-		('miscarriage','Miscarriage'),
-	)
-	
-	LOCATION_CHOICES = (
-		('home','Home'),
-		('clinic','Clinc'),
-		('hosptital','Hospital'),
-	)
-	
-	client = models.ForeignKey(Client)
-	
-	date = models.DateField()
-	
-	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES,default="live_birth")
-	
-	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
-	
-	def __unicode__(self):
-		return "%s (%s) %s"%(self.client,self.date,self.outcome)
 		
 class Nurse(models.Model):
 

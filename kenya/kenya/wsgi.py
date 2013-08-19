@@ -26,13 +26,6 @@ from backend.models import AutoTask
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-a = None
-try:
-	a = AutoTask.objects.get(id=1)
-except AutoTask.DoesNotExist:
-	a = AutoTask(id=1,function='WSGI')
-a.save()
-
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)

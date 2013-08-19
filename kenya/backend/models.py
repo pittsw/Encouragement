@@ -25,9 +25,8 @@ class AutomatedMessage(models.Model):
 					('dd','Delivery Date'),
 					)
 
-
 	class Meta:
-		ordering = ['-priority']
+		ordering = ['-pk']
 		
 	
 	groups = models.ManyToManyField("MessageGroup")
