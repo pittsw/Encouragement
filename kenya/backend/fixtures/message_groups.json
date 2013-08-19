@@ -1,0 +1,138 @@
+ {
+    "pk": 1, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "normal", 
+      "display": ""
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "first", 
+      "display": "First Pregnacy"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "adolescent", 
+      "display": ""
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "twins", 
+      "display": "Multiple Gestation"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "cesarean", 
+      "display": "Previous Cesarean"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "one_way", 
+      "display": "One Way"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "two_way", 
+      "display": "Two Way"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "control", 
+      "display": ""
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "english", 
+      "display": ""
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "kiswahili", 
+      "display": ""
+    }
+  }, 
+   {
+    "pk": 11, 
+    "model": "backend.messagegroup", 
+    "fields": {
+      "name": "visit", 
+      "display": "Next Visit"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "backend.condition", 
+    "fields": {}
+  }, 
+  {
+    "pk": 2, 
+    "model": "backend.condition", 
+    "fields": {}
+  }, 
+  {
+    "pk": 3, 
+    "model": "backend.condition", 
+    "fields": {}
+  }, 
+  {
+    "pk": 4, 
+    "model": "backend.condition", 
+    "fields": {}
+  }, 
+  {
+    "pk": 5, 
+    "model": "backend.condition", 
+    "fields": {}
+  }, 
+  {
+    "pk": 6, 
+    "model": "backend.studygroup", 
+    "fields": {}
+  }, 
+  {
+    "pk": 7, 
+    "model": "backend.studygroup", 
+    "fields": {}
+  }, 
+  {
+    "pk": 8, 
+    "model": "backend.studygroup", 
+    "fields": {}
+  }, 
+  {
+    "pk": 9, 
+    "model": "backend.languagegroup", 
+    "fields": {}
+  }, 
+  {
+    "pk": 10, 
+    "model": "backend.languagegroup", 
+    "fields": {}
+  }

@@ -1,0 +1,5 @@
+* Setting up Celeryd and Celerybeat
+  - Instrunctions
+    + http://ask.github.io/celery/cookbook/daemonizing.html
+  - Download:
+    + http://ask.github.io/celery/cookbook/daemonizing.html
