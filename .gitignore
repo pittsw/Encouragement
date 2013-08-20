@@ -10,3 +10,4 @@ kenya/celery
 kenya/celeryd.pid
 kenya/python
 kenya/ignore
+kenya/patients/static/admin
