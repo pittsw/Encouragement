@@ -156,22 +156,20 @@ def add_client(request):
         "sec_contact_number":"254",})
     elif request.method == "POST":
 		form = AddClientForm(request.POST)
+		print >> sys.stderr, form.errors
 		if form.is_valid():
 			id = form.cleaned_data['id']
 			client = form.save(commit=False)
 			client.id = id
 			client.save()
-
-			#Send initial message if any
-			#Todo: Filter based on language, condition, study group 
-			message = AutomatedMessage.objects.filter(send_base__name__exact="signup").filter(send_offset__exact=0) #get messages sent 0 days from signup
+			#Send initial message for language
+			#Exclude control group
+			message = AutomatedMessage.objects.filter(send_base__name__exact="signup").filter(send_offset__exact=-1)\
+			.filter(groups=client.language)
 			if message.count() > 0:
-				text = message[0].message
-				sender = "System"
-				nurse = None
-				tasks.message_client(client,nurse,sender,text) #send initial message to client
+				message[0].send(client)
 			
-			return HttpResponse(str(client.id))
+			return HttpResponse(str(client.id)) #return new client id
     return render_to_response("add_client.html", {'form': form},
                               context_instance=RequestContext(request))
 
@@ -236,7 +234,7 @@ def add_call(request, id_number):
             duration = int(duration)
         except ValueError:
             duration = 0
-        print initiated
+        #print initiated
         PhoneCall(
             user_id=nurse,
             client_id=client,
@@ -259,14 +257,14 @@ def pregnacy(request, id):
 		client = get_object_or_404(Client, id=id)
 		form = EndPregnacyForm(request.POST,prefix="end")
 		if form.is_valid():
-			print "Vaild: %s, %s, %s"%(form.cleaned_data['date'],form.cleaned_data['location'],form.cleaned_data['outcome'])
+			#print "Vaild: %s, %s, %s"%(form.cleaned_data['date'],form.cleaned_data['location'],form.cleaned_data['outcome'])
 			pregnacy_event = form.save(commit=False)
 			pregnacy_event.client = client
 			pregnacy_event.save()
 			#update client pregnacy_status
-			print pregnacy_event.outcome
+			#print pregnacy_event.outcome
 			if pregnacy_event.outcome == "live_birth":
-				print "Live"
+				#print "Live"
 				client.pregnancy_status = "Post-Partum"
 			elif pregnacy_event.outcome == "miscarriage":
 				client.pregnancy_status = "Stopped"

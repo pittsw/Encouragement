@@ -1,0 +1,15 @@
+* Celery 
+  - Basic Command: python manage.py celery worker -B --loglevel=info
+** Daemonize
++ Download to /etc/init/d and make executable (755)
+  - https://raw.github.com/celery/celery/3.0/extra/generic-init.d/celerybeat
+  - https://raw.github.com/celery/celery/3.0/extra/generic-init.d/celeryd
++ Make Default Configuration File /etc/default/celeryd
++ Make user and group celery
+  - sudo adduser --system --no-create-home --disabled-login --disabled-password --group celery
++ Make Log and Run directoris and chown celery
+  - sudo mkdir /var/log/celery | sudo mkdir /var/log/celery 
+  - chown celery:celery
++ Update rc.d
+  - sudo update-rc.d celeryd defaults
+  - sudo update-rc.d celerybeat defaults

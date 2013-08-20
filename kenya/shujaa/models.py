@@ -1,6 +1,6 @@
 from django.db import models
 
-import patients.models as patients
+import patients.models as _patients
 
 # Create your models here.from django.db import models
 
@@ -10,7 +10,7 @@ class ShujaaMsg(models.Model):
 	
 	message = models.CharField(max_length=300)
 	
-	network = models.CharField(max_length=50, choices=patients.Client.NETWORK_CHOICES,default="safaricom")
+	network = models.CharField(max_length=50, choices=_patients.Client.NETWORK_CHOICES,default="safaricom")
 	
 	response = models.CharField(max_length=40)
 	

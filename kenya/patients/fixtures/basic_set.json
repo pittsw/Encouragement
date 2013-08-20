@@ -1,0 +1,410 @@
+[
+    {
+        "pk": 4, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Way-Two", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": true, 
+            "send_time": 13, 
+            "pregnancy_event": null, 
+            "id": 4, 
+            "next_visit": "2013-06-10", 
+            "first_name": "Twins", 
+            "validated": false, 
+            "last_msg": "2013-02-19", 
+            "sec_contact_name": "", 
+            "send_day": 1, 
+            "pri_contact_name": "jj", 
+            "sec_contact_number": "254", 
+            "pri_contact_number": "254", 
+            "pending": 0, 
+            "phone_number": "123", 
+            "due_date": "2013-09-25", 
+            "previous_pregnacies": 1, 
+            "years_of_education": 1, 
+            "nickname": "Hello", 
+            "condition": 4, 
+            "partner_first_name": "", 
+            "signup_date": "2013-02-19", 
+            "language": 9, 
+            "study_group": 7, 
+            "partner_last_name": "", 
+            "birth_date": "1990-02-20", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Two-Way", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "send_time": 13, 
+            "pregnancy_event": null, 
+            "id": 2, 
+            "next_visit": "2013-06-14", 
+            "first_name": "KiSwahili-First", 
+            "validated": false, 
+            "last_msg": null, 
+            "sec_contact_name": "", 
+            "send_day": 3, 
+            "pri_contact_name": "LKjd", 
+            "sec_contact_number": "254", 
+            "pri_contact_number": "254", 
+            "pending": 0, 
+            "phone_number": "254", 
+            "due_date": "2013-10-26", 
+            "previous_pregnacies": 1, 
+            "years_of_education": 1, 
+            "nickname": "Siay", 
+            "condition": 2, 
+            "partner_first_name": "", 
+            "signup_date": "2013-02-01", 
+            "language": 10, 
+            "study_group": 7, 
+            "partner_last_name": "", 
+            "birth_date": "1990-07-03", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "One-Way", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "send_time": 13, 
+            "pregnancy_event": null, 
+            "id": 1, 
+            "next_visit": "2013-09-01", 
+            "first_name": "First", 
+            "validated": false, 
+            "last_msg": null, 
+            "sec_contact_name": "", 
+            "send_day": 3, 
+            "pri_contact_name": "ii", 
+            "sec_contact_number": "254", 
+            "pri_contact_number": "254", 
+            "pending": 0, 
+            "phone_number": "2543", 
+            "due_date": "2013-10-18", 
+            "previous_pregnacies": 1, 
+            "years_of_education": 1, 
+            "nickname": "Bdwag", 
+            "condition": 2, 
+            "partner_first_name": "", 
+            "signup_date": "2013-02-08", 
+            "language": 9, 
+            "study_group": 6, 
+            "partner_last_name": "", 
+            "birth_date": "1990-08-09", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "One-Way", 
+            "relationship_status": "Married", 
+            "living_children": 0, 
+            "urgent": false, 
+            "send_time": 19, 
+            "pregnancy_event": null, 
+            "id": 3, 
+            "next_visit": "2013-06-12", 
+            "first_name": "Kiswahili-Twins", 
+            "validated": false, 
+            "last_msg": null, 
+            "sec_contact_name": "", 
+            "send_day": 3, 
+            "pri_contact_name": "jj", 
+            "sec_contact_number": "254", 
+            "pri_contact_number": "254", 
+            "pending": 0, 
+            "phone_number": "1234", 
+            "due_date": "2013-12-20", 
+            "previous_pregnacies": 1, 
+            "years_of_education": 1, 
+            "nickname": "group 2?", 
+            "condition": 4, 
+            "partner_first_name": "", 
+            "signup_date": "2013-02-08", 
+            "language": 10, 
+            "study_group": 6, 
+            "partner_last_name": "", 
+            "birth_date": "1990-06-07", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "patients.client", 
+        "fields": {
+            "last_name": "Test", 
+            "relationship_status": "Married", 
+            "living_children": 1, 
+            "urgent": false, 
+            "send_time": 13, 
+            "pregnancy_event": null, 
+            "id": 5, 
+            "next_visit": null, 
+            "first_name": "Control", 
+            "validated": false, 
+            "last_msg": null, 
+            "sec_contact_name": "", 
+            "send_day": 3, 
+            "pri_contact_name": "8999", 
+            "sec_contact_number": "", 
+            "pri_contact_number": "8999", 
+            "pending": 0, 
+            "phone_number": "", 
+            "due_date": "2013-11-18", 
+            "previous_pregnacies": 2, 
+            "years_of_education": 1, 
+            "nickname": "Nick", 
+            "condition": 1, 
+            "partner_first_name": "", 
+            "signup_date": "2013-08-19", 
+            "language": 9, 
+            "study_group": 8, 
+            "partner_last_name": "", 
+            "birth_date": "1990-08-13", 
+            "pregnancy_status": "Pregnant", 
+            "phone_network": "safaricom"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.nurse", 
+        "fields": {
+            "user": 1
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-05-23T01:52:36.871Z", 
+            "content": "New Message", 
+            "user_id": 1, 
+            "client_id": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T03:13:06.844Z", 
+            "content": "Hi", 
+            "user_id": 1, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T03:10:50.973Z", 
+            "content": "Test", 
+            "user_id": 1, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T03:07:48.798Z", 
+            "content": "I called and she answered.", 
+            "user_id": 1, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T03:07:21.263Z", 
+            "content": "I called", 
+            "user_id": 1, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T02:58:08.521Z", 
+            "content": "Client called me.", 
+            "user_id": 1, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-19T02:52:31.111Z", 
+            "content": "Welcome Hello, you have been signed up for the CLINIC NAME study. Please reply with your user code to verify this phone #. ", 
+            "user_id": null, 
+            "client_id": 4
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-08T19:35:30.803Z", 
+            "content": "Welcome group 2?, you have been signed up for the CLINIC NAME study. Please reply with your user code to verify this phone #. ", 
+            "user_id": null, 
+            "client_id": 3
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.interaction", 
+        "fields": {
+            "date": "2013-02-08T19:34:35.705Z", 
+            "content": "Welcome Bdwag, you have been signed up for the CLINIC NAME study. Please reply with your user code to verify this phone #. ", 
+            "user_id": null, 
+            "client_id": 2
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "Nurse", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "Client", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "Nurse", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "System", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "System", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.message", 
+        "fields": {
+            "automated_message": null, 
+            "sent_by": "System", 
+            "prompted": true
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "patients.phonecall", 
+        "fields": {
+            "duration": 2, 
+            "reason": "visit", 
+            "caller": "nurse"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "patients.phonecall", 
+        "fields": {
+            "duration": 0, 
+            "reason": "visit", 
+            "caller": "nurse"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "patients.phonecall", 
+        "fields": {
+            "duration": 1, 
+            "reason": "other", 
+            "caller": "client"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "patients.visit", 
+        "fields": {
+            "date": "2013-05-30", 
+            "comments": "Planned Visit.", 
+            "client_id": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "patients.visit", 
+        "fields": {
+            "date": "2013-05-30", 
+            "comments": "Planned Visit.", 
+            "client_id": 3
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "patients.visit", 
+        "fields": {
+            "date": "2013-05-28", 
+            "comments": "Planned Visit.", 
+            "client_id": 3
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "patients.visit", 
+        "fields": {
+            "date": "2013-05-28", 
+            "comments": "Planned Visit.", 
+            "client_id": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "patients.visit", 
+        "fields": {
+            "date": "2013-05-28", 
+            "comments": "Planned Visit.", 
+            "client_id": 3
+        }
+    }
+]

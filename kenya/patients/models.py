@@ -12,7 +12,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 
-import backend.models as backend
+import backend.models as _backend
 
 class PregnancyEvent(models.Model):
 	
@@ -113,13 +113,13 @@ class Client(models.Model):
 
 	previous_pregnacies = models.IntegerField()
 
-	condition = models.ForeignKey(backend.Condition)
+	condition = models.ForeignKey(_backend.Condition)
 	
-	language = models.ForeignKey(backend.LanguageGroup)
+	language = models.ForeignKey(_backend.LanguageGroup,default="English")
 
 	next_visit = models.DateField(blank=True, null=True)
 
-	study_group = models.ForeignKey(backend.StudyGroup)
+	study_group = models.ForeignKey(_backend.StudyGroup)
 
 	#Send Message Attributes
 	phone_number = models.CharField(max_length=50, blank=True, unique=True)
@@ -152,10 +152,10 @@ class Client(models.Model):
 		if self.id > 1000:
 			errors.append('Study ID must be less than 1000')
 		if self.pregnancy_status == 'Pregnant' and self.due_date < today:
-			errors.append('Client is pregnant but expected delivery ',
+			errors.append('Client is pregnant but expected delivery '+\
 				'date is in the past')
 		if self.pregnancy_status == 'Post-Partum' and self.due_date > today:
-			errors.append('Client has given birth by date of birth of ',
+			errors.append('Client has given birth by date of birth of '+\
 				'the child is in the future.')
 		if today.year - low_age < self.birth_date.year:
 			errors.append('Client is under {low_age} years old'.format(
@@ -194,7 +194,8 @@ class Client(models.Model):
 			.hexdigest())
 		step = int(math.ceil(len(string) / key_length))
 		return ''.join([chars[int(x, 16)] for x in string[::step]])
-
+	
+	#move to recieve
 	def update(self):
 		messages = Message.objects.filter(client_id=self,
 										  sent_by='Client')
@@ -202,7 +203,7 @@ class Client(models.Model):
 			return
 
 		self.last_msg = messages[0].date
-		self.urgent = (datetime.now(pytz.utc) - self.last_msg) > settings.URGENT
+		self.urgent = (datetime.now() - self.last_msg) > settings.URGENT
 		self.save()
 		
 class Nurse(models.Model):
@@ -248,7 +249,7 @@ class Message(Interaction):
 	prompted = models.BooleanField(default=True)
 	
 	#link to an automated_message if this was sent by system
-	automated_message = models.ForeignKey(backend.AutomatedMessage,blank=True,null=True,related_name="automated_message")
+	automated_message = models.ForeignKey(_backend.AutomatedMessage,blank=True,null=True,related_name="automated_message")
 
 class PhoneCall(Interaction):
 

@@ -5,13 +5,14 @@ from celery.task import group, periodic_task, task
 from django.conf import settings
 from django.utils.importlib import import_module
 
-import patients.models as patients #import Client, Message, Nurse
-import backend.models as backend
+import patients.models as _patients #import Client, Message, Nurse
+import backend.models as _backend
+
 from transport_email import Transport as Email
 
 @periodic_task(run_every=crontab())
 def scheduled_tasks():
-	last = backend.AutoTask.objects.filter(function="scheduled_tasks").order_by('-pk')
+	last = _backend.AutoTask.objects.filter(function="scheduled_tasks").order_by('-pk')
 	(date,hour) = last[0].data.split("|") if last else ("2013-07-01","19")
 	if hour=="8":
 		hour="13"
@@ -28,7 +29,7 @@ def scheduled_tasks():
 
 @task
 def log(func,data=""):
-	l = backend.AutoTask(function=func,data=data)
+	l = _backend.AutoTask(function=func,data=data)
 	l.save()
 
 
@@ -107,7 +108,7 @@ def scheduled_message(client):
 '''
 
 
-def get_clients_to_message(clients=patients.Client.objects.all(),now=datetime.datetime.now()):
+def get_clients_to_message(clients=_patients.Client.objects.all(),now=datetime.datetime.now()):
 	"""
 	Return all clients that should be messaged now
 	"""
@@ -127,8 +128,8 @@ def get_message(client,now=datetime.datetime.now()):
 	Return (if any) the correct message to send the client at this time.
 	"""
 	
-	base_lookup = {b.name:b for b in backend.MessageBase.objects.all()}
-	normal = backend.Condition.objects.get(name="normal")
+	base_lookup = {b.name:b for b in _backend.MessageBase.objects.all()}
+	normal = _backend.Condition.objects.get(name="normal")
 	
 	condition = client.condition
 	language = client.language
@@ -144,13 +145,13 @@ def get_message(client,now=datetime.datetime.now()):
 	
 	print >> sys.stderr, client,condition,language,study_group,base,offset
 		
-	message = backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
+	message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
 	.filter(groups__in=[condition]).filter(groups__in=[language]).filter(groups__in=[study_group])
 	
 	print len(message)
 	if len(message)==0: 
 		#no message was found get message for normal conditon
-		message = backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
+		message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
 	.filter(groups__in=[normal]).filter(groups__in=[language]).filter(groups__in=[study_group])
 	
 	messages_to_send = []
@@ -178,9 +179,9 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	"""Sends the given message to the client.
 
 	Arguments:
-	client - a patients.models.Client object, representing the client
+	client - a _patients.models.Client object, representing the client
 			 to send to
-	nurse - a patients.models.Nurse object, representing the nurse
+	nurse - a _patients.models.Nurse object, representing the nurse
 			who sent the message (or the special Nurse object
 			'System')
 	sender - 'Nurse' or 'System'
@@ -196,9 +197,14 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	
 	#replace message variables 
 	nurse_name = nurse.user.first_name if nurse else settings.DEFAULT_NURSE_NAME
-	content = content%{'name':client.nickname,'first_name':client.first_name,'last_name':client.last_name,'next_visit':client.next_visit,'nurse':nurse_name}
+	content = content.format(**{
+		'name':client.nickname,
+		'first_name':client.first_name,
+		'last_name':client.last_name,
+		'next_visit':client.next_visit,
+		'nurse':nurse_name})
 
-	patients.Message(
+	_patients.Message(
 		client_id=client,
 		user_id=nurse,
 		sent_by=sender,
@@ -210,13 +216,13 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 def incoming_message(phone_number, message,network="default"):
 	"""Adds an incoming message to the database.
 	"""
-	clients = patients.Client.objects.filter(phone_number=phone_number)
+	clients = _patients.Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
 		# recieved a message from a phone number not in database
 		if len(message.strip()) == 5: #compare to key length in patients.models
 			message = message.strip().upper()
 			#check if message is equal to a valid key
-			for client in patients.Client.objects.filter():
+			for client in _patients.Client.objects.filter():
 				if message == client.generate_key():
 					if client.validated: #new number for already valid client
 						Email.template_email('valid_repeat',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
@@ -242,9 +248,9 @@ def incoming_message(phone_number, message,network="default"):
 			client.pregnancy_status = "Stopped"
 			client.save()
 			return True
-		patients.Message(
+		_patients.Message(
 			client_id=client,
-			user_id=patients.Nurse.objects.all()[0],
+			user_id=_patients.Nurse.objects.all()[0],
 			sent_by='Client',
 			content=message,
 		).save()

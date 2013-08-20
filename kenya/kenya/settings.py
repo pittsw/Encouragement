@@ -9,7 +9,7 @@ TRANSPORT = 'shujaa'
 SMSSYNC_SECRET = 'Standards'
 
 # Default Settings For System.
-DEFAULT_NURSE_NAME = "your friend"
+DEFAULT_NURSE_NAME = "Dyphna"
 
 # These settings must be set to use Celery
 import djcelery

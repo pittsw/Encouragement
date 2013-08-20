@@ -1,6 +1,6 @@
 from datetime import datetime, date, timedelta
 from hashlib import sha256 as sha
-import math
+import math,sys
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -43,18 +43,40 @@ class AutomatedMessage(models.Model):
 	key = models.CharField(max_length=25, blank=True, null=True)
 
 	#linked list of next messages
-	next_message = models.ForeignKey("self", blank=True, null=True)
+	next_message = models.ForeignKey("self", blank=True, null=True, related_name="previous_message")
 	
 	note = models.CharField(max_length=250)
 		
 	def __unicode__(self):
-		return 'Groups: ({groups}) {send_offset} from {send_base}<br/>\n <b>"{msg}"</b>'.format(
-			groups=','.join([str(g) for g in self.groups.all()]),
-			pri=self.priority,
-			msg=self.message,
-			send_base= self.send_base if self.send_base else None,
-			send_offset=self.send_offset,
-		)
+		out = '{send_offset} from {send_base}'.format(
+				pri=self.priority,
+				msg=self.message,
+				send_base= self.send_base if self.send_base else None,
+				send_offset=self.send_offset,
+			)
+		
+		if self.pk:
+			out = "{groups} ".format(groups=','.join([str(g) for g in self.groups.all()]))+out
+		return out
+		
+	def copy(self):
+		"""Deep copy of message"""
+		return AutomatedMessage(priority=self.priority,message=self.message,send_base=self.send_base,
+		send_offset=self.send_offset,key=self.key,next_message=self.next_message,note=self.note)
+		
+	def send(self,client,previous=False):
+		"""
+		Send message if it is not a second message
+		or if this is a recurisve call for a second message
+		"""
+		import patients.tasks as _tasks
+
+		if not self.previous_message.exists() or previous:
+			#print >> sys.stderr, "Sending AutomatedMessage: ",self
+			_tasks.message_client(client,None,"System",self.message)
+			if self.next_message:
+				self.next_message.send(client,previous=True)
+	
 
 class MessageBase(models.Model):
 	"""Set initial message send base"""
@@ -62,8 +84,8 @@ class MessageBase(models.Model):
 	display = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
-		if self.display:
-			return self.display.title()
+		#if self.display:
+			#return self.display.title()
 		return self.name.title()
 
 class MessageGroup(models.Model):
@@ -72,8 +94,8 @@ class MessageGroup(models.Model):
 	display = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
-		if self.display:
-			return self.display.title()
+		#if self.display:
+			#return self.display.title()
 		return self.name.title()
 
 class Condition(MessageGroup):
