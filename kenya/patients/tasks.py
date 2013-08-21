@@ -192,6 +192,9 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 					   might need
 
 	"""
+	if client.study_group=='control':
+		return #do not send a message if control group
+
 	if transport is None:
 		transport = import_module(settings.TRANSPORT).Transport
 	
