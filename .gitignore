@@ -3,6 +3,8 @@
 *.pyc
 .*
 *~
+kenya/patients/fixtures
+kenya/backend/fixtures
 kenya/kenya/settings_local.py
 kenya/patients/static/css/css_local.css
 kenya/celerybeat-schedule

@@ -192,7 +192,7 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 					   might need
 
 	"""
-	if client.study_group=='control':
+	if client.study_group__name=='control':
 		return #do not send a message if control group
 
 	if transport is None:
