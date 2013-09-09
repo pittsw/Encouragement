@@ -37,9 +37,6 @@ class PregnancyEvent(models.Model):
 		return "%s (%s) %s"%(self.client,self.date,self.outcome)
 
 class Client(models.Model):
-
-	class Meta:
-		ordering = ['-urgent', '-pending', '-last_msg']
 		
 	STATUS_CHOICES = (
 		('Pregnant', 'Pregnant'),

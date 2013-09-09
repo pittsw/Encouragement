@@ -28,3 +28,10 @@ class BaseTransport(object):
         """
         for target, content in lst:
             cls.send(target, content)
+
+
+class Transport(BaseTransport):
+	"""
+	A dummy transport class that does nothing
+	"""
+	pass

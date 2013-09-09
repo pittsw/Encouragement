@@ -8,7 +8,7 @@
 + Make user and group celery
   - sudo adduser --system --no-create-home --disabled-login --disabled-password --group celery
 + Make Log and Run directoris and chown celery
-  - sudo mkdir /var/log/celery | sudo mkdir /var/log/celery 
+  - sudo mkdir /var/log/celery | sudo mkdir /var/run/celery 
   - chown celery:celery
 + Update rc.d
   - sudo update-rc.d celeryd defaults

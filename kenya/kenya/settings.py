@@ -152,40 +152,72 @@ INSTALLED_APPS = (
     'patients',
     'httpsms',
     'transport_email',
-    'smssync',
+    #'smssync',
     'backend',
-    'shujaa',
     'djcelery',
+    'south',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
+# choose a path that is your virtual environment root
+VENV_ROOT = os.path.join('/','tmp/','encouragement')
+
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
+            'datefmt' : '%Y-%m-%d %H:%M:%S'
+        },
+        'message': {
+            'format': '%(asctime)s,%(message)s',
+            'datefmt' : '%Y-%m-%d %H:%M:%S'
+        },
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+        'transport_message_log': {                # define and name a handler
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler', # set the logging class to log to a file
+            'formatter': 'message',         # define the formatter to associate
+            'filename': os.path.join(VENV_ROOT, 'messages.log') # log file
+        },
+
+        'encouragement_log': {                 # define and name a second handler
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler', # set the logging class to log to a file
+            'formatter': 'verbose',         # define the formatter to associate
+            'filename': os.path.join(VENV_ROOT, 'encouragement.log')  # log file
+        },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+        'logview.transport': {              # define a logger - give it a name
+            'handlers': ['transport_message_log'], # specify what handler to associate
+            'level': 'INFO',                 # specify the logging level
             'propagate': True,
-        },
-    }
+        },     
+
+        'logview.encouragement': {               # define another logger
+            'handlers': ['encouragement_log'],  # associate a different handler
+            'level': 'INFO',                 # specify the logging level
+            'propagate': True,
+        },        
+    }       
 }
 
 #Import local settings
 from settings_local import *
+
+if 'LOCAL_LOGGING' in globals():
+	#overwrite with local logging settings
+	import collections
+	
+	def merge(old,new):
+		for k,v in new.iteritems():
+			if isinstance(v,collections.Mapping):
+				r = merge(old.get(k,{}),v)
+				old[k] = r
+			else:
+				old[k] = new[k]
+		return old
+		
+	LOGGING = merge(LOGGING,LOCAL_LOGGING)

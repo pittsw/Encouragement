@@ -27,12 +27,13 @@ def sendSMS(request):
 	if request.method == 'POST':
 		form = SendForm(request.POST)
 		if form.is_valid():
+			client = Client.objects.get(pk=request.POST['client'])
 			new_request = HttpRequest()
 			new_request.method = 'POST'
 			post = {
 				'callbackType':'incomingSms',
 				'destination':'6873',
-				'source':request.POST['sender_number'],
+				'source':client.phone_number,
 				'message':request.POST['content'],
 				'messageId':SendForm.msgID(),
 				'network':'safaricom'

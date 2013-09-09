@@ -20,11 +20,9 @@ def scheduled_tasks():
 		hour="19"
 	else:
 		hour="8"
-		date=datetime.strptime(date,"%Y-%m-%d")+timedelta(1)
+		date=datetime.datetime.strptime(date,"%Y-%m-%d")+datetime.timedelta(1)
 		date = date.strftime("%Y-%m-%d")
-	now = datetime.strptime(date,"%Y-%m-%d")+timedelta(hours=int(hour))
-	pregnant,post,visit = get_all_scheduled(now)
-	print "%s (%s,%s,%s)"%(now,len(pregnant),len(post),len(visit))
+	print "%s %s"%(date,hour)
 	log("scheduled_tasks","|".join((date,hour)))
 
 @task
@@ -108,19 +106,21 @@ def scheduled_message(client):
 '''
 
 
-def get_clients_to_message(clients=_patients.Client.objects.all(),now=datetime.datetime.now()):
+def get_clients_to_message(clients=_patients.Client.objects.all(),now=datetime.datetime.now(),day=True,hour=True):
 	"""
 	Return all clients that should be messaged now
 	"""
-	
 	#get clients for current time
 	#minus those in the control group 
 	#minus those who have finished or stopped
-	clients = clients.filter(send_time__range=(now.hour-1,now.hour+1))\
-	.filter(send_day=now.weekday())\
-	.exclude(study_group__name="control")\
+	clients = clients.exclude(study_group__name="control")\
 	.exclude(pregnancy_status="Stopped").exclude(pregnancy_status="Finished")
 	
+	#if day and hour flags are set
+	if(day):
+		clients = clients.filter(send_day=now.weekday())
+		if(hour):
+			clients = clients.filter(send_time__range=(now.hour-1,now.hour+1))
 	return clients
 	
 def get_message(client,now=datetime.datetime.now()):
@@ -143,12 +143,12 @@ def get_message(client,now=datetime.datetime.now()):
 		delivery_date = client.pregnancy_event.date
 		offset = 40 - (now.date() - delivery_date).days/7
 	
-	print >> sys.stderr, client,condition,language,study_group,base,offset
+	#print >> sys.stderr, client,condition,language,study_group,base,offset
 		
 	message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
 	.filter(groups__in=[condition]).filter(groups__in=[language]).filter(groups__in=[study_group])
 	
-	print len(message)
+	#print len(message)
 	if len(message)==0: 
 		#no message was found get message for normal conditon
 		message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
@@ -156,8 +156,8 @@ def get_message(client,now=datetime.datetime.now()):
 	
 	messages_to_send = []
 	for m in message:
-		print >> sys.stderr, m
-		messages_to_send.append((client,m.message))
+		#print >> sys.stderr, m
+		messages_to_send.append(m.message)
 		
 	return messages_to_send
 	
@@ -192,7 +192,13 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 					   might need
 
 	"""
-	if client.study_group__name=='control':
+	#transport logging
+	import logging
+	transport_logger = logging.getLogger("logview.transport")
+	transport_logger.info('send,%s,%s,%s,%s,"%s",%s'%
+	(client.phone_number,client.id,client.last_name,client.first_name,content,sender))
+	
+	if client.study_group.name=='control':
 		return #do not send a message if control group
 
 	if transport is None:
@@ -216,9 +222,16 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	transport.send(client, content, **transport_kwargs)
 
 
-def incoming_message(phone_number, message,network="default"):
+def incoming_message(phone_number, message,network="safaricom"):
 	"""Adds an incoming message to the database.
 	"""
+	
+	#transport logging
+	import logging
+	transport_logger = logging.getLogger("logview.transport")
+	transport_logger.info('recieved,%s,"%s",%s'%(phone_number,message,network))
+	
+	
 	clients = _patients.Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
 		# recieved a message from a phone number not in database
@@ -251,11 +264,12 @@ def incoming_message(phone_number, message,network="default"):
 			client.pregnancy_status = "Stopped"
 			client.save()
 			return True
+		print >> sys.stderr, "Client Found!"
 		_patients.Message(
 			client_id=client,
-			user_id=_patients.Nurse.objects.all()[0],
+			user_id=None,
 			sent_by='Client',
 			content=message,
 		).save()
-		client.last_msg = date.today()
+		client.last_msg = datetime.date.today()
 		return True

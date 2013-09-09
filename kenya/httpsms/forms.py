@@ -4,7 +4,7 @@ from backend.models import AutomatedMessage
 import time,md5
 
 class SendForm(forms.Form):
-	sender_number = forms.CharField(max_length=16)
+	client = forms.ModelChoiceField(queryset=Client.objects.filter(phone_number__gt=""))
 	content = forms.CharField(widget=forms.widgets.Textarea)
 	
 	@classmethod

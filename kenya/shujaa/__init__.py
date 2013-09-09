@@ -1,8 +1,6 @@
 from transports import BaseTransport
 import urllib, urllib2,sys
 
-import shujaa.models as shujaa
-
 class Transport(BaseTransport):
 	"""A transport that sends a message through the Shujaa API.
 
@@ -35,8 +33,6 @@ class Transport(BaseTransport):
 		values['network'] = network
 		values['source'] = cls.gateway['values']['source'][network]
 		
-		message = shujaa.ShujaaMsg(client_number=destination,message=content,network=network)
-		
 		#http request to getway to send sms
 		data = urllib.urlencode(values)
 		
@@ -47,10 +43,8 @@ class Transport(BaseTransport):
 		httpResponse = urllib2.urlopen(req)
 		
 		#do something with response 
-		#smessage.response = httpResponse.read()
+		#message.response = httpResponse.read()
 		#print >> sys.stderr, response
-		
-		message.save()
 		
 	@classmethod
 	def send_batch(cls, lst):
