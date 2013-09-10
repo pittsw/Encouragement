@@ -45,7 +45,7 @@ def receive(request):
 			sys.stderr.flush()
 			return HttpResponse("Please use post")
 	except Exception as e:
-		print >> sys.stderr, e
+		print >> sys.stderr, "Shujaa Recieve",e
 		sys.stderr.flush()
 
 def testmessage(request):

@@ -218,7 +218,7 @@ def add_message(request, id_number):
             tasks.message_client(client, nurse, sender, text) # task.message_client
             return HttpResponse('')
     except Exception as e:
-        print >> sys.stderr, e
+        print >> sys.stderr, "Add Message",e
 
 def add_call(request, id_number):
     if request.method == "POST":

@@ -39,7 +39,7 @@ def sendSMS(request):
 				'network':'safaricom'
 				}
 			new_request.POST = post
-			print >> sys.stderr, post
+			#print >> sys.stderr, post
 			sys.stderr.flush()
 			return shujaa.receive(new_request)
 	form = SendForm()
