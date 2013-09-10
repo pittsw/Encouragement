@@ -59,7 +59,6 @@ def client(request):
 		if "id" in request.GET:
 			client = Client.objects.get(id=request.GET["id"])
 			isList = request.GET.get('list')
-			print isList
 			client.pending = 0
 			client.save()
 			return render_to_response("display_client_fragment.html",
@@ -156,7 +155,6 @@ def add_client(request):
         "sec_contact_number":"254",})
     elif request.method == "POST":
 		form = AddClientForm(request.POST)
-		print >> sys.stderr, form.errors
 		if form.is_valid():
 			id = form.cleaned_data['id']
 			client = form.save(commit=False)
@@ -234,7 +232,6 @@ def add_call(request, id_number):
             duration = int(duration)
         except ValueError:
             duration = 0
-        #print initiated
         PhoneCall(
             user_id=nurse,
             client_id=client,
@@ -264,7 +261,6 @@ def pregnacy(request, id):
 			#update client pregnacy_status
 			#print pregnacy_event.outcome
 			if pregnacy_event.outcome == "live_birth":
-				#print "Live"
 				client.pregnancy_status = "Post-Partum"
 			elif pregnacy_event.outcome == "miscarriage":
 				client.pregnancy_status = "Stopped"

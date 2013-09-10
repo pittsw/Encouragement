@@ -198,7 +198,7 @@ LOGGING = {
 
         'logview.encouragement': {               # define another logger
             'handlers': ['encouragement_log'],  # associate a different handler
-            'level': 'INFO',                 # specify the logging level
+            'level': 'DEBUG',                 # specify the logging level
             'propagate': True,
         },        
     }       

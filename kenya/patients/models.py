@@ -169,10 +169,10 @@ class Client(models.Model):
 			raise ValidationError(errors)
 
 	def details(self):
-		return "Phone Number: %s -- %s %s (#%s) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
+		return "Phone Number: %s -- %s %s (#%03i) -- Study Group: %s"%(self.phone_number,self.first_name,self.last_name,self.id,self.study_group)
 		
 	def __unicode__(self):
-		return  "(#%s) %s %s"%(self.id,self.first_name,self.last_name)
+		return  "(#%03s) %s %s"%(self.id,self.first_name,self.last_name)
 		
 	def __str__(self):
 		return "%s %s"%(self.first_name,self.last_name)

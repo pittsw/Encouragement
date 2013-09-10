@@ -156,7 +156,6 @@ def get_message(client,now=datetime.datetime.now()):
 	
 	messages_to_send = []
 	for m in message:
-		#print >> sys.stderr, m
 		messages_to_send.append(m.message)
 		
 	return messages_to_send
@@ -230,7 +229,7 @@ def incoming_message(phone_number, message,network="safaricom"):
 	import logging
 	transport_logger = logging.getLogger("logview.transport")
 	transport_logger.info('recieved,%s,"%s",%s'%(phone_number,message,network))
-	
+	print >> sys.stderr, 'recieved,%s,"%s",%s'%(phone_number,message,network)
 	
 	clients = _patients.Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
@@ -264,7 +263,6 @@ def incoming_message(phone_number, message,network="safaricom"):
 			client.pregnancy_status = "Stopped"
 			client.save()
 			return True
-		print >> sys.stderr, "Client Found!"
 		_patients.Message(
 			client_id=client,
 			user_id=None,

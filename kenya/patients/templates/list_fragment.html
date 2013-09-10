@@ -2,7 +2,7 @@
     <div class="person" id="{{x.id}}">
        
         <div class="name {{x.study_group.name}}"><div></div>
-            <span class="client_id">(#{{x.id}}):</span> <span class="client_name">{{x.last_name}}, {{x.first_name}}</span>
+            <span class="client_id">(#{{x.id|stringformat:"03i"}}):</span> <span class="client_name">{{x.last_name}}, {{x.first_name}}</span>
         </div>
         <div class="left">
             {% if x.urgent %}
