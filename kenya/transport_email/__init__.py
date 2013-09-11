@@ -34,7 +34,7 @@ class Transport(BaseTransport):
 			template = EmailTemplates.objects.get(key=template)
 			cls.email(template.subject.format(**keys),template.content.format(**keys))
 		except Exception as e:
-			print >> sys.stderr, "Email Template Not Found"
+			print >> sys.stderr, "Email Template Not Found",e
 	
 	@classmethod
 	def email(cls,subject,content,group='debug'):

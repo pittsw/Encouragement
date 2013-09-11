@@ -205,12 +205,7 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	
 	#replace message variables 
 	nurse_name = nurse.user.first_name if nurse else settings.DEFAULT_NURSE_NAME
-	content = content.format(**{
-		'name':client.nickname,
-		'first_name':client.first_name,
-		'last_name':client.last_name,
-		'next_visit':client.next_visit,
-		'nurse':nurse_name})
+	content = content.format(name=client.nickname.capitalize())
 
 	_patients.Message(
 		client_id=client,
