@@ -37,7 +37,7 @@ class Transport(BaseTransport):
 		data = urllib.urlencode(values)
 		
 		req = urllib2.Request(cls.gateway['url'], data)
-		printsys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
+		print >> sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
 		
 		#Send http request
 		httpResponse = urllib2.urlopen(req)
