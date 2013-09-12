@@ -12,24 +12,7 @@ from transport_email import Transport as Email
 
 @periodic_task(run_every=crontab())
 def scheduled_tasks():
-	last = _backend.AutoTask.objects.filter(function="scheduled_tasks").order_by('-pk')
-	(date,hour) = last[0].data.split("|") if last else ("2013-07-01","19")
-	if hour=="8":
-		hour="13"
-	elif hour=="13":
-		hour="19"
-	else:
-		hour="8"
-		date=datetime.datetime.strptime(date,"%Y-%m-%d")+datetime.timedelta(1)
-		date = date.strftime("%Y-%m-%d")
-	print "%s %s"%(date,hour)
-	log("scheduled_tasks","|".join((date,hour)))
-
-@task
-def log(func,data=""):
-	l = _backend.AutoTask(function=func,data=data)
-	l.save()
-
+	pass
 
 '''
 Todo: Move this to the recieve section

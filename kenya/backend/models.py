@@ -45,7 +45,8 @@ class AutomatedMessage(models.Model):
 	#linked list of next messages
 	next_message = models.ForeignKey("self", blank=True, null=True, related_name="previous_message")
 	
-	note = models.CharField(max_length=250)
+	note = models.CharField(max_length=250,blank=True)
+	
 		
 	def __unicode__(self):
 		out = '{send_offset} from {send_base}'.format(
@@ -56,13 +57,18 @@ class AutomatedMessage(models.Model):
 			)
 		
 		if self.pk:
-			out = "{groups} ".format(groups=','.join([str(g) for g in self.groups.all()]))+out
+			out = self.list_groups()+out
 		return out
 		
 	def copy(self):
 		"""Deep copy of message"""
 		return AutomatedMessage(priority=self.priority,message=self.message,send_base=self.send_base,
 		send_offset=self.send_offset,key=self.key,next_message=self.next_message,note=self.note)
+		
+	def list_groups(self):
+		"""return string list of all groups"""
+		if self.pk:
+			return "{groups} ".format(groups=','.join([str(g) for g in self.groups.all()]))
 		
 	def send(self,client,previous=False):
 		"""
@@ -117,12 +123,4 @@ class Email(models.Model):
 	
 	def __unicode__(self):
 		return "%s | %s"%(self.key,self.subject)
-		
-class AutoTask(models.Model):
-	
-	timestamp = models.DateTimeField(auto_now=True)
-	function = models.CharField(max_length=20)
-	data = models.CharField(max_length=1000, blank=True)
-	
-	def __unicode__(self):
-		return "'%s':\t%s"%(self.function, self.timestamp.strftime('%Y-%m-%d %H:%M:%S'))
+

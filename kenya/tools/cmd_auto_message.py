@@ -5,6 +5,7 @@ parser = OptionParser()
 parser.add_option("-s","--send",action="store_true",help="flag to send messages",default=False)
 parser.add_option("-a","--ask",action="store_false",help="flag to ask before sending each",default=True)
 parser.add_option("-d","--day",action="store_true",help="flag to send messages for today only",default=False)
+parser.add_option("-h","--hour",action="store_true",help="flag to send messages for this hour only",default=False)
 (options,args) = parser.parse_args()
 #------- End Option Parser ------#
 
@@ -39,8 +40,7 @@ def yes_no(question, default="yes"):
 
     The "answer" return value is one of "yes" or "no".
     """
-    valid = {"yes":True,   "y":True,  "ye":True,
-             "no":False,     "n":False}
+    valid = {"yes":True,"y":True,"ye":True,"no":False,"n":False}
     if default == None:
         prompt = " [y/n] "
     elif default.lower() == "yes":
@@ -62,7 +62,7 @@ def yes_no(question, default="yes"):
                              "(or 'y' or 'n').\n")
 
 #get clients 
-clients = tasks.get_clients_to_message(day=options.day,hour=False)
+clients = tasks.get_clients_to_message(day=options.day,hour=options.hour)
 
 print "Found %i clients to message."%clients.count()
 for c in clients:

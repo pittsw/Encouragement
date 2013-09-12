@@ -1928,7 +1928,7 @@
             "next_message": 379, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your babies will receive important vaccines at the next visit. "
         }
@@ -1946,7 +1946,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure to check your book and make sure your babies has all (his or her) vaccines. Ask your nurse to help check the book."
         }
@@ -1964,7 +1964,7 @@
             "next_message": 377, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya wajawazito. Watoto wako watapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -1982,7 +1982,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha watoto wako wana pata chanjo zote (zake). Muulize muuguzi wako akusaidie kuangalia kitabu."
         }
@@ -2000,7 +2000,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. After birth you will bleed like a period on and off, so be prepared. Tell your nurse if you pass big clots."
         }
@@ -2018,7 +2018,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Baada ya kuzaa utatokwa na damu kama damu ya mwezi mara kwa mara, kwahivyo kuwa tayari. Mwambie muuguzi wako kama utatokwa na damu ya kuganda kubwa."
         }
@@ -2036,7 +2036,7 @@
             "next_message": 373, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Giving babies other fluids can cause illness and weakness. "
         }
@@ -2054,7 +2054,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please continue to only give breast milk to your babies for at least six month."
         }
@@ -2072,7 +2072,7 @@
             "next_message": 371, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki. Je uko na matatizo ya kunyonyesha? Kupeana watoto maji au vinwaji vyengine kunaweza kusababisha ugonjwa na udhaifu. "
         }
@@ -2090,7 +2090,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali endelea kupeana maziwa ya mama kwa watoto wako kwa miezi sita."
         }
@@ -2108,7 +2108,7 @@
             "next_message": 369, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The Implant is a small rod with medicine for family planning. It is placed in your arm and is very effective for 3 years. "
         }
@@ -2126,7 +2126,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " The Implant can be removed at any time! Ask about the Implant at the next visit and it may be low cost or free!"
         }
@@ -2144,7 +2144,7 @@
             "next_message": 367, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Implant ni kijiti kindogo kilichoko na dawa ya mpango wa uzazi. Kinawekwa ndani ya mkono wako na ni madhubuti kwa miaka mitatu. "
         }
@@ -2162,7 +2162,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " implant inaweza kuondolewa wakati wowote! Uliza kuhusu implant katika ziara ifuatayo na inaweza kuwa ya bei nafuu au kupewa bila kulipa."
         }
@@ -2180,7 +2180,7 @@
             "next_message": 365, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The IUCD or coil is a small device for family planning. "
         }
@@ -2198,7 +2198,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Easy to put in, safe and very effective for years the IUCD or coil can be removed at any time! Ask about the coil at the next visit and it may be low cost or free!"
         }
@@ -2216,7 +2216,7 @@
             "next_message": 363, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. IUCD au koili ni kifaa kidogo cha mpango wa uzazi. "
         }
@@ -2234,7 +2234,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Rahisi kukiweka, ni salama na kina ufanisi wa miaka mingi IUCD au koili inaweza kuondolewa wakati wowote! Uliza kuhusu koili katika ziara ifutayo na ni inaweza kuwa ya bei nafuu au kupewa bila kulipa."
         }
@@ -2252,7 +2252,7 @@
             "next_message": 361, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. It is best to think about family planning before you go to the clinic and have a plan in place. "
         }
@@ -2270,7 +2270,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " We will send you information about options. Please talk to the nurse about family planning at the next visit. It is best to space you babies."
         }
@@ -2288,7 +2288,7 @@
             "next_message": 359, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Ni bora kufikiri kuhusu mpango wa uzazi kabla ya kwenda kliniki na kuwa na mpango uliouchagua. "
         }
@@ -2306,7 +2306,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Sisi tutakutumia habari kuhusu mipango ya uzazi. Tafadhali zungumza na muuguzi kuhusu mpango wa uzazi katika ziara inayofuata. Ni bora kupata mtoto mmoja hadi mwengine baada ya mda."
         }
@@ -2324,7 +2324,7 @@
             "next_message": 357, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your babies will receive important vaccines at the next visit. "
         }
@@ -2342,7 +2342,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure to check your book and make sure your babies have all the vaccines. Ask your nurse to help check the book."
         }
@@ -2360,7 +2360,7 @@
             "next_message": 355, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya wajawazito. Watoto wako watapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -2378,7 +2378,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha watoto wako wana pata chanjo zote. Muulize muuguzi wako akusaidie kuangalia kitabu."
         }
@@ -2396,7 +2396,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Come to clinic we can help. Breast milk is the best gift to give your babies."
         }
@@ -2414,7 +2414,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki. Uko na matatizo ya kunyonyesha? Kuja kliniki tunaweza kukusaidia. Maziwa ya matiti ni zawadi bora ya kuwapa watoto wako."
         }
@@ -2432,7 +2432,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. If your new babies are having trouble breathing or feeding, is too warm, or very sleepy, go to the clinic."
         }
@@ -2450,7 +2450,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Kama watoto wako wapya wako na matatizo ya kupumua au kunyonya, wako na joto sana, au wana usingizi sana, nenda kliniki."
         }
@@ -2468,7 +2468,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Congratulations on your new babies. We are very happy for you!"
         }
@@ -2486,7 +2486,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya wajawazito. Hongera kwa watoto wako wapya. Sisi tuko na furaha sana kwa ajili yako!"
         }
@@ -2684,7 +2684,7 @@
             "next_message": 337, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Come to clinic we can help. Breast milk is the best gift to give your baby. "
         }
@@ -2702,7 +2702,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " It is common to have problems breastfeeding the first baby. We have ways to help."
         }
@@ -2720,7 +2720,7 @@
             "next_message": 335, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki. Je uko na mtatizo ya kunyonyesha? Kuja kliniki tunaweza kukusaidia. Maziwa ya matiti ni zawadi bora ya kumpa mtoto wako. "
         }
@@ -2738,7 +2738,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Ni kawaida kuwa na matatizo ya kunyonyesha mtoto wa kwanza. Tuna njia za kusaidia."
         }
@@ -2925,8 +2925,8 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 6, 
-            "key": null, 
+            "send_base": 8, 
+            "key": "", 
             "message": "{name}, it is Kerubo from clinic. Great job coming in for clinic today. You are taking good care of both you and your growing baby. "
         }
     }, 
@@ -2942,8 +2942,8 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 6, 
-            "key": null, 
+            "send_base": 8, 
+            "key": "", 
             "message": "{name}, mimi ni Kerubo kutoka kliniki. Umefanya kazi nzuri kwa kuja kwa kliniki leo. Unajitumikia huduma nzuri wewe mwenyewe na mtoto wako anaye kua. "
         }
     }, 
@@ -4106,7 +4106,7 @@
             "next_message": 257, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your baby will receive important vaccines at the next visit. "
         }
@@ -4124,7 +4124,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure to check your book and make sure your baby has all (his or her) vaccines. Ask your nurse to help check the book."
         }
@@ -4142,7 +4142,7 @@
             "next_message": 255, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya wajawazito. Mtoto wako atapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -4160,7 +4160,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha mtoto wako ana pata chanjo zote (zake). Muulize muuguzi wako akusaidie kuangalia kitabu."
         }
@@ -4178,7 +4178,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. After birth you will bleed like a period on and off, so be prepared. Tell your nurse if you pass big clots."
         }
@@ -4196,7 +4196,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Baada ya kuzaa utatokwa na damu kama damu ya mwezi mara kwa mara, kwa hivyo kuwa tayari. Mwambie muuguzi wako kama utatokwa na damu ya kuganda kubwa."
         }
@@ -4214,7 +4214,7 @@
             "next_message": 251, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Giving baby other fluids can cause illness and weakness. "
         }
@@ -4232,7 +4232,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please continue to only give breast milk to your baby for at least six month."
         }
@@ -4250,7 +4250,7 @@
             "next_message": 249, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa klinikiya Mathare. Je uko na matatizo ya kunyonyesha? Kupeana mtoto maji au vinywaji vyengine kunaweza kusababisha ugonjwa na udhaifu. "
         }
@@ -4268,7 +4268,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali endelea kupeana maziwa ya mama kwa mtoto wako kwa miezi sita."
         }
@@ -4286,7 +4286,7 @@
             "next_message": 247, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The Implant is a small rod with medicine for family planning. It is placed in your arm and is very effective for 3 years. "
         }
@@ -4304,7 +4304,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " The Implant can be removed at any time! Ask about the Implant at the next visit and it may be low cost or free!"
         }
@@ -4322,7 +4322,7 @@
             "next_message": 245, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Implant ni kijiti kidogo kilichoko na dawa ya mpango wa uzazi. Kinawekwa ndani ya mkono wako na ni madhubuti kwa miaka mitatu. "
         }
@@ -4340,7 +4340,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " implant inaweza kuondolewa wakati wowote! Uliza kuhusu implant katika ziara ifuatayo na inaweza kuwa ya bei nafuu au kupewa bila kulipa."
         }
@@ -4358,7 +4358,7 @@
             "next_message": 243, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The IUCD or coil is a small device for family planning. "
         }
@@ -4376,7 +4376,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Easy to put in, safe and very effective for years the IUCD or coil can be removed at any time! Ask about the coil at the next visit and it may be low cost or free!"
         }
@@ -4394,7 +4394,7 @@
             "next_message": 241, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. IUCD au koili ni kifaa kidogo cha mpango wa uzazi. "
         }
@@ -4412,7 +4412,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Rahisi kukiweka, ni salama na kina ufanisi wa miaka mingi IUCD au koili inaweza kuondolewa wakati wowote! Uliza kuhusu koili katika ziara ifutayo na inaweza kuwa ya bei nafuu au kupewa bila kulipa."
         }
@@ -4430,7 +4430,7 @@
             "next_message": 239, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. It is best to think about family planning before you go to the clinic and have a plan in place. "
         }
@@ -4448,7 +4448,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " We will send you information about options. Please talk to the nurse about family planning at the next visit. It is best to space you babies."
         }
@@ -4466,7 +4466,7 @@
             "next_message": 237, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Ni bora kufikiria kuhusu mpango wa uzazi kabla ya kwenda kliniki na kuwa na mpango uliouchagua. "
         }
@@ -4484,7 +4484,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Sisi tutakutumia habari kuhusu mipango ya uzazi. Tafadhali zungumza na muuguzi kuhusu mpango wa uzazi katika ziara inayofuata. Ni bora kupata mtoto mmoja hadi mwengine baada ya muda."
         }
@@ -4502,7 +4502,7 @@
             "next_message": 235, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your baby will receive important vaccines at the next visit. "
         }
@@ -4520,7 +4520,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure to check your book and make sure your baby has all (his or her) vaccines. Ask your nurse to help check the book."
         }
@@ -4538,7 +4538,7 @@
             "next_message": 233, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Mtoto wako atapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -4556,7 +4556,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha mtoto wako anapata chanjo zote (zake). Muulize muuguzi wako akusaidie kuangalia kitabu."
         }
@@ -4574,7 +4574,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Come to clinic we can help. Breast milk is the best gift to give your baby."
         }
@@ -4592,7 +4592,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Je uko na matatizo ya kunyonyesha? Kuja kliniki tunaweza kusaidia. Maziwa ya matiti ni zawadi bora ya kumpa mtoto wako."
         }
@@ -4610,7 +4610,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. If your new baby is having trouble breathing or feeding, is too warm, or very sleepy, go to the clinic."
         }
@@ -4628,7 +4628,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Kama mtoto wako mpya ako na matatizo ya kupumua au kunyonya, ako na joto sana, au ana usingizi sana, nenda kliniki."
         }
@@ -4646,7 +4646,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Congratulations on your new baby. We are very happy for you!"
         }
@@ -4664,7 +4664,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Hongera kwa mtoto wako mpya. Sisi tuko na furaha sana kwa ajili yako!"
         }
@@ -6014,7 +6014,7 @@
             "next_message": 151, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your baby will receive important vaccines at the next visit. "
         }
@@ -6032,7 +6032,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure your baby has all the vaccines. Ask your nurse to help check the book. Did your baby receive vaccines at the last visit? Which vaccines?"
         }
@@ -6050,7 +6050,7 @@
             "next_message": 149, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Mtoto wako atapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -6068,7 +6068,7 @@
             "next_message": null, 
             "send_offset": 9, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha mtoto wako ana pata chanjo zote. Muulize muuguzi wako akusaidie kuangalia kitabu. Je mtoto wako alipewa chanjo kwenye ziara ya mwisho iliyopita?"
         }
@@ -6086,7 +6086,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. After birth you will bleed on and off, so be prepared. Tell your nurse if you pass big clots. Are you still bleeding?"
         }
@@ -6104,7 +6104,7 @@
             "next_message": null, 
             "send_offset": 8, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Baada ya kuzaa utatokwa na damu kama damu ya mwezi mara kwa mara, kwahivyo kuwa tayari. Mwambie muuguzi wako kama utatokwa na damu ya kuganda kubwa. Je bado unatokwa na damu?"
         }
@@ -6122,7 +6122,7 @@
             "next_message": 145, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Are you having trouble breastfeeding? Giving baby other fluids can cause illness and weakness. "
         }
@@ -6140,7 +6140,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please continue to give only breast milk to your baby for at least six months. How long do you plan to breastfeed?"
         }
@@ -6158,7 +6158,7 @@
             "next_message": 143, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Uko na matatizo ya kunyonyesha? Kupeana mtoto vinywaji vyengine kunaweza kusababisha ugonjwa na udhaifu. "
         }
@@ -6176,7 +6176,7 @@
             "next_message": null, 
             "send_offset": 7, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali endelea kupeana maziwa ya mama kwa mtoto wako kwa miezi sita. Je unapanga kunyonyesha maziwa ya matiti kwa muda gani?"
         }
@@ -6194,7 +6194,7 @@
             "next_message": 141, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The Implant is a small rod with medicine for family planning. It is placed in your arm and is very effective for 3 years. "
         }
@@ -6212,7 +6212,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " The Implant can be removed at any time! Would you like to try the Implant? Do you have any questions about it?"
         }
@@ -6230,7 +6230,7 @@
             "next_message": 139, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Implant ni kijiti kindogo kilichoko na dawa ya mpango wa uzazi. Kinawekwa ndani ya mkono wako na ni madhubuti kwa miaka mitatu. "
         }
@@ -6248,7 +6248,7 @@
             "next_message": null, 
             "send_offset": 6, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " implant inaweza kuondolewa wakati wowote! Je ungependa kujaribu implant? Je uko na maswali lolote kuhusiana na implant?"
         }
@@ -6266,7 +6266,7 @@
             "next_message": 137, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. The IUCD or coil is a small device for family planning. The coil is easy to put in and very safe and effective for years. "
         }
@@ -6284,7 +6284,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " The IUCD or coil can be removed at any time! Would you like to try the coil? Do you have any questions about it?"
         }
@@ -6302,7 +6302,7 @@
             "next_message": 135, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. IUCD au koili ni kifaa kidogo cha mpango wa uzazi. Koili ni rahisi kuiweka, ni salama na ina ufanisi wa miaka mingi. "
         }
@@ -6320,7 +6320,7 @@
             "next_message": null, 
             "send_offset": 5, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " IUCD au koili inaweza kuondolewa wakati wowote! Je ungependa kujaribu koili? Je uko na maswali lolote kuhusiana ICDU au koili?"
         }
@@ -6338,7 +6338,7 @@
             "next_message": 133, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. It is best to think about family planning before you go to the clinic and have a plan in place. "
         }
@@ -6356,7 +6356,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " We will send you information about options. Have you already selected a method? What type?"
         }
@@ -6374,7 +6374,7 @@
             "next_message": 131, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Ni bora kufikiri kuhusu mpango wa uzazi kabla ya kwenda kliniki na kuwa na mpango uliouchagua. "
         }
@@ -6392,7 +6392,7 @@
             "next_message": null, 
             "send_offset": 4, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Sisi kutuma habari kuhusu mipango ya uzazi. Je umeshachagua mpango wa uzazi? Umechagua mpango gani?"
         }
@@ -6410,7 +6410,7 @@
             "next_message": 129, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Your baby will receive important vaccines at the next visit. "
         }
@@ -6428,7 +6428,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Please be sure to check your book and make sure your baby has all the vaccines. Did your baby receive vaccines at the hospital? Do you know what type?"
         }
@@ -6446,7 +6446,7 @@
             "next_message": 127, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya wajawazito. Mtoto wako atapata chanjo muhimu katika ziara ifuatayo. "
         }
@@ -6464,7 +6464,7 @@
             "next_message": null, 
             "send_offset": 3, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Tafadhali hakikisha umeangalia kitabu chako na kuhakikisha mtoto wako ana pata chanjo zote. Je mtoto wako alipewa chanjo hospitalini? Je unajua ni aina gani ya chanjo?"
         }
@@ -6482,7 +6482,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Breast milk is the best to give your baby. How long did your last baby breastfeed? How long does the baby stay on the breast for each feeding?"
         }
@@ -6500,7 +6500,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki. Maziwa ya matiti ya mama ndio bora zaidi kupea mototo. Je ulinyonyesha motto lini mara ya mwisho maziwa ya matiti ya mama? Je mtoto anachukua muda gani kunyonya maziwa ya matiti kila unapo mnyonyesha?"
         }
@@ -6518,7 +6518,7 @@
             "next_message": 123, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. If your new baby is having trouble breathing or feeding, is too warm, or very sleepy, go to the clinic. "
         }
@@ -6536,7 +6536,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Does the baby have trouble feeding? How many times a day does the baby feed?"
         }
@@ -6554,7 +6554,7 @@
             "next_message": 121, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Kama mtoto wako mpya ako na matatizo ya kupumua au kunyonya, ako na joto sana, au ana usingizi sana, nenda kliniki. "
         }
@@ -6572,7 +6572,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Je mtoto ako na matatizo ya kunyonya? Je ananyonya mara ngapi kwa siku?"
         }
@@ -6590,7 +6590,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Congratulations on your new baby. We are very happy for you! How much did your baby weigh? Boy or girl?"
         }
@@ -6608,7 +6608,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Hongera kwa mtoto wako mpya. Sisi tuko na furaha sana kwa ajili yako! Je mtoto wako alikuwa na uzani gani? Ni mme au mke?"
         }
@@ -7886,7 +7886,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Breast milk is the best to give your babies. How long does the baby stay on the breast for each feeding?"
         }
@@ -7904,7 +7904,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Maziwa ya matiti ya mama ndio bora zaidi kupea mtoto. Je mtoto anachukua muda gani kunyonya maziwa ya matiti kila unapo mnyonyesha?"
         }
@@ -7922,7 +7922,7 @@
             "next_message": 45, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from Mathare clinic. If your new babies having trouble breathing or feeding, is too warm, or very sleepy, go to the clinic. "
         }
@@ -7940,7 +7940,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Do the babies have trouble feeding? How many times a day do the babies feed?"
         }
@@ -7958,7 +7958,7 @@
             "next_message": 43, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Kama mtoto wako mpya ako na matatizo ya kupumua au kunyonya, ako na joto sana, au ana usingizi sana, nenda kliniki. "
         }
@@ -7976,7 +7976,7 @@
             "next_message": null, 
             "send_offset": 1, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": " Je mtoto ako na matatizo ya kunyonya? Je ananyonya mara ngapi kwa siku?"
         }
@@ -7994,7 +7994,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from the ANC clinic. Congratulations on your new babies. We are very happy for you! How much did your babies weigh? Boy or girl?"
         }
@@ -8012,7 +8012,7 @@
             "next_message": null, 
             "send_offset": 0, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kwa kliniki ya Mathare. Hongera kwa mtoto wako mpya. Sisi tuko na furaha sana kwa ajili yako! Je mtoto wako alikuwa na uzani gani? Ni mme au mke?"
         }
@@ -8390,7 +8390,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Breast milk is the best gift to give your baby. It is common to have problems breastfeeding the first baby. Do you have any questions about breastfeeding?"
         }
@@ -8408,7 +8408,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kliniki ya Mathare. Maziwa ya matiti ya mama ndio zawadi muhimu ya kupea mtoto. Ni kawaida kuwa na matatizo ya kunyonysha mtoto wa kwanza. Je uko na swali lolote kuhusu kunyonyesha mtoto maziwa ya matiti?"
         }
@@ -8714,7 +8714,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} this is Kerubo from clinic. Breast milk is the best gift to give your baby. It is common to have problems breastfeeding the baby. Do you have any questions about breastfeeding?"
         }
@@ -8732,7 +8732,7 @@
             "next_message": null, 
             "send_offset": 2, 
             "priority": 0, 
-            "send_base": 3, 
+            "send_base": 4, 
             "key": null, 
             "message": "{name} mimi ni Kerubo kutoka kliniki ya Mathare. Maziwa ya matiti ya mama ndio zawadi muhimu ya kupea mtoto. Ni kawaida kuwa na matatizo ya kunyonysha mtoto wa kwanza. Je uko na swali lolote kuhusu kunyonyesha mtoto maziwa ya matiti?"
         }

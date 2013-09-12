@@ -2,13 +2,12 @@ from backend.models import *
 from django.contrib import admin
 
 class AutomatedMessageAdmin(admin.ModelAdmin):
-	list_display = ('__unicode__','send_base','send_offset','message','note')
+	list_display = ('note','send_base','send_offset','list_groups','message')
 	list_filter = ('send_base','groups')
-	search_fields = ('send_offset',)
+	search_fields = ('note',)
 
 admin.site.register(AutomatedMessage,AutomatedMessageAdmin)
 admin.site.register(Email)
-admin.site.register(AutoTask)
 admin.site.register(MessageGroup)
 admin.site.register(Condition)
 admin.site.register(StudyGroup)
