@@ -45,22 +45,24 @@ def DoesNotExist(Exception):
         return repr(self.value)
 
 def message_fragment(request, id):
-    client = Client.objects.get(id=id)
-    client.pending = 0
-    client.save()
-    message_template = "message_frag.html"
-    if request.GET.get('mode','conversation') == 'list':
+	client = Client.objects.get(id=id)
+	nurse = get_object_or_default(Nurse, None, user=request.user)
+	print "Message Fragment: %s"%nurse
+	if not nurse==None:
+		print "viewed"
+		client.pending = 0
+		client.save()
+	message_template = "message_frag.html"
+	if request.GET.get('mode','conversation') == 'list':
 		message_template = "message_listmode.html"
-    messages = Interaction.objects.filter(client_id=client)
-    return render_to_response(message_template, {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
+	messages = Interaction.objects.filter(client_id=client)
+	return render_to_response(message_template, {"client": str(client), "messages":messages}, context_instance=RequestContext(request))
 
 def client(request):
 	if request.method == "GET":
 		if "id" in request.GET:
 			client = Client.objects.get(id=request.GET["id"])
 			isList = request.GET.get('list')
-			client.pending = 0
-			client.save()
 			return render_to_response("display_client_fragment.html",
 				{"client":client,
 				"list":isList,

@@ -161,6 +161,20 @@ INSTALLED_APPS = (
 # choose a path that is your virtual environment root
 VENV_ROOT = os.path.join('/','tmp/','encouragement')
 
+#------  Create log files if they do not exist  ----------#
+if not os.path.isdir(VENV_ROOT):
+	os.mkdir(VENV_ROOT)
+	os.chmod(VENV_ROOT,0o777)
+	
+def test_and_create(path):
+	if not os.path.isfile(path):
+		f = open(path,'w')
+		f.close()
+		os.chmod(path,0o666)
+test_and_create(os.path.join(VENV_ROOT, 'messages.log'))
+test_and_create(os.path.join(VENV_ROOT, 'encouragement.log'))
+#--------- End Log File Create ------------#
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

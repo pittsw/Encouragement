@@ -37,11 +37,11 @@ class Transport(BaseTransport):
 		data = urllib.urlencode(values)
 		
 		req = urllib2.Request(cls.gateway['url'], data)
-		print >> sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
 		
 		#Send http request
 		httpResponse = urllib2.urlopen(req)
 		
+		print >> sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
 		#do something with response 
 		#message.response = httpResponse.read()
 		#print >> sys.stderr, response

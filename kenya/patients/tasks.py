@@ -191,11 +191,6 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 					   might need
 
 	"""
-	#transport logging
-	import logging
-	transport_logger = logging.getLogger("logview.transport")
-	transport_logger.info('send,%s,%s,%s,%s,"%s",%s'%
-	(client.phone_number,client.id,client.last_name,client.first_name,content,sender))
 	
 	if client.study_group.name=='control':
 		return #do not send a message if control group
@@ -213,7 +208,14 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 		sent_by=sender,
 		content=content,
 	).save()
+	
 	transport.send(client, content, **transport_kwargs)
+	
+	#transport logging
+	import logging
+	transport_logger = logging.getLogger("logview.transport")
+	transport_logger.info('send,%s,%s,%s,%s,"%s",%s'%
+	(client.phone_number,client.id,client.last_name,client.first_name,content,sender))
 
 
 def incoming_message(phone_number, message,network="safaricom"):
