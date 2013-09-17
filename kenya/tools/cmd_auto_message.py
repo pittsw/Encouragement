@@ -5,7 +5,7 @@ parser = OptionParser()
 parser.add_option("-s","--send",action="store_true",help="flag to send messages",default=False)
 parser.add_option("-a","--ask",action="store_false",help="flag to ask before sending each",default=True)
 parser.add_option("-d","--day",action="store_true",help="flag to send messages for today only",default=False)
-parser.add_option("-h","--hour",action="store_true",help="flag to send messages for this hour only",default=False)
+parser.add_option("-H","--hour",action="store_true",help="flag to send messages for this hour only",default=False)
 (options,args) = parser.parse_args()
 #------- End Option Parser ------#
 
