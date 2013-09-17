@@ -34,7 +34,7 @@ class PregnancyEvent(models.Model):
 	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
 	
 	def __unicode__(self):
-		return "%s (%s) %s"%(self.client,self.date,self.outcome)
+		return "(%s) %s"%(self.date,self.outcome)
 
 class Client(models.Model):
 		
