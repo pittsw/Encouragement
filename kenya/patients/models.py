@@ -14,28 +14,6 @@ import pytz
 
 import backend.models as _backend
 
-class PregnancyEvent(models.Model):
-	
-	OUTCOME_CHOICES = (
-		('live_birth','Live Birth'),
-		('miscarriage','Miscarriage'),
-	)
-	
-	LOCATION_CHOICES = (
-		('home','Home'),
-		('clinic','Clinc'),
-		('hosptital','Hospital'),
-	)
-	
-	date = models.DateField()
-	
-	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES,default="live_birth")
-	
-	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
-	
-	def __unicode__(self):
-		return "(%s) %s"%(self.date,self.outcome)
-
 class Client(models.Model):
 		
 	STATUS_CHOICES = (
@@ -99,8 +77,6 @@ class Client(models.Model):
 	sec_contact_number = models.CharField(max_length=50, blank=True)
 
 	pregnancy_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Pregnant")
-	
-	pregnancy_event = models.OneToOneField(PregnancyEvent,null=True,blank=True)
 
 	due_date = models.DateField()
 
@@ -132,7 +108,9 @@ class Client(models.Model):
 
 	pending = models.IntegerField(editable=False, default=0)
 
-	last_msg = models.DateField(blank=True, null=True, editable=False)
+	last_msg_client = models.DateField(blank=True, null=True, editable=False)
+	
+	last_msg_system = models.DateField(blank=True, null=True, editable=False)
 	
 	validated = models.BooleanField(editable=False,default=False)
 
@@ -191,7 +169,31 @@ class Client(models.Model):
 			.hexdigest())
 		step = int(math.ceil(len(string) / key_length))
 		return ''.join([chars[int(x, 16)] for x in string[::step]])
-		
+
+class PregnancyEvent(models.Model):
+	
+	OUTCOME_CHOICES = (
+		('live_birth','Live Birth'),
+		('miscarriage','Miscarriage'),
+	)
+	
+	LOCATION_CHOICES = (
+		('home','Home'),
+		('clinic','Clinc'),
+		('hosptital','Hospital'),
+	)
+	
+	date = models.DateField()
+	
+	outcome = models.CharField(max_length=20, choices=OUTCOME_CHOICES,default="live_birth")
+	
+	location = models.CharField(max_length=20, choices=LOCATION_CHOICES,default="home")
+	
+	client = models.OneToOneField(Client,null=True,blank=True)
+	
+	def __unicode__(self):
+		return "(%s) %s (%s)"%(self.date,self.client,self.outcome)
+
 class Nurse(models.Model):
 
 	id = models.IntegerField(primary_key=True)

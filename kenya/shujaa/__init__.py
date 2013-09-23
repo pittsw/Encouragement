@@ -43,8 +43,8 @@ class Transport(BaseTransport):
 		
 		print >> sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
 		#do something with response 
-		#message.response = httpResponse.read()
-		#print >> sys.stderr, response
+		response = httpResponse.read()
+		print >> sys.stderr, response
 		
 	@classmethod
 	def send_batch(cls, lst):

@@ -77,6 +77,8 @@ for c in clients:
 					continue #do not send this message 
 			print "Sending..."
 			tasks.message_client(c,None,"System",m)
+			c.last_msg_system = datetime.date.today()
+			c.save()
 	
 
 

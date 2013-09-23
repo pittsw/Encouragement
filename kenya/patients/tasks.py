@@ -121,12 +121,11 @@ def get_message(client,now=datetime.datetime.now()):
 	if client.pregnancy_status == "Pregnant":
 		base = base_lookup['edd']
 		offset = 40 - (client.due_date-now.date()).days/7
-	elif client.pregnancy_status == "Post-Partum" and client.pregnancy_event.outcome != "miscarriage":
+	elif client.pregnancy_status == "Post-Partum" and client.pregnancyevent.outcome != "miscarriage":
 		base = base_lookup['dd']
-		delivery_date = client.pregnancy_event.date
-		offset = 40 - (now.date() - delivery_date).days/7
+		offset = (now.date() - client.pregnancyevent.date).days/7
 	
-	#print >> sys.stderr, client,condition,language,study_group,base,offset
+	print >> sys.stderr, client,condition,language,study_group,base,offset
 		
 	message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
 	.filter(groups__in=[condition]).filter(groups__in=[language]).filter(groups__in=[study_group])
@@ -195,10 +194,10 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	transport.send(client, content, **transport_kwargs)
 	
 	#transport logging
-	import logging
-	transport_logger = logging.getLogger("logview.transport")
-	transport_logger.info('send,%s,%s,%s,%s,"%s",%s'%
-	(client.phone_number,client.id,client.last_name,client.first_name,content,sender))
+	#import logging
+	#transport_logger = logging.getLogger("logview.transport")
+	#transport_logger.info('send,%s,%s,%s,%s,"%s",%s'%
+	#(client.phone_number,client.id,client.last_name,client.first_name,content,sender))
 
 
 def incoming_message(phone_number, message,network="safaricom"):
@@ -207,9 +206,9 @@ def incoming_message(phone_number, message,network="safaricom"):
 	
 	#transport logging
 	import logging
-	transport_logger = logging.getLogger("logview.transport")
-	transport_logger.info('recieved,%s,"%s",%s'%(phone_number,message,network))
-	print >> sys.stderr, 'recieved,%s,"%s",%s'%(phone_number,message,network)
+	#transport_logger = logging.getLogger("logview.transport")
+	#transport_logger.info('recieved,%s,"%s",%s'%(phone_number,message,network))
+	#print >> sys.stderr, 'recieved,%s,"%s",%s'%(phone_number,message,network)
 	
 	clients = _patients.Client.objects.filter(phone_number=phone_number)
 	if len(clients) == 0:
@@ -232,6 +231,7 @@ def incoming_message(phone_number, message,network="safaricom"):
 		#if the the message is not a valid key
 		Email.template_email('number_not_found',**{'phone_number':phone_number,'message':message})
 		return False
+	#recieved a message from a phone number in the database
 	else:
 		client = clients[0]
 		if len(message.strip()) == 5 and message.strip().upper() == client.generate_key():
@@ -249,4 +249,6 @@ def incoming_message(phone_number, message,network="safaricom"):
 			sent_by='Client',
 			content=message,
 		).save()
+		client.last_msg_client = datetime.date.today()
+		client.save()
 		return True

@@ -47,9 +47,7 @@ def DoesNotExist(Exception):
 def message_fragment(request, id):
 	client = Client.objects.get(id=id)
 	nurse = get_object_or_default(Nurse, None, user=request.user)
-	print "Message Fragment: %s"%nurse
 	if not nurse==None:
-		print "viewed"
 		client.pending = 0
 		client.save()
 	message_template = "message_frag.html"
