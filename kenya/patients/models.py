@@ -191,17 +191,6 @@ class Client(models.Model):
 			.hexdigest())
 		step = int(math.ceil(len(string) / key_length))
 		return ''.join([chars[int(x, 16)] for x in string[::step]])
-	
-	#move to recieve
-	def update(self):
-		messages = Message.objects.filter(client_id=self,
-										  sent_by='Client')
-		if len(messages) == 0:
-			return
-
-		self.last_msg = messages[0].date
-		self.urgent = (datetime.now() - self.last_msg) > settings.URGENT
-		self.save()
 		
 class Nurse(models.Model):
 

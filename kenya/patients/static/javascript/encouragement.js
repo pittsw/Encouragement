@@ -149,7 +149,8 @@
 					$("#save_call").css("background-color", "rgb(91,141,147)");
 					return;
 				}
-				if(!$('#complete').checked) {
+				//remove duration if not answered
+				if(!$('#complete').is(':checked')) {
 					$('#duration').val('');
 				}
 				$.post("/add_call/" + client_id + "/",$('#phone-box').serialize(),function() {

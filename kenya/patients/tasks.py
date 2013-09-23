@@ -225,7 +225,7 @@ def incoming_message(phone_number, message,network="safaricom"):
 					Email.template_email('number_change',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
 					#update phone number and network
 					client.phone_number = phone_number 
-					client.phone_network = network 
+					#client.phone_network = network #Don't change network since we aren't using Artiel
 					client.validated = True
 					client.save()
 					return True
@@ -249,5 +249,4 @@ def incoming_message(phone_number, message,network="safaricom"):
 			sent_by='Client',
 			content=message,
 		).save()
-		client.last_msg = datetime.date.today()
 		return True
