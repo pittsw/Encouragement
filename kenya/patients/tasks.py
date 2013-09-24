@@ -126,9 +126,9 @@ def send_automated_message(clients=_patients.Client.objects.all(),now=datetime.d
 			print_message(m.message)
 			if send :
 				print "Sending..."
-				message_client(c,None,"System",m)
-				c.last_msg_system = datetime.date.today()
-				c.save()
+				message_client(client,None,"System",m.message)
+				client.last_msg_system = datetime.date.today()
+				client.save()
 	return clients.count()
 	
 def send_up_coming(clients=_patients.Client.objects.all(),now=datetime.datetime.now(),hour=True,send=False,days=2):
@@ -162,7 +162,7 @@ def send_up_coming(clients=_patients.Client.objects.all(),now=datetime.datetime.
 			print_message(m.message)
 			if send :
 				print "Sending..."
-				message_client(c,None,"System",m)
+				message_client(client,None,"System",m.message)
 	
 	return clients.count()
 	
