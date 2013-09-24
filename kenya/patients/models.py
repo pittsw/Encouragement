@@ -235,9 +235,6 @@ class Message(Interaction):
 	sent_by = models.CharField(max_length=6, choices=SENDER_CHOICES)
 
 	prompted = models.BooleanField(default=True)
-	
-	#link to an automated_message if this was sent by system
-	automated_message = models.ForeignKey(_backend.AutomatedMessage,blank=True,null=True,related_name="automated_message")
 
 class PhoneCall(Interaction):
 

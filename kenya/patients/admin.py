@@ -5,7 +5,7 @@ class PregnancyEventInline(admin.StackedInline):
 	model = PregnancyEvent
 
 class ClientAdmin(admin.ModelAdmin):
-	list_display = ('first_name','last_name','study_group','id','signup_date','condition','last_msg_client','last_msg_system',
+	list_display = ('first_name','last_name','study_group','id','next_visit','condition','last_msg_client','last_msg_system',
 	'pregnancy_status','validated','phone_number','phone_network')
 	list_filter = ('study_group','condition')
 	search_fields = ('id','first_name','last_name') 
