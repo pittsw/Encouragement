@@ -15,10 +15,14 @@ class ClientAdmin(admin.ModelAdmin):
 	
 class PregnancyEventAdmin(admin.ModelAdmin):
 	list_display = ('date','outcome','location','client')
+	
+class MessageAdmin(admin.ModelAdmin):
+	list_display = ('date','client_id','content','sent_by')
+	list_filter = ('sent_by',)
 
 admin.site.register(Nurse)
 admin.site.register(Client,ClientAdmin)
-admin.site.register(Message)
+admin.site.register(Message,MessageAdmin)
 admin.site.register(Note)
 admin.site.register(PhoneCall)
 admin.site.register(Visit)

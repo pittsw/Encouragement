@@ -58,4 +58,4 @@ def testmessage(request):
 			return HttpResponse("To: %s <br/> Message: %s"%(to,message))
 	else:
 		form = TestMessage() #unbound form
-	return render(request,"test.html", {'form':form})
+	return render(request,"shujaa/test.html", {'form':form})

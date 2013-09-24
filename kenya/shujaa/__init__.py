@@ -41,7 +41,7 @@ class Transport(BaseTransport):
 		#Send http request
 		httpResponse = urllib2.urlopen(req)
 		
-		print >> sys.stderr, "Shujaa Send: %s %s,%s"%(network,destination,content)
+		print >> sys.stderr, "Shujaa Send: %s %s,%s (%s)"%(network,destination,content,data)
 		#do something with response 
 		response = httpResponse.read()
 		print >> sys.stderr, response

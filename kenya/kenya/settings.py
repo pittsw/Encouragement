@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'backend',
     'djcelery',
     'south',
+    'shujaa',
 )
 
 # choose a path that is your virtual environment root
