@@ -10,10 +10,6 @@ import backend.models as _backend
 
 from transport_email import Transport as Email
 
-@periodic_task(run_every=crontab())
-def scheduled_tasks():
-	pass
-
 '''
 Todo: Move this to the recieve section
 @periodic_task(run_every=crontab(minute=0, hour=0))
@@ -130,7 +126,7 @@ def send_automated_message(clients=_patients.Client.objects.all(),now=datetime.d
 			print_message(m.message)
 			if send :
 				print "Sending..."
-				tasks.message_client(c,None,"System",m)
+				message_client(c,None,"System",m)
 				c.last_msg_system = datetime.date.today()
 				c.save()
 	return clients.count()
@@ -166,7 +162,7 @@ def send_up_coming(clients=_patients.Client.objects.all(),now=datetime.datetime.
 			print_message(m.message)
 			if send :
 				print "Sending..."
-				tasks.message_client(c,None,"System",m)
+				message_client(c,None,"System",m)
 	
 	return clients.count()
 	
