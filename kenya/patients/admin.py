@@ -19,11 +19,20 @@ class PregnancyEventAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
 	list_display = ('date','client_id','content','sent_by')
 	list_filter = ('sent_by',)
+	
+class PhoneCallAdmin(admin.ModelAdmin):
+	list_display = ('date','client_id','content','duration','reason')
+	
+class VisitAdmin(admin.ModelAdmin):
+	list_display = ('date','client_id','comments')
+	
+class NoteAdmin(admin.ModelAdmin):
+	list_display = ('date','client_id','content')
 
 admin.site.register(Nurse)
 admin.site.register(Client,ClientAdmin)
 admin.site.register(Message,MessageAdmin)
-admin.site.register(Note)
-admin.site.register(PhoneCall)
-admin.site.register(Visit)
+admin.site.register(Note,NoteAdmin)
+admin.site.register(PhoneCall,PhoneCallAdmin)
+admin.site.register(Visit,VisitAdmin)
 admin.site.register(PregnancyEvent,PregnancyEventAdmin)
