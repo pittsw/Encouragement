@@ -20,7 +20,7 @@ not_sent = patients.Message.objects.filter(Q(id__gt=87) & Q(id__lt=128)).exclude
 .exclude(id__in=[88,96,97,98,103,104,116])
 	
 for m in not_sent:
-	#tasks.message_client(m.client_id,None,"System",m.content)
-	#m.client_id.last_msg_system = datetime.date.today()
-	#m.client_id.save()
-	print m.content
+	tasks.message_client(m.client_id,None,"System",m.content)
+	m.client_id.last_msg_system = datetime.date.today()
+	m.client_id.save()
+	print m.id,m.client_id
