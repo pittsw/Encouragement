@@ -105,6 +105,8 @@ class Client(models.Model):
 
 	#Attributes to be edited by system only
 	urgent = models.BooleanField(editable=False, default=False)
+	
+	repeat_msg = models.IntegerField(editable=False,default=0)
 
 	pending = models.IntegerField(editable=False, default=0)
 

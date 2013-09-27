@@ -4,205 +4,182 @@ from celery.schedules import crontab
 from celery.task import group, periodic_task, task
 from django.conf import settings
 from django.utils.importlib import import_module
+from django.db.models import F,Q
 
 import patients.models as _patients #import Client, Message, Nurse
 import backend.models as _backend
 
 from transport_email import Transport as Email
 
-'''
-Todo: Move this to the recieve section
-@periodic_task(run_every=crontab(minute=0, hour=0))
-def update_all():
-    """Updates all clients to see if they are urgent.
-
-    """
-    for client in Client.objects.all():
-        update_client(client)
-
-
-@task
-def update_client(client):
-    """A wrapper to let us update a client asynchronously.
-    """
-    client.update()
-'''
-
-'''
-Todo: Rewrite
-@periodic_task(run_every=crontab(minute=55, hour=16, day_of_week="wednesday"))
-def send_all_scheduled():
-    """Sends a reminder message to every client twice a week, unless there is
-    no defined transport in settings.py.
-
-    """
-    transport = import_module(settings.TRANSPORT).Transport
-
-    transport_kwargs = getattr(settings, 'TRANSPORT_KWARGS', {})
-    batch = group([scheduled_message.subtask(args=(client,))
-        for client in Client.objects.all()])
-    messages = batch.apply_async().join()
-    transport.send_batch(messages)
-
-
-@task
-def scheduled_message(client):
-    """Calculates which message to send to a client, then sends it.
-
-    Arguments:
-    client - the client to send to
-
-    Returns:
-    A tuple in the form (phone number, message) for this client
-
-    """
-    week = int((date.today() - client.due_date).days / 7)
-    messages = AutomatedMessage.objects.filter(
-        condition__in=client.conditions.all(),
-        start_week__lte=week,
-        end_week__gte=week,
-    )
-    messages = [x for x in messages if x not in client.sent_messages.all()]
-    
-    content = ""
-    if len(messages) == 0:
-        content = "Error: please report this error to your clinic."
-    else:
-        message = messages[0]
-        content = message.message
-        if not message.repeats:
-            client.sent_messages.add(message)
-            client.save()
-
-    Message(
-        client_id=client,
-        user_id=None,
-        sent_by="System",
-        content=content
-    ).save()
-
-    return (client.phone_number, content)
-'''
-
-
-def print_message(msg,l=50,first=True,tabs=2):
-	if first:
-		print "%s* (%i)%s"%('\t'*tabs,len(msg),msg[:l])
-	else:
-		print '\t'*tabs+msg[:l]
-	if l<len(msg):
-		print_message(msg[l:],first=False)
-
-def send_automated_message(clients=_patients.Client.objects.all(),now=datetime.datetime.now(),day=True,hour=True,send=False):
-	"""
-	Return all clients that should be messaged now
-	"""
-	#filter out clients who should not recieve a message
-	clients = exlude_clients(clients)
+class message_runner:
 	
-	#if day and hour flags are set
-	#get clients for current time
-	if(day):
-		clients = clients.filter(send_day=now.weekday())
-		if(hour):
-			closest_hour = 8 if now.hour <=9 else 13 if now.hour <=14 else 19
+	def __init__(self,options):
+		#options
+		self.day = options.day
+		self.hour = options.hour
+		self.send = options.send
+		self.now = options.time
+		
+		#vars
+		self.base_lookup = {b.name:b for b in _backend.MessageBase.objects.all()}
+		self.values = {
+			"auto":0,"visit":0,"resend":0,
+			}
+	
+	def send_automated_messages(self,clients=_patients.Client.objects.all()):
+		"""
+		Return all clients that should be messaged now
+		"""
+		#filter out clients who should not recieve a message
+		clients = self.exlude_clients(clients)
+		
+		#if day and hour flags are set
+		#get clients for current time
+		if(self.day):
+			clients = clients.filter(send_day=self.now.weekday())
+			if(self.hour):
+				closest_hour = 8 if self.now.hour <=9 else 13 if self.now.hour <=14 else 19
+				clients = clients.filter(send_time=(closest_hour))
+		
+		print "Found %i clients to message."%clients.count()
+		
+		for client in clients:
+			self.send_one_automated_message(client)
+		self.values['auto'] = clients.count()
+	
+	def send_up_coming(self,clients=_patients.Client.objects.all(),days=2):
+		"""
+		Return all clients who have an upcoming clinic visit
+		"""
+		#filter out clients who should not recieve a message
+		clients = self.exlude_clients(clients)
+		
+		#if hour flag is set
+		if(self.hour):
+			closest_hour = 8 if self.now.hour <=9 else 13 if self.now.hour <=14 else 19
 			clients = clients.filter(send_time=(closest_hour))
-	
-	base_lookup = {b.name:b for b in _backend.MessageBase.objects.all()}
-	
-	print "Found %i clients to message."%clients.count()
-	
-	for client in clients:
+		
+		#get clients with a visit in the days in the future.
+		clients = clients.filter(next_visit=self.now+datetime.timedelta(days=days))
+		
+		print "Found %i clients who are comming in %i days."%(clients.count(),days)
+		
+		for client in clients:
+			#get client pregnancy status and week offset
+			if client.pregnancy_status == "Pregnant":
+				base = self.base_lookup['upcoming_anc']
+			elif client.pregnancy_status == "Post-Partum" and client.pregnancyevent.outcome != "miscarriage":
+				base = self.base_lookup['upcoming_pnc']
+				
+			messages = self.get_message(client,base,0,groups=False)
+			for m in messages:
+				self.print_message(m.message)
+				if self.send:
+					print "Sending..."
+					message_client(client,None,"System",m.message)
+		
+		self.values['visit'] = clients.count()
+		
+	def send_repeat(self,clients=_patients.Client.objects.all(),days=2):
+		#if hour flag is set
+		if(self.hour):
+			closest_hour = 8 if self.now.hour <=9 else 13 if self.now.hour <=14 else 19
+			clients = clients.filter(send_time=(closest_hour))
+		
+		#get two way clients who have not responded within two days
+		#and last system message was over 2 days ago
+		clients = clients.filter(Q(last_msg_client=None) | Q(last_msg_client__lt=\
+		F('last_msg_system')-datetime.timedelta(days=days))).filter(last_msg_system__lt=\
+		datetime.date.today()-datetime.timedelta(days=days),study_group__name='two_way')
+		
+		print "Found %i clients who have not responded with in %i days."%(clients.count(),days)
+		
+		if self.send: #increase the repeat_msg count
+			clients.update(F('repeat_msg')+1)
+			
+		for client in clients:
+			self._now = self.now
+			self.now = self.now-datetime.timedelta(days=client.repeat_msg*days)
+			self.send_one_automated_message(client)
+			self.now = self._now
+			
+		self.values['resend'] = clients.count()
+
+	def print_message(self,msg,l=50,first=True,tabs=2):
+		if first:
+			print "%s* (%i)%s"%('\t'*tabs,len(msg),msg[:l])
+		else:
+			print '\t'*tabs+msg[:l]
+		if l<len(msg):
+			self.print_message(msg[l:],first=False)
+		else:
+			print ''
+			
+	def send_one_automated_message(self,client):
 		#get client pregnancy status and week offset
 		if client.pregnancy_status == "Pregnant":
-			base = base_lookup['edd']
-			offset = 40 - (client.due_date-now.date()).days/7
-		elif client.pregnancy_status == "Post-Partum" and client.pregnancyevent.outcome != "miscarriage":
-			base = base_lookup['dd']
-			offset = (now.date() - client.pregnancyevent.date).days/7
+			base = self.base_lookup['edd']
+			offset = 40 - (client.due_date-self.now.date()).days/7
+		elif client.pregnancy_status == "Post-Partum":
+			base = self.base_lookup['dd']
+			offset = (self.now.date() - client.pregnancyevent.date).days/7
 		
-		messages = get_message(client,base,offset)
+		messages = self.get_message(client,base,offset)
 		for m in messages:
-			print_message(m.message)
-			if send :
+			self.print_message(m.message)
+			if self.send :
 				print "Sending..."
 				message_client(client,None,"System",m.message)
 				client.last_msg_system = datetime.date.today()
 				client.save()
-	return clients.count()
-	
-def send_up_coming(clients=_patients.Client.objects.all(),now=datetime.datetime.now(),hour=True,send=False,days=2):
-	"""
-	Return all clients who have an upcoming clinic visit
-	"""
-	#filter out clients who should not recieve a message
-	clients = exlude_clients(clients)
-	
-	#if hour flag is set
-	if(hour):
-		closest_hour = 8 if now.hour <=9 else 13 if now.hour <=14 else 19
-		clients = clients.filter(send_time=(closest_hour))
-	
-	#get clients with a visit in the days in the future.
-	clients = clients.filter(next_visit=now+datetime.timedelta(days=days))
-	
-	base_lookup = {b.name:b for b in _backend.MessageBase.objects.all()}
-	
-	print "Found %i clients who are comming in %i days."%(clients.count(),days)
-	
-	for client in clients:
-		#get client pregnancy status and week offset
-		if client.pregnancy_status == "Pregnant":
-			base = base_lookup['upcoming_anc']
-		elif client.pregnancy_status == "Post-Partum" and client.pregnancyevent.outcome != "miscarriage":
-			base = base_lookup['upcoming_pnc']
-			
-		messages = get_message(client,base,0,groups=False)
-		for m in messages:
-			print_message(m.message)
-			if send :
-				print "Sending..."
-				message_client(client,None,"System",m.message)
-	
-	return clients.count()
-	
-def get_message(client,base,offset,groups=True):
-	"""
-	Return (if any) the correct message to send the client at this time.
-	-- groups: flag to filter messages based on condition and study_group
-	"""
-	
-	condition = client.condition
-	language = client.language
-	study_group = client.study_group
-	
-	print >> sys.stderr, client,condition,language,study_group,base,offset
+				
+	def get_message(self,client,base,offset,groups=True):
+		"""
+		Return (if any) the correct message to send the client at this time.
+		-- groups: flag to filter messages based on condition and study_group
+		"""
 		
-	message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset).filter(groups__in=[language])\
-	
-	if groups:
-		message = message.filter(groups__in=[condition]).filter(groups__in=[study_group])
-		if message.count()==0: 
-			#no message was found get message for normal conditon
-			message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
-		.filter(groups__name__in=['normal']).filter(groups__in=[language]).filter(groups__in=[study_group])
-	
-	return message
-	
-def get_missed_visit_client(now=datetime.datetime.now()):
-	pass
-	
-def get_missed_visit_message(client):
-	pass
-	
-def exlude_clients(clients,one_way=True):
-	#minus those in the control group 
-	#minus those who have finished or stopped
-	clients = clients.exclude(study_group__name="control")\
-	.exclude(pregnancy_status="Stopped").exclude(pregnancy_status="Finished")
-	if one_way==False:
-		clients = clients.exclude(study_group__name="one_way")
-	return clients
+		condition = client.condition
+		language = client.language
+		study_group = client.study_group
+		
+		print >> sys.stderr, client,condition,language,study_group,base,offset
+			
+		message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset).filter(groups__in=[language])
+		
+		if groups:
+			message = message.filter(groups__in=[condition]).filter(groups__in=[study_group])
+			if message.count()==0: 
+				#no message was found get message for normal conditon
+				message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset)\
+			.filter(groups__name__in=['normal']).filter(groups__in=[language]).filter(groups__in=[study_group])
+		
+		return message
+		
+	def exlude_clients(self,clients,one_way=True):
+		#minus those in the control group 
+		#minus those who have finished or stopped
+		#minus those who have had a mis-carrage
+		clients = clients.exclude(study_group__name="control")\
+		.exclude(pregnancy_status="Stopped").exclude(pregnancy_status="Finished")\
+		.exclude(pregnancyevent__outcome="miscarriage")
+		
+		if one_way==False:
+			clients = clients.exclude(study_group__name="one_way")
+		return clients
+
+	def content(self):
+		return 	"""
+	Mobil Watch Automatic Messages Sent: {0.now}
+		Automated: {0.values[auto]}
+		Visit:{0.values[visit]}
+		Resent:{0.values[resend]}
+
+		Options:
+			Day: {0.day} Hour: {0.hour} Send: {0.send}""".format(self)
+			
+	def __str__(self):
+		return "Now: {0.now} Day: {0.day} Hour: {0.hour} Send: {0.send}".format(self)
 
 def message_client(client, nurse, sender, content, transport=None,transport_kwargs={}):
 	"""Sends the given message to the client.
@@ -298,5 +275,6 @@ def incoming_message(phone_number, message,network="safaricom"):
 			content=message,
 		).save()
 		client.last_msg_client = datetime.date.today()
+		client.repeat_msg = 0
 		client.save()
 		return True

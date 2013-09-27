@@ -29,10 +29,10 @@ class Transport(BaseTransport):
 			cls.send(target, content)
 			
 	@classmethod
-	def template_email(cls,template,**keys):
+	def template_email(cls,template,group='debug',**keys):
 		try:
 			template = EmailTemplates.objects.get(key=template)
-			cls.email(template.subject.format(**keys),template.content.format(**keys))
+			cls.email(template.subject.format(**keys),template.content.format(**keys),group)
 		except Exception as e:
 			print >> sys.stderr, "Email Template Not Found",e
 	
