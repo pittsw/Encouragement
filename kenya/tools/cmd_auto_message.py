@@ -39,14 +39,14 @@ from transport_email import Transport as Email
 
 runner = tasks.message_runner(options)
 
-sent,up_comming,resent = 0,0,0
+sent,up_comming,resent = -1,-1,-1
 #get clients 
 if options.all or options.auto:
 	sent = runner.send_automated_messages()
 if options.all or options.visits:
 	up_comming = runner.send_up_coming()
 if options.all or options.resend:
-	resetn = runner.send_repeat()
+	resent = runner.send_repeat()
 
 content = runner.content()
 
