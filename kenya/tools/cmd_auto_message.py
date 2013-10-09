@@ -42,11 +42,11 @@ runner = tasks.message_runner(options)
 sent,up_comming,resent = 0,0,0
 #get clients 
 if options.all or options.auto:
-	runner.send_automated_messages()
+	sent = runner.send_automated_messages()
 if options.all or options.visits:
-	runner.send_up_coming()
+	up_comming = runner.send_up_coming()
 if options.all or options.resend:
-	runner.send_repeat()
+	resetn = runner.send_repeat()
 
 content = runner.content()
 

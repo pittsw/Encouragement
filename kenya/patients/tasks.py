@@ -49,7 +49,7 @@ class message_runner:
 	
 	def send_up_coming(self,clients=_patients.Client.objects.all(),days=2):
 		"""
-		Return all clients who have an upcoming clinic visit
+		Send messages to all clients who have an upcoming clinic visit
 		"""
 		#filter out clients who should not recieve a message
 		clients = self.exlude_clients(clients)
@@ -59,7 +59,7 @@ class message_runner:
 			closest_hour = 8 if self.now.hour <=9 else 13 if self.now.hour <=14 else 19
 			clients = clients.filter(send_time=(closest_hour))
 		
-		#get clients with a visit in the days in the future.
+		#get clients with a visit in days in the future.
 		clients = clients.filter(next_visit=self.now+datetime.timedelta(days=days))
 		
 		print "Found %i clients who are comming in %i days."%(clients.count(),days)
@@ -207,7 +207,7 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	
 	#replace message variables 
 	nurse_name = nurse.user.first_name if nurse else settings.DEFAULT_NURSE_NAME
-	content = content.format(name=client.nickname.capitalize())
+	content = content.format(name=client.nickname.capitalize(),date=client.next_vist.strftime("%A %b %m"))
 
 	_patients.Message(
 		client_id=client,
@@ -242,7 +242,7 @@ def incoming_message(phone_number, message,network="safaricom"):
 			message = message.strip().upper()
 			#check if message is equal to a valid key
 			for client in _patients.Client.objects.filter():
-				if message == client.generate_key():
+				if message.upper() == client.generate_key():
 					if client.validated: #new number for already valid client
 						Email.template_email('valid_repeat',**{'client':client,'phone_number':phone_number,'network':network,"message":message})
 						return False
@@ -276,5 +276,6 @@ def incoming_message(phone_number, message,network="safaricom"):
 		).save()
 		client.last_msg_client = datetime.date.today()
 		client.repeat_msg = 0
+		client.pending = F('pending') + 1
 		client.save()
 		return True

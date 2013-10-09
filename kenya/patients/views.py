@@ -113,7 +113,7 @@ def visit_history(request):
 		return render_to_response('visit_history.html',{'missed':missed,'today':today,'future':future},RequestContext(request))
 	#Process Post POST
 	updates = {}
-	messages = {'missed':'Patient arrived late','today':'Normal Visit','future':'Patient arrived early'}
+	messages = {'missed':'Patient arrived late','today':'Planned Visit','future':'Patient arrived early'}
 	#get clients to update from checkboxs
 	for name,value in request.POST.iteritems():
 		try:
@@ -135,6 +135,9 @@ def visit_history(request):
 			tmp_client = Client.objects.get(id=client_id)
 			tmp_client.next_visit = new_date
 			tmp_client.save()
+			#create visit event
+			visit = Visit(client_id=tmp_client,comments=messages[when],date=date.today())
+			visit.save()
 	return HttpResponse(out)
 
 def delete_visit(request, pk):
@@ -208,7 +211,7 @@ def edit_client(request, id):
 def add_message(request, id_number):
     try:
         if request.method == 'POST':
-            text = request.POST['text']
+            text = request.POST['text'].strip()
             nurse = get_object_or_default(Nurse, None, user=request.user)
             if nurse:
                 sender = 'Nurse'
@@ -259,12 +262,14 @@ def pregnacy(request, id):
 			pregnacy_event.client = client
 			pregnacy_event.save()
 			#update client pregnacy_status
-			#print pregnacy_event.outcome
 			if pregnacy_event.outcome == "live_birth":
 				client.pregnancy_status = "Post-Partum"
 			elif pregnacy_event.outcome == "miscarriage":
 				client.pregnancy_status = "Stopped"
 			client.save()
+			#create a visit record
+			visit = Visit(client_id=client,comments=pregnacy_event.message(),date=date.today())
+			visit.save()
 			return HttpResponse('')
 	return HttpResponse(form.as_table())
 

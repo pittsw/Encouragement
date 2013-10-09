@@ -193,6 +193,11 @@ class PregnancyEvent(models.Model):
 	
 	client = models.OneToOneField(Client,null=True,blank=True)
 	
+	def message(self):
+		if self.outcome=='live_birth':
+			return "Live birth at {}".format(self.location)
+		return "Miscarriage at {}".format(self.location)
+	
 	def __unicode__(self):
 		return "(%s) %s (%s)"%(self.date,self.client,self.outcome)
 
@@ -273,18 +278,19 @@ class Note(models.Model):
         return self.content
 
 class Visit(models.Model):
-    class Meta:
-        ordering = ['-date']
-        
-    client_id = models.ForeignKey(Client)
-    
-    comments = models.CharField(max_length=100)
-    
-    date = models.DateField()
-    
-    def __unicode__(self):
-        return self.comments
+	class Meta:
+		ordering = ['-date']
+		
+	client_id = models.ForeignKey(Client)
 
+	comments = models.CharField(max_length=100)
+
+	date = models.DateField()
+
+	def __unicode__(self):
+		return self.comments
+"""
+#There is an error with this and it adds 2 instead of 1 moved to incoming messsage
 @receiver(post_save, sender=Message, dispatch_uid="pending_update")
 def increment_pending(sender, **kwargs):
     instance = kwargs['instance']
@@ -292,3 +298,4 @@ def increment_pending(sender, **kwargs):
         client = instance.client_id
         client.pending = F('pending') + 1
         client.save()
+"""
