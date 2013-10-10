@@ -18,8 +18,9 @@ parser.add_option("-a","--auto",action="store_true",help="flag to send automated
 parser.add_option("-v","--visits",action="store_true",help="flag to send visit reminders",default=False)
 parser.add_option("-r","--resend",action="store_true",help="flag to resend automated messages",default=False)
 parser.add_option("--all",action="store_true",help="flag to send all",default=False)
-parser.add_option("--time",action="callback",callback=parse_date,nargs=4,help="change the time to send YYYY-MM-DD HH",type="int",default=datetime.datetime.today())
+parser.add_option("--time",action="callback",callback=parse_date,nargs=4,help="change the time to send YYYY MM DD HH",type="int",default=datetime.datetime.today())
 (options,args) = parser.parse_args()
+print options.time
 #------- End Option Parser ------#
 
 #------- Setup Django Framework --------#
@@ -39,19 +40,18 @@ from transport_email import Transport as Email
 
 runner = tasks.message_runner(options)
 
-sent,up_comming,resent = -1,-1,-1
 #get clients 
 if options.all or options.auto:
-	sent = runner.send_automated_messages()
+	runner.send_automated_messages()
 if options.all or options.visits:
-	up_comming = runner.send_up_coming()
+	runner.send_up_coming()
 if options.all or options.resend:
-	resent = runner.send_repeat()
+	runner.send_repeat()
 
 content = runner.content()
 
 if options.email:
-	subject = "Automatic Messages {} {} {}".format(sent,up_comming,resent)
+	subject = "Automatic Messages {auto} {visit} {resend}".format(**runner.values)
 
 	Email.email(subject,content)
 else:

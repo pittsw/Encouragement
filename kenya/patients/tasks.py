@@ -23,7 +23,7 @@ class message_runner:
 		#vars
 		self.base_lookup = {b.name:b for b in _backend.MessageBase.objects.all()}
 		self.values = {
-			"auto":0,"visit":0,"resend":0,
+			"auto":-1,"visit":-1,"resend":-1,
 			}
 	
 	def send_automated_messages(self,clients=_patients.Client.objects.all()):
@@ -42,6 +42,10 @@ class message_runner:
 				clients = clients.filter(send_time=(closest_hour))
 		
 		print "Found %i clients to message."%clients.count()
+		
+		if self.send:
+			#set repeat message back to 0
+			clients.update(repeat_msg=0)
 		
 		for client in clients:
 			self.send_one_automated_message(client)
@@ -85,21 +89,27 @@ class message_runner:
 		if(self.hour):
 			closest_hour = 8 if self.now.hour <=9 else 13 if self.now.hour <=14 else 19
 			clients = clients.filter(send_time=(closest_hour))
-		
+
 		#get two way clients who have not responded within two days
 		#and last system message was over 2 days ago
-		clients = clients.filter(Q(last_msg_client=None) | Q(last_msg_client__lt=\
-		F('last_msg_system')-datetime.timedelta(days=days))).filter(last_msg_system__lt=\
-		datetime.date.today()-datetime.timedelta(days=days),study_group__name='two_way')
+		clients = clients.filter(study_group__name='two_way').filter(
+		Q(last_msg_client=None) | Q(last_msg_client__lt=F('last_msg_system')-datetime.timedelta(days=days)),
+		last_msg_system__lt=self.now-datetime.timedelta(days=days))
 		
 		print "Found %i clients who have not responded with in %i days."%(clients.count(),days)
 		
-		if self.send: #increase the repeat_msg count
-			clients.update(F('repeat_msg')+1)
+		if self.send: 
+			#increase the repeat_msg count
+			clients.update(repeat_msg=F('repeat_msg')+1)
+			#update clients who have already been resent messages twice
+			clients.filter(urgent=False,repeat_msg__gte=2).update(urgent=True)
+			
 			
 		for client in clients:
 			self._now = self.now
-			self.now = self.now-datetime.timedelta(days=client.repeat_msg*days)
+			#add max so we do not multiple by 0
+			self.now = self.now-datetime.timedelta(days=max(client.repeat_msg,1)*days)
+			print client
 			self.send_one_automated_message(client)
 			self.now = self._now
 			
@@ -143,7 +153,7 @@ class message_runner:
 		language = client.language
 		study_group = client.study_group
 		
-		print >> sys.stderr, client,condition,language,study_group,base,offset
+		print >> sys.stderr, client.id,client,condition,language,study_group,base,offset
 			
 		message = _backend.AutomatedMessage.objects.filter(send_base=base,send_offset=offset).filter(groups__in=[language])
 		
@@ -207,7 +217,7 @@ def message_client(client, nurse, sender, content, transport=None,transport_kwar
 	
 	#replace message variables 
 	nurse_name = nurse.user.first_name if nurse else settings.DEFAULT_NURSE_NAME
-	content = content.format(name=client.nickname.capitalize(),date=client.next_vist.strftime("%A %b %m"))
+	content = content.format(name=client.nickname.capitalize(),date=client.next_visit.strftime("%A %b %d"))
 
 	_patients.Message(
 		client_id=client,
@@ -274,8 +284,10 @@ def incoming_message(phone_number, message,network="safaricom"):
 			sent_by='Client',
 			content=message,
 		).save()
+		#reset state on clilent
 		client.last_msg_client = datetime.date.today()
 		client.repeat_msg = 0
+		client.urgent=False
 		client.pending = F('pending') + 1
 		client.save()
 		return True

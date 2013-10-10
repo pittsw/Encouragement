@@ -6,7 +6,13 @@
         </div>
         <div class="left">
             {% if x.urgent %}
-                <div class="urgent_msg">No reply since {{x.last_msg}}.</div>
+            <div class="urgent_msg">
+				{% if not x.last_msg_client %}
+					Has never responded!
+				{% else %}
+                No reply since {{x.last_msg_client|date:"M d"}}.
+                {% endif %}
+                </div>
             {% endif %}
             {% if x.pending > 0 %}
                 <div class="pending_msg">{{x.pending}} unread messages.</div>

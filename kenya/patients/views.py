@@ -224,26 +224,30 @@ def add_message(request, id_number):
         print >> sys.stderr, "Add Message",e
 
 def add_call(request, id_number):
-    if request.method == "POST":
-        nurse = get_object_or_default(Nurse, None, user=request.user)
-        client = get_object_or_404(Client, id=id_number)
-        content = request.POST['text']
-        duration = request.POST['duration']
-        reason = request.POST.get('reason','other')
-        initiated = request.POST['initiated']
-        try:
-            duration = int(duration)
-        except ValueError:
-            duration = 0
-        PhoneCall(
-            user_id=nurse,
-            client_id=client,
-            content=content,
-            duration=duration,
-            reason=reason,
-            caller=initiated,
-        ).save()
-    return HttpResponse('')
+	if request.method == "POST":
+		nurse = get_object_or_default(Nurse, None, user=request.user)
+		client = get_object_or_404(Client, id=id_number)
+		content = request.POST['text']
+		duration = request.POST['duration']
+		reason = request.POST.get('reason','other')
+		initiated = request.POST['initiated']
+		try:
+			duration = int(duration)
+		except ValueError:
+			duration = 0
+		PhoneCall(
+			user_id=nurse,
+			client_id=client,
+			content=content,
+			duration=duration,
+			reason=reason,
+			caller=initiated,
+		).save()
+		#reset state on client
+		if client.urgent:
+			client.urgent = False
+			client.save()
+	return HttpResponse('')
     
 def message_prompted(request,id_number):
 	message = get_object_or_404(Message,id=id_number)
@@ -265,7 +269,7 @@ def pregnacy(request, id):
 			if pregnacy_event.outcome == "live_birth":
 				client.pregnancy_status = "Post-Partum"
 			elif pregnacy_event.outcome == "miscarriage":
-				client.pregnancy_status = "Stopped"
+				client.pregnancy_status = "Finished"
 			client.save()
 			#create a visit record
 			visit = Visit(client_id=client,comments=pregnacy_event.message(),date=date.today())
