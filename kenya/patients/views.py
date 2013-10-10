@@ -1,6 +1,6 @@
 from csv import DictWriter
 import sys, random, time
-from datetime import date, timedelta
+from datetime import date, timedelta,datetime
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -99,46 +99,52 @@ def add_visit(request, id):
         if form.is_valid():
             comments = form.cleaned_data['comments']
             date = form.cleaned_data['date']
-            Visit(client_id=client, comments=comments, date=date).save()
+            Visit(client_id=client, comments=comments, date=date,scheduled_date=client.next_visit).save()
             client.next_visit = form.cleaned_data['next_visit']
             client.save()
             return HttpResponse('')
     return render_to_response('visit_form.html', {'form': form,'client':client})
     
 def visit_history(request):
-	missed = Client.objects.filter(next_visit__lt=date.today())
-	today = Client.objects.filter(next_visit=date.today())
-	future = Client.objects.filter(next_visit__gt=date.today(),next_visit__lte=date.today()+timedelta(days=2))
+	#get date range
+	current_start = date(2013,10,24)
+	future_stop = current_start+timedelta(days=2)
+	current_stop = current_start-timedelta(days=1)
+	#get clients for eac date range
+	clients = {
+	'missed':Client.objects.filter(next_visit__lt=current_stop),
+	'current':Client.objects.filter(next_visit__lte=current_start,next_visit__gte=current_stop),
+	'future':Client.objects.filter(next_visit__gt=current_start,next_visit__lte=future_stop)
+	}
+	updates = {'next_visit':[],'no_next_visit':[]}
 	if request.method == "GET":
-		return render_to_response('visit_history.html',{'missed':missed,'today':today,'future':future},RequestContext(request))
+		return render_to_response('visit_history.html',{'clients':clients,'updates':updates},RequestContext(request))
 	#Process Post POST
-	updates = {}
 	messages = {'missed':'Patient arrived late','today':'Planned Visit','future':'Patient arrived early'}
 	#get clients to update from checkboxs
 	for name,value in request.POST.iteritems():
 		try:
 			box,when,client_id = name.split('_')
 			if(box=='ck' and value=='on'):
+				tmp_client = Client.objects.get(id=client_id)
+				#create visit event
+				Visit(
+					client_id=tmp_client,
+					comments=messages[when],
+					date=date.today(),
+					scheduled_date=tmp_client.next_visit
+				).save()
+				#check if new_visit_date is a date
 				try:
-					updates[when].append(client_id)
-				except KeyError, e:
-					updates[when] = [client_id]
+					new_visit_date = request.POST['date_%s'%(client_id)]
+					tmp_client.next_visit = new_visit_date
+					tmp_client.save()
+					updates['next_visit'].append(tmp_client)
+				except ValidationError: #input can not be parsed as date
+					updates['no_next_visit'].append(tmp_client)
 		except ValueError:
 			pass
-	out = ""
-	#Todo: Error Checking
-	for when,client_ids in updates.iteritems():
-		for client_id in client_ids:
-			new_date = request.POST['date_%s'%(client_id)]
-			out += '(%s) %s:%s<br/>\n'%(client_id,new_date,messages[when])
-			#Make this actually change the client
-			tmp_client = Client.objects.get(id=client_id)
-			tmp_client.next_visit = new_date
-			tmp_client.save()
-			#create visit event
-			visit = Visit(client_id=tmp_client,comments=messages[when],date=date.today())
-			visit.save()
-	return HttpResponse(out)
+	return render_to_response('visit_history.html',{'clients':clients,'updates':updates},RequestContext(request))
 
 def delete_visit(request, pk):
     if request.method == "POST":

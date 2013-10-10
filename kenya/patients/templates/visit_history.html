@@ -1,45 +1,67 @@
 
-<form id="visit_history_form" method="post" action="/visit_history/">
+<form id="visit_history_form" action="/visit_history/" method="post">
 	  {% csrf_token %}
 
-{% if missed %}     
-<h2>Missed Visits</h2>
-<ul class="visit_history">
-	{% for client in missed %}
+<h2>Missed Visits</h2> 
+<ol class="visit_history">
+	{% for client in clients.missed %}
 	<li><span class="date">{{ client.next_visit }}</span>
 	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
 	<input name="ck_missed_{{client.id}}" type="checkbox"/>
 	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
+	{% empty %}
+	None
 	{% endfor %}
-</ul>
-{% endif %}
-{% if today %}   
-<h2>Today's Visits</h2>
+</ol>
+
+<h2> Visits Today and Tomorrow</h2> 
 <ul class="visit_history">
-	{% for client in today %}
+	{% for client in clients.current %}
 	<li><span class="date">{{ client.next_visit }}</span>
 	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
 	<input name="ck_today_{{client.id}}" type="checkbox"/>
 	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
+	{% empty %}
+	None
 	{% endfor %}
 </ul>
-{% endif %}
-{% if future %}  
-<h2>Next Two Days</h2>
+
+<h2>Next Two Days</h2>  
 <ul class="visit_history">
-	{% for client in future %}
+	{% for client in clients.future %}
 	<li><span class="date">{{ client.next_visit }}</span>
 	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
 	<input name="ck_future_{{client.id}}" type="checkbox"/>
 	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 	</li>
+	{% empty %}
+	None
 	{% endfor %}
 </ul>
-{% endif %}
-<div style="text-align:center;margin-bottom:5px;"><input type="button" value="Submit" id="submit"/></div>
+
+<div style="text-align:center;margin-bottom:5px;"><input type="submit" value="Submit" id="submit"/></div>
     <div class="errors">
         {{ form.errors.as_ul }}
     </div>
 </form>
+
+{% if updates.next_visit %}
+<h2>Clients Next Visits Updated</h2>
+	<ol>
+	{% for client in updates.next_visit %}
+		({{ client.id }}) {{ client.first_name }} {{ client.last_name }} visit set to {{ client.next_visit }}
+	{% endfor %}
+	</ol>
+{% endif %}
+
+
+{% if updates.no_next_visit %}
+<h2>Visit Recorded</h2>
+	<ol>
+	{% for client in updates.no_next_visit %}
+		({{ client.id }}) {{ client.first_name }} {{ client.last_name }} next visit not set
+	{% endfor %}
+	</ol>
+{% endif %}

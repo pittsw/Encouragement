@@ -3,6 +3,9 @@ from django.contrib import admin
 
 class PregnancyEventInline(admin.StackedInline):
 	model = PregnancyEvent
+	
+class VisitsInline(admin.TabularInline):
+	model = Visit
 
 class ClientAdmin(admin.ModelAdmin):
 	list_display = ('first_name','last_name','study_group','id','next_visit','condition','last_msg_client','last_msg_system',
@@ -11,7 +14,7 @@ class ClientAdmin(admin.ModelAdmin):
 	search_fields = ('id','first_name','last_name') 
 	ordering = ('study_group','id')
 	readonly_fields=('urgent','pending','last_msg_client','last_msg_system','signup_date','validated','repeat_msg')
-	inlines = [PregnancyEventInline]
+	inlines = [PregnancyEventInline,VisitsInline]
 	
 class PregnancyEventAdmin(admin.ModelAdmin):
 	list_display = ('date','outcome','location','client')
@@ -24,7 +27,7 @@ class PhoneCallAdmin(admin.ModelAdmin):
 	list_display = ('date','client_id','content','duration','reason')
 	
 class VisitAdmin(admin.ModelAdmin):
-	list_display = ('date','client_id','comments')
+	list_display = ('client_id','date','scheduled_date','comments')
 	
 class NoteAdmin(admin.ModelAdmin):
 	list_display = ('date','client_id','content')

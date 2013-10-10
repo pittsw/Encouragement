@@ -286,6 +286,8 @@ class Visit(models.Model):
 	comments = models.CharField(max_length=100)
 
 	date = models.DateField()
+	
+	scheduled_date = models.DateField(null=True,blank=True)
 
 	def __unicode__(self):
 		return self.comments
