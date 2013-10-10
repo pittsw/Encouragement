@@ -107,7 +107,7 @@ def add_visit(request, id):
     
 def visit_history(request):
 	#get date range
-	current_start = date(2013,10,24)
+	current_start = date.today()
 	future_stop = current_start+timedelta(days=2)
 	current_stop = current_start-timedelta(days=1)
 	#get clients for eac date range
