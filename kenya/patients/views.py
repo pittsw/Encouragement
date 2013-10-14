@@ -1,5 +1,5 @@
 from csv import DictWriter
-import sys, random, time
+import sys, random, time, json
 from datetime import date, timedelta,datetime
 
 from django.conf import settings
@@ -127,7 +127,7 @@ def visit_history(request):
 			box,when,client_id = name.split('_')
 			if(box=='ck' and value=='on'):
 				tmp_client = Client.objects.get(id=client_id)
-				#create visit event
+				#cre03iate visit event
 				Visit(
 					client_id=tmp_client,
 					comments=messages[when],
@@ -196,6 +196,22 @@ def list_fragment(request):
 	clients = clients.filter(pregnancy_status__contains=status)
 	return render_to_response("list_fragment.html", {'clients': clients},
 							  context_instance=RequestContext(request))
+
+#return a JSON representation of all clients
+def clients(request):
+	clients = []
+	for c in Client.objects.all():
+		clients.append({
+			'id':c.id,
+			'id_str':'%03i'%c.id,
+			'study_group':c.study_group.name,
+			'last_name':c.last_name,
+			'first_name':c.first_name,
+			'urgent':c.urgent,
+			'pending':c.pending,
+			'next_visit':c.next_visit.strftime("%b %d")
+		})
+	return HttpResponse(json.dumps(clients))
 
 def edit_client(request, id):
     client = get_object_or_404(Client, id=id)

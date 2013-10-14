@@ -26,7 +26,8 @@ urlpatterns = patterns('',
     url(r'^test/',views.test),
     url(r'^delete_visit/(?P<pk>\d+)/', views.delete_visit),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.index),
+    url(r'^$', views.index), #Index
+    url(r'^clients$', views.clients), #JSON response of clients
     url(r'^csv/', views.csv),
     url(r'^clientcsv/(?P<id_number>\d+)/', views.clientcsv),
     url(r'^msgcsv/(?P<id_number>\d+)/', views.message_csv),
