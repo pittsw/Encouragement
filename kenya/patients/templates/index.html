@@ -7,15 +7,15 @@
 
         <script src="{{ STATIC_URL }}javascript/jquery-1.7.2.js"></script>
         <script src="{{ STATIC_URL }}javascript/jquery-ui-1.8.20.custom.min.js"></script>
+        <script src="{{ STATIC_URL }}javascript/underscore.js"></script>
         <script src="{{ STATIC_URL }}javascript/backbone.js"></script>
-        <script src="{{ STATIC_URL }}javascript/backbone.queryparams.js"></script>
+        <!-- <script src="{{ STATIC_URL }}javascript/backbone.queryparams.js"></script> -->
         <script src="{{ STATIC_URL }}javascript/encouragement.js"></script>
 	</head>
 	<body class="container_16">
 		<div class="header-bar grid_16">
             <div class="border">
                 <span class="title">Encouragement System</span>
-                <button id="refresh_button">Refresh</button>
                 <span class="logout">{% if nurse %}
                     Currently logged in as {{nurse}}
                     <a href="/accounts/logout"><button type="button">Log out</button></a>
@@ -28,8 +28,8 @@
 				<span class="search">
 					<input type="text" id="searchtext" placeholder="Search..."/>
 				</span>
-				<span class="addbutton" id="add"></span>
-				<span id="visit_history_button"></span>
+				<a href="#add"><span class="addbutton" id="add"></span></a>
+				<a href="#visit_history"><span id="visit_history_button"></span></a>
 			</div>
 	
             <div class="patient_bar">

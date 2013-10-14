@@ -194,6 +194,10 @@ textarea {
     overflow: auto;
 }
 
+#patient_list a {
+	text-decoration:none;
+}
+
 .person .name div{
     display: inline;
     float: left;

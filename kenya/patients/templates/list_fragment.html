@@ -1,4 +1,5 @@
 	{% for x in clients %}
+	<a href="#client/{{x.id}}">
     <div class="person" id="{{x.id}}">
        
         <div class="name {{x.study_group.name}}"><div></div>
@@ -28,5 +29,6 @@
             {% endif %}
         </div>
     </div>
+    </a>
     {% endfor %}
 
