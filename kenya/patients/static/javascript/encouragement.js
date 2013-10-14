@@ -1,35 +1,44 @@
+// Set up AJAX to allow posts
+$.ajaxSetup({ 
+	 beforeSend: function(xhr, settings) {
+		 function getCookie(name) {
+			 var cookieValue = null;
+			 if (document.cookie && document.cookie != '') {
+				 var cookies = document.cookie.split(';');
+				 for (var i = 0; i < cookies.length; i++) {
+					 var cookie = jQuery.trim(cookies[i]);
+					 // Does this cookie string begin with the name we want?
+				 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+					 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					 break;
+				 }
+			 }
+		 }
+		 return cookieValue;
+		 }
+		 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+			 // Only send the token to relative URLs i.e. locally.
+			 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+		 }
+	 } 
+});
+
+var Tools = function() {
+	
+	var pub = {};//public variables
+	
+	
+	
+}
+
 (function($) {
     $(document).ready(function() {
         // The id of the currently selected client
         var client_id = undefined;
         // The name of the currently selected client
         var client_name = undefined;
-        // The load timer that automatically refreshed the page
-        var load_timer = undefined;
-        // Set up AJAX to allow posts
-        $.ajaxSetup({ 
-             beforeSend: function(xhr, settings) {
-                 function getCookie(name) {
-                     var cookieValue = null;
-                     if (document.cookie && document.cookie != '') {
-                         var cookies = document.cookie.split(';');
-                         for (var i = 0; i < cookies.length; i++) {
-                             var cookie = jQuery.trim(cookies[i]);
-                             // Does this cookie string begin with the name we want?
-                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                             break;
-                         }
-                     }
-                 }
-                 return cookieValue;
-                 }
-                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                     // Only send the token to relative URLs i.e. locally.
-                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-                 }
-             } 
-        });
+       
+        
         
         //Load Client View Into Main Content
         var load_client = function(client_obj) {
@@ -326,7 +335,7 @@
         
         // Load the client editing fragment when they click edit
         var loadEditHandlers = function(link) {
-			//set date class on end pregnacy form (easy here then in django code)
+			//set date class on end pregnacy form (easier here then in django code)
 			$("#end_pregnacy_form #id_end-date").parent().addClass("date");
 			setCalendars();
             $('.info #client_info_edit').on("click", function(eventObject) {
