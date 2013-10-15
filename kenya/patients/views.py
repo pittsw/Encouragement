@@ -28,15 +28,11 @@ def get_object_or_default(klass, default, **kwargs):
 
 @login_required
 def index(request):
-    clients = Client.objects.all().order_by("-study_group")
-    patients = render_to_string("list_fragment.html", {'clients': clients})
-    nurse = get_object_or_default(Nurse, "Administrator", user=request.user)
-    c = {
-        'patient_list': patients,
-        'nurse': nurse,
-    }
-    c.update(csrf(request))
-    return render_to_response("index.html", c, context_instance=RequestContext(request))
+	c = {
+		'nurse': get_object_or_default(Nurse, "Administrator", user=request.user),
+	}
+	c.update(csrf(request))
+	return render_to_response("index.html", c, context_instance=RequestContext(request))
 
 def DoesNotExist(Exception):
     def __init__(self, value):
@@ -205,11 +201,12 @@ def clients(request):
 			'id':c.id,
 			'id_str':'%03i'%c.id,
 			'study_group':c.study_group.name,
-			'last_name':c.last_name,
-			'first_name':c.first_name,
+			'last_name':c.last_name.capitalize(),
+			'first_name':c.first_name.capitalize(),
 			'urgent':c.urgent,
 			'pending':c.pending,
-			'next_visit':c.next_visit.strftime("%b %d")
+			'next_visit':c.next_visit.strftime("%b %d"),
+			'last_msg':c.last_msg_client.strftime("%b %d") if c.last_msg_client else None,
 		})
 	return HttpResponse(json.dumps(clients))
 

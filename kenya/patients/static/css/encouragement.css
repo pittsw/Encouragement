@@ -176,15 +176,53 @@ textarea {
 .patient_bar {
     background-color: rgb(200, 200, 200);
     font-weight: bold;
-    padding: 5px 5px 0px 5px;
     height: 20px;
     font-size: 9px;
+}
+
+.patient_bar span button {
+	background-size:30px 30px;
+	background-position:center 35%;
+	height:20px;
+	width:30px;
+	padding:0px;
+	margin:0px;
+	border:1px solid black;
+	border-bottom:none;
+	border-radius:10px 10px 0px 0px;
+}
+
+.patient_bar button.selected {
+	background-color: rgb(217,233,236);
+}
+
+.patient_bar button:hover {
+	background-color: rgb(91,141,147);
 }
 
 .patient_bar select {
 	position:relative;
 	font-size:10px;
 }
+
+.patient_bar #sort_direction {
+	width: 15px;
+    height: 15px;
+    background-image: url('/static/images/sort.png');
+    background-size:15px 15px;
+    position:relative;
+    display:inline-block;
+    top:-3px;
+    left:10px;
+}
+
+.patient_bar #sort_direction.asc {
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
 /* End search bar styles */
 
 /* Styles for the client list. */
@@ -196,6 +234,7 @@ textarea {
 
 #patient_list a {
 	text-decoration:none;
+	display:block;
 }
 
 .person .name div{
@@ -207,15 +246,15 @@ textarea {
     height: 20px;
 }
 
-.person .two_way>div{
+.person .two_way>div, .patient_bar #two_way{
 	    background-image: url("/static/images/patient-two_way-2.png");
 }
 
-.person .one_way>div{
+.person .one_way>div, .patient_bar #one_way{
 	    background-image: url("/static/images/patient-one_way-1.png");
 }
 
-.person .control>div{
+.person .control>div, .patient_bar #control{
 	    background-image: url("/static/images/patient-control-0.png");
 }
 
@@ -231,7 +270,7 @@ textarea {
 	cursor:pointer;
 }
 
-.list .person_selected {
+.list .selected {
 	color: rgb(217,233,236);
 	background-color: rgb(91,141,147);
 }

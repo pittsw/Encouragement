@@ -23,6 +23,22 @@ $.ajaxSetup({
 	 } 
 });
 
+_.extend(Backbone.Model.prototype, {
+	getView:function() {
+		if(typeof(this.view)=="function") {
+			if(this.$view) return this.$view.render();
+			// no cashed view so make one
+			this.$view = new this.view({model:this});
+			//console.log("View",this.$view);
+			return this.$view.render();
+		}
+	}
+});
+_.extend(Backbone.Collection.prototype,{
+	getView:Backbone.Model.prototype.getView,
+});
+
+
 var Tools = function() {
 	
 	var pub = {};//public variables
@@ -480,6 +496,74 @@ var Tools = function() {
 	};
 //end load edit handlers
 
+/**********************
+ * Begin Backbone 
+ *******************/
+	pub.ClientView = Backbone.View.extend({
+		className:'person',
+		tagName:'a',
+		template:_.template($('#tmp_client').html()),
+		
+		initialize:function() {
+			this.listenTo(this.model,'change',this.render);
+			this.render();
+		},
+		
+		render:function(evt) {
+			//console.log("Render:",this.model.attributes.id)
+			this.$el.attr('id',this.model.attributes.id);
+			this.$el.attr('href','#client/'+this.model.attributes.id);
+			this.$el.html($($.trim(this.template({c:this.model.attributes}))));
+			this.$el.click(function(evt){
+				console.log(this);
+				$('#patient_list .selected').removeClass('selected');
+				$(this).addClass('selected');
+			});
+			return this;
+		}
+	});
+	
+	pub.Client = Backbone.Model.extend({
+		view:pub.ClientView
+	})
+	
+	pub.ClientsView = Backbone.View.extend({
+		initialize:function() {
+			this.render();
+		},
+		
+		render:function(evt) {
+			var sort = $('#sort_select').val()
+			var asc = ($('#sort_direction').hasClass('asc'))?-1:1;
+			//Sort the client list
+			var clients = this.model.models.sort(function(a,b){
+				a = a.get(sort), b=b.get(sort);
+				if(a > b) return asc;
+				else if(a < b) return asc*-1;
+				return 0;// else equal
+			});
+			//filter the client list based on selected tabs
+			$('.patient_bar button').not('.selected').each(function(i,button) {
+				console.log($(button).attr('id'));
+				clients = clients.filter(function(client) {
+					return client.get('study_group')!=$(button).attr('id');
+				});
+			});
+			this.$el.empty();
+			clients.forEach(function(client,i){
+				this.$el.append(client.getView().el);
+			},this);
+			return this;
+		}
+	});
+	
+	pub.Clients = Backbone.Collection.extend({
+		model:pub.Client,
+		view:pub.ClientsView,
+	});
+	
+	
+
 	pub.App = Backbone.Router.extend({
 		
 		routes: {
@@ -489,6 +573,9 @@ var Tools = function() {
 		},
 		
 	});
+/**********************
+ * End Backbone 
+ *******************/
 
 	return pub;
 }
@@ -511,9 +598,23 @@ $(function() {
 		tools.filter();
 	});
 	
-	$('#group_select').on('change',tools.load_client_list);
-	$('#sort_select').on('change',tools.load_client_list);
+	$.ajax({
+		dataType:'json',
+		url:'clients',
+		success:function(data){
+			tools.clients = new tools.Clients(data);
+			$('#patient_list').append(tools.clients.getView().el);
+		}
+	});
 	
-	tools.load_client_list_complete();
-	
+	$('#sort_select').change(function(evt){tools.clients.getView().render()});
+	$('.patient_bar button').click(function(evt) {
+		$(this).toggleClass('selected');
+		tools.clients.getView().render();
+	});
+	$('#sort_direction').click(function(evt) {
+		$(this).toggleClass('asc');
+		tools.clients.getView().render();
+	});
+
 })
