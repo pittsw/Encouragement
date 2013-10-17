@@ -149,8 +149,22 @@ textarea {
     padding-top: 4px;
 }
 
-.search {
-	margin-left: 10px;
+.search_bar .search_icon {
+	width: 20px;
+    height: 20px;
+    background-image: url('/static/images/search.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:20px 20px;
+    cursor:pointer;
+    display:inline-block;
+    margin-left: 10px;
+}
+
+.search_bar .search {
+	width:150px;
+	position:relative;
+	top:-5px;
 }
 
 .search_bar .addbutton {

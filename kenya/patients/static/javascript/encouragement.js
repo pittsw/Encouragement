@@ -535,8 +535,18 @@ var Tools = function() {
 		render:function(evt) {
 			var sort = $('#sort_select').val()
 			var asc = ($('#sort_direction').hasClass('asc'))?-1:1;
+			
+			var clients = this.model.models;
+			//filter client list based on search box
+			if($('#searchtext').val()) { //only if not blank
+				var needle = new RegExp($('#searchtext').val(),"i");
+				clients = clients.filter(function(client){
+					return needle.test(client.get('id_str')+client.get('first_name')+client.get('last_name'));
+				});
+			}
+			
 			//Sort the client list
-			var clients = this.model.models.sort(function(a,b){
+			clients = clients.sort(function(a,b){
 				a = a.get(sort), b=b.get(sort);
 				if(a > b) return asc;
 				else if(a < b) return asc*-1;
@@ -544,9 +554,9 @@ var Tools = function() {
 			});
 			//filter the client list based on selected tabs
 			$('.patient_bar button').not('.selected').each(function(i,button) {
-				console.log($(button).attr('id'));
+				var filter_group = $(button).attr('id');
 				clients = clients.filter(function(client) {
-					return client.get('study_group')!=$(button).attr('id');
+					return client.get('study_group')!=filter_group;
 				});
 			});
 			this.$el.empty();
@@ -591,13 +601,18 @@ $(function() {
 	
 	$('#searchtext').on('keyup', function(e) {
 		var code = (e.keyCode ? e.keyCode : e.which);
-		if (code == 27) {
-			// Clear on escape
-			$('#searchtext').val('');
+		switch(code) {
+			case 27://escape
+				$('#searchtext').val('');
+				tools.clients.getView().render();
+				break;
+			case 13: //enter
+				tools.clients.getView().render();
+				break;
 		}
-		tools.filter();
 	});
 	
+	//import json list of
 	$.ajax({
 		dataType:'json',
 		url:'clients',
@@ -616,5 +631,7 @@ $(function() {
 		$(this).toggleClass('asc');
 		tools.clients.getView().render();
 	});
+	
+	$('.search_bar .search_icon').click(function(evt){tools.clients.getView().render()});
 
 })
