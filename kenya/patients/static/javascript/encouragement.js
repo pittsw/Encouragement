@@ -553,12 +553,21 @@ var Tools = function() {
 				return 0;// else equal
 			});
 			//filter the client list based on selected tabs
-			$('.patient_bar button').not('.selected').each(function(i,button) {
+			$('.patient_bar button.study_group').not('.selected').each(function(i,button) {
 				var filter_group = $(button).attr('id');
 				clients = clients.filter(function(client) {
 					return client.get('study_group')!=filter_group;
 				});
 			});
+			
+			if($(".patient_bar #Post-Partum").is('.selected')) {
+				//filter out anti-partum clients
+				clients = clients.filter(function(client) {
+					console.log(client.get('status'));
+					return client.get('status')=='Post-Partum';
+				});
+			}
+			
 			this.$el.empty();
 			clients.forEach(function(client,i){
 				this.$el.append(client.getView().el);

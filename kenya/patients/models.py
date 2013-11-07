@@ -291,13 +291,7 @@ class Visit(models.Model):
 
 	def __unicode__(self):
 		return self.comments
-"""
-#There is an error with this and it adds 2 instead of 1 moved to incoming messsage
-@receiver(post_save, sender=Message, dispatch_uid="pending_update")
-def increment_pending(sender, **kwargs):
-    instance = kwargs['instance']
-    if instance.sent_by == 'Client' and kwargs['created'] and not kwargs['raw']:
-        client = instance.client_id
-        client.pending = F('pending') + 1
-        client.save()
-"""
+		
+class Reports(models.Model):
+	
+	date = models.DateField()

@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+	<head>
+		<title>Weekly Report</title>
+		
+	</head>
+	
+<body>
+	
+<h2>This Week</h2>
+
+<h4>Summary</h4>
+<table>
+	<tr><th></th><th>Two Way</th><th>One Way</th><th>Control</th><th>Total</th></tr>
+	{% for name,row in summary %}
+	<tr><td>{{ name }}</td><td>{{ row.two_way }}</td><td>{{ row.one_way }}</td><td>{{ row.control}}</td><th>{{ row.total}}</th></tr> 
+	{% endfor %}
+</table>
+
+<h3>Breakdown by Group</h3>
+
+<h4>Two Way</h4>
+<table>
+	{% for client in two_way %}
+	<tr>
+		<td>{{client}}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<h4>One Way</h4>
+<table>
+	{% for client in one_way %}
+	<tr>
+		
+	</tr>
+	{% endfor %}
+</table>
+
+<h4>Control</h4>
+<table>
+	{% for client in control %}
+	<tr>
+		
+	</tr>
+	{% endfor %}
+</table>
+
+</body>
+
+</html>

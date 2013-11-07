@@ -63,12 +63,15 @@
 	
             <div class="patient_bar">
                 <span>
-					<button id="two_way" class="selected">
-					</button><button id="one_way" class="selected">
-					</button><button id="control"></button>
+					<!-- make buttons span physical rows so there is no space between them -->
+					<button id="two_way" class="selected study_group">
+					</button><button id="one_way" class="selected study_group">
+					</button><button id="control" class="study_group">
+					</button><button id="Post-Partum">
+					</button>
 				</span>
                 <span style="position:relative;top:-5px; left:10px;">
-                <div style="display:inline;text-transform:uppercase;">Sort</div>
+                <!--<div style="display:inline;text-transform:uppercase;">Sort</div>-->
                 <select id="sort_select">
 					<option value="study_group">Group</option>
 					<option value="last_name">Last Name</option>

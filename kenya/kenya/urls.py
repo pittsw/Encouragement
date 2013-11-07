@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^visit/(?P<id>\d+)/', views.add_visit),
     url(r'^visit_history/',views.visit_history),
     url(r'^test/',views.test),
+    url(r'^reports/',views.reports),
     url(r'^delete_visit/(?P<pk>\d+)/', views.delete_visit),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index), #Index

@@ -272,6 +272,19 @@ textarea {
 	    background-image: url("/static/images/patient-control-0.png");
 }
 
+.patient_bar #Post-Partum, .icon-postpartum {
+	background-image:url("/static/images/postpartum.png");
+}
+
+.icon-postpartum {
+	display:inline-block;
+	width:20;
+	height:20;
+	background-position:center;
+	position:relative;
+	top:3px;
+}
+
 .list .person {
     padding: 5px;
     border-bottom: 1px dashed grey;

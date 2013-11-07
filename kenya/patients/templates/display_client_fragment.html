@@ -26,7 +26,7 @@
 						</div>
 						<div class="input" id="duration_box">Minutes: <input type="text" id="duration" name="duration" placeholder="0"/></div>
 						<div class="input" id="initiated_box">
-						<span>Called:</span>
+						<span>Who Called:</span>
 						Client: <input type="radio" name="initiated" value="client"/>
 						Nurse: <input type="radio" name="initiated" checked value="nurse"/>
 						</div>
@@ -56,7 +56,6 @@
 		</div>
 		<div>
 			<div id="change" class="message_bar">Message History<span class="message-view-select">
-				<span class="download">Download</span>
 					<select id="select_msg">
 						<option value="conversation">Conversation</option>
 						<option {% if list %} selected {% endif %} value="list">List</option>

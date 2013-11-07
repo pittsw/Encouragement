@@ -203,6 +203,7 @@ def clients(request):
 			'study_group':c.study_group.name,
 			'last_name':c.last_name.capitalize(),
 			'first_name':c.first_name.capitalize(),
+			'status':c.pregnancy_status,
 			'urgent':c.urgent,
 			'pending':c.pending,
 			'next_visit':c.next_visit.strftime("%b %d"),
@@ -295,6 +296,89 @@ def pregnacy(request, id):
 			visit.save()
 			return HttpResponse('')
 	return HttpResponse(form.as_table())
+
+def reports(request):
+	
+	end_date = date.today()
+	start_date = end_date - timedelta(days=7)
+	
+	signed_up = Client.objects.filter(signup_date__range=(start_date,end_date))
+	visits = Visit.objects.filter(date__range=(start_date,end_date))
+	births = PregnancyEvent.objects.filter(date__range=(start_date,end_date))
+	total = Client.objects.all()
+	
+	summary = [
+		('Signed Up',{
+			'two_way':signed_up.filter(study_group__name='two_way').count(),
+			'one_way':signed_up.filter(study_group__name='one_way').count(),
+			'control':signed_up.filter(study_group__name='control').count(),
+			'total':signed_up.count()
+		}),
+		('Visits',{
+			'two_way':visits.filter(client_id__study_group__name='two_way').count(),
+			'one_way':visits.filter(client_id__study_group__name='one_way').count(),
+			'control':visits.filter(client_id__study_group__name='control').count(),
+			'total':visits.count(),
+		}),
+		('Births',{
+			'two_way':births.filter(client__study_group__name='two_way').count(),
+			'one_way':births.filter(client__study_group__name='one_way').count(),
+			'control':births.filter(client__study_group__name='control').count(),
+			'total':births.count(),
+		}),
+		('Total',{
+			'two_way':total.filter(study_group__name='two_way').count(),
+			'one_way':total.filter(study_group__name='one_way').count(),
+			'control':total.filter(study_group__name='control').count(),
+			'total':total.count()
+		})
+	]
+	
+	clients = Client.objects.extra(select = {
+		'messages_client': """
+		select count(*)
+		from patients_message join patients_interaction on patients_message.interaction_ptr_id = patients_interaction.id
+		where patients_message.sent_by="Client" and patients_interaction.client_id_id=patients_client.id
+		""",
+		'messages_total':"""
+		select count(*)
+		from patients_message join patients_interaction on patients_message.interaction_ptr_id = patients_interaction.id
+		where patients_interaction.client_id_id=patients_client.id
+		""",
+		'messages_system':"""
+		select count(*)
+		from patients_message join patients_interaction on patients_message.interaction_ptr_id = patients_interaction.id
+		where patients_message.sent_by="System" and patients_interaction.client_id_id=patients_client.id
+		""",
+		'messages_nurse':"""
+		select count(*)
+		from patients_message join patients_interaction on patients_message.interaction_ptr_id = patients_interaction.id
+		where patients_message.sent_by="Nurse" and patients_interaction.client_id_id=patients_client.id
+		""",
+		'phonecalls_nurse':"""
+		select count(*)
+		from patients_phonecall join patients_interaction on patients_phonecall.interaction_ptr_id = patients_interaction.id
+		where patients_phonecall.caller='nurse' and patients_interaction.client_id_id=patients_client.id
+		""",
+		'phonecalls_client':"""
+		select count(*)
+		from patients_phonecall join patients_interaction on patients_phonecall.interaction_ptr_id = patients_interaction.id
+		where patients_phonecall.caller='client' and patients_interaction.client_id_id=patients_client.id
+		""",
+		'phonecalls_total':"""
+		select count(*)
+		from patients_phonecall join patients_interaction on patients_phonecall.interaction_ptr_id = patients_interaction.id
+		where patients_interaction.client_id_id=patients_client.id
+		"""
+	})
+	
+	return render_to_response("report.html",{
+		'summary':summary,
+		'two_way':clients.filter(study_group__name='two_way'),
+		'one_way':clients.filter(study_group__name='one_way'),
+		'control':clients.filter(study_group__name='control')
+	},context_instance=RequestContext(request))
+
 
 def test(request):
 	pregnant,post,visit = [],[],[]
