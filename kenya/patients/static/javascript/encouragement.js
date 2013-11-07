@@ -533,8 +533,6 @@ var Tools = function() {
 		},
 		
 		render:function(evt) {
-			var sort = $('#sort_select').val()
-			var asc = ($('#sort_direction').hasClass('asc'))?-1:1;
 			
 			var clients = this.model.models;
 			//filter client list based on search box
@@ -545,13 +543,6 @@ var Tools = function() {
 				});
 			}
 			
-			//Sort the client list
-			clients = clients.sort(function(a,b){
-				a = a.get(sort), b=b.get(sort);
-				if(a > b) return asc;
-				else if(a < b) return asc*-1;
-				return 0;// else equal
-			});
 			//filter the client list based on selected tabs
 			$('.patient_bar button.study_group').not('.selected').each(function(i,button) {
 				var filter_group = $(button).attr('id');
@@ -560,6 +551,7 @@ var Tools = function() {
 				});
 			});
 			
+			// anti-partum tab 
 			if($(".patient_bar #Post-Partum").is('.selected')) {
 				//filter out anti-partum clients
 				clients = clients.filter(function(client) {
@@ -567,6 +559,22 @@ var Tools = function() {
 					return client.get('status')=='Post-Partum';
 				});
 			}
+			
+			var sort = $('#sort_select').val()
+			var asc = ($('#sort_direction').hasClass('asc'))?-1:1;
+			var cmp = function(a,b) {
+				if(a > b) return asc;
+				else if(a < b) return asc*-1;
+				return 0
+			}
+			//Sort the client list
+			clients = clients.sort(function(a,b){
+				var out = cmp(a.get(sort),b.get(sort));
+				if (out != 0) return out;
+				//else equal sort new message > urgent > normal
+				return cmp(a.get('pending')+' '+a.get('urgent'), b.get('pending')+' '+b.get('urgent'));
+			});
+			
 			
 			this.$el.empty();
 			clients.forEach(function(client,i){
