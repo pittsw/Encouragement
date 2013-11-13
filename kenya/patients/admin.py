@@ -11,7 +11,7 @@ class MessageInline(admin.TabularInline):
 	model = Message
 
 class ClientAdmin(admin.ModelAdmin):
-	list_display = ('first_name','last_name','study_group','id','next_visit','condition','last_msg_client','last_msg_system',
+	list_display = ('first_name','last_name','study_group','id','anc_num','next_visit','condition','last_msg_client','last_msg_system',
 	'repeat_msg','pregnancy_status','validated','phone_number','send_time','send_day')
 	list_filter = ('study_group','condition','send_time','send_day')
 	search_fields = ('id','first_name','last_name') 

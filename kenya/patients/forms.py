@@ -9,7 +9,7 @@ class AddClientForm(ModelForm):
 		fields = ('id', 'first_name', 'last_name', 'nickname','phone_number','birth_date', 'pregnancy_status', 'condition', 'due_date',
 		 'relationship_status', 'living_children', 'previous_pregnacies','years_of_education','send_day','send_time','next_visit', 
 		 'phone_network' , 'partner_first_name', 'partner_last_name', 'pri_contact_name', 'pri_contact_number', 'sec_contact_name', 
-		 'sec_contact_number', 'study_group','language')
+		 'sec_contact_number', 'study_group','language','anc_num')
 
 	id = IntegerField(required=False)
 	

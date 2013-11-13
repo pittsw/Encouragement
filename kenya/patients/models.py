@@ -53,6 +53,8 @@ class Client(models.Model):
 	primary_key = models.AutoField(primary_key=True)
 
 	id = models.PositiveIntegerField(unique=True)
+	
+	anc_num = models.PositiveIntegerField(blank=True,null=True)
 
 	first_name = models.CharField(max_length=50)
 
@@ -104,7 +106,7 @@ class Client(models.Model):
 	send_time = models.IntegerField(choices=TIME_CHOICES, default=13)
 
 	#Attributes to be edited by system only
-	urgent = models.BooleanField(editable=False, default=False)
+	urgent = models.BooleanField(default=False)
 	
 	repeat_msg = models.IntegerField(editable=False,default=0)
 
@@ -114,7 +116,7 @@ class Client(models.Model):
 	
 	last_msg_system = models.DateField(blank=True, null=True, editable=False)
 	
-	validated = models.BooleanField(editable=False,default=False)
+	validated = models.BooleanField(default=False)
 
 	signup_date = models.DateField(editable=False, auto_now_add=True)
 
@@ -292,6 +294,6 @@ class Visit(models.Model):
 	def __unicode__(self):
 		return self.comments
 		
-class Reports(models.Model):
+#class Reports(models.Model):
 	
-	date = models.DateField()
+	#date = models.DateField()

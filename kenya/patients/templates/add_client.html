@@ -168,6 +168,20 @@
 					</div>
 				</div>
 				<div>
+					<div class="form_column">
+						<div class="form_label">ANC Number</div>
+						<div class="form_input">{{ form.anc_num }} </div>
+						{% if form.anc_num.errors %}<div class="form_error"><span class="errors"><span class="collapse">{{ form.anc_num.errors }}</span></span></div>{% endif %}
+					</div>
+					<div class="form_column">
+						<!-- Next Visit -->
+						<div class="form_label" >Next ANC Vist <span class="form_info">yyyy-mm-dd</span></div>
+						<div class="form_input date">{{ form.next_visit }} </div>
+						{% if form.next_visit.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.next_visit.errors }}</span></span></div>{% endif %}
+						
+					</div>
+				</div>
+				<div>
 					<!-- Condition -->
 					<div class=" form_column">
 						<div class="form_label" >Condition</div>
@@ -175,10 +189,6 @@
 						{% if form.condition.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.condition.errors }}</span></span></div>{% endif %}
 					</div>
 					<div class=" form_column">
-						<!-- Next Visit -->
-						<div class="form_label" >Next ANC Vist <span class="form_info">yyyy-mm-dd</span></div>
-						<div class="form_input date">{{ form.next_visit }} </div>
-						{% if form.next_visit.errors %} <div class="form_error"><span class="errors"><span class="collapse">{{ form.next_visit.errors }}</span></span></div>{% endif %}
 						<!-- Relationship -->
 						<div class="form_label">Relationship Status</div>
 						<div class="form_input">{{ form.relationship_status }} </div>
