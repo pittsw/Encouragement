@@ -1,0 +1,8 @@
+<li><span class="date">{{ client.next_visit }}</span>
+<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }} #{{ client.anc_num }}</span>
+{% if client.pregnancy_status == 'Post-Partum' %}
+<span class="icon-postpartum"></span>
+{% endif %} 
+<input name="ck_future_{{client.id}}" type="checkbox"/>
+<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
+</li>

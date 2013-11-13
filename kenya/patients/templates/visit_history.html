@@ -5,11 +5,7 @@
 <h2>Missed Visits</h2> 
 <ol class="visit_history">
 	{% for client in clients.missed %}
-	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
-	<input name="ck_missed_{{client.id}}" type="checkbox"/>
-	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
-	</li>
+	{% include "visit_history_client.html" %}
 	{% empty %}
 	None
 	{% endfor %}
@@ -18,12 +14,7 @@
 <h2> Visits Today and Tomorrow</h2> 
 <ul class="visit_history">
 	{% for client in clients.current %}
-	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
-	
-	<input name="ck_today_{{client.id}}" type="checkbox"/>
-	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
-	</li>
+	{% include "visit_history_client.html" %}
 	{% empty %}
 	None
 	{% endfor %}
@@ -32,14 +23,7 @@
 <h2>Next Two Days</h2>  
 <ul class="visit_history">
 	{% for client in clients.future %}
-	<li><span class="date">{{ client.next_visit }}</span>
-	<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }}</span>
-	{% if client.pregnancy_status == 'Post-Partum' %}
-	<span class="icon-postpartum"></span>
-	{% endif %} 
-	<input name="ck_future_{{client.id}}" type="checkbox"/>
-	<span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
-	</li>
+	{% include "visit_history_client.html" %}
 	{% empty %}
 	None
 	{% endfor %}
