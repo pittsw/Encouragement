@@ -682,6 +682,10 @@ div.add_client .errorlist {
 	margin-left:15px;
 }
 
+.message-list>div{
+	word-wrap:break-word;
+}
+
 .message-list span.icon {
 	display:inline-block;
 	width: 20px;
