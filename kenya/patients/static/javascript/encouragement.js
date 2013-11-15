@@ -524,7 +524,10 @@ var Tools = function() {
 	});
 	
 	pub.Client = Backbone.Model.extend({
-		view:pub.ClientView
+		view:pub.ClientView,
+		sort_str:function() {
+			return this.get('pending')+this.get('urgent')+this.get('last_msg');
+		}
 	})
 	
 	pub.ClientsView = Backbone.View.extend({
@@ -572,7 +575,8 @@ var Tools = function() {
 				var out = cmp(a.get(sort),b.get(sort));
 				if (out != 0) return out;
 				//else equal sort new message > urgent > normal
-				return cmp(a.get('pending')+' '+a.get('urgent'), b.get('pending')+' '+b.get('urgent'));
+				//return cmp(a.get('pending')+' '+a.get('urgent'), b.get('pending')+' '+b.get('urgent'));
+				return cmp(a.sort_str(),b.sort_str());
 			});
 			
 			

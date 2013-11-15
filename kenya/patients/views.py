@@ -207,7 +207,7 @@ def clients(request):
 			'urgent':c.urgent,
 			'pending':c.pending,
 			'next_visit':c.next_visit.strftime("%b %d"),
-			'last_msg':c.last_msg_client.strftime("%b %d") if c.last_msg_client else None,
+			'last_msg':c.last_msg_client.strftime("%b %d") if c.last_msg_client else 'never',
 		})
 	return HttpResponse(json.dumps(clients))
 

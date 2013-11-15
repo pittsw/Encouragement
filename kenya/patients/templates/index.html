@@ -19,12 +19,20 @@
 	<div class="left">
 		<% if (c.urgent) { %>
 		<div class="urgent_msg">
-			<% if (!c.last_msg) { %>
+			<% if (c.last_msg=='never') { %>
 				Has never responded!
 			<% } else { %>
 			No reply since <%= c.last_msg %>.
 			<% } %>
 		</div>
+		<% } else { %>
+			<div class="urgent_msg">
+				<% if (c.last_msg=='never') { %>
+				Has never responded!
+				<% } else { %>
+				<i>Last SMS</i> <%= c.last_msg %>
+				<% } %>
+			</div>
 		<% } %>
 		<% if (c.pending > 0) { %>
 			<div class="pending_msg"><%= c.pending %> unread messages.</div>
