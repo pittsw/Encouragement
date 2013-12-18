@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     url(r'^add/', views.add_client),
     url(r'^edit/(?P<id>\d+)/', views.edit_client),
     url(r'^fragment/display_client/$', views.client), #Load Main Client Info and Messages
-    url(r'^fragment/list/$', views.list_fragment), #Left list of clients
     url(r'^fragment/message/(?P<id>\d+)/', views.message_fragment), #Center Messages Default
     url(r'^fragment/(?P<id>\d+)/', views.client_fragment), #Right Top client info
     url(r'^note/(?P<id>\d+)/', views.add_note),

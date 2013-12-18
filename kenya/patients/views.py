@@ -108,9 +108,9 @@ def visit_history(request):
 	current_stop = current_start-timedelta(days=1)
 	#get clients for eac date range
 	clients = {
-	'missed':Client.objects.filter(next_visit__lt=current_stop),
-	'current':Client.objects.filter(next_visit__lte=current_start,next_visit__gte=current_stop),
-	'future':Client.objects.filter(next_visit__gt=current_start,next_visit__lte=future_stop)
+	'missed':Client.objects.filter(next_visit__lt=current_stop).order_by("next_visit"),
+	'current':Client.objects.filter(next_visit__lte=current_start,next_visit__gte=current_stop).order_by("next_visit"),
+	'future':Client.objects.filter(next_visit__gt=current_start,next_visit__lte=future_stop).order_by("next_visit")
 	}
 	updates = {'next_visit':[],'no_next_visit':[]}
 	if request.method == "GET":
@@ -180,18 +180,6 @@ def client_fragment(request, id):
     client = get_object_or_404(Client, id=id)
     return render_to_response("client_fragment.html", {'client': client},
                               context_instance=RequestContext(request))
-
-def list_fragment(request):
-	clients = Client.objects.all()
-	sort = request.GET.get("sort","study_group")
-	clients = clients.order_by(sort)
-	group,status = request.GET.get("group",',').split(',')
-	group = get_object_or_default(StudyGroup,None,name=group) if group else None
-	if group:
-		clients = clients.filter(study_group=group)
-	clients = clients.filter(pregnancy_status__contains=status)
-	return render_to_response("list_fragment.html", {'clients': clients},
-							  context_instance=RequestContext(request))
 
 def dateToUnixTime(d):
 	return  (d.toordinal() - date(1970, 1, 1).toordinal()) * 86400000
