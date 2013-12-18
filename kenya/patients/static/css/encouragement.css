@@ -58,6 +58,7 @@ textarea {
     border-color: rgb(121, 121, 121);
     height: 635px;
     background-color: rgb(255,255,255);
+    overflow-y:auto;
 }
 
 .center_bar {
@@ -74,12 +75,6 @@ textarea {
     display: inline;
 }
 
-.center_bar .download {
-    display: inline;
-    padding: 2px 5px 0px 0px;
-    font-size: 12px;
-    float: right;
-}
 
 .errors {
     color: red;
@@ -230,6 +225,7 @@ textarea {
     left:10px;
 }
 
+/*flip image based on direction*/
 .patient_bar #sort_direction.asc {
 	-moz-transform: scaleY(-1);
     -o-transform: scaleY(-1);
@@ -258,6 +254,13 @@ textarea {
     background-repeat: no-repeat;
     width: 30px;
     height: 20px;
+}
+
+
+.person .icon-postpartum {
+	position:absolute;
+	left:0px;
+	top:-6px;
 }
 
 .person .two_way>div, .patient_bar #two_way{
@@ -325,6 +328,7 @@ textarea {
 
 .list .left {
 	font-size:9pt;
+	position:relative;
 }
 
 .list .header {

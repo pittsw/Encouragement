@@ -193,10 +193,13 @@ def list_fragment(request):
 	return render_to_response("list_fragment.html", {'clients': clients},
 							  context_instance=RequestContext(request))
 
+def dateToUnixTime(d):
+	return  (d.toordinal() - date(1970, 1, 1).toordinal()) * 86400000
+
 #return a JSON representation of all clients
 def clients(request):
 	clients = []
-	for c in Client.objects.all():
+	for c in Client.objects.exclude(pregnancy_status__in=["Stopped","Finished"]):
 		clients.append({
 			'id':c.id,
 			'id_str':'%03i'%c.id,
@@ -206,8 +209,8 @@ def clients(request):
 			'status':c.pregnancy_status,
 			'urgent':c.urgent,
 			'pending':c.pending,
-			'next_visit':c.next_visit.strftime("%b %d"),
-			'last_msg':c.last_msg_client.strftime("%b %d") if c.last_msg_client else 'never',
+			'next_visit':dateToUnixTime(c.next_visit),
+			'last_msg':dateToUnixTime(c.last_msg_client) if c.last_msg_client else 0,
 		})
 	return HttpResponse(json.dumps(clients))
 
