@@ -58,7 +58,12 @@ textarea {
     border-color: rgb(121, 121, 121);
     height: 635px;
     background-color: rgb(255,255,255);
-    overflow-y:auto;
+
+}
+
+#visit_history {
+	overflow-y:auto;
+	height: 635px;
 }
 
 .center_bar {
