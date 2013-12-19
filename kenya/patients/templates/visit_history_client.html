@@ -5,6 +5,7 @@
 {% if client.pregnancy_status == 'Post-Partum' %}
 <span class="icon-postpartum"></span>
 {% endif %} 
+<span class="icon-{{ client.study_group|lower }}"></span>
 <input name="ck_future_{{client.id}}" type="checkbox"/>
 <span class="next_visit date">Next Visit <input name="date_{{client.id}}" type="input"/></span>
 </li>

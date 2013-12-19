@@ -268,15 +268,15 @@ textarea {
 	top:-6px;
 }
 
-.person .two_way>div, .patient_bar #two_way{
+.person .two_way>div, .patient_bar #two_way, .icon-two_way{
 	    background-image: url("/static/images/patient-two_way-2.png");
 }
 
-.person .one_way>div, .patient_bar #one_way{
+.person .one_way>div, .patient_bar #one_way, .icon-one_way{
 	    background-image: url("/static/images/patient-one_way-1.png");
 }
 
-.person .control>div, .patient_bar #control{
+.person .control>div, .patient_bar #control, .icon-control{
 	    background-image: url("/static/images/patient-control-0.png");
 }
 
@@ -284,7 +284,7 @@ textarea {
 	background-image:url("/static/images/postpartum.png");
 }
 
-.icon-postpartum {
+.icon-postpartum, .icon-control, .icon-one_way, .icon-two_way {
 	display:inline-block;
 	width:20;
 	height:20;

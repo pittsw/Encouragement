@@ -182,7 +182,7 @@ def client_fragment(request, id):
                               context_instance=RequestContext(request))
 
 def dateToUnixTime(d):
-	return  (d.toordinal() - date(1970, 1, 1).toordinal()) * 86400000
+	return  ((d.toordinal() - date(1970, 1, 1).toordinal())+1) * 86400000
 
 #return a JSON representation of all clients
 def clients(request):
