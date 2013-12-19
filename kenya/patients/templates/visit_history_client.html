@@ -1,5 +1,7 @@
 <li><span class="date">{{ client.next_visit }}</span>
-<span class="name">({{ client.id }}) {{ client.first_name }} {{ client.last_name }} #{{ client.anc_num }}</span>
+<span class="name">({{ client.id }})
+	<a href="#client/{{ client.id }}">{{ client.first_name }} {{ client.last_name }}</a>
+	#{{ client.anc_num }}</span>
 {% if client.pregnancy_status == 'Post-Partum' %}
 <span class="icon-postpartum"></span>
 {% endif %} 
