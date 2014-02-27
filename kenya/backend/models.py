@@ -90,8 +90,8 @@ class MessageBase(models.Model):
 	display = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
-		#if self.display:
-			#return self.display.title()
+		if self.display != '':
+			return self.display.title()
 		return self.name.title()
 
 class MessageGroup(models.Model):
@@ -100,8 +100,8 @@ class MessageGroup(models.Model):
 	display = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
-		#if self.display:
-			#return self.display.title()
+		if self.display != '':
+			return self.display.title()
 		return self.name.title()
 
 class Condition(MessageGroup):
