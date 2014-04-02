@@ -638,7 +638,7 @@ div.add_client .errorlist {
 
 .messages .Client .prompted {
 	position:absolute;
-	bottom:5px;
+	bottom:0px;
 	right:5px;
 	font-size:9pt;
 	font-style:italic;
